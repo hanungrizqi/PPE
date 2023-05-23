@@ -10,20 +10,10 @@ namespace PLANT_PPE.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
             return View();
         }
     }
