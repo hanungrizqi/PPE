@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLANT_PPE", "PLANT_PPE\PLANT_PPE.csproj", "{2D4D64BC-BA11-4387-8E60-472622E6EF8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_PLANT_PPE", "API_PLANT_PPE\API_PLANT_PPE.csproj", "{91C62F73-4127-4DB0-A24E-6B56EB5BD183}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2D4D64BC-BA11-4387-8E60-472622E6EF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D4D64BC-BA11-4387-8E60-472622E6EF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D4D64BC-BA11-4387-8E60-472622E6EF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C62F73-4127-4DB0-A24E-6B56EB5BD183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C62F73-4127-4DB0-A24E-6B56EB5BD183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C62F73-4127-4DB0-A24E-6B56EB5BD183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C62F73-4127-4DB0-A24E-6B56EB5BD183}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
