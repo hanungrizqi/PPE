@@ -13,6 +13,7 @@ function PostLogin() {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         beforeSend: function () {
+            debugger
             $("#overlay").show();
         },
         success: function (data) {
