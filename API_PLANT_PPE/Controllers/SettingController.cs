@@ -105,10 +105,23 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
-                tbl.CONTENT = param.CONTENT;
+                var cek = db.TBL_M_AGREEMENTs.Where(a => a.CONTENT == param.CONTENT).FirstOrDefault();
+                if (cek != null)
+                {
+                    cek.CONTENT = param.CONTENT;
+                    db.TBL_M_AGREEMENTs.InsertOnSubmit(cek);
+                }
+                else
+                {
+                    TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
+                    tbl.CONTENT = param.CONTENT;
+                    db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
+                }
+
+                //TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
+                //tbl.CONTENT = param.CONTENT;
                 
-                db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
+                //db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
                 db.SubmitChanges();
                 return Json(new { Remarks = true });
             }

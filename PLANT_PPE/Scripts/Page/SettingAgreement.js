@@ -48,7 +48,6 @@ function submitEditor() {
                     'Data has been Saved.',
                     'success'
                 );
-                $('#js-ckeditor').val('');
             } if (data.Remarks == false) {
                 Swal.fire(
                     'Error!',
