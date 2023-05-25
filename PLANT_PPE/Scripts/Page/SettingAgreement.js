@@ -31,7 +31,7 @@ function submitEditor() {
     debugger
 
     let obj = new Object
-    obj.ID = $("#txt_ID").val();
+    obj.ID = 99
     obj.CONTENT = editor.getData();
     
     //debugger
