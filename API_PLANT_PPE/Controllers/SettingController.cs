@@ -105,9 +105,10 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                var cek = db.TBL_M_AGREEMENTs.Where(a => a.CONTENT == param.CONTENT).FirstOrDefault();
+                var cek = db.TBL_M_AGREEMENTs.Where(a => a.ID != param.ID).FirstOrDefault();
                 if (cek != null)
                 {
+                    cek.ID = param.ID;
                     cek.CONTENT = param.CONTENT;
                     db.TBL_M_AGREEMENTs.InsertOnSubmit(cek);
                 }
