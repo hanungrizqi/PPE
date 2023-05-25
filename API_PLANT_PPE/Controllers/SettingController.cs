@@ -108,23 +108,16 @@ namespace API_PLANT_PPE.Controllers
                 var cek = db.TBL_M_AGREEMENTs.Where(a => a.ID == param.ID).FirstOrDefault();
                 if (cek != null)
                 {
-                    cek.ID = param.ID;
-                    cek.CONTENT = param.CONTENT;
-                    db.TBL_M_AGREEMENTs.InsertOnSubmit(cek);
-                }
-                else
-                {
-                    TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
-                    tbl.ID = param.ID;
-                    tbl.CONTENT = param.CONTENT;
-                    db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
+                    db.TBL_M_AGREEMENTs.DeleteOnSubmit(cek);
                 }
 
-                //TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
-                //tbl.CONTENT = param.CONTENT;
-                
-                //db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
+                TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
+                tbl.ID = param.ID;
+                tbl.CONTENT = param.CONTENT;
+
+                db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
                 db.SubmitChanges();
+
                 return Json(new { Remarks = true });
             }
             catch (Exception ex)
@@ -148,6 +141,6 @@ namespace API_PLANT_PPE.Controllers
                 return Json(new { Remarks = false, Message = ex });
             }
         }
-        
+        //END Setting Agreement
     }
 }

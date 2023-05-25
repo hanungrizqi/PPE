@@ -43,12 +43,26 @@ function submitEditor() {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             debugger
+            //if (data.Remarks == true) {
+            //    Swal.fire(
+            //        'Saved!',
+            //        'Data has been Saved.',
+            //        'success'
+            //    );
             if (data.Remarks == true) {
-                Swal.fire(
-                    'Saved!',
-                    'Data has been Saved.',
-                    'success'
-                );
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Setting/Agreement";
+                    }
+                });
             } if (data.Remarks == false) {
                 Swal.fire(
                     'Error!',
