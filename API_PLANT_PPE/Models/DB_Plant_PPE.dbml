@@ -137,4 +137,10 @@
       <Column Name="LAST_MOD_EMP" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.TBL_M_AGREEMENT" Member="TBL_M_AGREEMENTs">
+    <Type Name="TBL_M_AGREEMENT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CONTENT" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

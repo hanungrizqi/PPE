@@ -30,5 +30,14 @@ namespace PLANT_PPE.Controllers
             ViewBag.Group = db.TBL_M_ROLEs.ToList();
             return View();
         }
+
+        public ActionResult Agreement()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
     }
 }
