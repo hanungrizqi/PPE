@@ -97,5 +97,42 @@ namespace API_PLANT_PPE.Controllers
             }
 
         }
+        //END Setting Menu
+        //Setting Agreement
+        [HttpPost]
+        [Route("Create_Agreement")]
+        public IHttpActionResult Create_Agreement(TBL_M_AGREEMENT param)
+        {
+            try
+            {
+                TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
+                tbl.CONTENT = param.CONTENT;
+                
+                db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_Agreement")]
+        public IHttpActionResult Get_Agreement()
+        {
+            try
+            {
+                var data = db.TBL_M_AGREEMENTs.FirstOrDefault();
+
+                return Ok(new { Data = data.CONTENT });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+        
     }
 }

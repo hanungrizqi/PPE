@@ -45,6 +45,9 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_R_SUB_MENU(TBL_R_SUB_MENU instance);
     partial void UpdateTBL_R_SUB_MENU(TBL_R_SUB_MENU instance);
     partial void DeleteTBL_R_SUB_MENU(TBL_R_SUB_MENU instance);
+    partial void InsertTBL_M_AGREEMENT(TBL_M_AGREEMENT instance);
+    partial void UpdateTBL_M_AGREEMENT(TBL_M_AGREEMENT instance);
+    partial void DeleteTBL_M_AGREEMENT(TBL_M_AGREEMENT instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -170,6 +173,14 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<VW_MSF020>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_AGREEMENT> TBL_M_AGREEMENTs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_AGREEMENT>();
 			}
 		}
 	}
@@ -2139,6 +2150,92 @@ namespace API_PLANT_PPE.Models
 				{
 					this._LAST_MOD_EMP = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_AGREEMENT")]
+	public partial class TBL_M_AGREEMENT : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _CONTENT;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnCONTENTChanging(string value);
+    partial void OnCONTENTChanged();
+    #endregion
+		
+		public TBL_M_AGREEMENT()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CONTENT", DbType="VarChar(MAX)")]
+		public string CONTENT
+		{
+			get
+			{
+				return this._CONTENT;
+			}
+			set
+			{
+				if ((this._CONTENT != value))
+				{
+					this.OnCONTENTChanging(value);
+					this.SendPropertyChanging();
+					this._CONTENT = value;
+					this.SendPropertyChanged("CONTENT");
+					this.OnCONTENTChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
