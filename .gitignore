@@ -5,3 +5,8 @@
 /.vs/PLANT_PPE/FileContentIndex
 /.vs/
 /.vs/*
+/API_PLANT_PPE/obj/Debug/*
+
+/API_PLANT_PPE/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/PLANT_PPE/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/PLANT_PPE/obj/Debug/PLANT_PPE.csproj.AssemblyReference.cache
