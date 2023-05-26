@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    ViewBag.JS = "/Scripts/Page/RegisterPPE.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-heading">Register PPE</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <h3 class="block-title">District <small>From</small></h3>
+                <div class="block-options">
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
+                        <i class="si si-pin"></i>
+                    </button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                </div>
+            </div>
+            <div class="block-content">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtFrom">District</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_districtFrom" name="txt_districtFrom" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_locFrom">Location</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_locFrom" name="txt_locFrom" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <h3 class="block-title">District <small>To</small></h3>
+                <div class="block-options">
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
+                        <i class="si si-pin"></i>
+                    </button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                </div>
+            </div>
+            <div class="block-content">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtTo">District</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_districtTo" name="txt_districtTo" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_locTo">Location</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_locTo" name="txt_locTo" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">Form PPE <small>Permohonan Pemindahan Equipment</small></h3>
+    </div>
+    <div class="block-content">
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_date">Date</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control form-control-sm " id="txt_date" name="txt_date" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_noPPE">No PPE</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_noPPE" name="txt_noPPE" value="@ViewBag.NoPPE" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_eqNumber">Eqp Number</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_eqNumber" name="txt_eqNumber" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_ppeDesc">PPE Description</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_ppeDesc" name="txt_ppeDesc">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_egi">EGI</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_egi" name="txt_egi" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_eqClass">Eqp Class</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_eqClass" name="txt_eqClass" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_serialNo">Serial Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_serialNo" name="txt_serialNo" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_remark">Remarks</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control form-control-sm " id="txt_remark" name="txt_remark"></textarea>
+                        @*<input type="text" class="form-control form-control-sm " id="txt_remark" name="txt_remark">*@
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_standJob">Attachment</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_standJob" name="txt_standJob" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+        <div class="block-options justify-content-center">
+            <div class="row text-center">
+                @*<div class="col-md-6">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="clearBacklog()">
+                            <i class="fa fa-broom opacity-50 me-1"></i> Clear
+                        </button>
+                    </div>*@
+                <div class="col-md-12">
+                    <a href="/Backlog/ListBacklog" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
+                    <button type="submit" class="btn btn-sm btn-info" value="SAVED" onclick="saveBacklog(this.value)">
+                        <i class="fa fa-floppy-disk opacity-50 me-1"></i> Save
+                    </button>
+                    <button type="submit" id="submit_button" class="btn btn-sm btn-success" value="SUBMITTED" onclick="saveBacklog(this.value)">
+                        <i class="fa fa-check-circle opacity-50 me-1"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">Daftar Equipment</h3>
+    </div>
+    <div class="block-content">
+        <div class="row justify-content-center pb-4">
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination w-100" id="table_equipment">
+                    <thead class="text-center">
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th>Egi</th>
+                            <th>Eqp Number</th>
+                            <th>PPE Description</th>
+                            <th>Eqp Class</th>
+                            <th>Serial Number</th>
+                            @*<th>Action</th>*@
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
