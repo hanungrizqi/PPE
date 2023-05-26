@@ -1172,15 +1172,11 @@ namespace PLANT_PPE.Models
 		
 		private string _LOC_TO;
 		
-		private string _EQP_NUMBER;
+		private string _EQUIP_NO;
 		
 		private string _EGI;
 		
-		private string _EGI_DESC;
-		
-		private string _EQUIP_CLASS_ID;
-		
-		private string _EQUIP_CLASS_DESC;
+		private string _EQUIP_CLASS;
 		
 		private string _SERIAL_NO;
 		
@@ -1190,13 +1186,9 @@ namespace PLANT_PPE.Models
 		
 		private System.Nullable<System.DateTime> _CREATED_DATE;
 		
-		private string _CREATED_NRP;
-		
 		private string _CREATED_BY;
 		
 		private System.Nullable<System.DateTime> _UPDATED_DATE;
-		
-		private string _UPDATED_NRP;
 		
 		private string _UPDATED_BY;
 		
@@ -1222,16 +1214,12 @@ namespace PLANT_PPE.Models
     partial void OnLOC_FROMChanged();
     partial void OnLOC_TOChanging(string value);
     partial void OnLOC_TOChanged();
-    partial void OnEQP_NUMBERChanging(string value);
-    partial void OnEQP_NUMBERChanged();
+    partial void OnEQUIP_NOChanging(string value);
+    partial void OnEQUIP_NOChanged();
     partial void OnEGIChanging(string value);
     partial void OnEGIChanged();
-    partial void OnEGI_DESCChanging(string value);
-    partial void OnEGI_DESCChanged();
-    partial void OnEQUIP_CLASS_IDChanging(string value);
-    partial void OnEQUIP_CLASS_IDChanged();
-    partial void OnEQUIP_CLASS_DESCChanging(string value);
-    partial void OnEQUIP_CLASS_DESCChanged();
+    partial void OnEQUIP_CLASSChanging(string value);
+    partial void OnEQUIP_CLASSChanged();
     partial void OnSERIAL_NOChanging(string value);
     partial void OnSERIAL_NOChanged();
     partial void OnPPE_DESCChanging(string value);
@@ -1240,14 +1228,10 @@ namespace PLANT_PPE.Models
     partial void OnSTATUSChanged();
     partial void OnCREATED_DATEChanging(System.Nullable<System.DateTime> value);
     partial void OnCREATED_DATEChanged();
-    partial void OnCREATED_NRPChanging(string value);
-    partial void OnCREATED_NRPChanged();
     partial void OnCREATED_BYChanging(string value);
     partial void OnCREATED_BYChanged();
     partial void OnUPDATED_DATEChanging(System.Nullable<System.DateTime> value);
     partial void OnUPDATED_DATEChanged();
-    partial void OnUPDATED_NRPChanging(string value);
-    partial void OnUPDATED_NRPChanged();
     partial void OnUPDATED_BYChanging(string value);
     partial void OnUPDATED_BYChanged();
     partial void OnREMARKSChanging(string value);
@@ -1383,22 +1367,22 @@ namespace PLANT_PPE.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQP_NUMBER", DbType="VarChar(50)")]
-		public string EQP_NUMBER
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="VarChar(50)")]
+		public string EQUIP_NO
 		{
 			get
 			{
-				return this._EQP_NUMBER;
+				return this._EQUIP_NO;
 			}
 			set
 			{
-				if ((this._EQP_NUMBER != value))
+				if ((this._EQUIP_NO != value))
 				{
-					this.OnEQP_NUMBERChanging(value);
+					this.OnEQUIP_NOChanging(value);
 					this.SendPropertyChanging();
-					this._EQP_NUMBER = value;
-					this.SendPropertyChanged("EQP_NUMBER");
-					this.OnEQP_NUMBERChanged();
+					this._EQUIP_NO = value;
+					this.SendPropertyChanged("EQUIP_NO");
+					this.OnEQUIP_NOChanged();
 				}
 			}
 		}
@@ -1423,62 +1407,22 @@ namespace PLANT_PPE.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGI_DESC", DbType="VarChar(50)")]
-		public string EGI_DESC
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="VarChar(10)")]
+		public string EQUIP_CLASS
 		{
 			get
 			{
-				return this._EGI_DESC;
+				return this._EQUIP_CLASS;
 			}
 			set
 			{
-				if ((this._EGI_DESC != value))
+				if ((this._EQUIP_CLASS != value))
 				{
-					this.OnEGI_DESCChanging(value);
+					this.OnEQUIP_CLASSChanging(value);
 					this.SendPropertyChanging();
-					this._EGI_DESC = value;
-					this.SendPropertyChanged("EGI_DESC");
-					this.OnEGI_DESCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS_ID", DbType="VarChar(10)")]
-		public string EQUIP_CLASS_ID
-		{
-			get
-			{
-				return this._EQUIP_CLASS_ID;
-			}
-			set
-			{
-				if ((this._EQUIP_CLASS_ID != value))
-				{
-					this.OnEQUIP_CLASS_IDChanging(value);
-					this.SendPropertyChanging();
-					this._EQUIP_CLASS_ID = value;
-					this.SendPropertyChanged("EQUIP_CLASS_ID");
-					this.OnEQUIP_CLASS_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS_DESC", DbType="VarChar(50)")]
-		public string EQUIP_CLASS_DESC
-		{
-			get
-			{
-				return this._EQUIP_CLASS_DESC;
-			}
-			set
-			{
-				if ((this._EQUIP_CLASS_DESC != value))
-				{
-					this.OnEQUIP_CLASS_DESCChanging(value);
-					this.SendPropertyChanging();
-					this._EQUIP_CLASS_DESC = value;
-					this.SendPropertyChanged("EQUIP_CLASS_DESC");
-					this.OnEQUIP_CLASS_DESCChanged();
+					this._EQUIP_CLASS = value;
+					this.SendPropertyChanged("EQUIP_CLASS");
+					this.OnEQUIP_CLASSChanged();
 				}
 			}
 		}
@@ -1563,26 +1507,6 @@ namespace PLANT_PPE.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_NRP", DbType="VarChar(50)")]
-		public string CREATED_NRP
-		{
-			get
-			{
-				return this._CREATED_NRP;
-			}
-			set
-			{
-				if ((this._CREATED_NRP != value))
-				{
-					this.OnCREATED_NRPChanging(value);
-					this.SendPropertyChanging();
-					this._CREATED_NRP = value;
-					this.SendPropertyChanged("CREATED_NRP");
-					this.OnCREATED_NRPChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="VarChar(50)")]
 		public string CREATED_BY
 		{
@@ -1619,26 +1543,6 @@ namespace PLANT_PPE.Models
 					this._UPDATED_DATE = value;
 					this.SendPropertyChanged("UPDATED_DATE");
 					this.OnUPDATED_DATEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_NRP", DbType="VarChar(50)")]
-		public string UPDATED_NRP
-		{
-			get
-			{
-				return this._UPDATED_NRP;
-			}
-			set
-			{
-				if ((this._UPDATED_NRP != value))
-				{
-					this.OnUPDATED_NRPChanging(value);
-					this.SendPropertyChanging();
-					this._UPDATED_NRP = value;
-					this.SendPropertyChanged("UPDATED_NRP");
-					this.OnUPDATED_NRPChanged();
 				}
 			}
 		}

@@ -38,10 +38,10 @@
         <elementListCompartment Id="9c60fb4c-c5a5-4c79-9b12-79306c2d312d" absoluteBounds="4.7650000000000006, 1.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="0c9e25e1-a010-4949-989e-b5014c1c2d8c" isExpanded="false" absoluteBounds="2.625, 0.5, 2, 0.45">
+    <classShape Id="027931ab-9fca-4c6c-9d23-dc1931d8825f" isExpanded="false" absoluteBounds="2.625, 0.5, 2, 0.45">
       <DataClassMoniker Name="/DB_PLANT_PPEDataContext/TBL_T_PPE" />
       <nestedChildShapes>
-        <elementListCompartment Id="b03831c5-f54d-4106-a017-c3b7a08434cd" absoluteBounds="2.64, 0.96, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fdcb2ba5-f9fa-4349-99e2-d85e64304bf8" absoluteBounds="2.64, 0.96, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
