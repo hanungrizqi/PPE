@@ -51,6 +51,9 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_T_PPE(TBL_T_PPE instance);
     partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
     partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
+    partial void InsertTBL_H_PPE_TEMPORARY(TBL_H_PPE_TEMPORARY instance);
+    partial void UpdateTBL_H_PPE_TEMPORARY(TBL_H_PPE_TEMPORARY instance);
+    partial void DeleteTBL_H_PPE_TEMPORARY(TBL_H_PPE_TEMPORARY instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -264,6 +267,14 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<VW_R_EQ_NUMBER_WHEEL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_H_PPE_TEMPORARY> TBL_H_PPE_TEMPORARies
+		{
+			get
+			{
+				return this.GetTable<TBL_H_PPE_TEMPORARY>();
 			}
 		}
 	}
@@ -4478,6 +4489,356 @@ namespace API_PLANT_PPE.Models
 				{
 					this._DSTRCT_CODE = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_H_PPE_TEMPORARY")]
+	public partial class TBL_H_PPE_TEMPORARY : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _PPE_NO;
+		
+		private System.Nullable<System.DateTime> _DATE;
+		
+		private string _DISTRICT_FROM;
+		
+		private string _DISTRICT_TO;
+		
+		private string _LOC_FROM;
+		
+		private string _LOC_TO;
+		
+		private string _EQUIP_NO;
+		
+		private string _PPE_DESC;
+		
+		private string _EGI;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NO;
+		
+		private string _REMARKS;
+		
+		private string _PATH_ATTACHMENT;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPPE_NOChanging(string value);
+    partial void OnPPE_NOChanged();
+    partial void OnDATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnDATEChanged();
+    partial void OnDISTRICT_FROMChanging(string value);
+    partial void OnDISTRICT_FROMChanged();
+    partial void OnDISTRICT_TOChanging(string value);
+    partial void OnDISTRICT_TOChanged();
+    partial void OnLOC_FROMChanging(string value);
+    partial void OnLOC_FROMChanged();
+    partial void OnLOC_TOChanging(string value);
+    partial void OnLOC_TOChanged();
+    partial void OnEQUIP_NOChanging(string value);
+    partial void OnEQUIP_NOChanged();
+    partial void OnPPE_DESCChanging(string value);
+    partial void OnPPE_DESCChanged();
+    partial void OnEGIChanging(string value);
+    partial void OnEGIChanged();
+    partial void OnEQUIP_CLASSChanging(string value);
+    partial void OnEQUIP_CLASSChanged();
+    partial void OnSERIAL_NOChanging(string value);
+    partial void OnSERIAL_NOChanged();
+    partial void OnREMARKSChanging(string value);
+    partial void OnREMARKSChanged();
+    partial void OnPATH_ATTACHMENTChanging(string value);
+    partial void OnPATH_ATTACHMENTChanged();
+    #endregion
+		
+		public TBL_H_PPE_TEMPORARY()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_NO", DbType="VarChar(200) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string PPE_NO
+		{
+			get
+			{
+				return this._PPE_NO;
+			}
+			set
+			{
+				if ((this._PPE_NO != value))
+				{
+					this.OnPPE_NOChanging(value);
+					this.SendPropertyChanging();
+					this._PPE_NO = value;
+					this.SendPropertyChanged("PPE_NO");
+					this.OnPPE_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> DATE
+		{
+			get
+			{
+				return this._DATE;
+			}
+			set
+			{
+				if ((this._DATE != value))
+				{
+					this.OnDATEChanging(value);
+					this.SendPropertyChanging();
+					this._DATE = value;
+					this.SendPropertyChanged("DATE");
+					this.OnDATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_FROM", DbType="VarChar(50)")]
+		public string DISTRICT_FROM
+		{
+			get
+			{
+				return this._DISTRICT_FROM;
+			}
+			set
+			{
+				if ((this._DISTRICT_FROM != value))
+				{
+					this.OnDISTRICT_FROMChanging(value);
+					this.SendPropertyChanging();
+					this._DISTRICT_FROM = value;
+					this.SendPropertyChanged("DISTRICT_FROM");
+					this.OnDISTRICT_FROMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_TO", DbType="VarChar(50)")]
+		public string DISTRICT_TO
+		{
+			get
+			{
+				return this._DISTRICT_TO;
+			}
+			set
+			{
+				if ((this._DISTRICT_TO != value))
+				{
+					this.OnDISTRICT_TOChanging(value);
+					this.SendPropertyChanging();
+					this._DISTRICT_TO = value;
+					this.SendPropertyChanged("DISTRICT_TO");
+					this.OnDISTRICT_TOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_FROM", DbType="VarChar(50)")]
+		public string LOC_FROM
+		{
+			get
+			{
+				return this._LOC_FROM;
+			}
+			set
+			{
+				if ((this._LOC_FROM != value))
+				{
+					this.OnLOC_FROMChanging(value);
+					this.SendPropertyChanging();
+					this._LOC_FROM = value;
+					this.SendPropertyChanged("LOC_FROM");
+					this.OnLOC_FROMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_TO", DbType="VarChar(50)")]
+		public string LOC_TO
+		{
+			get
+			{
+				return this._LOC_TO;
+			}
+			set
+			{
+				if ((this._LOC_TO != value))
+				{
+					this.OnLOC_TOChanging(value);
+					this.SendPropertyChanging();
+					this._LOC_TO = value;
+					this.SendPropertyChanged("LOC_TO");
+					this.OnLOC_TOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="VarChar(50)")]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this.OnEQUIP_NOChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIP_NO = value;
+					this.SendPropertyChanged("EQUIP_NO");
+					this.OnEQUIP_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_DESC", DbType="VarChar(200)")]
+		public string PPE_DESC
+		{
+			get
+			{
+				return this._PPE_DESC;
+			}
+			set
+			{
+				if ((this._PPE_DESC != value))
+				{
+					this.OnPPE_DESCChanging(value);
+					this.SendPropertyChanging();
+					this._PPE_DESC = value;
+					this.SendPropertyChanged("PPE_DESC");
+					this.OnPPE_DESCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGI", DbType="VarChar(20)")]
+		public string EGI
+		{
+			get
+			{
+				return this._EGI;
+			}
+			set
+			{
+				if ((this._EGI != value))
+				{
+					this.OnEGIChanging(value);
+					this.SendPropertyChanging();
+					this._EGI = value;
+					this.SendPropertyChanged("EGI");
+					this.OnEGIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="VarChar(10)")]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this.OnEQUIP_CLASSChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIP_CLASS = value;
+					this.SendPropertyChanged("EQUIP_CLASS");
+					this.OnEQUIP_CLASSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NO", DbType="VarChar(50)")]
+		public string SERIAL_NO
+		{
+			get
+			{
+				return this._SERIAL_NO;
+			}
+			set
+			{
+				if ((this._SERIAL_NO != value))
+				{
+					this.OnSERIAL_NOChanging(value);
+					this.SendPropertyChanging();
+					this._SERIAL_NO = value;
+					this.SendPropertyChanged("SERIAL_NO");
+					this.OnSERIAL_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REMARKS", DbType="VarChar(MAX)")]
+		public string REMARKS
+		{
+			get
+			{
+				return this._REMARKS;
+			}
+			set
+			{
+				if ((this._REMARKS != value))
+				{
+					this.OnREMARKSChanging(value);
+					this.SendPropertyChanging();
+					this._REMARKS = value;
+					this.SendPropertyChanged("REMARKS");
+					this.OnREMARKSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH_ATTACHMENT", DbType="VarChar(200)")]
+		public string PATH_ATTACHMENT
+		{
+			get
+			{
+				return this._PATH_ATTACHMENT;
+			}
+			set
+			{
+				if ((this._PATH_ATTACHMENT != value))
+				{
+					this.OnPATH_ATTACHMENTChanging(value);
+					this.SendPropertyChanging();
+					this._PATH_ATTACHMENT = value;
+					this.SendPropertyChanged("PATH_ATTACHMENT");
+					this.OnPATH_ATTACHMENTChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

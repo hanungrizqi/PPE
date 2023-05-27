@@ -126,15 +126,15 @@
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label" for="txt_remark">Remarks</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control form-control-sm " id="txt_remark" name="txt_remark"></textarea>
+                        @*<textarea class="form-control form-control-sm " id="txt_remark" name="txt_remark"></textarea>*@
+                        <textarea class="form-control form-control-alt" id="txt_remark" name="txt_remark" rows="7" placeholder="Textarea content.."></textarea>
                         @*<input type="text" class="form-control form-control-sm " id="txt_remark" name="txt_remark">*@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label" for="txt_standJob">Attachment</label>
+                    <label class="col-sm-4 col-form-label" for="txt_attach">Attachment</label>
                     <div class="col-sm-8">
-                        <select class="js-select2 form-select" id="txt_standJob" name="txt_standJob" style="width: 100%;">
-                        </select>
+                        <input class="form-control" type="file" id="example-file-input">
                     </div>
                 </div>
             </div>
@@ -144,13 +144,13 @@
         <div class="block-options justify-content-center">
             <div class="row text-center">
                 @*<div class="col-md-6">
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="clearBacklog()">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="clearPPE()">
                             <i class="fa fa-broom opacity-50 me-1"></i> Clear
                         </button>
                     </div>*@
                 <div class="col-md-12">
-                    <a href="/Backlog/ListBacklog" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
-                    <button type="submit" class="btn btn-sm btn-info" value="SAVED" onclick="saveBacklog(this.value)">
+                    <a href="/Home/Index" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
+                    <button type="submit" class="btn btn-sm btn-info" onclick="savePPEtoTable()">
                         <i class="fa fa-floppy-disk opacity-50 me-1"></i> Save
                     </button>
                     <button type="submit" id="submit_button" class="btn btn-sm btn-success" value="SUBMITTED" onclick="saveBacklog(this.value)">
@@ -173,12 +173,20 @@
                     <thead class="text-center">
                         <tr>
                             <th class="text-center">No</th>
-                            <th>Egi</th>
+                            <th>No Ppe</th>
+                            <th>Date</th>
                             <th>Eqp Number</th>
                             <th>PPE Description</th>
+                            <th>Egi</th>
                             <th>Eqp Class</th>
                             <th>Serial Number</th>
-                            @*<th>Action</th>*@
+                            <th>District From</th>
+                            <th>Loc From</th>
+                            <th>District To</th>
+                            <th>Loc To</th>
+                            <th>Remarks</th>
+                            <th>Attachment</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -187,3 +195,89 @@
         </div>
     </div>
 </div>
+
+<!--<div class="block block-rounded">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">
+            Daftar Equipment <small>PPE</small>
+        </h3>
+    </div>
+    <div class="block-content block-content-full">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="table_equipment">
+            <thead class="text-center bg-primary text-white">
+                <tr>-->
+                    @*<th class="text-center">No</th>*@
+                    <!--<th>No Ppe</th>
+                    <th>Date</th>
+                    <th>Eqp Number</th>
+                    <th>PPE Description</th>
+                    <th>Egi</th>
+                    <th>Eqp Class</th>
+                    <th>Serial Number</th>
+                    <th>District From</th>
+                    <th>Loc From</th>
+                    <th>District To</th>
+                    <th>Loc To</th>
+                    <th>Remarks</th>
+                    <th>Attachment</th>
+                    <th>Delete</th>-->
+                    @*<th>Action</th>*@
+                <!--</tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>-->
+
+@*<script>
+    function savePPEtoTable() {
+        var date = $("#txt_date").val();
+        var ppeNo = $("#txt_noPPE").val();
+        var eqNumber = $("#txt_eqNumber option:selected").val();
+        var ppeDescription = $("#txt_ppeDesc").val();
+        var egi = $("#txt_egi").val();
+        var eqClass = $("#txt_eqClass").val();
+        var serialNumber = $("#txt_serialNo").val();
+        var districtFrom = $("#txt_districtFrom option:selected").val();
+        var locFrom = $("#txt_locFrom option:selected").val();
+        var districtTo = $("#txt_districtTo option:selected").val();
+        var locTo = $("#txt_locTo option:selected").val();
+
+        var rowCount = $("#table_equipment tbody tr").length + 1;
+        var row = "<tr>" +
+            "<td class='text-center'>" + rowCount + "</td>" +
+            "<td>" + date + "</td>" +
+            "<td>" + ppeNo + "</td>" +
+            "<td>" + eqNumber + "</td>" +
+            "<td>" + ppeDescription + "</td>" +
+            "<td>" + egi + "</td>" +
+            "<td>" + eqClass + "</td>" +
+            "<td>" + serialNumber + "</td>" +
+            "<td>" + districtFrom + "</td>" +
+            "<td>" + locFrom + "</td>" +
+            "<td>" + districtTo + "</td>" +
+            "<td>" + locTo + "</td>" +
+            "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>Remove</button></td>" +
+            "</tr>";
+
+        $("#table_equipment tbody").append(row);
+
+        // Clear input fields after adding the row
+        $("#txt_date").val("");
+        $("#txt_noPPE").val("");
+        $("#txt_eqNumber").val("").trigger("change");
+        $("#txt_ppeDesc").val("");
+        $("#txt_egi").val("");
+        $("#txt_eqClass").val("");
+        $("#txt_serialNo").val("");
+        $("#txt_districtFrom").val("").trigger("change");
+        $("#txt_locFrom").val("").trigger("change");
+        $("#txt_districtTo").val("").trigger("change");
+        $("#txt_locTo").val("").trigger("change");
+    }
+
+    function removeRow(button) {
+        $(button).closest("tr").remove();
+    }
+</script>*@
