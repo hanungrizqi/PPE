@@ -19,7 +19,6 @@ $("#txt_eqNumber").on("change", function () {
     $("#txt_serialNo").val(Sn);
 })
 
-//Start District From
 var selectedDistrict;
 function getDistrict() {
     $.ajax({
@@ -58,8 +57,7 @@ function getLoc() {
         }
     });
 }
-//End District From
-//Start District To
+
 var selectedDistrictTO;
 function getDistrictTO() {
     $.ajax({
@@ -97,7 +95,6 @@ function getLocTO() {
         }
     });
 }
-//End District To
 
 function getEqNumber() {
     $.ajax({
@@ -108,7 +105,6 @@ function getEqNumber() {
             $('#txt_eqNumber').empty();
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
-                //text += '<option value="' + val.EQUIP_NO + '">' + val.EQUIP_NO + '</option>';
                 text += '<option value="' + val.EQUIP_NO + '" data-egi="' + val.EQUIP_GRP_ID + '" data-eqclass="' + val.EQUIP_CLASS + '" data-Sn="' + val.SERIAL_NUMBER + '">' + val.EQUIP_NO + '</option>';
             });
             $("#txt_eqNumber").append(text);
@@ -116,32 +112,98 @@ function getEqNumber() {
         }
     });
 }
-function savePPEtoTable() {
-    debugger
-    let dataPPE = new Object();
-    dataPPE.DATE = $("#txt_date").val();
-    dataPPE.PPE_NO = $("#txt_noPPE").val();
-    dataPPE.DISTRICT_FROM = $("#txt_districtFrom").val();
-    dataPPE.DISTRICT_TO = $("#txt_districtTo").val();
-    dataPPE.LOC_FROM = $("#txt_locFrom").val();
-    dataPPE.LOC_TO = $("#txt_locTo").val();
-    dataPPE.EQUIP_NO = $("#txt_eqNumber").val();
-    dataPPE.PPE_DESC = $("#txt_ppeDesc").val();
-    dataPPE.EGI = $("#txt_egi").val();
-    dataPPE.EQUIP_CLASS = $("#txt_eqClass").val();
-    dataPPE.SERIAL_NO = $("#txt_serialNo").val();
-    dataPPE.REMARKS = $("#txt_remark").val();
-    dataPPE.PATH_ATTACHMENT = $("#txt_attach").val();
-    
+
+$("#savePPEtoTable").click(function () {
+    var date = $("#txt_date").val();
+    var formattedDate = formatDate(date);
+
+    var ppeNo = $("#txt_noPPE").val();
+    var eqNumber = $("#txt_eqNumber").val();
+    var ppeDescription = $("#txt_ppeDesc").val();
+    var egi = $("#txt_egi").val();
+    var eqClass = $("#txt_eqClass").val();
+    var serialNumber = $("#txt_serialNo").val();
+    var districtFrom = $("#txt_districtFrom").val();
+    var locFrom = $("#txt_locFrom").val();
+    var districtTo = $("#txt_districtTo").val();
+    var locTo = $("#txt_locTo").val();
+    var remark = $("#txt_remark").val();
+    var attch = $("#txt_attach").val();
+
+    var rowCount = $("#table_equipment tbody tr").length + 1;
+    var row = "<tr>" +
+        "<td class='text-center'>" + rowCount + "</td>" +
+        "<td>" + formattedDate + "</td>" +
+        "<td>" + ppeNo + "</td>" +
+        "<td>" + eqNumber + "</td>" +
+        "<td>" + ppeDescription + "</td>" +
+        "<td>" + egi + "</td>" +
+        "<td>" + eqClass + "</td>" +
+        "<td>" + serialNumber + "</td>" +
+        "<td>" + districtFrom + "</td>" +
+        "<td>" + locFrom + "</td>" +
+        "<td>" + districtTo + "</td>" +
+        "<td>" + locTo + "</td>" +
+        "<td>" + remark + "</td>" +
+        "<td>" + attch + "</td>" +
+        "</tr>";
+
+    $("#table_equipment tbody").append(row);
+
+    // Clear input
+    //$("#txt_date").val("");
+    //$("#txt_noPPE").val("");
+    //$("#txt_eqNumber").val("").trigger("change");
+    //$("#txt_ppeDesc").val("");
+    //$("#txt_egi").val("");
+    //$("#txt_eqClass").val("");
+    //$("#txt_serialNo").val("");
+    //$("#txt_districtFrom").val("").trigger("change");
+    //$("#txt_locFrom").val("").trigger("change");
+    //$("#txt_districtTo").val("").trigger("change");
+    //$("#txt_locTo").val("").trigger("change");
+});
+
+function formatDate(date) {
+    var parts = date.split("-");
+    var day = parts[2];
+    var month = parts[1];
+    var year = parts[0];
+    return day + "/" + month + "/" + year;
+}
+
+$("#savePPE").click(function () {
+    var tableData = [];
+    $("#table_equipment tbody tr").each(function () {
+        var rowData = [];
+        $(this).find("td").each(function () {
+            rowData.push($(this).text());
+        });
+        tableData.push(rowData);
+    });
+
     $.ajax({
-        url: $("#web_link").val() + "/api/PPE/Save_Temporary_PPE", //URI
-        data: JSON.stringify(dataPPE),
+        url: $("#web_link").val() + "/api/PPE/Create_PPE", //URI
+        data: tableData,
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            debugger
             if (data.Remarks == true) {
-                initializeDataTable();
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Home/Index";
+                    }
+                });
             } if (data.Remarks == false) {
                 Swal.fire(
                     'Error!',
@@ -149,93 +211,12 @@ function savePPEtoTable() {
                     'error'
                 );
             }
+
         },
         error: function (xhr) {
             alert(xhr.responseText);
         }
-    });
-}
+    })
 
-function initializeDataTable() {
-    debugger
-    var table = $("#table_equipment").DataTable({
-        ajax: {
-            url: $("#web_link").val() + "/api/PPE/Get_TemporaryPPE",
-            dataSrc: "Data",
-        },
-
-        "columnDefs": [
-            { "className": "dt-center", "targets": [0, 1, 2, 3, 5, 6, 7, 8, 9, 10] },
-            { "className": "dt-nowrap", "targets": '_all' }
-        ],
-        scrollX: true,
-        columns: [
-            { data: 'PPE_NO' },
-            {
-                data: 'DATE',
-                render: function (data, type, row) {
-                    const tanggal = moment(data).format("DD/MM/YYYY");
-                    return tanggal;
-                }
-            },
-            { data: 'EQUIP_NO' },
-            { data: 'PPE_DESC' },
-            { data: 'EGI' },
-            { data: 'EQUIP_CLASS' },
-            { data: 'SERIAL_NO' },
-            { data: 'DISTRICT_FROM' },
-            { data: 'LOC_FROM' },
-            { data: 'DISTRICT_TO' },
-            { data: 'LOC_TO' },
-            { data: 'REMARKS' },
-            { data: 'PATH_ATTACHMENT' },
-        ],
-
-    });
-    return table;
-}
-
-//$("#savePPEtoTable").click(function () {
-//    var date = $("#txt_date").val();
-//    var ppeNo = $("#txt_noPPE").val();
-//    var eqNumber = $("#txt_eqNumber option:selected").val();
-//    var ppeDescription = $("#txt_ppeDesc").val();
-//    var egi = $("#txt_egi").val();
-//    var eqClass = $("#txt_eqClass").val();
-//    var serialNumber = $("#txt_serialNo").val();
-//    var districtFrom = $("#txt_districtFrom option:selected").val();
-//    var locFrom = $("#txt_locFrom option:selected").val();
-//    var districtTo = $("#txt_districtTo option:selected").val();
-//    var locTo = $("#txt_locTo option:selected").val();
-
-//    var rowCount = $("#table_equipment tbody tr").length + 1;
-//    var row = "<tr>" +
-//        "<td class='text-center'>" + rowCount + "</td>" +
-//        "<td>" + date + "</td>" +
-//        "<td>" + ppeNo + "</td>" +
-//        "<td>" + eqNumber + "</td>" +
-//        "<td>" + ppeDescription + "</td>" +
-//        "<td>" + egi + "</td>" +
-//        "<td>" + eqClass + "</td>" +
-//        "<td>" + serialNumber + "</td>" +
-//        "<td>" + districtFrom + "</td>" +
-//        "<td>" + locFrom + "</td>" +
-//        "<td>" + districtTo + "</td>" +
-//        "<td>" + locTo + "</td>" +
-//        "</tr>";
-
-//    $("#table_equipment tbody").append(row);
-
-//    // Clear input fields after adding the row
-//    $("#txt_date").val("");
-//    $("#txt_noPPE").val("");
-//    $("#txt_eqNumber").val("").trigger("change");
-//    $("#txt_ppeDesc").val("");
-//    $("#txt_egi").val("");
-//    $("#txt_eqClass").val("");
-//    $("#txt_serialNo").val("");
-//    $("#txt_districtFrom").val("").trigger("change");
-//    $("#txt_locFrom").val("").trigger("change");
-//    $("#txt_districtTo").val("").trigger("change");
-//    $("#txt_locTo").val("").trigger("change");
-//});
+    console.log(tableData);
+});
