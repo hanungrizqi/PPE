@@ -112,7 +112,8 @@ function getEqNumber() {
         }
     });
 }
-
+debugger
+var savePPEtoTableClicked = false; // Tambahkan variabel flag
 function savePPEtoTable() { 
 /*$("#savePPEtoTable").click(function () {*/
     var date = $("#txt_date").val();
@@ -156,7 +157,6 @@ function savePPEtoTable() {
 
                 var rowCount = $("#table_equipment tbody tr").length + 1;
                 var row = "<tr>" +
-                    // ...
                     "<td class='text-center'>" + rowCount + "</td>" +
                     "<td>" + formattedDate + "</td>" +
                     "<td>" + ppeNo + "</td>" +
@@ -174,10 +174,8 @@ function savePPEtoTable() {
                     "<td><a href='" + attachmentUrl + "' target='_blank'>View Attachment</a></td>" +
                     "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
                     "</tr>";
-
-                $("#table_equipment tbody").append(row);
-
-                // ...
+                    $("#table_equipment tbody").append(row);
+                    savePPEtoTableClicked = true;
             },
             error: function (xhr) {
                 alert(xhr.responseText);
@@ -202,8 +200,8 @@ function savePPEtoTable() {
             "<td>" + attch + "</td>" +
             "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
             "</tr>";
-
-        $("#table_equipment tbody").append(row);
+            $("#table_equipment tbody").append(row);
+            savePPEtoTableClicked = true;
     }
 
     //var rowCount = $("#table_equipment tbody tr").length + 1;
@@ -252,6 +250,15 @@ function formatDate(date) {
 
 function savePPE() {
     debugger
+    if (!savePPEtoTableClicked) {
+        // Tombol save belum diklik, tampilkan notifikasi
+        Swal.fire(
+            'Warning!',
+            'Tidak bisa Submit sebelum Save.',
+            'warning'
+        );
+        return;
+    }
     var tableData = [];
 
     $("#table_equipment tbody tr").each(function () {
