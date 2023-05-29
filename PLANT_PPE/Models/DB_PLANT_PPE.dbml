@@ -70,4 +70,16 @@
       <Column Name="RoleName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_DISTRICT" Member="VW_DISTRICTs">
+    <Type Name="VW_DISTRICT">
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DSTRCT_NAME" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_LOCATION" Member="VW_LOCATIONs">
+    <Type Name="VW_LOCATION">
+      <Column Name="TABLE_CODE" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

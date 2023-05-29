@@ -4347,7 +4347,9 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\Page\login.js" />
     <Content Include="Scripts\Page\SettingAgreement.js" />
+    <Content Include="Scripts\Page\MappingApproval.js" />
     <Content Include="Scripts\Page\SettingMenu.js" />
+    <Content Include="Scripts\Page\SettingDistrict.js" />
     <Content Include="Scripts\Page\SettingUser.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -4366,6 +4368,8 @@
     <Content Include="Views\Setting\Users.cshtml" />
     <Content Include="Views\Setting\Menu.cshtml" />
     <Content Include="Views\Setting\Agreement.cshtml" />
+    <Content Include="Views\Setting\District.cshtml" />
+    <Content Include="Views\Setting\MappingApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

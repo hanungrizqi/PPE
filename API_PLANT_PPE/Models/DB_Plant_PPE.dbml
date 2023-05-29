@@ -143,4 +143,59 @@
       <Column Name="CONTENT" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_DISTRICT" Member="VW_DISTRICTs">
+    <Type Name="VW_DISTRICT">
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DSTRCT_NAME" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_M_DISTRICT" Member="TBL_M_DISTRICTs">
+    <Type Name="TBL_M_DISTRICT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LOCATION" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_M_POSITION" Member="TBL_M_POSITIONs">
+    <Type Name="TBL_M_POSITION">
+      <Column Name="ID_POSITION" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ID_DISTRICT" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="POSITION_ID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="POS_TITLE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="POSITION_FULL" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OCCUP_TYPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OCCUP_TYPE_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GROUP_OCCUP_TYPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GROUP_OCCUP_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="COST_CENTRE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DEPT" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OCCUP_STATUS" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OCCUP_STATUS_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DEPT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DEPT_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DIV_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DIV_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="POSITION_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SUPERIOR_ID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DWH_GROUP_OCCUP_TYPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FUNCTIONAL_STRUCTURE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="OCCUP_GRADE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_M_MAPPING_APPROVAL" Member="TBL_M_MAPPING_APPROVALs">
+    <Type Name="TBL_M_MAPPING_APPROVAL">
+      <Column Name="APPROVAL_NO" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="APPROVAL_ACTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_FROM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="APPROVAL_TO" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="APPROVAL_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOCATION_FROM" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LOCATION_TO" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

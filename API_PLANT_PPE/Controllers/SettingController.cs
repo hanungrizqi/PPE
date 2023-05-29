@@ -148,6 +148,128 @@ namespace API_PLANT_PPE.Controllers
                 return Json(new { Remarks = false, Message = ex });
             }
         }
-        
+
+
+        #region Setting District
+        //Setting District
+        [HttpPost]
+        [Route("Create_District")]
+        public IHttpActionResult Create_District(TBL_M_DISTRICT param)
+        {
+            try
+            {
+                TBL_M_DISTRICT tbl = new TBL_M_DISTRICT();
+                tbl.DSTRCT_CODE = param.DSTRCT_CODE;
+                tbl.LOCATION = param.LOCATION;
+
+                db.TBL_M_DISTRICTs.InsertOnSubmit(tbl);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_District")]
+        public IHttpActionResult Get_District()
+        {
+            var data = db.TBL_M_DISTRICTs.ToList();
+            return Ok(new { Data = data });
+        }
+
+
+        [HttpPost]
+        [Route("Delete_District")]
+        public IHttpActionResult Delete_District(int id)
+        {
+            try
+            {
+                var data = db.TBL_M_DISTRICTs.Where(a => a.ID == id).FirstOrDefault();
+
+                db.TBL_M_DISTRICTs.DeleteOnSubmit(data);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+
+        }
+
+        #endregion
+
+
+        #region Setting MappingApproval
+
+        [HttpGet]
+        [Route("Get_MappingApproval")]
+        public IHttpActionResult Get_MappingApproval()
+        {
+            var data = db.TBL_M_MAPPING_APPROVALs.ToList();
+            return Ok(new { Data = data });
+        }
+
+        [HttpGet]
+        [Route("Get_DistrictLocation")]
+        public IHttpActionResult Get_DistrictLocation(String dstrct)
+        {
+            var data = db.TBL_M_DISTRICTs.Where(a => a.DSTRCT_CODE == dstrct).ToList();
+            return Ok(new { Data = data });
+        }
+
+        [HttpGet]
+        [Route("Get_DistrictMap")]
+        public IHttpActionResult Get_DistrictMap()
+        {
+            var data = db.VW_DISTRICTs.ToList();
+            return Ok(new { Data = data });
+        }
+
+        [HttpGet]
+        [Route("Get_Position")]
+        public IHttpActionResult Get_Position()
+        {
+            var data = db.TBL_M_POSITIONs.ToList();
+            return Ok(new { Data = data });
+        }
+
+
+        [HttpPost]
+        [Route("Create_MappingApproval")]
+        public IHttpActionResult Create_MappingApproval(TBL_M_MAPPING_APPROVAL param)
+        {
+            try
+            {
+                TBL_M_MAPPING_APPROVAL  tbl = new TBL_M_MAPPING_APPROVAL();
+                tbl.APPROVAL_ACTION = param.APPROVAL_ACTION;
+                tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
+                tbl.APPROVAL_FROM = param.APPROVAL_FROM;
+                tbl.APPROVAL_TO = param.APPROVAL_TO;
+                tbl.LOCATION_FROM= param.LOCATION_FROM;
+                tbl.LOCATION_TO = param.LOCATION_TO;
+                tbl.CURR_POSITION_ID = param.CURR_POSITION_ID;
+                tbl.NEXT_POSITION_ID = param.NEXT_POSITION_ID;
+                tbl.CURRENT_STATUS = param.CURRENT_STATUS;
+                tbl.APPROVAL_STATUS = param.APPROVAL_STATUS;
+                
+                db.TBL_M_MAPPING_APPROVALs.InsertOnSubmit(tbl);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
+
+
+
+
+        #endregion
     }
 }
