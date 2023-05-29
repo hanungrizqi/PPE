@@ -8,6 +8,18 @@ $("document").ready(function () {
     txtDateInput.setAttribute("max", formattedDate);
     getDistrict();
     getDistrictTO();
+    $('#modal-terms').on('show.bs.modal', function () {
+        getContent();
+    });
+    $('#modal-terms').on('hidden.bs.modal', function () {
+        var agreeCheckbox = document.getElementById('val-terms');
+        agreeCheckbox.checked = true; //kalo diklik accept, cek box jadi aktif
+    });
+
+    $('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
+        var agreeCheckbox = document.getElementById('val-terms');
+        agreeCheckbox.disabled = false; //kalo baca modal, cek box aktip
+    });
 })
 
 $("#txt_eqNumber").on("change", function () {
@@ -112,10 +124,10 @@ function getEqNumber() {
         }
     });
 }
-debugger
-var savePPEtoTableClicked = false; // Tambahkan variabel flag
+
+var savePPEtoTableClicked = false;
 function savePPEtoTable() { 
-/*$("#savePPEtoTable").click(function () {*/
+    var agreeCheckbox = document.getElementById('val-terms');
     var date = $("#txt_date").val();
     var formattedDate = formatDate(date);
 
@@ -136,6 +148,13 @@ function savePPEtoTable() {
         Swal.fire(
             'Warning!',
             'Mohon lengkapi data!',
+            'warning'
+        );
+        return;
+    } else if (!agreeCheckbox.checked) {
+        Swal.fire(
+            'Warning!',
+            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
             'warning'
         );
         return;
@@ -237,7 +256,7 @@ function savePPEtoTable() {
     //$("#txt_locFrom").val("").trigger("change");
     //$("#txt_districtTo").val("").trigger("change");
     //$("#txt_locTo").val("").trigger("change");
-/*});*/
+
 };
 
 function formatDate(date) {
@@ -251,7 +270,6 @@ function formatDate(date) {
 function savePPE() {
     debugger
     if (!savePPEtoTableClicked) {
-        // Tombol save belum diklik, tampilkan notifikasi
         Swal.fire(
             'Warning!',
             'Tidak bisa Submit sebelum Save.',
@@ -321,4 +339,21 @@ function savePPE() {
     });
 
     console.log(tableData);
+}
+
+function getContent() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
+        dataType: "json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var content = data.Data;
+            $("#agreeModals").html(content);
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
 }
