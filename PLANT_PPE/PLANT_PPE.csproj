@@ -4373,6 +4373,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\AttachmentFile\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>

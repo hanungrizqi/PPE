@@ -114,6 +114,7 @@ namespace API_PLANT_PPE.Controllers
                 TBL_M_AGREEMENT tbl = new TBL_M_AGREEMENT();
                 tbl.ID = param.ID;
                 tbl.CONTENT = param.CONTENT;
+                tbl.LAST_MODIFIED_DATE = DateTime.Now;
 
                 db.TBL_M_AGREEMENTs.InsertOnSubmit(tbl);
                 db.SubmitChanges();
@@ -134,7 +135,7 @@ namespace API_PLANT_PPE.Controllers
             {
                 var data = db.TBL_M_AGREEMENTs.FirstOrDefault();
 
-                return Ok(new { Data = data.CONTENT });
+                return Ok(new { Data = data.CONTENT, DATE = data.LAST_MODIFIED_DATE });
             }
             catch (Exception ex)
             {

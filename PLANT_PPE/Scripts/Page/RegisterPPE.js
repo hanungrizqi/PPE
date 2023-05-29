@@ -113,7 +113,8 @@ function getEqNumber() {
     });
 }
 
-$("#savePPEtoTable").click(function () {
+function savePPEtoTable() { 
+/*$("#savePPEtoTable").click(function () {*/
     var date = $("#txt_date").val();
     var formattedDate = formatDate(date);
 
@@ -130,25 +131,101 @@ $("#savePPEtoTable").click(function () {
     var remark = $("#txt_remark").val();
     var attch = $("#txt_attach").val();
 
-    var rowCount = $("#table_equipment tbody tr").length + 1;
-    var row = "<tr>" +
-        "<td class='text-center'>" + rowCount + "</td>" +
-        "<td>" + formattedDate + "</td>" +
-        "<td>" + ppeNo + "</td>" +
-        "<td>" + eqNumber + "</td>" +
-        "<td>" + ppeDescription + "</td>" +
-        "<td>" + egi + "</td>" +
-        "<td>" + eqClass + "</td>" +
-        "<td>" + serialNumber + "</td>" +
-        "<td>" + districtFrom + "</td>" +
-        "<td>" + locFrom + "</td>" +
-        "<td>" + districtTo + "</td>" +
-        "<td>" + locTo + "</td>" +
-        "<td>" + remark + "</td>" +
-        "<td>" + attch + "</td>" +
-        "</tr>";
+    if (districtFrom == "" || locFrom == "" || districtTo == "" || locTo == "" || eqNumber == "" || ppeDescription == "") {
+        Swal.fire(
+            'Warning!',
+            'Mohon lengkapi data!',
+            'warning'
+        );
+        return;
+    } else if (attch != "") {
+        var file = $("#txt_attach")[0].files[0];
 
-    $("#table_equipment tbody").append(row);
+        var formData = new FormData();
+        formData.append("attachment", file);
+
+        $.ajax({
+            url: $("#web_link").val() + "/api/PPE/UploadAttachment", // URI
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                debugger
+                var attachmentUrl = response.AttachmentUrl;
+
+                var rowCount = $("#table_equipment tbody tr").length + 1;
+                var row = "<tr>" +
+                    // ...
+                    "<td class='text-center'>" + rowCount + "</td>" +
+                    "<td>" + formattedDate + "</td>" +
+                    "<td>" + ppeNo + "</td>" +
+                    "<td>" + eqNumber + "</td>" +
+                    "<td>" + ppeDescription + "</td>" +
+                    "<td>" + egi + "</td>" +
+                    "<td>" + eqClass + "</td>" +
+                    "<td>" + serialNumber + "</td>" +
+                    "<td>" + districtFrom + "</td>" +
+                    "<td>" + locFrom + "</td>" +
+                    "<td>" + districtTo + "</td>" +
+                    "<td>" + locTo + "</td>" +
+                    "<td>" + remark + "</td>" +
+                    //"<td>" + attch + "</td>" +
+                    "<td><a href='" + attachmentUrl + "' target='_blank'>View Attachment</a></td>" +
+                    "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
+                    "</tr>";
+
+                $("#table_equipment tbody").append(row);
+
+                // ...
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+    } else if (attch == "") {
+        var rowCount = $("#table_equipment tbody tr").length + 1;
+        var row = "<tr>" +
+            "<td class='text-center'>" + rowCount + "</td>" +
+            "<td>" + formattedDate + "</td>" +
+            "<td>" + ppeNo + "</td>" +
+            "<td>" + eqNumber + "</td>" +
+            "<td>" + ppeDescription + "</td>" +
+            "<td>" + egi + "</td>" +
+            "<td>" + eqClass + "</td>" +
+            "<td>" + serialNumber + "</td>" +
+            "<td>" + districtFrom + "</td>" +
+            "<td>" + locFrom + "</td>" +
+            "<td>" + districtTo + "</td>" +
+            "<td>" + locTo + "</td>" +
+            "<td>" + remark + "</td>" +
+            "<td>" + attch + "</td>" +
+            "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
+            "</tr>";
+
+        $("#table_equipment tbody").append(row);
+    }
+
+    //var rowCount = $("#table_equipment tbody tr").length + 1;
+    //var row = "<tr>" +
+    //    "<td class='text-center'>" + rowCount + "</td>" +
+    //    "<td>" + formattedDate + "</td>" +
+    //    "<td>" + ppeNo + "</td>" +
+    //    "<td>" + eqNumber + "</td>" +
+    //    "<td>" + ppeDescription + "</td>" +
+    //    "<td>" + egi + "</td>" +
+    //    "<td>" + eqClass + "</td>" +
+    //    "<td>" + serialNumber + "</td>" +
+    //    "<td>" + districtFrom + "</td>" +
+    //    "<td>" + locFrom + "</td>" +
+    //    "<td>" + districtTo + "</td>" +
+    //    "<td>" + locTo + "</td>" +
+    //    "<td>" + remark + "</td>" +
+    //    "<td>" + attch + "</td>" +
+    //    "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
+    //    "</tr>";
+
+    //$("#table_equipment tbody").append(row);
 
     // Clear input
     //$("#txt_date").val("");
@@ -162,7 +239,8 @@ $("#savePPEtoTable").click(function () {
     //$("#txt_locFrom").val("").trigger("change");
     //$("#txt_districtTo").val("").trigger("change");
     //$("#txt_locTo").val("").trigger("change");
-});
+/*});*/
+};
 
 function formatDate(date) {
     var parts = date.split("-");
@@ -172,25 +250,43 @@ function formatDate(date) {
     return day + "/" + month + "/" + year;
 }
 
-$("#savePPE").click(function () {
+function savePPE() {
+    debugger
     var tableData = [];
+
     $("#table_equipment tbody tr").each(function () {
-        var rowData = [];
-        $(this).find("td").each(function () {
-            rowData.push($(this).text());
-        });
+        debugger
+        var rowData = {};
+        var cells = $(this).find("td");
+
+        rowData.DATE = $("#txt_date").val();
+        rowData.PPE_NO = cells.eq(2).text();
+        rowData.EQUIP_NO = cells.eq(3).text();
+        rowData.PPE_DESC = cells.eq(4).text();
+        rowData.EGI = cells.eq(5).text();
+        rowData.EQUIP_CLASS = cells.eq(6).text();
+        rowData.SERIAL_NO = cells.eq(7).text();
+        rowData.DISTRICT_FROM = cells.eq(8).text();
+        rowData.LOC_FROM = cells.eq(9).text();
+        rowData.DISTRICT_TO = cells.eq(10).text();
+        rowData.LOC_TO = cells.eq(11).text();
+        rowData.REMARKS = cells.eq(12).text();
+        //rowData.PATH_ATTACHMENT = cells.eq(13).text();
+        rowData.PATH_ATTACHMENT = cells.eq(13).find("a").attr("href");
+        rowData.CREATED_BY = $("#txt_createBy").val();
+        rowData.STATUS = "CREATED";
+
         tableData.push(rowData);
     });
 
     $.ajax({
-        url: $("#web_link").val() + "/api/PPE/Create_PPE", //URI
-        data: tableData,
+        url: $("#web_link").val() + "/api/PPE/Create_PPE", // URI
+        data: JSON.stringify(tableData),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            debugger
-            if (data.Remarks == true) {
+            if (data.Remarks) {
                 Swal.fire({
                     title: 'Saved',
                     text: "Data has been Saved.",
@@ -201,22 +297,21 @@ $("#savePPE").click(function () {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Home/Index";
+                        window.location.href = "/PPE/Register";
                     }
                 });
-            } if (data.Remarks == false) {
+            } else {
                 Swal.fire(
                     'Error!',
-                    'Message : ' + data.Message,
+                    'Message: ' + data.Message,
                     'error'
                 );
             }
-
         },
         error: function (xhr) {
             alert(xhr.responseText);
         }
-    })
+    });
 
     console.log(tableData);
-});
+}

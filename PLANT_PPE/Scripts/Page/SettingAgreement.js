@@ -13,6 +13,9 @@ function getContent() {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             editor.setData(data.Data);
+            var dateParts = data.DATE.split('T');
+            var date = dateParts[0];
+            document.getElementById('getModifiedDate').textContent = ' ' + date;
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -24,6 +27,7 @@ function submitEditor() {
     debugger
     let obj = new Object
     obj.ID = 99;
+    //obj.LAST_MODIFIED_DATE = new Date().toISOString().split('T')[0];
     obj.CONTENT = editor.getData();
     
     $.ajax({

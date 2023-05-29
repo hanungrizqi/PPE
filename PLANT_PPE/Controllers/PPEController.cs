@@ -90,7 +90,7 @@ namespace PLANT_PPE.Controllers
                         }
                         else
                         {
-                            NoPPE = "0001" + "/PPE/" + thisMonth + "/" + thisYear;
+                            NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
                         }
                     }
 
