@@ -79,19 +79,85 @@ namespace PLANT_PPE.Controllers
                     }
                     else
                     {
-                        string month = tbl.PPE_NO.Substring(8, 1);
-                        string year = tbl.PPE_NO.Substring(10, 4);
-                        string thisMonth = RomanMonth(DateTime.Now.Month);
-                        string thisYear = DateTime.Now.ToString("yyyy");
-                        if (month == thisMonth && year == thisYear)
+                        //Penambahan kondisi jumlah roman
+                        string romanMonth = RomanMonth(DateTime.Now.Month);
+                        //string romanMonth = "VI";
+                        if (romanMonth == "I" || romanMonth == "V" || romanMonth == "X")
                         {
-                            int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
-                            NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
-                        }
-                        else
+                            string month = tbl.PPE_NO.Substring(8, 1);
+                            string year = tbl.PPE_NO.Substring(10, 4);
+                            string thisMonth = RomanMonth(DateTime.Now.Month);
+                            string thisYear = DateTime.Now.ToString("yyyy");
+                            if (month == thisMonth && year == thisYear)
+                            {
+                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
+                            else
+                            {
+                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
+                        } else if (romanMonth == "II" || romanMonth == "IV" || romanMonth == "VI" || romanMonth == "IX" || romanMonth == "XI")
                         {
-                            NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                            string month = tbl.PPE_NO.Substring(8, 2);
+                            string year = tbl.PPE_NO.Substring(11, 4);
+                            string thisMonth = RomanMonth(DateTime.Now.Month);
+                            //string thisMonth = "VII";
+                            string thisYear = DateTime.Now.ToString("yyyy");
+                            if (month == thisMonth && year == thisYear)
+                            {
+                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
+                            else
+                            {
+                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
+                        } else if (romanMonth == "III" || romanMonth == "VII" || romanMonth == "XII")
+                        {
+                            string month = tbl.PPE_NO.Substring(8, 3);
+                            string year = tbl.PPE_NO.Substring(12, 4);
+                            string thisMonth = RomanMonth(DateTime.Now.Month);
+                            string thisYear = DateTime.Now.ToString("yyyy");
+                            if (month == thisMonth && year == thisYear)
+                            {
+                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
+                            else
+                            {
+                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
+                        } else if (romanMonth == "VIII")
+                        {
+                            string month = tbl.PPE_NO.Substring(8, 4);
+                            string year = tbl.PPE_NO.Substring(13, 4);
+                            string thisMonth = RomanMonth(DateTime.Now.Month);
+                            string thisYear = DateTime.Now.ToString("yyyy");
+                            if (month == thisMonth && year == thisYear)
+                            {
+                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
+                            else
+                            {
+                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                            }
                         }
+
+                        //string month = tbl.PPE_NO.Substring(8, 1);
+                        //string year = tbl.PPE_NO.Substring(10, 4);
+                        //string thisMonth = RomanMonth(DateTime.Now.Month);
+                        //string thisYear = DateTime.Now.ToString("yyyy");
+                        //if (month == thisMonth && year == thisYear)
+                        //{
+                        //    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                        //    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                        //}
+                        //else
+                        //{
+                        //    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                        //}
                     }
 
                     ViewBag.NoPPE = NoPPE;

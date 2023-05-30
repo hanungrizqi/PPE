@@ -23,7 +23,7 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                var data = db.TBL_T_PPEs.OrderByDescending(a => a.PPE_NO).FirstOrDefault();
+                var data = db.TBL_T_PPEs.OrderByDescending(a => a.ID).FirstOrDefault();
 
                 return Ok(new { Data = data });
             }

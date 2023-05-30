@@ -15,7 +15,9 @@ function getContent() {
             editor.setData(data.Data);
             var dateParts = data.DATE.split('T');
             var date = dateParts[0];
-            document.getElementById('getModifiedDate').textContent = ' ' + date;
+            var formattedDate = formatDate(date);
+            //document.getElementById('getModifiedDate').textContent = ' lastmodified:' + date;
+            document.getElementById('getModifiedDate').textContent = ' lastmodified: ' + formattedDate;
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -65,4 +67,12 @@ function submitEditor() {
             alert(xhr.responseText);
         }
     })
+}
+
+function formatDate(dateString) {
+    var dateParts = dateString.split('-');
+    var day = dateParts[2];
+    var month = dateParts[1];
+    var year = dateParts[0];
+    return day + '-' + month + '-' + year;
 }
