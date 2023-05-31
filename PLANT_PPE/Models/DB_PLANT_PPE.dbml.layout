@@ -44,5 +44,17 @@
         <elementListCompartment Id="fdcb2ba5-f9fa-4349-99e2-d85e64304bf8" absoluteBounds="2.64, 0.96, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="5ab87662-775a-4f05-8985-d36485e07ac6" isExpanded="false" absoluteBounds="2.625, 1, 2, 0.45">
+      <DataClassMoniker Name="/DB_PLANT_PPEDataContext/VW_DISTRICT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6252c94f-7bb5-4c83-8222-1c8edaf16626" absoluteBounds="2.64, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0b8935eb-8182-40d1-8bcd-7f6a732a5cb8" isExpanded="false" absoluteBounds="2.625, 1.5, 2, 0.45">
+      <DataClassMoniker Name="/DB_PLANT_PPEDataContext/VW_LOCATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fcc10855-2642-49cd-80d2-2d60a86993cd" absoluteBounds="2.64, 1.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
