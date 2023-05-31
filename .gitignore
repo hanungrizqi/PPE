@@ -5,7 +5,7 @@
 /.vs/PLANT_PPE/FileContentIndex
 /.vs/
 /.vs/*
-/API_PLANT_PPE/bin/API_PLANT_PPE.dll
-/API_PLANT_PPE/obj/Debug/API_PLANT_PPE.csproj.AssemblyReference.cache
-/PLANT_PPE/bin/PLANT_PPE.dll
-/PLANT_PPE/obj/Debug/PLANT_PPE.csproj.AssemblyReference.cache
+/API_PLANT_PPE/bin/*
+/API_PLANT_PPE/obj/*
+/PLANT_PPE/bin/*
+/PLANT_PPE/obj/*
