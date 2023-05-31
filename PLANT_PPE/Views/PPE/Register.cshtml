@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    ViewBag.JS = "/Scripts/Page/RegisterPPE.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-heading">Register PPE</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <h3 class="block-title">District <small>From</small></h3>
+                <div class="block-options">
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
+                        <i class="si si-pin"></i>
+                    </button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                </div>
+            </div>
+            <div class="block-content">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtFrom">District</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_districtFrom" name="txt_districtFrom" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_locFrom">Location</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_locFrom" name="txt_locFrom" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <h3 class="block-title">District <small>To</small></h3>
+                <div class="block-options">
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
+                        <i class="si si-pin"></i>
+                    </button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                </div>
+            </div>
+            <div class="block-content">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtTo">District</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_districtTo" name="txt_districtTo" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_locTo">Location</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_locTo" name="txt_locTo" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">Form PPE <small>Permohonan Pemindahan Equipment</small></h3>
+    </div>
+    <div class="block-content">
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_date">Date</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control form-control-sm " id="txt_date" name="txt_date" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_noPPE">No PPE</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_posPPE" name="txt_posPPE" value="ADM" hidden>
+                        <input type="text" class="form-control form-control-sm " id="txt_createBy" name="txt_createBy" value="@Session["Nrp"].ToString()" hidden>
+                        <input type="text" class="form-control form-control-sm " id="txt_noPPE" name="txt_noPPE" value="@ViewBag.NoPPE" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_eqNumber">Eqp Number</label>
+                    <div class="col-sm-8">
+                        <select class="js-select2 form-select" id="txt_eqNumber" name="txt_eqNumber" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_ppeDesc">PPE Description</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_ppeDesc" name="txt_ppeDesc">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_egi">EGI</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_egi" name="txt_egi" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_eqClass">Eqp Class</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_eqClass" name="txt_eqClass" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_serialNo">Serial Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_serialNo" name="txt_serialNo" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_remark">Remarks</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control form-control-alt" id="txt_remark" name="txt_remark" rows="7" placeholder="Textarea content.."></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_attach">Attachment</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="file" accept=".pdf,.docx" id="txt_attach">
+                    </div>
+                </div>
+                @*<div class="mb-4">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-terms">Terms &amp; Conditions</a>
+                    <span class="text-danger">*</span>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="val-terms" name="val-terms" value="1" disabled>
+                        <label class="form-check-label" for="val-terms">I agree</label>
+                    </div>
+                </div>*@
+                <div class="mb-4">
+                    <div class="row">
+                        <div class="col-auto">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-terms" style="color:blue">Terms &amp; Conditions</a>
+                            <span class="text-danger">*</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="val-terms" name="val-terms" value="1" disabled>
+                                <label class="form-check-label" for="val-terms">I agree</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+        <div class="block-options justify-content-center">
+            <div class="row text-center">
+                @*<div class="col-md-6">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="clearPPE()">
+                            <i class="fa fa-broom opacity-50 me-1"></i> Clear
+                        </button>
+                    </div>*@
+                <div class="col-md-12">
+                    <a href="/Home/Index" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
+                    <button type="submit" class="btn btn-sm btn-info" onclick="savePPEtoTable()">
+                        <i class="fa fa-floppy-disk opacity-50 me-1"></i> Save
+                    </button>
+                    <button type="submit" id="submit_button" class="btn btn-sm btn-success" value="CREATED" onclick="savePPE(this.value)">
+                        <i class="fa fa-check-circle opacity-50 me-1"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">Daftar Equipment</h3>
+    </div>
+    <div class="block-content">
+        <div class="row justify-content-center pb-4">
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination w-100" id="table_equipment">
+                    <thead class="text-center">
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th>No Ppe</th>
+                            <th>Date</th>
+                            <th>Eqp Number</th>
+                            <th>PPE Description</th>
+                            <th>Egi</th>
+                            <th>Eqp Class</th>
+                            <th>Serial Number</th>
+                            <th>District From</th>
+                            <th>Loc From</th>
+                            <th>District To</th>
+                            <th>Loc To</th>
+                            <th>Remarks</th>
+                            <th>Attachment</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-terms" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-popin">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Terms &amp; Conditions</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm" id="agreeModals">
+                    
+                </div>
+                <div class="block-content block-content-full block-content-sm text-end border-top">
+                    <button type="button" class="btn btn-alt-primary" data-bs-dismiss="modal">
+                        Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function savePPEtoTable() {
+        var date = $("#txt_date").val();
+        var formattedDate = formatDate(date);
+
+        var ppeNo = $("#txt_noPPE").val();
+        var eqNumber = $("#txt_eqNumber").val();
+        var ppeDescription = $("#txt_ppeDesc").val();
+        var egi = $("#txt_egi").val();
+        var eqClass = $("#txt_eqClass").val();
+        var serialNumber = $("#txt_serialNo").val();
+        var districtFrom = $("#txt_districtFrom").val();
+        var locFrom = $("#txt_locFrom").val();
+        var districtTo = $("#txt_districtTo").val();
+        var locTo = $("#txt_locTo").val();
+        var remark = $("#txt_remark").val();
+        var attch = $("#txt_attach").val();
+
+        var rowCount = $("#table_equipment tbody tr").length + 1;
+        var row = "<tr>" +
+            "<td class='text-center'>" + rowCount + "</td>" +
+            "<td>" + formattedDate + "</td>" +
+            "<td>" + ppeNo + "</td>" +
+            "<td>" + eqNumber + "</td>" +
+            "<td>" + ppeDescription + "</td>" +
+            "<td>" + egi + "</td>" +
+            "<td>" + eqClass + "</td>" +
+            "<td>" + serialNumber + "</td>" +
+            "<td>" + districtFrom + "</td>" +
+            "<td>" + locFrom + "</td>" +
+            "<td>" + districtTo + "</td>" +
+            "<td>" + locTo + "</td>" +
+            "<td>" + remark + "</td>" +
+            "<td>" + attch + "</td>" +
+            "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
+            "</tr>";
+
+        $("#table_equipment tbody").append(row);
+
+        // Clear input
+        //$("#txt_date").val("");
+        //$("#txt_noPPE").val("");
+        //$("#txt_eqNumber").val("");
+        //$("#txt_ppeDesc").val("");
+        //$("#txt_egi").val("");
+        //$("#txt_eqClass").val("");
+        //$("#txt_serialNo").val("");
+        //$("#txt_districtFrom").val("");
+        //$("#txt_locFrom").val("");
+        //$("#txt_districtTo").val("");
+        //$("#txt_locTo").val("");
+        //$("#txt_remark").val("");
+        //$("#txt_attach").val("");
+    }
+
+    function removeRow(button) {
+        $(button).closest("tr").remove();
+    }
+    function formatDate(date) {
+        var parts = date.split("-");
+        var day = parts[2];
+        var month = parts[1];
+        var year = parts[0];
+        return day + "/" + month + "/" + year;
+    }
+</script>

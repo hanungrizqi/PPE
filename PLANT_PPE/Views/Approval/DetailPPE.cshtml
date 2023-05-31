@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Detail PPE";
+    ViewBag.JS = "/Scripts/Page/DetailPPE.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-heading">Detail PPE</h2>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">Approval Section Head</h3>
+    </div>
+    <div class="block-content">
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_noPPE">No PPE</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="id_ppe" name="id_ppe" value="@ViewBag.idppe" hidden>
+                        <input type="text" class="form-control form-control-sm " id="txt_noPPE" name="txt_noPPE" @*value="@ViewBag.noPpe"*@ readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_eqNumber">Eqp Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_eqNumber" name="txt_eqNumber" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_ppeDesc">PPE Description</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_ppeDesc" name="txt_ppeDesc" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_egi">EGI</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_egi" name="txt_egi" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_eqClass">Eqp Class</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_eqClass" name="txt_eqClass" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_serialNo">Serial Number</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_serialNo" name="txt_serialNo" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_date">Date</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control form-control-sm " id="txt_date" name="txt_date" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtFrom">District From</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_districtFrom" name="txt_districtFrom" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtTo">District To</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_districtTo" name="txt_districtTo" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_locFrom">Loc From</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_locFrom" name="txt_locFrom" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_locTo">Loc To</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_locTo" name="txt_locTo" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header">
+        <h3 class="block-title">Remarks/Reason to cancel</h3>
+    </div>
+    <div class="block-content">
+        <div class="mb-3">
+            <textarea class="form-control form-control-sm" id="txt_note" name="txt_note"></textarea>
+        </div>
+    </div>
+    <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+        <div class="block-options justify-content-center">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <a href="/Approval/SectionHead" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
+                    <button type="submit" class="btn btn-sm btn-danger" value="PLANNER CANCEL" onclick="submitApproval(this.value)">
+                        <i class="fa fa-times opacity-50 me-1"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-success" value="PLANNER APPROVED" onclick="submitApproval(this.value)">
+                        <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
