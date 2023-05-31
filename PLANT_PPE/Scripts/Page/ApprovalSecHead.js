@@ -1,4 +1,5 @@
-﻿var table = $("#tbl_ppe").DataTable({
+﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
+var table = $("#tbl_ppe").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE",
         dataSrc: "Data",
@@ -13,7 +14,9 @@
         {
             "data": null,
             render: function (data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
+                /*return meta.row + meta.settings._iDisplayStart + 1;*/
+                //return '<input type="checkbox">';
+                return '<input type="checkbox" class="row-checkbox">';
             }
         },
         { data: 'PPE_NO' },
@@ -43,6 +46,14 @@
         }
     ],
     initComplete: function () {
+        var headerCheckbox = document.getElementById('checkAll');
+        var rowCheckboxes = document.getElementsByClassName('row-checkbox');
+        headerCheckbox.addEventListener('change', function () {
+            var isChecked = headerCheckbox.checked;
+            for (var i = 0; i < rowCheckboxes.length; i++) {
+                rowCheckboxes[i].checked = isChecked;
+            }
+        });
         this.api()
             .columns(1)
             .every(function () {
@@ -64,4 +75,12 @@
                     });
             });
     },
+});
+
+table.on('draw', function () {
+    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');
+
+    visibleCheckboxes.forEach(function (checkbox) {
+        checkbox.checked = false;
+    });
 });

@@ -16,7 +16,8 @@
         <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_ppe">
             <thead class="text-center bg-primary text-white">
                 <tr>
-                    <th>NO</th>
+                    @*<th>NO</th>*@
+                    <th><input type="checkbox" id="checkAll"></th>
                     <th>PPE NUMBER</th>
                     <th>EGI</th>
                     <th>EQP NUMBER</th>
@@ -33,5 +34,30 @@
             <tbody>
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header">
+        <h3 class="block-title">Remarks</h3>
+    </div>
+    <div class="block-content">
+        <div class="mb-3">
+            <textarea class="form-control form-control-sm" id="txt_remark" name="txt_remark"></textarea>
+        </div>
+    </div>
+    <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+        <div class="block-options justify-content-center">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-sm btn-danger" value="APPROVAL CANCEL" onclick="submitApproval(this.value)">
+                        <i class="fa fa-times opacity-50 me-1"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-success" value="SEC.HEAD APPROVED" onclick="submitApproval(this.value)">
+                        <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
