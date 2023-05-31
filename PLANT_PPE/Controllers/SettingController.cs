@@ -39,5 +39,27 @@ namespace PLANT_PPE.Controllers
             }
             return View();
         }
+
+        public ActionResult District()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.dstrct = db.VW_DISTRICTs.ToList();
+            ViewBag.loc = db.VW_LOCATIONs.ToList();
+            return View();
+        }
+
+        public ActionResult MappingApproval()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            /*ViewBag.dstrct = db.VW_DISTRICTs.ToList();
+            ViewBag.loc = db.VW_LOCATIONs.ToList();*/
+            return View();
+        }
     }
 }

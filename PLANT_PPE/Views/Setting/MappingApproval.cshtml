@@ -1,0 +1,357 @@
+﻿
+@{
+    ViewBag.Title = "Mammping Approval";
+    ViewBag.JS = "/Scripts/Page/MappingApproval.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-heading">Setting Mapping Approval</h2>
+<div class="block block-rounded">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">
+            Table Mapping Approval <small>Set Mapping Approval Group</small>
+        </h3>
+        <div class="block-options">
+            <div class="block-options-item">
+                <button type="button" class="btn btn-success py-2 mb-0" data-bs-toggle="modal" data-bs-target="#modal-insert" onclick="showInsert();">
+                    <i class="fa fa-add opacity-50 me-1"></i> Add Mapping Approval
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="block-content block-content-full">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_mappingApproval">
+            <thead class="text-center">
+                <tr>
+                    <th>APPROVAL ACTION</th>
+                    <th>APPROVAL ORDER</th>
+                    <th>FROM</th>
+                    <th>TO</th>
+                    <th>LOCATION FROM</th>
+                    <th>LOCATION TO</th>
+                    <th>CURRENT POSITION</th>
+                    <th>NEXT POSITION</th>
+                    <th>APPROVAL STATUS</th>
+                    <th>STATUS</th>
+                    <th>ACTION </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="modal-insert" tabindex="-1" aria-labelledby="modal-large" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Register User's Group</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <input id="apprv_no" hidden></input>
+                                <label class="form-label" for="txt_nrp">APPROVAL ACTION</label>
+                                <select class="js-select2 form-select select2-modal" id="txt_action" name="txt_action" style="width: 100%;">
+                                    <option>PILIH</option>
+                                    <option value="0">REJECT</option>
+                                    <option value="1">APPROVE</option>
+                                    @*@foreach (var item in ViewBag.dstrct)
+            {
+                <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+            }*@
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">APPROVAL ORDER</label>
+                                <input type="number" class="form-control" id="apprv_order" placeholder="Number Order">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">APPROVAL FROM</label>
+                                <select class="js-select2 form-select select2-modal" id="apprv_from" name="apprv_from" onchange="getloc_from()" style="width: 100%;">
+                                    
+                                    @*@foreach (var item in ViewBag.dstrct)
+                        {
+                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+                        }*@
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">APPROVAL TO</label>
+                                <select class="js-select2 form-select select2-modal" id="apprv_to" name="apprv_to" onchange="getloc_to()" style="width: 100%;">
+                                    
+                                    @*@foreach (var item in ViewBag.loc)
+                        {
+                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
+                        }*@
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">LOCATION FROM</label>
+                                <select class="js-select2 form-select select2-modal" id="loc_from" name="loc_from" style="width: 100%;">
+                                    
+                                    @*@foreach (var item in ViewBag.dstrct)
+                        {
+                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+                        }*@
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">LOCATION TO</label>
+                                <select class="js-select2 form-select select2-modal" id="loc_to" name="loc_to" style="width: 100%;">
+                                    
+                                    @*@foreach (var item in ViewBag.loc)
+                        {
+                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
+                        }*@
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">CURRENT POSITION</label>
+                                <select class="js-select2 form-select select2-modal" id="curr_position" name="curr_position" style="width: 100%;">
+                                    <option></option>
+                                    @*@foreach (var item in ViewBag.dstrct)
+                        {
+                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+                        }*@
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">NEXT POSITION</label>
+                                <select class="js-select2 form-select select2-modal" id="next_position" name="next_position" style="width: 100%;">
+                                    
+                                    @*@foreach (var item in ViewBag.loc)
+                        {
+                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
+                        }*@
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">APPROVAL STATUS</label>
+                                <textarea class="form-control" id="apprv_status" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">CURRENT STATUS</label>
+                                <textarea class="form-control" id="curr_status" rows="2"></textarea>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="block-content block-content-full block-content-sm text-end border-top">
+                    <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button id="buttonInsert" type="button" class="btn btn-alt-primary" onclick="insertMapApproval()">
+                        Insert
+                    </button>
+                    <button id="buttonUpdate" type="button" class="btn btn-alt-primary" onclick="updateMapApproval()">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*modal edit mapping approval*@
+
+<!--<div class="modal" id="modal-editor" tabindex="-1" aria-labelledby="modal-large" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Editor Mapping's Group</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">APPROVAL ACTION</label>
+                                <select class="js-select2 form-select select2-modal" id="edit_action" name="edit_action" style="width: 100%;">
+                                    <option>PILIH</option>
+                                    <option value="0">REJECT</option>
+                                    <option value="1">APPROVE</option>-->
+                                    @*@foreach (var item in ViewBag.dstrct)
+                                        {
+                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+                                        }*@
+                                <!--</select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">APPROVAL ORDER</label>
+                                <input type="number" class="form-control" id="editapprv_order" placeholder="Number Order">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">APPROVAL FROM</label>
+                                <select class="js-select2 form-select select2-modal" id="editapprv_from" name="editapprv_from" onchange="getloc_from()" style="width: 100%;">
+                                    <option></option>-->
+                                    @*@foreach (var item in ViewBag.dstrct)
+                                        {
+                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+                                        }*@
+                                <!--</select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">APPROVAL TO</label>
+                                <select class="js-select2 form-select select2-modal" id="editapprv_to" name="editapprv_to" onchange="getloc_to()" style="width: 100%;">
+                                    <option></option>-->
+                                    @*@foreach (var item in ViewBag.loc)
+                                        {
+                                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
+                                        }*@
+                                <!--</select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">LOCATION FROM</label>
+                                <select class="js-select2 form-select select2-modal" id="editloc_from" name="editloc_from" style="width: 100%;">
+                                    <option></option>-->
+                                    @*@foreach (var item in ViewBag.dstrct)
+                                        {
+                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+                                        }*@
+                                <!--</select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">LOCATION TO</label>
+                                <select class="js-select2 form-select select2-modal" id="editloc_to" name="editloc_to" style="width: 100%;">
+                                    <option></option>-->
+                                    @*@foreach (var item in ViewBag.loc)
+                                        {
+                                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
+                                        }*@
+                                <!--</select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">CURRENT POSITION</label>
+                                <select class="js-select2 form-select select2-modal" id="editcurr_position" name="editcurr_position" style="width: 100%;">
+                                    <option></option>-->
+                                    @*@foreach (var item in ViewBag.dstrct)
+                                        {
+                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
+                                        }*@
+                                <!--</select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">NEXT POSITION</label>
+                                <select class="js-select2 form-select select2-modal" id="editnext_position" name="editnext_position" style="width: 100%;">
+                                    <option></option>-->
+                                    @*@foreach (var item in ViewBag.loc)
+                                        {
+                                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
+                                        }*@
+                                <!--</select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_nrp">APPROVAL STATUS</label>
+                                <textarea class="form-control" id="editapprv_status" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="txt_group">CURRENT STATUS</label>
+                                <textarea class="form-control" id="editcurr_status" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="block-content block-content-full block-content-sm text-end border-top">
+                    <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-alt-primary" onclick="insertMapApproval()">
+                        Insert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

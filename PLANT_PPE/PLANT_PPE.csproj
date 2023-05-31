@@ -134,9 +134,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ApprovalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\PPEController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,6 +149,7 @@
       <DependentUpon>DB_PLANT_PPE.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Cls_PPE.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\codebase.css" />
@@ -4345,9 +4348,14 @@
       <DependentUpon>DB_PLANT_PPE.dbml</DependentUpon>
     </None>
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\Page\ApprovalSecHead.js" />
+    <Content Include="Scripts\Page\DetailPPE.js" />
     <Content Include="Scripts\Page\login.js" />
+    <Content Include="Scripts\Page\RegisterPPE.js" />
     <Content Include="Scripts\Page\SettingAgreement.js" />
+    <Content Include="Scripts\Page\MappingApproval.js" />
     <Content Include="Scripts\Page\SettingMenu.js" />
+    <Content Include="Scripts\Page\SettingDistrict.js" />
     <Content Include="Scripts\Page\SettingUser.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -4366,9 +4374,15 @@
     <Content Include="Views\Setting\Users.cshtml" />
     <Content Include="Views\Setting\Menu.cshtml" />
     <Content Include="Views\Setting\Agreement.cshtml" />
+    <Content Include="Views\PPE\Register.cshtml" />
+    <Content Include="Views\Approval\SectionHead.cshtml" />
+    <Content Include="Views\Approval\DetailPPE.cshtml" />
+    <Content Include="Views\Setting\District.cshtml" />
+    <Content Include="Views\Setting\MappingApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\AttachmentFile\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
