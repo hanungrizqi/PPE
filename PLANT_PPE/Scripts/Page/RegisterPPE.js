@@ -267,7 +267,7 @@ function formatDate(date) {
     return day + "/" + month + "/" + year;
 }
 
-function savePPE() {
+function savePPE(postStatus) {
     debugger
     if (!savePPEtoTableClicked) {
         Swal.fire(
@@ -299,7 +299,13 @@ function savePPE() {
         //rowData.PATH_ATTACHMENT = cells.eq(13).text();
         rowData.PATH_ATTACHMENT = cells.eq(13).find("a").attr("href");
         rowData.CREATED_BY = $("#txt_createBy").val();
-        rowData.STATUS = "CREATED";
+        rowData.STATUS = postStatus;
+        
+        if (postStatus == "CREATED") {
+            rowData.POSISI_PPE = "Sect. Head";
+        } else {
+            rowData.POSISI_PPE = $("#txt_posPPE").val();
+        }
 
         tableData.push(rowData);
     });

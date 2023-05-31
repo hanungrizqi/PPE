@@ -54,12 +54,12 @@ namespace API_PLANT_PPE.Controllers
                     tbl.EQUIP_CLASS = param.EQUIP_CLASS;
                     tbl.SERIAL_NO = param.SERIAL_NO;
                     tbl.REMARKS = param.REMARKS;
+                    tbl.POSISI_PPE = param.POSISI_PPE;
                     tbl.STATUS = param.STATUS;
                     tbl.CREATED_DATE = DateTime.Now;
                     tbl.CREATED_BY = param.CREATED_BY;
                     tbl.UPDATED_DATE = param.UPDATED_DATE;
                     tbl.UPDATED_BY = param.UPDATED_BY;
-                    tbl.APPROVAL_NO = param.APPROVAL_NO;
                     tbl.PATH_ATTACHMENT = param.PATH_ATTACHMENT;
 
                     db.TBL_T_PPEs.InsertOnSubmit(tbl);
@@ -107,6 +107,41 @@ namespace API_PLANT_PPE.Controllers
             catch (Exception e)
             {
                 return InternalServerError(e);
+            }
+        }
+        
+        [HttpGet]
+        [Route("Get_ListApprovalPPE")]
+        public IHttpActionResult Get_ListApprovalPPE()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head").ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        
+        //Get Detail PPE
+        [HttpGet]
+        [Route("Get_PPEDetail/{idppe}")]
+        public IHttpActionResult Get_PPEDetail(int idppe)
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.ID == idppe).FirstOrDefault();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
     }
