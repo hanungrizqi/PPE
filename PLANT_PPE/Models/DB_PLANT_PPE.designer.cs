@@ -129,8 +129,6 @@ namespace PLANT_PPE.Models
 				return this.GetTable<TBL_T_PPE>();
 			}
 		}
-	}
-	
 		
 		public System.Data.Linq.Table<VW_DISTRICT> VW_DISTRICTs
 		{

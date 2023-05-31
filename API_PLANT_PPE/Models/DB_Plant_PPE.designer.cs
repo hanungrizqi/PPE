@@ -54,6 +54,12 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
     partial void UpdateTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
     partial void DeleteTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
+    partial void InsertTBL_M_DISTRICT(TBL_M_DISTRICT instance);
+    partial void UpdateTBL_M_DISTRICT(TBL_M_DISTRICT instance);
+    partial void DeleteTBL_M_DISTRICT(TBL_M_DISTRICT instance);
+    partial void InsertTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
+    partial void UpdateTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
+    partial void DeleteTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -198,14 +204,6 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<VW_DISTRICT> VW_DISTRICTs
-		{
-			get
-			{
-				return this.GetTable<VW_DISTRICT>();
-			}
-		}
-		
 		public System.Data.Linq.Table<VW_KARYAWAN_PLANT_HAULING> VW_KARYAWAN_PLANT_HAULINGs
 		{
 			get
@@ -259,6 +257,62 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<TBL_M_AGREEMENT>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_T_PPE> TBL_T_PPEs
+		{
+			get
+			{
+				return this.GetTable<TBL_T_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_H_APPROVAL_PPE> TBL_H_APPROVAL_PPEs
+		{
+			get
+			{
+				return this.GetTable<TBL_H_APPROVAL_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_T_PPE> VW_T_PPEs
+		{
+			get
+			{
+				return this.GetTable<VW_T_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_DISTRICT> VW_DISTRICTs
+		{
+			get
+			{
+				return this.GetTable<VW_DISTRICT>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_DISTRICT> TBL_M_DISTRICTs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_DISTRICT>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_MAPPING_APPROVAL> TBL_M_MAPPING_APPROVALs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_MAPPING_APPROVAL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_POSITION> TBL_M_POSITIONs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_POSITION>();
 			}
 		}
 	}
@@ -2394,51 +2448,6 @@ namespace API_PLANT_PPE.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_DISTRICT")]
-	public partial class VW_DISTRICT
-	{
-		
-		private string _DSTRCT_CODE;
-		
-		private string _DSTRCT_NAME;
-		
-		public VW_DISTRICT()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(100)")]
-		public string DSTRCT_CODE
-		{
-			get
-			{
-				return this._DSTRCT_CODE;
-			}
-			set
-			{
-				if ((this._DSTRCT_CODE != value))
-				{
-					this._DSTRCT_CODE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_NAME", DbType="VarChar(100)")]
-		public string DSTRCT_NAME
-		{
-			get
-			{
-				return this._DSTRCT_NAME;
-			}
-			set
-			{
-				if ((this._DSTRCT_NAME != value))
-				{
-					this._DSTRCT_NAME = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_KARYAWAN_PLANT_HAULING")]
 	public partial class VW_KARYAWAN_PLANT_HAULING
 	{
@@ -4003,6 +4012,1925 @@ namespace API_PLANT_PPE.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_T_PPE")]
+	public partial class TBL_T_PPE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _PPE_NO;
+		
+		private System.Nullable<System.DateTime> _DATE;
+		
+		private string _DISTRICT_FROM;
+		
+		private string _DISTRICT_TO;
+		
+		private string _LOC_FROM;
+		
+		private string _LOC_TO;
+		
+		private string _EQUIP_NO;
+		
+		private string _EGI;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NO;
+		
+		private string _PPE_DESC;
+		
+		private string _POSISI_PPE;
+		
+		private string _STATUS;
+		
+		private System.Nullable<System.DateTime> _CREATED_DATE;
+		
+		private string _CREATED_BY;
+		
+		private System.Nullable<System.DateTime> _UPDATED_DATE;
+		
+		private string _UPDATED_BY;
+		
+		private string _REMARKS;
+		
+		private string _PATH_ATTACHMENT;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnPPE_NOChanging(string value);
+    partial void OnPPE_NOChanged();
+    partial void OnDATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnDATEChanged();
+    partial void OnDISTRICT_FROMChanging(string value);
+    partial void OnDISTRICT_FROMChanged();
+    partial void OnDISTRICT_TOChanging(string value);
+    partial void OnDISTRICT_TOChanged();
+    partial void OnLOC_FROMChanging(string value);
+    partial void OnLOC_FROMChanged();
+    partial void OnLOC_TOChanging(string value);
+    partial void OnLOC_TOChanged();
+    partial void OnEQUIP_NOChanging(string value);
+    partial void OnEQUIP_NOChanged();
+    partial void OnEGIChanging(string value);
+    partial void OnEGIChanged();
+    partial void OnEQUIP_CLASSChanging(string value);
+    partial void OnEQUIP_CLASSChanged();
+    partial void OnSERIAL_NOChanging(string value);
+    partial void OnSERIAL_NOChanged();
+    partial void OnPPE_DESCChanging(string value);
+    partial void OnPPE_DESCChanged();
+    partial void OnPOSISI_PPEChanging(string value);
+    partial void OnPOSISI_PPEChanged();
+    partial void OnSTATUSChanging(string value);
+    partial void OnSTATUSChanged();
+    partial void OnCREATED_DATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnCREATED_DATEChanged();
+    partial void OnCREATED_BYChanging(string value);
+    partial void OnCREATED_BYChanged();
+    partial void OnUPDATED_DATEChanging(System.Nullable<System.DateTime> value);
+    partial void OnUPDATED_DATEChanged();
+    partial void OnUPDATED_BYChanging(string value);
+    partial void OnUPDATED_BYChanged();
+    partial void OnREMARKSChanging(string value);
+    partial void OnREMARKSChanged();
+    partial void OnPATH_ATTACHMENTChanging(string value);
+    partial void OnPATH_ATTACHMENTChanged();
+    #endregion
+		
+		public TBL_T_PPE()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_NO", DbType="VarChar(200)")]
+		public string PPE_NO
+		{
+			get
+			{
+				return this._PPE_NO;
+			}
+			set
+			{
+				if ((this._PPE_NO != value))
+				{
+					this.OnPPE_NOChanging(value);
+					this.SendPropertyChanging();
+					this._PPE_NO = value;
+					this.SendPropertyChanged("PPE_NO");
+					this.OnPPE_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> DATE
+		{
+			get
+			{
+				return this._DATE;
+			}
+			set
+			{
+				if ((this._DATE != value))
+				{
+					this.OnDATEChanging(value);
+					this.SendPropertyChanging();
+					this._DATE = value;
+					this.SendPropertyChanged("DATE");
+					this.OnDATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_FROM", DbType="VarChar(50)")]
+		public string DISTRICT_FROM
+		{
+			get
+			{
+				return this._DISTRICT_FROM;
+			}
+			set
+			{
+				if ((this._DISTRICT_FROM != value))
+				{
+					this.OnDISTRICT_FROMChanging(value);
+					this.SendPropertyChanging();
+					this._DISTRICT_FROM = value;
+					this.SendPropertyChanged("DISTRICT_FROM");
+					this.OnDISTRICT_FROMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_TO", DbType="VarChar(50)")]
+		public string DISTRICT_TO
+		{
+			get
+			{
+				return this._DISTRICT_TO;
+			}
+			set
+			{
+				if ((this._DISTRICT_TO != value))
+				{
+					this.OnDISTRICT_TOChanging(value);
+					this.SendPropertyChanging();
+					this._DISTRICT_TO = value;
+					this.SendPropertyChanged("DISTRICT_TO");
+					this.OnDISTRICT_TOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_FROM", DbType="VarChar(50)")]
+		public string LOC_FROM
+		{
+			get
+			{
+				return this._LOC_FROM;
+			}
+			set
+			{
+				if ((this._LOC_FROM != value))
+				{
+					this.OnLOC_FROMChanging(value);
+					this.SendPropertyChanging();
+					this._LOC_FROM = value;
+					this.SendPropertyChanged("LOC_FROM");
+					this.OnLOC_FROMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_TO", DbType="VarChar(50)")]
+		public string LOC_TO
+		{
+			get
+			{
+				return this._LOC_TO;
+			}
+			set
+			{
+				if ((this._LOC_TO != value))
+				{
+					this.OnLOC_TOChanging(value);
+					this.SendPropertyChanging();
+					this._LOC_TO = value;
+					this.SendPropertyChanged("LOC_TO");
+					this.OnLOC_TOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="VarChar(50)")]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this.OnEQUIP_NOChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIP_NO = value;
+					this.SendPropertyChanged("EQUIP_NO");
+					this.OnEQUIP_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGI", DbType="VarChar(20)")]
+		public string EGI
+		{
+			get
+			{
+				return this._EGI;
+			}
+			set
+			{
+				if ((this._EGI != value))
+				{
+					this.OnEGIChanging(value);
+					this.SendPropertyChanging();
+					this._EGI = value;
+					this.SendPropertyChanged("EGI");
+					this.OnEGIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="VarChar(10)")]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this.OnEQUIP_CLASSChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIP_CLASS = value;
+					this.SendPropertyChanged("EQUIP_CLASS");
+					this.OnEQUIP_CLASSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NO", DbType="VarChar(50)")]
+		public string SERIAL_NO
+		{
+			get
+			{
+				return this._SERIAL_NO;
+			}
+			set
+			{
+				if ((this._SERIAL_NO != value))
+				{
+					this.OnSERIAL_NOChanging(value);
+					this.SendPropertyChanging();
+					this._SERIAL_NO = value;
+					this.SendPropertyChanged("SERIAL_NO");
+					this.OnSERIAL_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_DESC", DbType="VarChar(200)")]
+		public string PPE_DESC
+		{
+			get
+			{
+				return this._PPE_DESC;
+			}
+			set
+			{
+				if ((this._PPE_DESC != value))
+				{
+					this.OnPPE_DESCChanging(value);
+					this.SendPropertyChanging();
+					this._PPE_DESC = value;
+					this.SendPropertyChanged("PPE_DESC");
+					this.OnPPE_DESCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSISI_PPE", DbType="VarChar(100)")]
+		public string POSISI_PPE
+		{
+			get
+			{
+				return this._POSISI_PPE;
+			}
+			set
+			{
+				if ((this._POSISI_PPE != value))
+				{
+					this.OnPOSISI_PPEChanging(value);
+					this.SendPropertyChanging();
+					this._POSISI_PPE = value;
+					this.SendPropertyChanged("POSISI_PPE");
+					this.OnPOSISI_PPEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="VarChar(50)")]
+		public string STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this.OnSTATUSChanging(value);
+					this.SendPropertyChanging();
+					this._STATUS = value;
+					this.SendPropertyChanged("STATUS");
+					this.OnSTATUSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATED_DATE
+		{
+			get
+			{
+				return this._CREATED_DATE;
+			}
+			set
+			{
+				if ((this._CREATED_DATE != value))
+				{
+					this.OnCREATED_DATEChanging(value);
+					this.SendPropertyChanging();
+					this._CREATED_DATE = value;
+					this.SendPropertyChanged("CREATED_DATE");
+					this.OnCREATED_DATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="VarChar(50)")]
+		public string CREATED_BY
+		{
+			get
+			{
+				return this._CREATED_BY;
+			}
+			set
+			{
+				if ((this._CREATED_BY != value))
+				{
+					this.OnCREATED_BYChanging(value);
+					this.SendPropertyChanging();
+					this._CREATED_BY = value;
+					this.SendPropertyChanged("CREATED_BY");
+					this.OnCREATED_BYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> UPDATED_DATE
+		{
+			get
+			{
+				return this._UPDATED_DATE;
+			}
+			set
+			{
+				if ((this._UPDATED_DATE != value))
+				{
+					this.OnUPDATED_DATEChanging(value);
+					this.SendPropertyChanging();
+					this._UPDATED_DATE = value;
+					this.SendPropertyChanged("UPDATED_DATE");
+					this.OnUPDATED_DATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_BY", DbType="VarChar(50)")]
+		public string UPDATED_BY
+		{
+			get
+			{
+				return this._UPDATED_BY;
+			}
+			set
+			{
+				if ((this._UPDATED_BY != value))
+				{
+					this.OnUPDATED_BYChanging(value);
+					this.SendPropertyChanging();
+					this._UPDATED_BY = value;
+					this.SendPropertyChanged("UPDATED_BY");
+					this.OnUPDATED_BYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REMARKS", DbType="VarChar(MAX)")]
+		public string REMARKS
+		{
+			get
+			{
+				return this._REMARKS;
+			}
+			set
+			{
+				if ((this._REMARKS != value))
+				{
+					this.OnREMARKSChanging(value);
+					this.SendPropertyChanging();
+					this._REMARKS = value;
+					this.SendPropertyChanged("REMARKS");
+					this.OnREMARKSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH_ATTACHMENT", DbType="VarChar(200)")]
+		public string PATH_ATTACHMENT
+		{
+			get
+			{
+				return this._PATH_ATTACHMENT;
+			}
+			set
+			{
+				if ((this._PATH_ATTACHMENT != value))
+				{
+					this.OnPATH_ATTACHMENTChanging(value);
+					this.SendPropertyChanging();
+					this._PATH_ATTACHMENT = value;
+					this.SendPropertyChanged("PATH_ATTACHMENT");
+					this.OnPATH_ATTACHMENTChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_H_APPROVAL_PPE")]
+	public partial class TBL_H_APPROVAL_PPE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Ppe_NO;
+		
+		private string _Status;
+		
+		private System.Nullable<System.DateTime> _Approved_Date;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnPpe_NOChanging(string value);
+    partial void OnPpe_NOChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnApproved_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnApproved_DateChanged();
+    #endregion
+		
+		public TBL_H_APPROVAL_PPE()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ppe_NO", DbType="VarChar(200)")]
+		public string Ppe_NO
+		{
+			get
+			{
+				return this._Ppe_NO;
+			}
+			set
+			{
+				if ((this._Ppe_NO != value))
+				{
+					this.OnPpe_NOChanging(value);
+					this.SendPropertyChanging();
+					this._Ppe_NO = value;
+					this.SendPropertyChanged("Ppe_NO");
+					this.OnPpe_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(150)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Approved_Date
+		{
+			get
+			{
+				return this._Approved_Date;
+			}
+			set
+			{
+				if ((this._Approved_Date != value))
+				{
+					this.OnApproved_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Approved_Date = value;
+					this.SendPropertyChanged("Approved_Date");
+					this.OnApproved_DateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_T_PPE")]
+	public partial class VW_T_PPE
+	{
+		
+		private int _ID;
+		
+		private string _PPE_NO;
+		
+		private System.Nullable<System.DateTime> _DATE;
+		
+		private string _DISTRICT_FROM;
+		
+		private string _DISTRICT_TO;
+		
+		private string _LOC_FROM;
+		
+		private string _LOC_TO;
+		
+		private string _EQUIP_NO;
+		
+		private string _EGI;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NO;
+		
+		private string _PPE_DESC;
+		
+		private string _POSISI_PPE;
+		
+		private string _STATUS;
+		
+		private System.Nullable<System.DateTime> _CREATED_DATE;
+		
+		private string _CREATED_BY;
+		
+		private string _NAME;
+		
+		private System.Nullable<System.DateTime> _UPDATED_DATE;
+		
+		private string _UPDATED_BY;
+		
+		private string _REMARKS;
+		
+		private string _PATH_ATTACHMENT;
+		
+		public VW_T_PPE()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_NO", DbType="VarChar(200)")]
+		public string PPE_NO
+		{
+			get
+			{
+				return this._PPE_NO;
+			}
+			set
+			{
+				if ((this._PPE_NO != value))
+				{
+					this._PPE_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> DATE
+		{
+			get
+			{
+				return this._DATE;
+			}
+			set
+			{
+				if ((this._DATE != value))
+				{
+					this._DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_FROM", DbType="VarChar(50)")]
+		public string DISTRICT_FROM
+		{
+			get
+			{
+				return this._DISTRICT_FROM;
+			}
+			set
+			{
+				if ((this._DISTRICT_FROM != value))
+				{
+					this._DISTRICT_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_TO", DbType="VarChar(50)")]
+		public string DISTRICT_TO
+		{
+			get
+			{
+				return this._DISTRICT_TO;
+			}
+			set
+			{
+				if ((this._DISTRICT_TO != value))
+				{
+					this._DISTRICT_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_FROM", DbType="VarChar(50)")]
+		public string LOC_FROM
+		{
+			get
+			{
+				return this._LOC_FROM;
+			}
+			set
+			{
+				if ((this._LOC_FROM != value))
+				{
+					this._LOC_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_TO", DbType="VarChar(50)")]
+		public string LOC_TO
+		{
+			get
+			{
+				return this._LOC_TO;
+			}
+			set
+			{
+				if ((this._LOC_TO != value))
+				{
+					this._LOC_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="VarChar(50)")]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGI", DbType="VarChar(20)")]
+		public string EGI
+		{
+			get
+			{
+				return this._EGI;
+			}
+			set
+			{
+				if ((this._EGI != value))
+				{
+					this._EGI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="VarChar(10)")]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this._EQUIP_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NO", DbType="VarChar(50)")]
+		public string SERIAL_NO
+		{
+			get
+			{
+				return this._SERIAL_NO;
+			}
+			set
+			{
+				if ((this._SERIAL_NO != value))
+				{
+					this._SERIAL_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_DESC", DbType="VarChar(200)")]
+		public string PPE_DESC
+		{
+			get
+			{
+				return this._PPE_DESC;
+			}
+			set
+			{
+				if ((this._PPE_DESC != value))
+				{
+					this._PPE_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSISI_PPE", DbType="VarChar(100)")]
+		public string POSISI_PPE
+		{
+			get
+			{
+				return this._POSISI_PPE;
+			}
+			set
+			{
+				if ((this._POSISI_PPE != value))
+				{
+					this._POSISI_PPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="VarChar(50)")]
+		public string STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this._STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATED_DATE
+		{
+			get
+			{
+				return this._CREATED_DATE;
+			}
+			set
+			{
+				if ((this._CREATED_DATE != value))
+				{
+					this._CREATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="VarChar(50)")]
+		public string CREATED_BY
+		{
+			get
+			{
+				return this._CREATED_BY;
+			}
+			set
+			{
+				if ((this._CREATED_BY != value))
+				{
+					this._CREATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="VarChar(61)")]
+		public string NAME
+		{
+			get
+			{
+				return this._NAME;
+			}
+			set
+			{
+				if ((this._NAME != value))
+				{
+					this._NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> UPDATED_DATE
+		{
+			get
+			{
+				return this._UPDATED_DATE;
+			}
+			set
+			{
+				if ((this._UPDATED_DATE != value))
+				{
+					this._UPDATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_BY", DbType="VarChar(50)")]
+		public string UPDATED_BY
+		{
+			get
+			{
+				return this._UPDATED_BY;
+			}
+			set
+			{
+				if ((this._UPDATED_BY != value))
+				{
+					this._UPDATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REMARKS", DbType="VarChar(MAX)")]
+		public string REMARKS
+		{
+			get
+			{
+				return this._REMARKS;
+			}
+			set
+			{
+				if ((this._REMARKS != value))
+				{
+					this._REMARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH_ATTACHMENT", DbType="VarChar(200)")]
+		public string PATH_ATTACHMENT
+		{
+			get
+			{
+				return this._PATH_ATTACHMENT;
+			}
+			set
+			{
+				if ((this._PATH_ATTACHMENT != value))
+				{
+					this._PATH_ATTACHMENT = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_DISTRICT")]
+	public partial class VW_DISTRICT
+	{
+		
+		private string _DSTRCT_CODE;
+		
+		private string _DSTRCT_NAME;
+		
+		public VW_DISTRICT()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(100)")]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_NAME", DbType="VarChar(100)")]
+		public string DSTRCT_NAME
+		{
+			get
+			{
+				return this._DSTRCT_NAME;
+			}
+			set
+			{
+				if ((this._DSTRCT_NAME != value))
+				{
+					this._DSTRCT_NAME = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_DISTRICT")]
+	public partial class TBL_M_DISTRICT : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _LOCATION;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnDSTRCT_CODEChanging(string value);
+    partial void OnDSTRCT_CODEChanged();
+    partial void OnLOCATIONChanging(string value);
+    partial void OnLOCATIONChanged();
+    #endregion
+		
+		public TBL_M_DISTRICT()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(100)")]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this.OnDSTRCT_CODEChanging(value);
+					this.SendPropertyChanging();
+					this._DSTRCT_CODE = value;
+					this.SendPropertyChanged("DSTRCT_CODE");
+					this.OnDSTRCT_CODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOCATION", DbType="VarChar(100)")]
+		public string LOCATION
+		{
+			get
+			{
+				return this._LOCATION;
+			}
+			set
+			{
+				if ((this._LOCATION != value))
+				{
+					this.OnLOCATIONChanging(value);
+					this.SendPropertyChanging();
+					this._LOCATION = value;
+					this.SendPropertyChanged("LOCATION");
+					this.OnLOCATIONChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_MAPPING_APPROVAL")]
+	public partial class TBL_M_MAPPING_APPROVAL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _APPROVAL_NO;
+		
+		private System.Nullable<int> _APPROVAL_ACTION;
+		
+		private System.Nullable<int> _APPROVAL_ORDER;
+		
+		private string _APPROVAL_FROM;
+		
+		private string _APPROVAL_TO;
+		
+		private string _CURR_POSITION_ID;
+		
+		private string _NEXT_POSITION_ID;
+		
+		private string _APPROVAL_STATUS;
+		
+		private string _CURRENT_STATUS;
+		
+		private string _LOCATION_FROM;
+		
+		private string _LOCATION_TO;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAPPROVAL_NOChanging(int value);
+    partial void OnAPPROVAL_NOChanged();
+    partial void OnAPPROVAL_ACTIONChanging(System.Nullable<int> value);
+    partial void OnAPPROVAL_ACTIONChanged();
+    partial void OnAPPROVAL_ORDERChanging(System.Nullable<int> value);
+    partial void OnAPPROVAL_ORDERChanged();
+    partial void OnAPPROVAL_FROMChanging(string value);
+    partial void OnAPPROVAL_FROMChanged();
+    partial void OnAPPROVAL_TOChanging(string value);
+    partial void OnAPPROVAL_TOChanged();
+    partial void OnCURR_POSITION_IDChanging(string value);
+    partial void OnCURR_POSITION_IDChanged();
+    partial void OnNEXT_POSITION_IDChanging(string value);
+    partial void OnNEXT_POSITION_IDChanged();
+    partial void OnAPPROVAL_STATUSChanging(string value);
+    partial void OnAPPROVAL_STATUSChanged();
+    partial void OnCURRENT_STATUSChanging(string value);
+    partial void OnCURRENT_STATUSChanged();
+    partial void OnLOCATION_FROMChanging(string value);
+    partial void OnLOCATION_FROMChanged();
+    partial void OnLOCATION_TOChanging(string value);
+    partial void OnLOCATION_TOChanged();
+    #endregion
+		
+		public TBL_M_MAPPING_APPROVAL()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_NO", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int APPROVAL_NO
+		{
+			get
+			{
+				return this._APPROVAL_NO;
+			}
+			set
+			{
+				if ((this._APPROVAL_NO != value))
+				{
+					this.OnAPPROVAL_NOChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVAL_NO = value;
+					this.SendPropertyChanged("APPROVAL_NO");
+					this.OnAPPROVAL_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ACTION", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ACTION
+		{
+			get
+			{
+				return this._APPROVAL_ACTION;
+			}
+			set
+			{
+				if ((this._APPROVAL_ACTION != value))
+				{
+					this.OnAPPROVAL_ACTIONChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVAL_ACTION = value;
+					this.SendPropertyChanged("APPROVAL_ACTION");
+					this.OnAPPROVAL_ACTIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ORDER", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ORDER
+		{
+			get
+			{
+				return this._APPROVAL_ORDER;
+			}
+			set
+			{
+				if ((this._APPROVAL_ORDER != value))
+				{
+					this.OnAPPROVAL_ORDERChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVAL_ORDER = value;
+					this.SendPropertyChanged("APPROVAL_ORDER");
+					this.OnAPPROVAL_ORDERChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_FROM", DbType="VarChar(10)")]
+		public string APPROVAL_FROM
+		{
+			get
+			{
+				return this._APPROVAL_FROM;
+			}
+			set
+			{
+				if ((this._APPROVAL_FROM != value))
+				{
+					this.OnAPPROVAL_FROMChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVAL_FROM = value;
+					this.SendPropertyChanged("APPROVAL_FROM");
+					this.OnAPPROVAL_FROMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_TO", DbType="VarChar(10)")]
+		public string APPROVAL_TO
+		{
+			get
+			{
+				return this._APPROVAL_TO;
+			}
+			set
+			{
+				if ((this._APPROVAL_TO != value))
+				{
+					this.OnAPPROVAL_TOChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVAL_TO = value;
+					this.SendPropertyChanged("APPROVAL_TO");
+					this.OnAPPROVAL_TOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURR_POSITION_ID", DbType="VarChar(20)")]
+		public string CURR_POSITION_ID
+		{
+			get
+			{
+				return this._CURR_POSITION_ID;
+			}
+			set
+			{
+				if ((this._CURR_POSITION_ID != value))
+				{
+					this.OnCURR_POSITION_IDChanging(value);
+					this.SendPropertyChanging();
+					this._CURR_POSITION_ID = value;
+					this.SendPropertyChanged("CURR_POSITION_ID");
+					this.OnCURR_POSITION_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEXT_POSITION_ID", DbType="VarChar(20)")]
+		public string NEXT_POSITION_ID
+		{
+			get
+			{
+				return this._NEXT_POSITION_ID;
+			}
+			set
+			{
+				if ((this._NEXT_POSITION_ID != value))
+				{
+					this.OnNEXT_POSITION_IDChanging(value);
+					this.SendPropertyChanging();
+					this._NEXT_POSITION_ID = value;
+					this.SendPropertyChanged("NEXT_POSITION_ID");
+					this.OnNEXT_POSITION_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_STATUS", DbType="VarChar(50)")]
+		public string APPROVAL_STATUS
+		{
+			get
+			{
+				return this._APPROVAL_STATUS;
+			}
+			set
+			{
+				if ((this._APPROVAL_STATUS != value))
+				{
+					this.OnAPPROVAL_STATUSChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVAL_STATUS = value;
+					this.SendPropertyChanged("APPROVAL_STATUS");
+					this.OnAPPROVAL_STATUSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURRENT_STATUS", DbType="VarChar(50)")]
+		public string CURRENT_STATUS
+		{
+			get
+			{
+				return this._CURRENT_STATUS;
+			}
+			set
+			{
+				if ((this._CURRENT_STATUS != value))
+				{
+					this.OnCURRENT_STATUSChanging(value);
+					this.SendPropertyChanging();
+					this._CURRENT_STATUS = value;
+					this.SendPropertyChanged("CURRENT_STATUS");
+					this.OnCURRENT_STATUSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOCATION_FROM", DbType="VarChar(100)")]
+		public string LOCATION_FROM
+		{
+			get
+			{
+				return this._LOCATION_FROM;
+			}
+			set
+			{
+				if ((this._LOCATION_FROM != value))
+				{
+					this.OnLOCATION_FROMChanging(value);
+					this.SendPropertyChanging();
+					this._LOCATION_FROM = value;
+					this.SendPropertyChanged("LOCATION_FROM");
+					this.OnLOCATION_FROMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOCATION_TO", DbType="VarChar(100)")]
+		public string LOCATION_TO
+		{
+			get
+			{
+				return this._LOCATION_TO;
+			}
+			set
+			{
+				if ((this._LOCATION_TO != value))
+				{
+					this.OnLOCATION_TOChanging(value);
+					this.SendPropertyChanging();
+					this._LOCATION_TO = value;
+					this.SendPropertyChanged("LOCATION_TO");
+					this.OnLOCATION_TOChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_POSITION")]
+	public partial class TBL_M_POSITION
+	{
+		
+		private string _ID_POSITION;
+		
+		private string _ID_DISTRICT;
+		
+		private string _POSITION_ID;
+		
+		private string _POS_TITLE;
+		
+		private string _POSITION_FULL;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _OCCUP_TYPE;
+		
+		private string _OCCUP_TYPE_DESC;
+		
+		private string _GROUP_OCCUP_TYPE;
+		
+		private string _GROUP_OCCUP_DESC;
+		
+		private string _COST_CENTRE;
+		
+		private string _DEPT;
+		
+		private string _OCCUP_STATUS;
+		
+		private string _OCCUP_STATUS_DESC;
+		
+		private string _DEPT_CODE;
+		
+		private string _DEPT_DESC;
+		
+		private string _DIV_CODE;
+		
+		private string _DIV_DESC;
+		
+		private string _POSITION_DESC;
+		
+		private string _SUPERIOR_ID;
+		
+		private string _DWH_GROUP_OCCUP_TYPE;
+		
+		private string _FUNCTIONAL_STRUCTURE;
+		
+		private string _OCCUP_GRADE;
+		
+		public TBL_M_POSITION()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_POSITION", DbType="VarChar(100)")]
+		public string ID_POSITION
+		{
+			get
+			{
+				return this._ID_POSITION;
+			}
+			set
+			{
+				if ((this._ID_POSITION != value))
+				{
+					this._ID_POSITION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_DISTRICT", DbType="VarChar(100)")]
+		public string ID_DISTRICT
+		{
+			get
+			{
+				return this._ID_DISTRICT;
+			}
+			set
+			{
+				if ((this._ID_DISTRICT != value))
+				{
+					this._ID_DISTRICT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSITION_ID", DbType="VarChar(100)")]
+		public string POSITION_ID
+		{
+			get
+			{
+				return this._POSITION_ID;
+			}
+			set
+			{
+				if ((this._POSITION_ID != value))
+				{
+					this._POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POS_TITLE", DbType="VarChar(100)")]
+		public string POS_TITLE
+		{
+			get
+			{
+				return this._POS_TITLE;
+			}
+			set
+			{
+				if ((this._POS_TITLE != value))
+				{
+					this._POS_TITLE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSITION_FULL", DbType="VarChar(203)")]
+		public string POSITION_FULL
+		{
+			get
+			{
+				return this._POSITION_FULL;
+			}
+			set
+			{
+				if ((this._POSITION_FULL != value))
+				{
+					this._POSITION_FULL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(100)")]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OCCUP_TYPE", DbType="VarChar(100)")]
+		public string OCCUP_TYPE
+		{
+			get
+			{
+				return this._OCCUP_TYPE;
+			}
+			set
+			{
+				if ((this._OCCUP_TYPE != value))
+				{
+					this._OCCUP_TYPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OCCUP_TYPE_DESC", DbType="VarChar(100)")]
+		public string OCCUP_TYPE_DESC
+		{
+			get
+			{
+				return this._OCCUP_TYPE_DESC;
+			}
+			set
+			{
+				if ((this._OCCUP_TYPE_DESC != value))
+				{
+					this._OCCUP_TYPE_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GROUP_OCCUP_TYPE", DbType="VarChar(100)")]
+		public string GROUP_OCCUP_TYPE
+		{
+			get
+			{
+				return this._GROUP_OCCUP_TYPE;
+			}
+			set
+			{
+				if ((this._GROUP_OCCUP_TYPE != value))
+				{
+					this._GROUP_OCCUP_TYPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GROUP_OCCUP_DESC", DbType="VarChar(100)")]
+		public string GROUP_OCCUP_DESC
+		{
+			get
+			{
+				return this._GROUP_OCCUP_DESC;
+			}
+			set
+			{
+				if ((this._GROUP_OCCUP_DESC != value))
+				{
+					this._GROUP_OCCUP_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COST_CENTRE", DbType="VarChar(100)")]
+		public string COST_CENTRE
+		{
+			get
+			{
+				return this._COST_CENTRE;
+			}
+			set
+			{
+				if ((this._COST_CENTRE != value))
+				{
+					this._COST_CENTRE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPT", DbType="VarChar(100)")]
+		public string DEPT
+		{
+			get
+			{
+				return this._DEPT;
+			}
+			set
+			{
+				if ((this._DEPT != value))
+				{
+					this._DEPT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OCCUP_STATUS", DbType="VarChar(100)")]
+		public string OCCUP_STATUS
+		{
+			get
+			{
+				return this._OCCUP_STATUS;
+			}
+			set
+			{
+				if ((this._OCCUP_STATUS != value))
+				{
+					this._OCCUP_STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OCCUP_STATUS_DESC", DbType="VarChar(100)")]
+		public string OCCUP_STATUS_DESC
+		{
+			get
+			{
+				return this._OCCUP_STATUS_DESC;
+			}
+			set
+			{
+				if ((this._OCCUP_STATUS_DESC != value))
+				{
+					this._OCCUP_STATUS_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPT_CODE", DbType="VarChar(100)")]
+		public string DEPT_CODE
+		{
+			get
+			{
+				return this._DEPT_CODE;
+			}
+			set
+			{
+				if ((this._DEPT_CODE != value))
+				{
+					this._DEPT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPT_DESC", DbType="VarChar(100)")]
+		public string DEPT_DESC
+		{
+			get
+			{
+				return this._DEPT_DESC;
+			}
+			set
+			{
+				if ((this._DEPT_DESC != value))
+				{
+					this._DEPT_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIV_CODE", DbType="VarChar(100)")]
+		public string DIV_CODE
+		{
+			get
+			{
+				return this._DIV_CODE;
+			}
+			set
+			{
+				if ((this._DIV_CODE != value))
+				{
+					this._DIV_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DIV_DESC", DbType="VarChar(100)")]
+		public string DIV_DESC
+		{
+			get
+			{
+				return this._DIV_DESC;
+			}
+			set
+			{
+				if ((this._DIV_DESC != value))
+				{
+					this._DIV_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSITION_DESC", DbType="VarChar(100)")]
+		public string POSITION_DESC
+		{
+			get
+			{
+				return this._POSITION_DESC;
+			}
+			set
+			{
+				if ((this._POSITION_DESC != value))
+				{
+					this._POSITION_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPERIOR_ID", DbType="VarChar(100)")]
+		public string SUPERIOR_ID
+		{
+			get
+			{
+				return this._SUPERIOR_ID;
+			}
+			set
+			{
+				if ((this._SUPERIOR_ID != value))
+				{
+					this._SUPERIOR_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DWH_GROUP_OCCUP_TYPE", DbType="VarChar(100)")]
+		public string DWH_GROUP_OCCUP_TYPE
+		{
+			get
+			{
+				return this._DWH_GROUP_OCCUP_TYPE;
+			}
+			set
+			{
+				if ((this._DWH_GROUP_OCCUP_TYPE != value))
+				{
+					this._DWH_GROUP_OCCUP_TYPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FUNCTIONAL_STRUCTURE", DbType="VarChar(100)")]
+		public string FUNCTIONAL_STRUCTURE
+		{
+			get
+			{
+				return this._FUNCTIONAL_STRUCTURE;
+			}
+			set
+			{
+				if ((this._FUNCTIONAL_STRUCTURE != value))
+				{
+					this._FUNCTIONAL_STRUCTURE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OCCUP_GRADE", DbType="VarChar(100)")]
+		public string OCCUP_GRADE
+		{
+			get
+			{
+				return this._OCCUP_GRADE;
+			}
+			set
+			{
+				if ((this._OCCUP_GRADE != value))
+				{
+					this._OCCUP_GRADE = value;
+				}
 			}
 		}
 	}
