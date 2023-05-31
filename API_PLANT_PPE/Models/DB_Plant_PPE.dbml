@@ -198,4 +198,10 @@
       <Column Name="LOCATION_TO" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_R_DISTRICT_LOCATION" Member="VW_R_DISTRICT_LOCATIONs">
+    <Type Name="VW_R_DISTRICT_LOCATION">
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="EQUIP_LOCATION" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

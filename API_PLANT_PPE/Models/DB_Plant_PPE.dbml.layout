@@ -104,5 +104,11 @@
         <elementListCompartment Id="55bcb194-ee8f-4d38-a611-a51f1d4b0041" absoluteBounds="0.51500000000000012, 3.46, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="c386661b-e986-401a-8f84-1d6640e7a4fe" isExpanded="false" absoluteBounds="4.75, 4.5, 2, 0.45">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/VW_R_DISTRICT_LOCATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="640e9ada-4f33-41bc-b58f-31e6740419b8" absoluteBounds="4.765, 4.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -217,7 +217,7 @@ namespace API_PLANT_PPE.Controllers
         [Route("Get_DistrictLocation")]
         public IHttpActionResult Get_DistrictLocation(String dstrct)
         {
-            var data = db.TBL_M_DISTRICTs.Where(a => a.DSTRCT_CODE == dstrct).ToList();
+            var data = db.VW_R_DISTRICT_LOCATIONs.Where(a => a.DSTRCT_CODE == dstrct).ToList();
             return Ok(new { Data = data });
         }
 
@@ -225,7 +225,7 @@ namespace API_PLANT_PPE.Controllers
         [Route("Get_DistrictMap")]
         public IHttpActionResult Get_DistrictMap()
         {
-            var data = db.VW_DISTRICTs.ToList();
+            var data = db.VW_R_DISTRICT_LOCATIONs.ToList();
             return Ok(new { Data = data });
         }
 
@@ -238,12 +238,22 @@ namespace API_PLANT_PPE.Controllers
         }
 
 
+        [HttpGet]
+        [Route("Get_PositionById")]
+        public IHttpActionResult Get_PositionById(String id)
+        {
+            var data = db.TBL_M_POSITIONs.Where(a => a.POSITION_ID == id).ToList();
+            return Ok(new { Data = data });
+        }
+
         [HttpPost]
         [Route("Create_MappingApproval")]
         public IHttpActionResult Create_MappingApproval(TBL_M_MAPPING_APPROVAL param)
         {
             try
             {
+               // var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).ToList();
+               
                 TBL_M_MAPPING_APPROVAL  tbl = new TBL_M_MAPPING_APPROVAL();
                 tbl.APPROVAL_ACTION = param.APPROVAL_ACTION;
                 tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
@@ -266,8 +276,82 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Update_MappingApproval")]
+        public IHttpActionResult Update_MappingApproval(TBL_M_MAPPING_APPROVAL param)
+        {
+            try
+            {
+                 var tbl = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == param.APPROVAL_NO).FirstOrDefault();
+
+                
+                tbl.APPROVAL_NO = param.APPROVAL_NO;
+                tbl.APPROVAL_ACTION = param.APPROVAL_ACTION;
+                tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
+                tbl.APPROVAL_FROM = param.APPROVAL_FROM;
+                tbl.APPROVAL_TO = param.APPROVAL_TO;
+                tbl.LOCATION_FROM = param.LOCATION_FROM;
+                tbl.LOCATION_TO = param.LOCATION_TO;
+                tbl.CURR_POSITION_ID = param.CURR_POSITION_ID;
+                tbl.NEXT_POSITION_ID = param.NEXT_POSITION_ID;
+                tbl.CURRENT_STATUS = param.CURRENT_STATUS;
+                tbl.APPROVAL_STATUS = param.APPROVAL_STATUS;
+
+                //db.TBL_M_MAPPING_APPROVALs.InsertOnSubmit;
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
 
 
+
+        [HttpPost]
+        [Route("Delete_MappingApproval")]
+        public IHttpActionResult Delete_MappingApproval(int id)
+        {
+            try
+            {
+                // var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).ToList();
+
+                var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).FirstOrDefault();
+                db.TBL_M_MAPPING_APPROVALs.DeleteOnSubmit(data);
+                db.SubmitChanges();
+                
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+        /*[HttpPost]
+        [Route("Delete_MappingApproval")]
+        public IHttpActionResult Delete_MappingApproval(int id)
+        {
+            try
+            {
+                var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).FirstOrDefault();
+                db.TBL_M_MAPPING_APPROVALs.DeleteOnSubmit(data);
+                db.SubmitChanges();
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Remarks = false, Message = e });
+            }
+        }*/
+
+        [HttpGet]
+        [Route("Get_MappingbyId")]
+        public IHttpActionResult Get_MappingbyId(int ApproveNum)
+        {
+            var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == ApproveNum).ToList();
+            return Ok(new { Data = data });
+        }
 
 
         #endregion
