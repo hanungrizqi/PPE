@@ -117,7 +117,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head").ToList();
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
             }
