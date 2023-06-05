@@ -262,30 +262,6 @@
       <Column Name="LAST_MODIFIED_DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TBL_T_PPE" Member="TBL_T_PPEs">
-    <Type Name="TBL_T_PPE">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DISTRICT_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="DISTRICT_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="LOC_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="LOC_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EQUIP_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EGI" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="EQUIP_CLASS" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="SERIAL_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PPE_DESC" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="POSISI_PPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CREATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="UPDATED_DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="UPDATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="REMARKS" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="PATH_ATTACHMENT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.VW_T_PPE" Member="VW_T_PPEs">
     <Type Name="VW_T_PPE">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -372,6 +348,31 @@
       <Column Name="Ppe_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Posisi_Ppe" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Approved_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_T_PPE" Member="TBL_T_PPEs">
+    <Type Name="TBL_T_PPE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DISTRICT_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DISTRICT_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOC_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOC_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EQUIP_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EGI" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EQUIP_CLASS" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SERIAL_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PPE_DESC" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="POSISI_PPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CREATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UPDATED_DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="REMARKS" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PATH_ATTACHMENT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

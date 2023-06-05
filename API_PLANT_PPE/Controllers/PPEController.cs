@@ -126,7 +126,41 @@ namespace API_PLANT_PPE.Controllers
                 return BadRequest();
             }
         }
-        
+
+        [HttpGet]
+        [Route("Get_ListApprovalPM_PPE")]
+        public IHttpActionResult Get_ListApprovalPM_PPE()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_ListApprovalPDH_PPE")]
+        public IHttpActionResult Get_ListApprovalPDH_PPE()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         //Get Detail PPE
         [HttpGet]
         [Route("Get_PPEDetail/{idppe}")]

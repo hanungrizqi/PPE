@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    ViewBag.JS = "/Scripts/Page/ApprovalPlantDeptHead.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-heading">Approval Plant Dept. Head</h2>
+<div class="block block-rounded">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">
+            Table Approval PPE <small>All list Approval Plant Dept. Head</small>
+        </h3>
+    </div>
+    <div class="block-content block-content-full">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_ppe">
+            <thead class="text-center bg-primary text-white">
+                <tr>
+                    @*<th>NO</th>*@
+                    <th><input type="checkbox" id="checkAll"></th>
+                    <th>PPE NUMBER</th>
+                    <th>EGI</th>
+                    <th>EQP NUMBER</th>
+                    <th>PPE DESCRIPTION</th>
+                    <th>EQP CLASS</th>
+                    <th>SERIAL NUMBER</th>
+                    <th>FROM DISTRICT</th>
+                    <th>TO DISTRICT</th>
+                    <th>CREATED DATE</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="block block-rounded">
+            @*<div class="block-header block-header-default">
+                <h3 class="block-title">Upload Form CAAB <small></small></h3>
+                <div class="block-options">
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
+                        <i class="si si-pin"></i>
+                    </button>
+                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                </div>
+            </div>*@
+            <div class="block-content">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_formCAAB">Upload Form CAAB</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="file" accept=".pdf" id="txt_formCAAB">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header">
+        <h3 class="block-title">Remarks</h3>
+    </div>
+    <div class="block-content">
+        <div class="mb-3">
+            <textarea class="form-control form-control-sm" id="txt_remark" name="txt_remark"></textarea>
+        </div>
+    </div>
+    <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+        <div class="block-options justify-content-center">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="submitApproval(this.value)">
+                        <i class="fa fa-times opacity-50 me-1"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-success" value="PLANT DEPT. HEAD APPROVED" onclick="submitApproval(this.value)">
+                        <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
