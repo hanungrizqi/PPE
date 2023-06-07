@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "Plant Dept. Head";
-    ViewBag.JS = "/Scripts/Page/ApprovalPlantDeptHead.js";
+    ViewBag.Title = "Project Manager";
+    ViewBag.JS = "/Scripts/Page/ApprovalProjectManager.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="content-heading">Approval Plant Dept. Head</h2>
+<h2 class="content-heading">Approval Project Manager</h2>
 <div class="block block-rounded">
     <div class="block-header block-header-default">
         <h3 class="block-title">
-            Table Approval PPE <small>All list Approval Plant Dept. Head</small>
+            Table Approval PPE <small>All list Approval Project Manager</small>
         </h3>
     </div>
     <div class="block-content block-content-full">
@@ -37,30 +37,37 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="block block-rounded">
-            @*<div class="block-header block-header-default">
-                <h3 class="block-title">Upload Form CAAB <small></small></h3>
-                <div class="block-options">
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
-                        <i class="si si-pin"></i>
-                    </button>
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+@*<div class="row">*@
+    @*<div class="col-md-6">*@
+    <div class="block block-rounded">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Agreement's <small>Content Agreement's</small></h3>
+            <div class="block-options">
+                <div class="block-options-item">
+                    <div class="alert alert-warning py-2 mb-0">
+                        <i class="fa fa-exclamation-triangle opacity-50 me-1"></i> This is important!
+                    </div>
                 </div>
-            </div>*@
-            <div class="block-content">
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label" for="txt_formCAAB">Upload Form CAAB</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="file" accept=".pdf" id="txt_formCAAB">
+            </div>
+        </div>
+        <div class="block-content" id="agreementss">
+
+        </div>
+        <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+            <div class="block-options justify-content-center">
+                <div class="row text-center">
+                    <div class="col-auto">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="val-terms" name="val-terms" value="1">
+                            <label class="form-check-label" for="val-terms">I accept license &amp; terms</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    @*</div>*@
+@*</div>*@
 
 <div class="block block-rounded block-link-shadow">
     <div class="block-header">
@@ -78,7 +85,7 @@
                     <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="submitApproval(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-sm btn-success" value="PLANT DEPT. HEAD APPROVED" onclick="submitApproval(this.value)">
+                    <button type="submit" class="btn btn-sm btn-success" value="PROJECT MANAGER APPROVED" onclick="submitApproval(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
                     </button>
                 </div>

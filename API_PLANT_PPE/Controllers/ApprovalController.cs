@@ -25,34 +25,78 @@ namespace API_PLANT_PPE.Controllers
             {
                 foreach (var ppe in param)
                 {
-                    string old_posisi = "";
-                    //if (ppe.STATUS == "PLANNER CANCEL")
+                    //string old_posisi = "";
+                    //var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
+
+                    //old_posisi = cek.POSISI_PPE;
+
+                    ////update
+                    //cek.STATUS = ppe.STATUS;
+                    //cek.REMARKS = ppe.REMARKS;
+                    //cek.UPDATED_BY = ppe.UPDATED_BY;
+                    //cek.POSISI_PPE = ppe.POSISI_PPE;
+                    //cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+
+                    ////history ppe
+                    //TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    ////his.Ppe_NO = ppe.PPE_NO;
+                    ////his.Posisi_Ppe = old_posisi;
+                    ////his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+
+                    //////db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                    ////if (ppe.STATUS != "REJECT")
+                    ////{
+                    ////    db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                    ////}
+                    //if (cek.PPE_NO != null && cek.POSISI_PPE != "")
                     //{
-                    //    db.cusp_NotifBacklogCancel(ppe.NO_BACKLOG);
+                    //    his.Ppe_NO = ppe.PPE_NO;
+                    //    his.Posisi_Ppe = old_posisi;
+                    //    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+
+                    //    if (ppe.STATUS != "REJECT")
+                    //    {
+                    //        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                    //    }
                     //}
+
+                    string old_posisi = "";
 
                     var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
 
-                    old_posisi = cek.POSISI_PPE;
-
-                    //update
-                    cek.STATUS = ppe.STATUS;
-                    cek.REMARKS = ppe.REMARKS;
-                    cek.UPDATED_BY = ppe.UPDATED_BY;
-                    cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
-
-                    //history ppe
-                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
-
-                    his.Ppe_NO = ppe.PPE_NO;
-                    his.Posisi_Ppe = old_posisi;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
-
-                    //db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                    if (ppe.STATUS != "REJECT")
+                    if (cek != null)
                     {
-                        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        old_posisi = cek.POSISI_PPE;
+
+                        // Update data
+                        cek.STATUS = ppe.STATUS;
+                        cek.REMARKS = ppe.REMARKS;
+                        cek.UPDATED_BY = ppe.UPDATED_BY;
+                        cek.POSISI_PPE = ppe.POSISI_PPE;
+                        cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+
+                        // Cek apakah PPE_NO ada di TBL_H_APPROVAL_PPE
+                        var existingApproval = db.TBL_H_APPROVAL_PPEs.FirstOrDefault(a => a.Ppe_NO == ppe.PPE_NO && a.Equip_No == ppe.EQUIP_NO);
+                        if (existingApproval != null)
+                        {
+                            existingApproval.Posisi_Ppe = old_posisi;
+                            existingApproval.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        }
+                        else
+                        {
+                            // Buat entri baru di TBL_H_APPROVAL_PPE jika tidak ada
+                            TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+                            his.Ppe_NO = ppe.PPE_NO;
+                            his.Equip_No = ppe.EQUIP_NO;
+                            his.Posisi_Ppe = old_posisi;
+                            his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+
+                            if (ppe.STATUS != "REJECT")
+                            {
+                                db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                            }
+                        }
                     }
                 }
 

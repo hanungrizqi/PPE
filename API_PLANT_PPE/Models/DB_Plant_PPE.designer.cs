@@ -54,12 +54,12 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
     partial void UpdateTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
     partial void DeleteTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
-    partial void InsertTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
-    partial void UpdateTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
-    partial void DeleteTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
     partial void InsertTBL_T_PPE(TBL_T_PPE instance);
     partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
     partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
+    partial void InsertTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
+    partial void UpdateTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
+    partial void DeleteTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -300,19 +300,19 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<TBL_H_APPROVAL_PPE> TBL_H_APPROVAL_PPEs
-		{
-			get
-			{
-				return this.GetTable<TBL_H_APPROVAL_PPE>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TBL_T_PPE> TBL_T_PPEs
 		{
 			get
 			{
 				return this.GetTable<TBL_T_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_H_APPROVAL_PPE> TBL_H_APPROVAL_PPEs
+		{
+			get
+			{
+				return this.GetTable<TBL_H_APPROVAL_PPE>();
 			}
 		}
 	}
@@ -5283,140 +5283,6 @@ namespace API_PLANT_PPE.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_H_APPROVAL_PPE")]
-	public partial class TBL_H_APPROVAL_PPE : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Ppe_NO;
-		
-		private string _Posisi_Ppe;
-		
-		private System.Nullable<System.DateTime> _Approved_Date;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnPpe_NOChanging(string value);
-    partial void OnPpe_NOChanged();
-    partial void OnPosisi_PpeChanging(string value);
-    partial void OnPosisi_PpeChanged();
-    partial void OnApproved_DateChanging(System.Nullable<System.DateTime> value);
-    partial void OnApproved_DateChanged();
-    #endregion
-		
-		public TBL_H_APPROVAL_PPE()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ppe_NO", DbType="VarChar(200)")]
-		public string Ppe_NO
-		{
-			get
-			{
-				return this._Ppe_NO;
-			}
-			set
-			{
-				if ((this._Ppe_NO != value))
-				{
-					this.OnPpe_NOChanging(value);
-					this.SendPropertyChanging();
-					this._Ppe_NO = value;
-					this.SendPropertyChanged("Ppe_NO");
-					this.OnPpe_NOChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Posisi_Ppe", DbType="VarChar(150)")]
-		public string Posisi_Ppe
-		{
-			get
-			{
-				return this._Posisi_Ppe;
-			}
-			set
-			{
-				if ((this._Posisi_Ppe != value))
-				{
-					this.OnPosisi_PpeChanging(value);
-					this.SendPropertyChanging();
-					this._Posisi_Ppe = value;
-					this.SendPropertyChanged("Posisi_Ppe");
-					this.OnPosisi_PpeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Approved_Date
-		{
-			get
-			{
-				return this._Approved_Date;
-			}
-			set
-			{
-				if ((this._Approved_Date != value))
-				{
-					this.OnApproved_DateChanging(value);
-					this.SendPropertyChanging();
-					this._Approved_Date = value;
-					this.SendPropertyChanged("Approved_Date");
-					this.OnApproved_DateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_T_PPE")]
 	public partial class TBL_T_PPE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -5934,6 +5800,164 @@ namespace API_PLANT_PPE.Models
 					this._UPLOAD_FORM_CAAB = value;
 					this.SendPropertyChanged("UPLOAD_FORM_CAAB");
 					this.OnUPLOAD_FORM_CAABChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_H_APPROVAL_PPE")]
+	public partial class TBL_H_APPROVAL_PPE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Ppe_NO;
+		
+		private string _Equip_No;
+		
+		private string _Posisi_Ppe;
+		
+		private System.Nullable<System.DateTime> _Approved_Date;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnPpe_NOChanging(string value);
+    partial void OnPpe_NOChanged();
+    partial void OnEquip_NoChanging(string value);
+    partial void OnEquip_NoChanged();
+    partial void OnPosisi_PpeChanging(string value);
+    partial void OnPosisi_PpeChanged();
+    partial void OnApproved_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnApproved_DateChanged();
+    #endregion
+		
+		public TBL_H_APPROVAL_PPE()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ppe_NO", DbType="VarChar(200)")]
+		public string Ppe_NO
+		{
+			get
+			{
+				return this._Ppe_NO;
+			}
+			set
+			{
+				if ((this._Ppe_NO != value))
+				{
+					this.OnPpe_NOChanging(value);
+					this.SendPropertyChanging();
+					this._Ppe_NO = value;
+					this.SendPropertyChanged("Ppe_NO");
+					this.OnPpe_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Equip_No", DbType="VarChar(100)")]
+		public string Equip_No
+		{
+			get
+			{
+				return this._Equip_No;
+			}
+			set
+			{
+				if ((this._Equip_No != value))
+				{
+					this.OnEquip_NoChanging(value);
+					this.SendPropertyChanging();
+					this._Equip_No = value;
+					this.SendPropertyChanged("Equip_No");
+					this.OnEquip_NoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Posisi_Ppe", DbType="VarChar(150)")]
+		public string Posisi_Ppe
+		{
+			get
+			{
+				return this._Posisi_Ppe;
+			}
+			set
+			{
+				if ((this._Posisi_Ppe != value))
+				{
+					this.OnPosisi_PpeChanging(value);
+					this.SendPropertyChanging();
+					this._Posisi_Ppe = value;
+					this.SendPropertyChanged("Posisi_Ppe");
+					this.OnPosisi_PpeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Approved_Date
+		{
+			get
+			{
+				return this._Approved_Date;
+			}
+			set
+			{
+				if ((this._Approved_Date != value))
+				{
+					this.OnApproved_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Approved_Date = value;
+					this.SendPropertyChanged("Approved_Date");
+					this.OnApproved_DateChanged();
 				}
 			}
 		}
