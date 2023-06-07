@@ -85,7 +85,7 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                var data = db.VW_DISTRICTs.ToList();
+                var data = db.VW_DISTRICTs.OrderBy(a => a.DSTRCT_CODE).ToList();
 
                 return Ok(new { Data = data });
             }

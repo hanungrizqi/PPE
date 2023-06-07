@@ -70,6 +70,7 @@ namespace PLANT_PPE.Controllers
                     var ApiResponse = Res.Content.ReadAsStringAsync().Result;
                     Cls_PPE data = new Cls_PPE();
                     data = JsonConvert.DeserializeObject<Cls_PPE>(ApiResponse);
+                    //int jmlstringsebelumnya = data.tbl.PPE_NO.Count();
 
                     tbl = data.tbl;
                     if (tbl == null)
@@ -79,85 +80,277 @@ namespace PLANT_PPE.Controllers
                     }
                     else
                     {
+                        int jmlstringsebelumnya = data.tbl.PPE_NO.Count();
                         //Penambahan kondisi jumlah roman
                         string romanMonth = RomanMonth(DateTime.Now.Month);
                         //string romanMonth = "VI";
                         if (romanMonth == "I" || romanMonth == "V" || romanMonth == "X")
                         {
-                            string month = tbl.PPE_NO.Substring(8, 1);
-                            string year = tbl.PPE_NO.Substring(10, 4);
-                            string thisMonth = RomanMonth(DateTime.Now.Month);
-                            string thisYear = DateTime.Now.ToString("yyyy");
-                            if (month == thisMonth && year == thisYear)
+                            if (jmlstringsebelumnya == 15)
                             {
-                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
-                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                string month = tbl.PPE_NO.Substring(8, 2);
+                                string year = tbl.PPE_NO.Substring(11, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 16)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 3);
+                                string year = tbl.PPE_NO.Substring(12, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 17)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 4);
+                                string year = tbl.PPE_NO.Substring(13, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                //string thisMonth = "VII";
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
                             else
                             {
-                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                //baku = 14 string
+                                string month = tbl.PPE_NO.Substring(8, 1);
+                                string year = tbl.PPE_NO.Substring(10, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
-                        } else if (romanMonth == "II" || romanMonth == "IV" || romanMonth == "VI" || romanMonth == "IX" || romanMonth == "XI")
+                            
+                        } 
+                        else if (romanMonth == "II" || romanMonth == "IV" || romanMonth == "VI" || romanMonth == "IX" || romanMonth == "XI")
                         {
-                            string month = tbl.PPE_NO.Substring(8, 2);
-                            string year = tbl.PPE_NO.Substring(11, 4);
-                            string thisMonth = RomanMonth(DateTime.Now.Month);
-                            //string thisMonth = "VII";
-                            string thisYear = DateTime.Now.ToString("yyyy");
-                            if (month == thisMonth && year == thisYear)
+                            //penambahan kondisi jumlah string
+                            if (jmlstringsebelumnya == 14)
                             {
-                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
-                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                string month = tbl.PPE_NO.Substring(8, 1);
+                                string year = tbl.PPE_NO.Substring(10, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 16)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 3);
+                                string year = tbl.PPE_NO.Substring(12, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 17)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 4);
+                                string year = tbl.PPE_NO.Substring(13, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
                             else
                             {
-                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                //baku 15 string
+                                string month = tbl.PPE_NO.Substring(8, 2);
+                                string year = tbl.PPE_NO.Substring(11, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
-                        } else if (romanMonth == "III" || romanMonth == "VII" || romanMonth == "XII")
+                        } 
+                        else if (romanMonth == "III" || romanMonth == "VII" || romanMonth == "XII")
                         {
-                            string month = tbl.PPE_NO.Substring(8, 3);
-                            string year = tbl.PPE_NO.Substring(12, 4);
-                            string thisMonth = RomanMonth(DateTime.Now.Month);
-                            string thisYear = DateTime.Now.ToString("yyyy");
-                            if (month == thisMonth && year == thisYear)
+                            if (jmlstringsebelumnya == 14)
                             {
-                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
-                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                string month = tbl.PPE_NO.Substring(8, 1);
+                                string year = tbl.PPE_NO.Substring(10, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 15)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 2);
+                                string year = tbl.PPE_NO.Substring(11, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 17)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 4);
+                                string year = tbl.PPE_NO.Substring(13, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
                             else
                             {
-                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                //baku 16 string
+                                string month = tbl.PPE_NO.Substring(8, 3);
+                                string year = tbl.PPE_NO.Substring(12, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
-                        } else if (romanMonth == "VIII")
+                        } 
+                        else if (romanMonth == "VIII")
                         {
-                            string month = tbl.PPE_NO.Substring(8, 4);
-                            string year = tbl.PPE_NO.Substring(13, 4);
-                            string thisMonth = RomanMonth(DateTime.Now.Month);
-                            string thisYear = DateTime.Now.ToString("yyyy");
-                            if (month == thisMonth && year == thisYear)
+                            if (jmlstringsebelumnya == 14)
                             {
-                                int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
-                                NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                string month = tbl.PPE_NO.Substring(8, 1);
+                                string year = tbl.PPE_NO.Substring(10, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 15)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 2);
+                                string year = tbl.PPE_NO.Substring(11, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                            } else if (jmlstringsebelumnya == 16)
+                            {
+                                string month = tbl.PPE_NO.Substring(8, 3);
+                                string year = tbl.PPE_NO.Substring(12, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
                             else
                             {
-                                NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                //baku 17 string
+                                string month = tbl.PPE_NO.Substring(8, 4);
+                                string year = tbl.PPE_NO.Substring(13, 4);
+                                string thisMonth = RomanMonth(DateTime.Now.Month);
+                                string thisYear = DateTime.Now.ToString("yyyy");
+                                if (month == thisMonth && year == thisYear)
+                                {
+                                    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
+                                    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
+                                else
+                                {
+                                    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
+                                }
                             }
                         }
-
-                        //string month = tbl.PPE_NO.Substring(8, 1);
-                        //string year = tbl.PPE_NO.Substring(10, 4);
-                        //string thisMonth = RomanMonth(DateTime.Now.Month);
-                        //string thisYear = DateTime.Now.ToString("yyyy");
-                        //if (month == thisMonth && year == thisYear)
-                        //{
-                        //    int setNo = Convert.ToInt32(tbl.PPE_NO.Substring(0, 3)) + 1;
-                        //    NoPPE = setNo.ToString().PadLeft(3, '0') + "/PPE/" + thisMonth + "/" + thisYear;
-                        //}
-                        //else
-                        //{
-                        //    NoPPE = "001" + "/PPE/" + thisMonth + "/" + thisYear;
-                        //}
                     }
 
                     ViewBag.NoPPE = NoPPE;
