@@ -4348,6 +4348,7 @@
       <DependentUpon>DB_PLANT_PPE.dbml</DependentUpon>
     </None>
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\Page\ApprovalDivHead.js" />
     <Content Include="Scripts\Page\ApprovalPlantDeptHead.js" />
     <Content Include="Scripts\Page\ApprovalPlantManager.js" />
     <Content Include="Scripts\Page\ApprovalProjectManager.js" />
@@ -4385,6 +4386,7 @@
     <Content Include="Views\Approval\PlantManager.cshtml" />
     <Content Include="Views\Approval\PlantDeptHead.cshtml" />
     <Content Include="Views\Approval\ProjectManager.cshtml" />
+    <Content Include="Views\Approval\DivHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
