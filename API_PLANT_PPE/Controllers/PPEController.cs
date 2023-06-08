@@ -229,8 +229,8 @@ namespace API_PLANT_PPE.Controllers
                         var eqpno = cek.EQUIP_NO;
                         var posppe = cek.POSISI_PPE;
                         var stts = cek.STATUS;
-                        //edit 13.05.2023
-                        var message = string.Format("Equipment {0} Sedang ada pemindahan di No. PPE : {1}, Dengan Status {2}", eqpno, noppe, stts);
+                        
+                        var message = string.Format("Equipment {0} Sedang ada pemindahan di No. PPE : {1}, Dengan Status {2}, dan Posisi PPE : {3}", eqpno, noppe, stts, posppe);
                         return Ok(new { Remarkss = true, Datas = cek, ppe = noppe, eq = eqpno, st = stts, Messages = message });
                     }
                     return Ok(new { Remarks = true });

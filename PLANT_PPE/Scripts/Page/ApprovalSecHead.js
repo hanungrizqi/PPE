@@ -35,7 +35,13 @@ var table = $("#tbl_ppe").DataTable({
                 return tanggal;
             }
         },
-        { data: 'STATUS' },
+        {
+            data: 'STATUS',
+            render: function (data, type, row) {
+                text = `<span class="badge bg-info">${data}</span>`;
+                return text;
+            }
+        },
         {
             data: 'ID',
             targets: 'no-sort', orderable: false,
