@@ -212,5 +212,41 @@ namespace API_PLANT_PPE.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost]
+        [Route("Cek_History_Part")]
+        public IHttpActionResult Cek_History_Part(VW_T_PPE param)
+        {
+            try
+            {
+                var cek = db.VW_T_PPEs.Where(a => a.EQUIP_NO == param.EQUIP_NO).FirstOrDefault();
+                if (cek != null)
+                {
+
+                    if (cek.EQUIP_NO == param.EQUIP_NO)
+                    {
+                        var noppe = cek.PPE_NO;
+                        var eqpno = cek.EQUIP_NO;
+                        var posppe = cek.POSISI_PPE;
+                        var stts = cek.STATUS;
+                        //edit 13.05.2023
+                        var message = string.Format("Equipment {0} Sedang ada pemindahan di No. PPE : {1}, Dengan Status {2}", eqpno, noppe, stts);
+                        return Ok(new { Remarkss = true, Datas = cek, ppe = noppe, eq = eqpno, st = stts, Messages = message });
+                    }
+                    return Ok(new { Remarks = true });
+                }
+                else
+                {
+                    
+                    return Ok(new { Remarkss = false });
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

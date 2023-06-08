@@ -164,42 +164,116 @@ function savePPEtoTable() {
         var formData = new FormData();
         formData.append("attachment", file);
 
+        //upcoming cek posisi equip number
+        debugger
+        let pep = new Object();
+        pep.PPE_NO = $("#txt_noPPE").val(),
+        pep.EQUIP_NO = $("#txt_eqNumber").val(),
         $.ajax({
-            url: $("#web_link").val() + "/api/PPE/UploadAttachment", // URI
+            url: $("#web_link").val() + "/api/PPE/Cek_History_Part", //URI
+            data: JSON.stringify(pep),
+            dataType: "json",
             type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
                 debugger
-                var attachmentUrl = response.AttachmentUrl;
+                if (data.Remarkss == true) {
+                    debugger
+                    Swal.fire({
+                        title: 'Info!',
+                        text: data.Messages,
+                        icon: 'info',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/PPE/Register";
+                        }
+                    });
+                } if (data.Remarkss == false) {
+                    $.ajax({
+                        url: $("#web_link").val() + "/api/PPE/UploadAttachment", // URI
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            debugger
+                            var attachmentUrl = response.AttachmentUrl;
 
-                var rowCount = $("#table_equipment tbody tr").length + 1;
-                var row = "<tr>" +
-                    "<td class='text-center'>" + rowCount + "</td>" +
-                    "<td>" + formattedDate + "</td>" +
-                    "<td>" + ppeNo + "</td>" +
-                    "<td>" + eqNumber + "</td>" +
-                    "<td>" + ppeDescription + "</td>" +
-                    "<td>" + egi + "</td>" +
-                    "<td>" + eqClass + "</td>" +
-                    "<td>" + serialNumber + "</td>" +
-                    "<td>" + districtFrom + "</td>" +
-                    "<td>" + locFrom + "</td>" +
-                    "<td>" + districtTo + "</td>" +
-                    "<td>" + locTo + "</td>" +
-                    "<td>" + remark + "</td>" +
-                    //"<td>" + attch + "</td>" +
-                    "<td><a href='" + attachmentUrl + "' target='_blank'>View Attachment</a></td>" +
-                    "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
-                    "</tr>";
-                    $("#table_equipment tbody").append(row);
-                    savePPEtoTableClicked = true;
+                            var rowCount = $("#table_equipment tbody tr").length + 1;
+                            var row = "<tr>" +
+                                "<td class='text-center'>" + rowCount + "</td>" +
+                                "<td>" + formattedDate + "</td>" +
+                                "<td>" + ppeNo + "</td>" +
+                                "<td>" + eqNumber + "</td>" +
+                                "<td>" + ppeDescription + "</td>" +
+                                "<td>" + egi + "</td>" +
+                                "<td>" + eqClass + "</td>" +
+                                "<td>" + serialNumber + "</td>" +
+                                "<td>" + districtFrom + "</td>" +
+                                "<td>" + locFrom + "</td>" +
+                                "<td>" + districtTo + "</td>" +
+                                "<td>" + locTo + "</td>" +
+                                "<td>" + remark + "</td>" +
+                                //"<td>" + attch + "</td>" +
+                                "<td><a href='" + attachmentUrl + "' target='_blank'>View Attachment</a></td>" +
+                                "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
+                                "</tr>";
+                            $("#table_equipment tbody").append(row);
+                            savePPEtoTableClicked = true;
+                        },
+                        error: function (xhr) {
+                            alert(xhr.responseText);
+                        }
+                    });
+                }
+
             },
             error: function (xhr) {
                 alert(xhr.responseText);
             }
         });
+        //sampe sini
+
+        //$.ajax({
+        //    url: $("#web_link").val() + "/api/PPE/UploadAttachment", // URI
+        //    type: "POST",
+        //    data: formData,
+        //    processData: false,
+        //    contentType: false,
+        //    success: function (response) {
+        //        debugger
+        //        var attachmentUrl = response.AttachmentUrl;
+
+        //        var rowCount = $("#table_equipment tbody tr").length + 1;
+        //        var row = "<tr>" +
+        //            "<td class='text-center'>" + rowCount + "</td>" +
+        //            "<td>" + formattedDate + "</td>" +
+        //            "<td>" + ppeNo + "</td>" +
+        //            "<td>" + eqNumber + "</td>" +
+        //            "<td>" + ppeDescription + "</td>" +
+        //            "<td>" + egi + "</td>" +
+        //            "<td>" + eqClass + "</td>" +
+        //            "<td>" + serialNumber + "</td>" +
+        //            "<td>" + districtFrom + "</td>" +
+        //            "<td>" + locFrom + "</td>" +
+        //            "<td>" + districtTo + "</td>" +
+        //            "<td>" + locTo + "</td>" +
+        //            "<td>" + remark + "</td>" +
+        //            //"<td>" + attch + "</td>" +
+        //            "<td><a href='" + attachmentUrl + "' target='_blank'>View Attachment</a></td>" +
+        //            "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
+        //            "</tr>";
+        //            $("#table_equipment tbody").append(row);
+        //            savePPEtoTableClicked = true;
+        //    },
+        //    error: function (xhr) {
+        //        alert(xhr.responseText);
+        //    }
+        //});
     } else if (attch == "") {
         var rowCount = $("#table_equipment tbody tr").length + 1;
         var row = "<tr>" +
