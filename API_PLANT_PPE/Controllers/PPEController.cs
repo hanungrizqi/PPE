@@ -219,7 +219,7 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                var cek = db.VW_T_PPEs.Where(a => a.EQUIP_NO == param.EQUIP_NO).FirstOrDefault();
+                var cek = db.TBL_T_PPEs.Where(a => a.EQUIP_NO == param.EQUIP_NO).FirstOrDefault();
                 if (cek != null)
                 {
 
