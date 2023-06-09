@@ -166,6 +166,26 @@ namespace PLANT_PPE.Controllers
                 return View();
             }
         }
-        
+
+        public ActionResult Review()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
+
+        public ActionResult DetailPPE(int idppe)
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.idppe = idppe;
+            return View();
+        }
     }
+
+
 }

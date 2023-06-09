@@ -45,9 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LdapAuthentication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\New folder\plant_bcs\API_PLANT_BCS\bin\LdapAuthentication.dll</HintPath>
+    <Reference Include="LdapAuthentication">
+      <HintPath>..\..\..\new_ppe\PLANT_PPE\bin\LdapAuthentication.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
