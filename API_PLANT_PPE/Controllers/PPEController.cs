@@ -33,6 +33,23 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("Get_FirstNoPPE")]
+        public IHttpActionResult Get_FirstNoPPE()
+        {
+            try
+            {
+                var data = db.TBL_T_PPEs.OrderBy(a => a.ID).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost]
         [Route("Create_PPE")]
         public IHttpActionResult Create_PPE(List<TBL_T_PPE> ppeList)
