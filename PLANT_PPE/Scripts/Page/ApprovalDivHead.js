@@ -1,7 +1,7 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
 var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE",
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalDivHead_PPE",
         dataSrc: "Data",
     },
 
@@ -38,7 +38,7 @@ var table = $("#tbl_ppe").DataTable({
         {
             data: 'STATUS',
             render: function (data, type, row) {
-                text = `<span class="badge bg-info">${data}</span>`;
+                text = `<span class="badge bg-success">${data}</span>`;
                 return text;
             }
         },
@@ -118,31 +118,7 @@ function submitApproval(postStatus) {
         );
         return;
     }
-    //debugger
-    //let dataPPE = {
-    //    PPE_NO: selectedRows,
-    //    UPDATED_BY: $("#hd_nrp").val(),
-    //    REMARKS: $("#txt_remark").val(),
-    //    POSISI_PPE: "Plant Manager",
-    //    // kolom laenn kalo perlu
-    //    STATUS: postStatus
-    //};
 
-    //let dataPPE = [];
-    //selectedRows.forEach(function (row) {
-    //    debugger
-    //    let ppe = {
-    //        PPE_NO: row,
-    //        UPDATED_BY: $("#hd_nrp").val(),
-    //        REMARKS: $("#txt_remark").val(),
-    //        EQUIP_NO: equipNo,
-    //        //POSISI_PPE: "Plant Manager",
-    //        POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
-    //        // kolom laenn kalo perlu
-    //        STATUS: postStatus
-    //    };
-    //    dataPPE.push(ppe);
-    //});
     let dataPPE = [];
     $('.row-checkbox:checked').each(function () {
         debugger
@@ -152,7 +128,7 @@ function submitApproval(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+            POSISI_PPE: postStatus === "REJECT" ? "Division Head" : "Waiting SM Dept",
             // kolom lain jika diperlukan
             STATUS: postStatus
         };
@@ -180,7 +156,7 @@ function submitApproval(postStatus) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
+                        window.location.href = "/Approval/DivHead";
                     }
                 })
             } if (data.Remarks == false) {

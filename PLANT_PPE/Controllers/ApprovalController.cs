@@ -25,5 +25,37 @@ namespace PLANT_PPE.Controllers
             ViewBag.idppe = idppe;
             return View();
         }
+        public ActionResult PlantManager()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
+        public ActionResult PlantDeptHead()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
+        public ActionResult ProjectManager()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
+        public ActionResult DivHead()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
     }
 }

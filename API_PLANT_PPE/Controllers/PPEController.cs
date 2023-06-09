@@ -134,7 +134,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head").ToList();
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
             }
@@ -143,7 +143,75 @@ namespace API_PLANT_PPE.Controllers
                 return BadRequest();
             }
         }
-        
+
+        [HttpGet]
+        [Route("Get_ListApprovalPM_PPE")]
+        public IHttpActionResult Get_ListApprovalPM_PPE()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_ListApprovalPDH_PPE")]
+        public IHttpActionResult Get_ListApprovalPDH_PPE()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_ListApprovalProjMan_PPE")]
+        public IHttpActionResult Get_ListApprovalProjMan_PPE()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager" && a.STATUS != "REJECT").ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_ListApprovalDivHead_PPE")]
+        public IHttpActionResult Get_ListApprovalDivHead_PPE()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head" && a.STATUS != "REJECT").ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         //Get Detail PPE
         [HttpGet]
         [Route("Get_PPEDetail/{idppe}")]
@@ -155,6 +223,42 @@ namespace API_PLANT_PPE.Controllers
                 var data = db.VW_T_PPEs.Where(a => a.ID == idppe).FirstOrDefault();
 
                 return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Cek_History_Part")]
+        public IHttpActionResult Cek_History_Part(VW_T_PPE param)
+        {
+            try
+            {
+                var cek = db.TBL_T_PPEs.Where(a => a.EQUIP_NO == param.EQUIP_NO).FirstOrDefault();
+                if (cek != null)
+                {
+
+                    if (cek.EQUIP_NO == param.EQUIP_NO)
+                    {
+                        var noppe = cek.PPE_NO;
+                        var eqpno = cek.EQUIP_NO;
+                        var posppe = cek.POSISI_PPE;
+                        var stts = cek.STATUS;
+                        
+                        var message = string.Format("Equipment {0} Sedang ada pemindahan di No. PPE : {1}, Dengan Status {2}, dan Posisi PPE : {3}", eqpno, noppe, stts, posppe);
+                        return Ok(new { Remarkss = true, Datas = cek, ppe = noppe, eq = eqpno, st = stts, Messages = message });
+                    }
+                    return Ok(new { Remarks = true });
+                }
+                else
+                {
+                    
+                    return Ok(new { Remarkss = false });
+
+                }
+
             }
             catch (Exception)
             {

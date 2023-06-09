@@ -1,7 +1,7 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
 var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE",
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE",
         dataSrc: "Data",
     },
 
@@ -38,7 +38,7 @@ var table = $("#tbl_ppe").DataTable({
         {
             data: 'STATUS',
             render: function (data, type, row) {
-                text = `<span class="badge bg-info">${data}</span>`;
+                text = `<span class="badge bg-success">${data}</span>`;
                 return text;
             }
         },
@@ -118,31 +118,7 @@ function submitApproval(postStatus) {
         );
         return;
     }
-    //debugger
-    //let dataPPE = {
-    //    PPE_NO: selectedRows,
-    //    UPDATED_BY: $("#hd_nrp").val(),
-    //    REMARKS: $("#txt_remark").val(),
-    //    POSISI_PPE: "Plant Manager",
-    //    // kolom laenn kalo perlu
-    //    STATUS: postStatus
-    //};
 
-    //let dataPPE = [];
-    //selectedRows.forEach(function (row) {
-    //    debugger
-    //    let ppe = {
-    //        PPE_NO: row,
-    //        UPDATED_BY: $("#hd_nrp").val(),
-    //        REMARKS: $("#txt_remark").val(),
-    //        EQUIP_NO: equipNo,
-    //        //POSISI_PPE: "Plant Manager",
-    //        POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
-    //        // kolom laenn kalo perlu
-    //        STATUS: postStatus
-    //    };
-    //    dataPPE.push(ppe);
-    //});
     let dataPPE = [];
     $('.row-checkbox:checked').each(function () {
         debugger
@@ -152,13 +128,13 @@ function submitApproval(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+            POSISI_PPE: postStatus === "REJECT" ? "Plant Dept. Head" : "Project Manager",
             // kolom lain jika diperlukan
             STATUS: postStatus
         };
         dataPPE.push(ppe);
     });
-
+    
     $.ajax({
         url: $("#web_link").val() + "/api/Approval/Approve_PPE",
         data: JSON.stringify(dataPPE),
@@ -170,19 +146,7 @@ function submitApproval(postStatus) {
         },
         success: function (data) {
             if (data.Remarks == true) {
-                Swal.fire({
-                    title: 'Saved',
-                    text: "Your data has been saved!",
-                    icon: 'success',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
-                    }
-                })
+                submitCAAB();
             } if (data.Remarks == false) {
                 Swal.fire(
                     'Error!',
@@ -198,4 +162,80 @@ function submitApproval(postStatus) {
             $("#overlay").hide();
         }
     });
+}
+
+function submitCAAB() {
+    debugger
+    let selectedRows = [];
+    $('.row-checkbox:checked').each(function () {
+        //selectedRows.push($(this).data('id'));
+        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        selectedRows.push(equipNo);
+    });
+    let dataPPE = [];
+    $('.row-checkbox:checked').each(function () {
+        debugger
+        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        let ppe = {
+            PPE_NO: $(this).data('id'),
+            UPDATED_BY: $("#hd_nrp").val(),
+            REMARKS: $("#txt_remark").val(),
+            EQUIP_NO: equipNo,
+        };
+        dataPPE.push(ppe);
+    });
+
+    debugger
+    let nomorPPE = dataPPE[0].PPE_NO;
+    let attachmentFile = $("#txt_formCAAB")[0].files[0]; // Mendapatkan file yang dipilih
+
+    // Buat objek FormData dan tambahkan data yang ingin dikirim
+    let formData = new FormData();
+    formData.append('nomorPPE', nomorPPE);
+    formData.append('attachmentFile', attachmentFile);
+
+    $.ajax({
+        url: $("#web_link").val() + "/api/Approval/Upload_CAAB", //URI
+        data: formData,
+        type: "POST",
+        contentType: false, // Hapus pengaturan contentType
+        processData: false, // Tidak memproses data secara otomatis
+        success: function (data) {
+            if (data.Remarks == true) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantDeptHead";
+                    }
+                });
+            } else if (data.Remarks == false) {
+                Swal.fire({
+                    title: 'Warning',
+                    text: "File already exist.",
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                });
+            } else {
+                Swal.fire(
+                    'Error!',
+                    'Message: ' + data.Message,
+                    'error'
+                );
+            }
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    })
 }

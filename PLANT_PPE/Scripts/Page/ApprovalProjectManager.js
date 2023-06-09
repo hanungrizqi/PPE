@@ -1,7 +1,7 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
 var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE",
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalProjMan_PPE",
         dataSrc: "Data",
     },
 
@@ -38,7 +38,7 @@ var table = $("#tbl_ppe").DataTable({
         {
             data: 'STATUS',
             render: function (data, type, row) {
-                text = `<span class="badge bg-info">${data}</span>`;
+                text = `<span class="badge bg-success">${data}</span>`;
                 return text;
             }
         },
@@ -84,6 +84,10 @@ var table = $("#tbl_ppe").DataTable({
     },
 });
 
+$("document").ready(function () {
+    getContent();
+})
+
 table.on('draw', function () {
     var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');
 
@@ -94,10 +98,18 @@ table.on('draw', function () {
 
 function submitApproval(postStatus) {
     debugger
+    var agreeCheckbox = document.getElementById('val-terms');
     if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
         Swal.fire(
             'Warning',
             'Mohon sertakan Remarks Approval!',
+            'warning'
+        );
+        return;
+    } else if (!agreeCheckbox.checked) {
+        Swal.fire(
+            'Warning!',
+            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
             'warning'
         );
         return;
@@ -118,31 +130,7 @@ function submitApproval(postStatus) {
         );
         return;
     }
-    //debugger
-    //let dataPPE = {
-    //    PPE_NO: selectedRows,
-    //    UPDATED_BY: $("#hd_nrp").val(),
-    //    REMARKS: $("#txt_remark").val(),
-    //    POSISI_PPE: "Plant Manager",
-    //    // kolom laenn kalo perlu
-    //    STATUS: postStatus
-    //};
 
-    //let dataPPE = [];
-    //selectedRows.forEach(function (row) {
-    //    debugger
-    //    let ppe = {
-    //        PPE_NO: row,
-    //        UPDATED_BY: $("#hd_nrp").val(),
-    //        REMARKS: $("#txt_remark").val(),
-    //        EQUIP_NO: equipNo,
-    //        //POSISI_PPE: "Plant Manager",
-    //        POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
-    //        // kolom laenn kalo perlu
-    //        STATUS: postStatus
-    //    };
-    //    dataPPE.push(ppe);
-    //});
     let dataPPE = [];
     $('.row-checkbox:checked').each(function () {
         debugger
@@ -152,7 +140,7 @@ function submitApproval(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+            POSISI_PPE: postStatus === "REJECT" ? "Project Manager" : "Division Head",
             // kolom lain jika diperlukan
             STATUS: postStatus
         };
@@ -180,7 +168,7 @@ function submitApproval(postStatus) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
+                        window.location.href = "/Approval/ProjectManager";
                     }
                 })
             } if (data.Remarks == false) {
@@ -196,6 +184,23 @@ function submitApproval(postStatus) {
         error: function (xhr) {
             alert(xhr.responseText);
             $("#overlay").hide();
+        }
+    });
+}
+
+function getContent() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
+        dataType: "json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var content = data.Data;
+            $("#agreementss").html(content);
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
         }
     });
 }
