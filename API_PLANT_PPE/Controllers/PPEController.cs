@@ -32,7 +32,7 @@ namespace API_PLANT_PPE.Controllers
                 return BadRequest();
             }
         }
-
+        
 
         [HttpGet]
         [Route("Get_FirstNoPPE")]
