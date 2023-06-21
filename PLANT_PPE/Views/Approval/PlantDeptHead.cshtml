@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<input type="hidden" id="hd_idProfile" value="@Session["ID_Role"]" />
+<input type="hidden" id="hd_idNrp" value="@Session["Nrp"]" />
+<input type="hidden" id="hd_PositionID" value="@Session["PositionID"]" />
+<input type="text" id="txt_PositionID" value="@ViewBag.POSID" hidden />
+
 <h2 class="content-heading">Approval Plant Dept. Head</h2>
 <div class="block block-rounded">
     <div class="block-header block-header-default">
@@ -21,13 +26,11 @@
                     <th>PPE NUMBER</th>
                     <th>EGI</th>
                     <th>EQP NUMBER</th>
-                    <th>PPE DESCRIPTION</th>
-                    <th>EQP CLASS</th>
-                    <th>SERIAL NUMBER</th>
                     <th>FROM DISTRICT</th>
                     <th>TO DISTRICT</th>
                     <th>CREATED DATE</th>
                     <th>STATUS</th>
+                    <th style="width: 400px;">UPLOAD FORM CAAB</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
@@ -37,30 +40,20 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="block block-rounded">
-            @*<div class="block-header block-header-default">
-                <h3 class="block-title">Upload Form CAAB <small></small></h3>
-                <div class="block-options">
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="pinned_toggle">
-                        <i class="si si-pin"></i>
-                    </button>
-                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
-                </div>
-            </div>*@
-            <div class="block-content">
-                <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label" for="txt_formCAAB">Upload Form CAAB</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="file" accept=".pdf" id="txt_formCAAB">
+@*<div class="row">
+        <div class="col-md-6">
+            <div class="block block-rounded">
+                <div class="block-content">
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label" for="txt_formCAAB">Upload Form CAAB</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="file" accept=".pdf" id="txt_formCAAB">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 
 <div class="block block-rounded block-link-shadow">
     <div class="block-header">

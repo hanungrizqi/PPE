@@ -17,7 +17,7 @@ namespace PLANT_PPE.Controllers
             return View();
         }
 
-        public JsonResult MakeSession(string NRP, string Jobsite)
+        public JsonResult MakeSession(string NRP, string Jobsite, string Roled)
         {
             string nrp = "";
 
@@ -31,12 +31,19 @@ namespace PLANT_PPE.Controllers
             }
             var dataUser = db.VW_KARYAWAN_ALLs.Where(a => a.EMPLOYEE_ID == nrp).FirstOrDefault();
             var dataRole = db.TBL_M_USERs.Where(a => a.Username == nrp).FirstOrDefault();
+            //var dataRoledakun = db.TBL_M_ROLEs.Where(a => a.ID == dataRole.ID_Role).FirstOrDefault();
 
             if (dataRole != null)
             {
+                var dataRoledakun = db.TBL_M_ROLEs.Where(a => a.ID == dataRole.ID_Role).FirstOrDefault();
+                var dataApprovalid = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.NEXT_POSITION_ID == dataUser.POSITION_ID).FirstOrDefault();
                 if (Jobsite == null || Jobsite == "")
                 {
                     return new JsonResult() { Data = new { Remarks = false, Message = "Jobsite tidak sesuai" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                if (Roled == null || Roled == "" || Roled != dataRoledakun.RoleName)
+                {
+                    return new JsonResult() { Data = new { Remarks = false, Message = "Role tidak sesuai" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                 }
 
                 Session["Web_Link"] = System.Configuration.ConfigurationManager.AppSettings["WebApp_Link"].ToString();
@@ -44,12 +51,15 @@ namespace PLANT_PPE.Controllers
                 Session["ID_Role"] = dataRole.ID_Role;
                 Session["Name"] = dataUser.NAME;
                 Session["Site"] = Jobsite;
+                Session["Role"] = dataRoledakun.RoleName;
+                Session["PositionID"] = dataUser.POSITION_ID;
+                ViewBag.POSID = dataUser.POSITION_ID;
                 //Session["Site"] = dataUser.DSTRCT_CODE;
                 return new JsonResult() { Data = new { Remarks = true }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
             else
             {
-                return new JsonResult() { Data = new { Remarks = false, Message = "Maaf anda tidak memiliki akses ke PPE" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return new JsonResult() { Data = new { Remarks = false, Message = "Maaf anda tidak memiliki akses ke NEW PPE" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
 
         }

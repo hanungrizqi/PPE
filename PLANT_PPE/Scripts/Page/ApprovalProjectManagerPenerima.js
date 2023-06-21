@@ -1,8 +1,9 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
-var table = $("#tbl_ppe").DataTable({
+
+var table = $("#tbl_ppe_penerima").DataTable({
     ajax: {
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE",
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE_SECHEAD/" + $("#hd_PositionID").val(),
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima",
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima/" + $("#hd_PositionID").val(),
         dataSrc: "Data",
     },
 
@@ -36,7 +37,7 @@ var table = $("#tbl_ppe").DataTable({
         {
             data: 'STATUS',
             render: function (data, type, row) {
-                text = `<span class="badge bg-info">${data}</span>`;
+                text = `<span class="badge bg-success">${data}</span>`;
                 return text;
             }
         },
@@ -51,7 +52,7 @@ var table = $("#tbl_ppe").DataTable({
         }
     ],
     initComplete: function () {
-        var headerCheckbox = document.getElementById('checkAll');
+        var headerCheckbox = document.getElementById('checkAll2');
         var rowCheckboxes = document.getElementsByClassName('row-checkbox');
         headerCheckbox.addEventListener('change', function () {
             var isChecked = headerCheckbox.checked;
@@ -64,7 +65,7 @@ var table = $("#tbl_ppe").DataTable({
             .every(function () {
                 var column = this;
                 var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- PPE NUMBER --</option></select>')
-                    .appendTo($("#tbl_ppe_filter.dataTables_filter"))
+                    .appendTo($("#tbl_ppe_penerima_filter.dataTables_filter"))
                     .on('change', function () {
                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
@@ -82,20 +83,61 @@ var table = $("#tbl_ppe").DataTable({
     },
 });
 
+$("document").ready(function () {
+    //getContent();
+    $('#modal-terms').on('show.bs.modal', function () {
+        getContent();
+    });
+    $('#modal-terms').on('hidden.bs.modal', function () {
+        var agreeCheckbox = document.getElementById('val-terms');
+        agreeCheckbox.checked = true; //kalo diklik accept, cek box jadi aktif
+    });
+
+    $('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
+        var agreeCheckbox = document.getElementById('val-terms');
+        agreeCheckbox.disabled = false; //kalo baca modal, cek box aktip
+    });
+})
+
 table.on('draw', function () {
-    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');
+    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe_pengirim tbody .row-checkbox:checked');
 
     visibleCheckboxes.forEach(function (checkbox) {
         checkbox.checked = false;
     });
 });
 
-function submitApproval(postStatus) {
+function getContent() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
+        dataType: "json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var content = data.Data;
+            $("#agreementss").html(content);
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function submitApprovalPenerima(postStatus) {
     debugger
+    var agreeCheckbox = document.getElementById('val-terms');
     if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
         Swal.fire(
             'Warning',
             'Mohon sertakan Remarks Approval!',
+            'warning'
+        );
+        return;
+    } else if (!agreeCheckbox.checked) {
+        Swal.fire(
+            'Warning!',
+            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
             'warning'
         );
         return;
@@ -116,31 +158,7 @@ function submitApproval(postStatus) {
         );
         return;
     }
-    //debugger
-    //let dataPPE = {
-    //    PPE_NO: selectedRows,
-    //    UPDATED_BY: $("#hd_nrp").val(),
-    //    REMARKS: $("#txt_remark").val(),
-    //    POSISI_PPE: "Plant Manager",
-    //    // kolom laenn kalo perlu
-    //    STATUS: postStatus
-    //};
 
-    //let dataPPE = [];
-    //selectedRows.forEach(function (row) {
-    //    debugger
-    //    let ppe = {
-    //        PPE_NO: row,
-    //        UPDATED_BY: $("#hd_nrp").val(),
-    //        REMARKS: $("#txt_remark").val(),
-    //        EQUIP_NO: equipNo,
-    //        //POSISI_PPE: "Plant Manager",
-    //        POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
-    //        // kolom laenn kalo perlu
-    //        STATUS: postStatus
-    //    };
-    //    dataPPE.push(ppe);
-    //});
     let dataPPE = [];
     $('.row-checkbox:checked').each(function () {
         debugger
@@ -150,15 +168,17 @@ function submitApproval(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+            //POSISI_PPE: postStatus === "REJECT" ? "Project Manager" : "Division Head",
+            POSISI_PPE: postStatus === "REJECT" ? "Project Manager Penerima" : "Division Head ENG",
             // kolom lain jika diperlukan
-            STATUS: postStatus
+            STATUS: postStatus,
+            APPROVAL_ORDER: 6
         };
         dataPPE.push(ppe);
     });
 
     $.ajax({
-        url: $("#web_link").val() + "/api/Approval/Approve_Section_Head",
+        url: $("#web_link").val() + "/api/Approval/Approve_PPE",
         data: JSON.stringify(dataPPE),
         dataType: "json",
         type: "POST",
@@ -178,7 +198,7 @@ function submitApproval(postStatus) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
+                        window.location.href = "/Approval/ProjectManagerPenerima";
                     }
                 })
             } if (data.Remarks == false) {

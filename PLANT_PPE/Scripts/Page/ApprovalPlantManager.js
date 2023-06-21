@@ -1,12 +1,13 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
 var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE",
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE",
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE/" + $("#hd_PositionID").val(),
         dataSrc: "Data",
     },
 
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11] },
+        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] },
         { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
@@ -23,9 +24,6 @@ var table = $("#tbl_ppe").DataTable({
         { data: 'PPE_NO' },
         { data: 'EGI' },
         { data: 'EQUIP_NO' },
-        { data: 'PPE_DESC' },
-        { data: 'EQUIP_CLASS' },
-        { data: 'SERIAL_NO' },
         { data: 'DISTRICT_FROM' },
         { data: 'DISTRICT_TO' },
         {
@@ -130,7 +128,8 @@ function submitApproval(postStatus) {
             EQUIP_NO: equipNo,
             POSISI_PPE: postStatus === "REJECT" ? "Plant Manager" : "Plant Dept. Head",
             // kolom lain jika diperlukan
-            STATUS: postStatus
+            STATUS: postStatus,
+            APPROVAL_ORDER: postStatus === "REJECT" ? 3 : 3,
         };
         dataPPE.push(ppe);
     });
