@@ -42,6 +42,8 @@
     <input type="text" id="hd_nrp" value="@Session["Nrp"].ToString()" hidden />
     <input type="text" id="hd_site" value="@Session["Site"].ToString()" hidden />
     <input type="text" id="web_link" value="@Session["Web_Link"].ToString()" hidden />
+    <input type="text" id="hd_PositionID" value="@Session["PositionID"].ToString()" hidden />
+    <input type="text" id="txt_PositionID" value="@ViewBag.POSID" hidden />
 
     <div id="overlay">
         <div class="cv-spinner">
@@ -61,11 +63,11 @@
                     <!-- Logo -->
                     <div>
                         <span class="smini-visible fw-bold tracking-wide fs-lg">
-                            <span class="text-primary">BCS</span>
+                            <span class="text-primary">PPE</span>
                         </span>
                         <a class="link-fx fw-bold tracking-wide mx-auto" href="/home/index">
                             <span class="smini-hidden">
-                                <i class="fa fa-cogs text-primary"></i>
+                                <i class="fab fa-mixcloud text-primary"></i>
                                 <span class="fs-4 text-dual">KPP</span><span class="fs-4 text-primary">PPE</span>
                             </span>
                         </a>
@@ -163,6 +165,10 @@
                             </div>
                             <div class="p-2">
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="#">
+                                    <span>@Session["Role"].ToString()</span>
+                                    <i class="fa fa-fw fa-book-open-reader opacity-25"></i>
+                                </a>
                                 <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="/Login/logout">
                                     <span>Sign Out</span>
                                     <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
@@ -212,7 +218,7 @@
     <script src="~/Content/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
     <script src="~/Content/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
     @*<script src="~/Content/assets/js/plugins/jquery-validation/additional-methods.js"></script>
-    <script src="~/Content/assets/js/pages/be_forms_validation.min.js"></script>*@
+        <script src="~/Content/assets/js/pages/be_forms_validation.min.js"></script>*@
     <!-- Page JS Helpers (CKEditor 5 plugins) -->
     <script>
         Codebase.helpersOnLoad(['js-ckeditor5', 'jq-notify', 'cb-table-tools-checkable', 'cb-table-tools-sections']);

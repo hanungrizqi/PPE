@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<input type="hidden" id="hd_PositionID" value="@Session["PositionID"]" />
+
 <h2 class="content-heading">Approval Plant Manager</h2>
 <div class="block block-rounded">
     <div class="block-header block-header-default">
@@ -21,9 +23,6 @@
                     <th>PPE NUMBER</th>
                     <th>EGI</th>
                     <th>EQP NUMBER</th>
-                    <th>PPE DESCRIPTION</th>
-                    <th>EQP CLASS</th>
-                    <th>SERIAL NUMBER</th>
                     <th>FROM DISTRICT</th>
                     <th>TO DISTRICT</th>
                     <th>CREATED DATE</th>

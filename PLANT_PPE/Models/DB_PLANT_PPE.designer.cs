@@ -145,6 +145,14 @@ namespace PLANT_PPE.Models
 				return this.GetTable<VW_LOCATION>();
 			}
 		}
+		
+		public System.Data.Linq.Table<TBL_M_MAPPING_APPROVALSS> TBL_M_MAPPING_APPROVALSSes
+		{
+			get
+			{
+				return this.GetTable<TBL_M_MAPPING_APPROVALSS>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_USER")]
@@ -1749,6 +1757,159 @@ namespace PLANT_PPE.Models
 				if ((this._TABLE_DESC != value))
 				{
 					this._TABLE_DESC = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_MAPPING_APPROVALSS")]
+	public partial class TBL_M_MAPPING_APPROVALSS
+	{
+		
+		private System.Nullable<int> _APPROVAL_ACTION;
+		
+		private System.Nullable<int> _APPROVAL_ORDER;
+		
+		private string _APPROVAL_FROM;
+		
+		private string _APPROVAL_TO;
+		
+		private string _CURR_POSITION_ID;
+		
+		private string _NEXT_POSITION_ID;
+		
+		private string _APPROVAL_STATUS;
+		
+		private string _CURRENT_STATUS;
+		
+		public TBL_M_MAPPING_APPROVALSS()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ACTION", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ACTION
+		{
+			get
+			{
+				return this._APPROVAL_ACTION;
+			}
+			set
+			{
+				if ((this._APPROVAL_ACTION != value))
+				{
+					this._APPROVAL_ACTION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ORDER", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ORDER
+		{
+			get
+			{
+				return this._APPROVAL_ORDER;
+			}
+			set
+			{
+				if ((this._APPROVAL_ORDER != value))
+				{
+					this._APPROVAL_ORDER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_FROM", DbType="VarChar(10)")]
+		public string APPROVAL_FROM
+		{
+			get
+			{
+				return this._APPROVAL_FROM;
+			}
+			set
+			{
+				if ((this._APPROVAL_FROM != value))
+				{
+					this._APPROVAL_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_TO", DbType="VarChar(10)")]
+		public string APPROVAL_TO
+		{
+			get
+			{
+				return this._APPROVAL_TO;
+			}
+			set
+			{
+				if ((this._APPROVAL_TO != value))
+				{
+					this._APPROVAL_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURR_POSITION_ID", DbType="VarChar(20)")]
+		public string CURR_POSITION_ID
+		{
+			get
+			{
+				return this._CURR_POSITION_ID;
+			}
+			set
+			{
+				if ((this._CURR_POSITION_ID != value))
+				{
+					this._CURR_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEXT_POSITION_ID", DbType="VarChar(20)")]
+		public string NEXT_POSITION_ID
+		{
+			get
+			{
+				return this._NEXT_POSITION_ID;
+			}
+			set
+			{
+				if ((this._NEXT_POSITION_ID != value))
+				{
+					this._NEXT_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_STATUS", DbType="VarChar(50)")]
+		public string APPROVAL_STATUS
+		{
+			get
+			{
+				return this._APPROVAL_STATUS;
+			}
+			set
+			{
+				if ((this._APPROVAL_STATUS != value))
+				{
+					this._APPROVAL_STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURRENT_STATUS", DbType="VarChar(50)")]
+		public string CURRENT_STATUS
+		{
+			get
+			{
+				return this._CURRENT_STATUS;
+			}
+			set
+			{
+				if ((this._CURRENT_STATUS != value))
+				{
+					this._CURRENT_STATUS = value;
 				}
 			}
 		}

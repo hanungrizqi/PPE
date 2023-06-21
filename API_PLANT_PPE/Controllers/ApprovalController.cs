@@ -25,77 +25,82 @@ namespace API_PLANT_PPE.Controllers
             {
                 foreach (var ppe in param)
                 {
-                    //string old_posisi = "";
-                    //var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
-
-                    //old_posisi = cek.POSISI_PPE;
-
-                    ////update
-                    //cek.STATUS = ppe.STATUS;
-                    //cek.REMARKS = ppe.REMARKS;
-                    //cek.UPDATED_BY = ppe.UPDATED_BY;
-                    //cek.POSISI_PPE = ppe.POSISI_PPE;
-                    //cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
-
-                    ////history ppe
-                    //TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
-
-                    ////his.Ppe_NO = ppe.PPE_NO;
-                    ////his.Posisi_Ppe = old_posisi;
-                    ////his.Approved_Date = DateTime.UtcNow.ToLocalTime();
-
-                    //////db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                    ////if (ppe.STATUS != "REJECT")
-                    ////{
-                    ////    db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                    ////}
-                    //if (cek.PPE_NO != null && cek.POSISI_PPE != "")
-                    //{
-                    //    his.Ppe_NO = ppe.PPE_NO;
-                    //    his.Posisi_Ppe = old_posisi;
-                    //    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
-
-                    //    if (ppe.STATUS != "REJECT")
-                    //    {
-                    //        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                    //    }
-                    //}
-
                     string old_posisi = "";
-
                     var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
 
-                    if (cek != null)
+                    old_posisi = cek.POSISI_PPE;
+
+                    //update
+                    cek.STATUS = ppe.STATUS;
+                    cek.REMARKS = ppe.REMARKS;
+                    cek.UPDATED_BY = ppe.UPDATED_BY;
+                    cek.POSISI_PPE = ppe.POSISI_PPE;
+                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
+
+                    //history ppe
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
                     {
-                        old_posisi = cek.POSISI_PPE;
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
 
-                        // Update data
-                        cek.STATUS = ppe.STATUS;
-                        cek.REMARKS = ppe.REMARKS;
-                        cek.UPDATED_BY = ppe.UPDATED_BY;
-                        cek.POSISI_PPE = ppe.POSISI_PPE;
-                        cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
-
-                        // Cek apakah PPE_NO ada di TBL_H_APPROVAL_PPE
-                        var existingApproval = db.TBL_H_APPROVAL_PPEs.FirstOrDefault(a => a.Ppe_NO == ppe.PPE_NO && a.Equip_No == ppe.EQUIP_NO);
-                        if (existingApproval != null)
+                        if (ppe.STATUS != "REJECT")
                         {
-                            existingApproval.Posisi_Ppe = old_posisi;
-                            existingApproval.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
                         }
-                        else
-                        {
-                            // Buat entri baru di TBL_H_APPROVAL_PPE jika tidak ada
-                            TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
-                            his.Ppe_NO = ppe.PPE_NO;
-                            his.Equip_No = ppe.EQUIP_NO;
-                            his.Posisi_Ppe = old_posisi;
-                            his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    }
+                }
 
-                            if (ppe.STATUS != "REJECT")
-                            {
-                                db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                            }
+                db.SubmitChanges();
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Remarks = false, Message = e });
+            }
+        }
+
+        [HttpPost]
+        [Route("Approve_Section_Head")]
+        public IHttpActionResult Approve_Section_Head(TBL_T_PPE[] param)
+        {
+            try
+            {
+                foreach (var ppe in param)
+                {
+                    string old_posisi = "";
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
+
+                    old_posisi = cek.POSISI_PPE;
+
+                    //update
+                    cek.STATUS = ppe.STATUS;
+                    cek.REMARKS = ppe.REMARKS;
+                    cek.UPDATED_BY = ppe.UPDATED_BY;
+                    cek.POSISI_PPE = ppe.POSISI_PPE;
+                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.APPROVAL_ORDER = 2;
+
+                    //history ppe
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
                         }
                     }
                 }
@@ -119,61 +124,127 @@ namespace API_PLANT_PPE.Controllers
                 var httpRequest = HttpContext.Current.Request;
                 var files = httpRequest.Files;
                 var attachmentUrls = new List<string>();
-                var nomorPPE = HttpContext.Current.Request.Form["nomorPPE"];
-                if (files.Count > 0)
+
+                //var nomorPPE = HttpContext.Current.Request.Form["nomorPPE"];
+                //var nomorEQP = HttpContext.Current.Request.Form["nomorEQP"];
+                //if (files.Count > 0)
+                //{
+                //    foreach (string file in files)
+                //    {
+                //        var postedFile = files[file];
+                //        //var fileName = postedFile.FileName + nomorEQP;
+                //        //var fileName = nomorPPE + nomorEQP;
+                //        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(postedFile.FileName);
+                //        var folderPath = HttpContext.Current.Server.MapPath("~/Content/UploadCAAB");
+
+                //        if (!Directory.Exists(folderPath))
+                //        {
+                //            Directory.CreateDirectory(folderPath);
+                //        }
+
+                //        var filePath = Path.Combine(folderPath, fileName);
+                //        if (File.Exists(filePath))
+                //        {
+                //            return Ok(new { Remarks = false });
+                //        }
+
+                //        // Simpan file dan atur atribut menjadi FileAttributes.Normal
+                //        using (var fileStream = File.Create(filePath))
+                //        {
+                //            postedFile.InputStream.CopyTo(fileStream);
+                //            fileStream.Flush();
+                //        }
+                //        File.SetAttributes(filePath, FileAttributes.Normal);
+
+                //        var attachmentUrl = Url.Content("~/Content/UploadCAAB/" + fileName);
+                //        attachmentUrls.Add(attachmentUrl);
+                //    }
+
+                //    using (var dbContext = new DB_Plant_PPEDataContext())
+                //    {
+                //        foreach (var attachmentUrl in attachmentUrls)
+                //        {
+                //            // Lakukan pengecekan disini jika nomorPPE == PPE_NO
+                //            var nomorrPPE = HttpContext.Current.Request.Form["nomorPPE"];
+                //            var existingPPE = dbContext.TBL_T_PPEs.FirstOrDefault(p => p.PPE_NO == nomorrPPE);
+                //            if (existingPPE != null)
+                //            {
+                //                existingPPE.UPLOAD_FORM_CAAB = attachmentUrl;
+                //            }
+                //        }
+
+                //        dbContext.SubmitChanges();
+                //    }
+
+                //    return Ok(new { Remarks = true, AttachmentUrls = attachmentUrls });
+                //}
+                //else
+                //{
+                //    return Ok(new { Remarks = true });
+                //}
+
+                // Mendapatkan nilai dari form dengan indeks yang sesuai
+                var nomorPPE = httpRequest.Form.GetValues("nomorPPE[]"); // Menggunakan "nomorPPE[]" untuk mendapatkan semua nilai
+                var nomorEQP = httpRequest.Form.GetValues("nomorEQP[]"); // Menggunakan "nomorEQP[]" untuk mendapatkan semua nilai
+
+                //if (files.Count > 0)
+                if (files.Count > 0 && nomorPPE.Length == files.Count && nomorEQP.Length == files.Count)
                 {
-                    foreach (string file in files)
-                    {
-                        var postedFile = files[file];
-                        var fileName = postedFile.FileName;
-                        var folderPath = HttpContext.Current.Server.MapPath("~/Content/UploadCAAB");
-
-                        if (!Directory.Exists(folderPath))
-                        {
-                            Directory.CreateDirectory(folderPath);
-                        }
-
-                        var filePath = Path.Combine(folderPath, fileName);
-                        if (File.Exists(filePath))
-                        {
-                            return Ok(new { Remarks = false });
-                        }
-
-                        // Simpan file dan atur atribut menjadi FileAttributes.Normal
-                        using (var fileStream = File.Create(filePath))
-                        {
-                            postedFile.InputStream.CopyTo(fileStream);
-                            fileStream.Flush();
-                        }
-                        File.SetAttributes(filePath, FileAttributes.Normal);
-
-                        var attachmentUrl = Url.Content("~/Content/UploadCAAB/" + fileName);
-                        attachmentUrls.Add(attachmentUrl);
-                    }
-
                     using (var dbContext = new DB_Plant_PPEDataContext())
                     {
-                        foreach (var attachmentUrl in attachmentUrls)
+                        for (int i = 0; i < files.Count; i++)
                         {
-                            // Lakukan pengecekan disini jika nomorPPE == PPE_NO
-                            var nomorrPPE = HttpContext.Current.Request.Form["nomorPPE"];
-                            var existingPPE = dbContext.TBL_T_PPEs.FirstOrDefault(p => p.PPE_NO == nomorrPPE);
-                            if (existingPPE != null)
+                            var postedFile = files[i];
+                            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(postedFile.FileName);
+                            var folderPath = HttpContext.Current.Server.MapPath("~/Content/UploadCAAB");
+
+                            if (!Directory.Exists(folderPath))
                             {
-                                existingPPE.UPLOAD_FORM_CAAB = attachmentUrl;
-                                //dbContext.TBL_T_PPEs.InsertOnSubmit(existingPPE);
-                                //return Ok(new { Remarks = false, Message = "PPE with the given number already exists." });
+                                Directory.CreateDirectory(folderPath);
                             }
 
-                            //var caab = new TBL_T_PPE
+                            var filePath = Path.Combine(folderPath, fileName);
+                            if (File.Exists(filePath))
+                            {
+                                return Ok(new { Remarks = false });
+                            }
+
+                            // Simpan file dan atur atribut menjadi FileAttributes.Normal
+                            using (var fileStream = File.Create(filePath))
+                            {
+                                postedFile.InputStream.CopyTo(fileStream);
+                                fileStream.Flush();
+                            }
+                            File.SetAttributes(filePath, FileAttributes.Normal);
+
+                            var attachmentUrl = Url.Content("~/Content/UploadCAAB/" + fileName);
+                            attachmentUrls.Add(attachmentUrl);
+
+                            //using (var dbContext = new DB_Plant_PPEDataContext())
                             //{
-                            //    UPLOAD_FORM_CAAB = attachmentUrl,
-                            //    PPE_NO = nomorPPE
-                            //};
+                            // Lakukan pengecekan disini jika nomorPPE == PPE_NO
+                            //var existingPPE = dbContext.TBL_T_PPEs.FirstOrDefault(p => p.PPE_NO == nomorEQP[i]);
+                            //if (existingPPE != null)
+                            //{
+                            //    existingPPE.UPLOAD_FORM_CAAB = attachmentUrl;
+                            //}
 
-                            //dbContext.TBL_T_PPEs.InsertOnSubmit(caab);
+                            //dbContext.SubmitChanges();
+                            for (int j = 0; j < nomorEQP.Length; j++)
+                            {
+                                // Lakukan pengecekan disini jika nomorPPE[j] == PPE_NO
+                                //var existingPPE = dbContext.TBL_T_PPEs.FirstOrDefault(p => p.PPE_NO == nomorPPE[j] && p.EQUIP_NO == nomorEQP[j]);
+                                var existingPPE = dbContext.TBL_T_PPEs.FirstOrDefault(p => p.PPE_NO == nomorPPE[j] && p.EQUIP_NO == nomorEQP[i]);
+                                if (existingPPE != null)
+                                {
+                                    existingPPE.UPLOAD_FORM_CAAB = attachmentUrl;
+                                    //existingPPE.UPLOAD_FORM_CAAB = attachmentUrls[j];
+                                }
+                            }
+
+                            //dbContext.SubmitChanges();
+                            //}
                         }
-
                         dbContext.SubmitChanges();
                     }
 
@@ -183,6 +254,61 @@ namespace API_PLANT_PPE.Controllers
                 {
                     return Ok(new { Remarks = true });
                 }
+                
+                //var nomorPPE = httpRequest.Form["nomorPPE"].Split(',');
+                //var nomorEQP = httpRequest.Form["nomorEQP"].Split(',');
+                //if (files.Count > 0)
+                //{
+                //    for (int i = 0; i < files.Count; i++)
+                //    {
+                //        var postedFile = files[i];
+                //        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(postedFile.FileName);
+                //        var folderPath = HttpContext.Current.Server.MapPath("~/Content/UploadCAAB");
+
+                //        if (!Directory.Exists(folderPath))
+                //        {
+                //            Directory.CreateDirectory(folderPath);
+                //        }
+
+                //        var filePath = Path.Combine(folderPath, fileName);
+                //        if (File.Exists(filePath))
+                //        {
+                //            return Ok(new { Remarks = false });
+                //        }
+
+                //        // Simpan file dan atur atribut menjadi FileAttributes.Normal
+                //        using (var fileStream = File.Create(filePath))
+                //        {
+                //            postedFile.InputStream.CopyTo(fileStream);
+                //            fileStream.Flush();
+                //        }
+                //        File.SetAttributes(filePath, FileAttributes.Normal);
+
+                //        var attachmentUrl = Url.Content("~/Content/UploadCAAB/" + fileName);
+                //        attachmentUrls.Add(attachmentUrl);
+                //    }
+
+                //    using (var dbContext = new DB_Plant_PPEDataContext())
+                //    {
+                //        for (int i = 0; i < attachmentUrls.Count; i++)
+                //        {
+                //            var attachmentUrl = attachmentUrls[i];
+                //            var existingPPE = dbContext.TBL_T_PPEs.FirstOrDefault(p => p.PPE_NO == nomorPPE[i]);
+                //            if (existingPPE != null)
+                //            {
+                //                existingPPE.UPLOAD_FORM_CAAB = attachmentUrl;
+                //            }
+                //        }
+
+                //        dbContext.SubmitChanges();
+                //    }
+
+                //    return Ok(new { Remarks = true, AttachmentUrls = attachmentUrls });
+                //}
+                //else
+                //{
+                //    return Ok(new { Remarks = true });
+                //}
             }
             catch (Exception)
             {
@@ -190,89 +316,6 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
-        //[HttpPost]
-        //[Route("Approve_PPE_nCAAB")]
-        //public IHttpActionResult Approve_PPE_nCAAB([FromBody] TBL_T_PPE[] param)
-        //{
-        //    try
-        //    {
-        //        foreach (var ppe in param)
-        //        {
-        //            string old_posisi = "";
-        //            var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
-
-        //            old_posisi = cek.POSISI_PPE;
-
-        //            //untuk upload caab
-        //            var httpRequest = HttpContext.Current.Request;
-        //            var files = httpRequest.Files;
-        //            var attachmentUrls = new List<string>();
-        //            if (files.Count > 0)
-        //            {
-        //                foreach (string file in files)
-        //                {
-        //                    var postedFile = files[file];
-        //                    var fileName = postedFile.FileName;
-        //                    var folderPath = HttpContext.Current.Server.MapPath("~/Content/UploadCAAB");
-
-        //                    if (!Directory.Exists(folderPath))
-        //                    {
-        //                        Directory.CreateDirectory(folderPath);
-        //                    }
-
-        //                    var filePath = Path.Combine(folderPath, fileName);
-        //                    if (File.Exists(filePath))
-        //                    {
-        //                        return Ok(new { Remarks = false });
-        //                    }
-
-        //                    // Simpan file dan atur atribut menjadi FileAttributes.Normal
-        //                    using (var fileStream = File.Create(filePath))
-        //                    {
-        //                        postedFile.InputStream.CopyTo(fileStream);
-        //                        fileStream.Flush();
-        //                    }
-        //                    File.SetAttributes(filePath, FileAttributes.Normal);
-
-        //                    var attachmentUrl = Url.Content("~/Content/UploadCAAB/" + fileName);
-        //                    attachmentUrls.Add(attachmentUrl);
-        //                }
-
-        //                //update
-        //                cek.STATUS = ppe.STATUS;
-        //                cek.REMARKS = ppe.REMARKS;
-        //                cek.UPDATED_BY = ppe.UPDATED_BY;
-        //                cek.POSISI_PPE = ppe.POSISI_PPE;
-        //                cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
-        //                cek.UPLOAD_FORM_CAAB = attachmentUrls[0];
-
-        //                //history ppe
-        //                TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
-
-        //                his.Ppe_NO = ppe.PPE_NO;
-        //                his.Posisi_Ppe = old_posisi;
-        //                his.Approved_Date = DateTime.UtcNow.ToLocalTime();
-
-        //                //db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-        //                if (ppe.STATUS != "REJECT")
-        //                {
-        //                    db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-        //                }
-
-        //            }
-        //            else
-        //            {
-        //                return BadRequest("No file found in the request.");
-        //            }
-        //        }
-
-        //        db.SubmitChanges();
-        //        return Ok(new { Remarks = true });
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Ok(new { Remarks = false, Message = e });
-        //    }
-        //}
+        
     }
 }

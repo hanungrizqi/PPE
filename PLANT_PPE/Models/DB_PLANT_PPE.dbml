@@ -105,4 +105,16 @@
       <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.TBL_M_MAPPING_APPROVALSS" Member="TBL_M_MAPPING_APPROVALSSes">
+    <Type Name="TBL_M_MAPPING_APPROVALSS">
+      <Column Name="APPROVAL_ACTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_FROM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="APPROVAL_TO" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="APPROVAL_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

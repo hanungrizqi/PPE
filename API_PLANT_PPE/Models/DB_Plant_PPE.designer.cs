@@ -54,12 +54,12 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
     partial void UpdateTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
     partial void DeleteTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
-    partial void InsertTBL_T_PPE(TBL_T_PPE instance);
-    partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
-    partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
     partial void InsertTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
     partial void UpdateTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
     partial void DeleteTBL_H_APPROVAL_PPE(TBL_H_APPROVAL_PPE instance);
+    partial void InsertTBL_T_PPE(TBL_T_PPE instance);
+    partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
+    partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -188,14 +188,6 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<VW_R_EQ_NUMBER> VW_R_EQ_NUMBERs
-		{
-			get
-			{
-				return this.GetTable<VW_R_EQ_NUMBER>();
-			}
-		}
-		
 		public System.Data.Linq.Table<VW_R_DISTRICT_LOCATION> VW_R_DISTRICT_LOCATIONs
 		{
 			get
@@ -228,43 +220,11 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<VW_R_EQ_NUMBER_HAULING> VW_R_EQ_NUMBER_HAULINGs
-		{
-			get
-			{
-				return this.GetTable<VW_R_EQ_NUMBER_HAULING>();
-			}
-		}
-		
-		public System.Data.Linq.Table<VW_R_EQ_NUMBER_TRACK> VW_R_EQ_NUMBER_TRACKs
-		{
-			get
-			{
-				return this.GetTable<VW_R_EQ_NUMBER_TRACK>();
-			}
-		}
-		
-		public System.Data.Linq.Table<VW_R_EQ_NUMBER_WHEEL> VW_R_EQ_NUMBER_WHEELs
-		{
-			get
-			{
-				return this.GetTable<VW_R_EQ_NUMBER_WHEEL>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TBL_M_AGREEMENT> TBL_M_AGREEMENTs
 		{
 			get
 			{
 				return this.GetTable<TBL_M_AGREEMENT>();
-			}
-		}
-		
-		public System.Data.Linq.Table<VW_T_PPE> VW_T_PPEs
-		{
-			get
-			{
-				return this.GetTable<VW_T_PPE>();
 			}
 		}
 		
@@ -300,11 +260,35 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<TBL_T_PPE> TBL_T_PPEs
+		public System.Data.Linq.Table<VW_R_EQ_NUMBER> VW_R_EQ_NUMBERs
 		{
 			get
 			{
-				return this.GetTable<TBL_T_PPE>();
+				return this.GetTable<VW_R_EQ_NUMBER>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_R_EQ_NUMBER_HAULING> VW_R_EQ_NUMBER_HAULINGs
+		{
+			get
+			{
+				return this.GetTable<VW_R_EQ_NUMBER_HAULING>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_R_EQ_NUMBER_TRACK> VW_R_EQ_NUMBER_TRACKs
+		{
+			get
+			{
+				return this.GetTable<VW_R_EQ_NUMBER_TRACK>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_R_EQ_NUMBER_WHEEL> VW_R_EQ_NUMBER_WHEELs
+		{
+			get
+			{
+				return this.GetTable<VW_R_EQ_NUMBER_WHEEL>();
 			}
 		}
 		
@@ -313,6 +297,38 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<TBL_H_APPROVAL_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_MAPPING_APPROVALSS> TBL_M_MAPPING_APPROVALSSes
+		{
+			get
+			{
+				return this.GetTable<TBL_M_MAPPING_APPROVALSS>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_T_PPE> VW_T_PPEs
+		{
+			get
+			{
+				return this.GetTable<VW_T_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_T_PPE> TBL_T_PPEs
+		{
+			get
+			{
+				return this.GetTable<TBL_T_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_T_SECHEAD> VW_T_SECHEADs
+		{
+			get
+			{
+				return this.GetTable<VW_T_SECHEAD>();
 			}
 		}
 	}
@@ -2286,123 +2302,6 @@ namespace API_PLANT_PPE.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER")]
-	public partial class VW_R_EQ_NUMBER
-	{
-		
-		private string _EQUIP_NO;
-		
-		private string _EQUIP_GRP_ID;
-		
-		private string _DSTRCT_CODE;
-		
-		private string _EQUIP_LOCATION;
-		
-		private string _EQUIP_CLASS;
-		
-		private string _SERIAL_NUMBER;
-		
-		public VW_R_EQ_NUMBER()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_NO
-		{
-			get
-			{
-				return this._EQUIP_NO;
-			}
-			set
-			{
-				if ((this._EQUIP_NO != value))
-				{
-					this._EQUIP_NO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_GRP_ID
-		{
-			get
-			{
-				return this._EQUIP_GRP_ID;
-			}
-			set
-			{
-				if ((this._EQUIP_GRP_ID != value))
-				{
-					this._EQUIP_GRP_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
-		public string DSTRCT_CODE
-		{
-			get
-			{
-				return this._DSTRCT_CODE;
-			}
-			set
-			{
-				if ((this._DSTRCT_CODE != value))
-				{
-					this._DSTRCT_CODE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_LOCATION", DbType="Char(5) NOT NULL", CanBeNull=false)]
-		public string EQUIP_LOCATION
-		{
-			get
-			{
-				return this._EQUIP_LOCATION;
-			}
-			set
-			{
-				if ((this._EQUIP_LOCATION != value))
-				{
-					this._EQUIP_LOCATION = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="Char(2) NOT NULL", CanBeNull=false)]
-		public string EQUIP_CLASS
-		{
-			get
-			{
-				return this._EQUIP_CLASS;
-			}
-			set
-			{
-				if ((this._EQUIP_CLASS != value))
-				{
-					this._EQUIP_CLASS = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NUMBER", DbType="Char(30) NOT NULL", CanBeNull=false)]
-		public string SERIAL_NUMBER
-		{
-			get
-			{
-				return this._SERIAL_NUMBER;
-			}
-			set
-			{
-				if ((this._SERIAL_NUMBER != value))
-				{
-					this._SERIAL_NUMBER = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_DISTRICT_LOCATION")]
 	public partial class VW_R_DISTRICT_LOCATION
 	{
@@ -3717,195 +3616,6 @@ namespace API_PLANT_PPE.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER_HAULING")]
-	public partial class VW_R_EQ_NUMBER_HAULING
-	{
-		
-		private string _EQUIP_NO;
-		
-		private string _EQUIP_GRP_ID;
-		
-		private string _DSTRCT_CODE;
-		
-		public VW_R_EQ_NUMBER_HAULING()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_NO
-		{
-			get
-			{
-				return this._EQUIP_NO;
-			}
-			set
-			{
-				if ((this._EQUIP_NO != value))
-				{
-					this._EQUIP_NO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_GRP_ID
-		{
-			get
-			{
-				return this._EQUIP_GRP_ID;
-			}
-			set
-			{
-				if ((this._EQUIP_GRP_ID != value))
-				{
-					this._EQUIP_GRP_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
-		public string DSTRCT_CODE
-		{
-			get
-			{
-				return this._DSTRCT_CODE;
-			}
-			set
-			{
-				if ((this._DSTRCT_CODE != value))
-				{
-					this._DSTRCT_CODE = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER_TRACK")]
-	public partial class VW_R_EQ_NUMBER_TRACK
-	{
-		
-		private string _EQUIP_NO;
-		
-		private string _EQUIP_GRP_ID;
-		
-		private string _DSTRCT_CODE;
-		
-		public VW_R_EQ_NUMBER_TRACK()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_NO
-		{
-			get
-			{
-				return this._EQUIP_NO;
-			}
-			set
-			{
-				if ((this._EQUIP_NO != value))
-				{
-					this._EQUIP_NO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_GRP_ID
-		{
-			get
-			{
-				return this._EQUIP_GRP_ID;
-			}
-			set
-			{
-				if ((this._EQUIP_GRP_ID != value))
-				{
-					this._EQUIP_GRP_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
-		public string DSTRCT_CODE
-		{
-			get
-			{
-				return this._DSTRCT_CODE;
-			}
-			set
-			{
-				if ((this._DSTRCT_CODE != value))
-				{
-					this._DSTRCT_CODE = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER_WHEEL")]
-	public partial class VW_R_EQ_NUMBER_WHEEL
-	{
-		
-		private string _EQUIP_NO;
-		
-		private string _EQUIP_GRP_ID;
-		
-		private string _DSTRCT_CODE;
-		
-		public VW_R_EQ_NUMBER_WHEEL()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_NO
-		{
-			get
-			{
-				return this._EQUIP_NO;
-			}
-			set
-			{
-				if ((this._EQUIP_NO != value))
-				{
-					this._EQUIP_NO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
-		public string EQUIP_GRP_ID
-		{
-			get
-			{
-				return this._EQUIP_GRP_ID;
-			}
-			set
-			{
-				if ((this._EQUIP_GRP_ID != value))
-				{
-					this._EQUIP_GRP_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
-		public string DSTRCT_CODE
-		{
-			get
-			{
-				return this._DSTRCT_CODE;
-			}
-			set
-			{
-				if ((this._DSTRCT_CODE != value))
-				{
-					this._DSTRCT_CODE = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_AGREEMENT")]
 	public partial class TBL_M_AGREEMENT : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4012,393 +3722,6 @@ namespace API_PLANT_PPE.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_T_PPE")]
-	public partial class VW_T_PPE
-	{
-		
-		private int _ID;
-		
-		private string _PPE_NO;
-		
-		private System.Nullable<System.DateTime> _DATE;
-		
-		private string _DISTRICT_FROM;
-		
-		private string _DISTRICT_TO;
-		
-		private string _LOC_FROM;
-		
-		private string _LOC_TO;
-		
-		private string _EQUIP_NO;
-		
-		private string _EGI;
-		
-		private string _EQUIP_CLASS;
-		
-		private string _SERIAL_NO;
-		
-		private string _PPE_DESC;
-		
-		private string _POSISI_PPE;
-		
-		private string _STATUS;
-		
-		private System.Nullable<System.DateTime> _CREATED_DATE;
-		
-		private string _CREATED_BY;
-		
-		private string _NAME;
-		
-		private System.Nullable<System.DateTime> _UPDATED_DATE;
-		
-		private string _UPDATED_BY;
-		
-		private string _REMARKS;
-		
-		private string _PATH_ATTACHMENT;
-		
-		public VW_T_PPE()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this._ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_NO", DbType="VarChar(200)")]
-		public string PPE_NO
-		{
-			get
-			{
-				return this._PPE_NO;
-			}
-			set
-			{
-				if ((this._PPE_NO != value))
-				{
-					this._PPE_NO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE", DbType="Date")]
-		public System.Nullable<System.DateTime> DATE
-		{
-			get
-			{
-				return this._DATE;
-			}
-			set
-			{
-				if ((this._DATE != value))
-				{
-					this._DATE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_FROM", DbType="VarChar(50)")]
-		public string DISTRICT_FROM
-		{
-			get
-			{
-				return this._DISTRICT_FROM;
-			}
-			set
-			{
-				if ((this._DISTRICT_FROM != value))
-				{
-					this._DISTRICT_FROM = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_TO", DbType="VarChar(50)")]
-		public string DISTRICT_TO
-		{
-			get
-			{
-				return this._DISTRICT_TO;
-			}
-			set
-			{
-				if ((this._DISTRICT_TO != value))
-				{
-					this._DISTRICT_TO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_FROM", DbType="VarChar(50)")]
-		public string LOC_FROM
-		{
-			get
-			{
-				return this._LOC_FROM;
-			}
-			set
-			{
-				if ((this._LOC_FROM != value))
-				{
-					this._LOC_FROM = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_TO", DbType="VarChar(50)")]
-		public string LOC_TO
-		{
-			get
-			{
-				return this._LOC_TO;
-			}
-			set
-			{
-				if ((this._LOC_TO != value))
-				{
-					this._LOC_TO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="VarChar(50)")]
-		public string EQUIP_NO
-		{
-			get
-			{
-				return this._EQUIP_NO;
-			}
-			set
-			{
-				if ((this._EQUIP_NO != value))
-				{
-					this._EQUIP_NO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGI", DbType="VarChar(20)")]
-		public string EGI
-		{
-			get
-			{
-				return this._EGI;
-			}
-			set
-			{
-				if ((this._EGI != value))
-				{
-					this._EGI = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="VarChar(10)")]
-		public string EQUIP_CLASS
-		{
-			get
-			{
-				return this._EQUIP_CLASS;
-			}
-			set
-			{
-				if ((this._EQUIP_CLASS != value))
-				{
-					this._EQUIP_CLASS = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NO", DbType="VarChar(50)")]
-		public string SERIAL_NO
-		{
-			get
-			{
-				return this._SERIAL_NO;
-			}
-			set
-			{
-				if ((this._SERIAL_NO != value))
-				{
-					this._SERIAL_NO = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_DESC", DbType="VarChar(200)")]
-		public string PPE_DESC
-		{
-			get
-			{
-				return this._PPE_DESC;
-			}
-			set
-			{
-				if ((this._PPE_DESC != value))
-				{
-					this._PPE_DESC = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSISI_PPE", DbType="VarChar(100)")]
-		public string POSISI_PPE
-		{
-			get
-			{
-				return this._POSISI_PPE;
-			}
-			set
-			{
-				if ((this._POSISI_PPE != value))
-				{
-					this._POSISI_PPE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="VarChar(50)")]
-		public string STATUS
-		{
-			get
-			{
-				return this._STATUS;
-			}
-			set
-			{
-				if ((this._STATUS != value))
-				{
-					this._STATUS = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_DATE", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CREATED_DATE
-		{
-			get
-			{
-				return this._CREATED_DATE;
-			}
-			set
-			{
-				if ((this._CREATED_DATE != value))
-				{
-					this._CREATED_DATE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="VarChar(50)")]
-		public string CREATED_BY
-		{
-			get
-			{
-				return this._CREATED_BY;
-			}
-			set
-			{
-				if ((this._CREATED_BY != value))
-				{
-					this._CREATED_BY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="VarChar(61)")]
-		public string NAME
-		{
-			get
-			{
-				return this._NAME;
-			}
-			set
-			{
-				if ((this._NAME != value))
-				{
-					this._NAME = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="Date")]
-		public System.Nullable<System.DateTime> UPDATED_DATE
-		{
-			get
-			{
-				return this._UPDATED_DATE;
-			}
-			set
-			{
-				if ((this._UPDATED_DATE != value))
-				{
-					this._UPDATED_DATE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_BY", DbType="VarChar(50)")]
-		public string UPDATED_BY
-		{
-			get
-			{
-				return this._UPDATED_BY;
-			}
-			set
-			{
-				if ((this._UPDATED_BY != value))
-				{
-					this._UPDATED_BY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REMARKS", DbType="VarChar(MAX)")]
-		public string REMARKS
-		{
-			get
-			{
-				return this._REMARKS;
-			}
-			set
-			{
-				if ((this._REMARKS != value))
-				{
-					this._REMARKS = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH_ATTACHMENT", DbType="VarChar(200)")]
-		public string PATH_ATTACHMENT
-		{
-			get
-			{
-				return this._PATH_ATTACHMENT;
-			}
-			set
-			{
-				if ((this._PATH_ATTACHMENT != value))
-				{
-					this._PATH_ATTACHMENT = value;
-				}
 			}
 		}
 	}
@@ -5283,6 +4606,1340 @@ namespace API_PLANT_PPE.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER")]
+	public partial class VW_R_EQ_NUMBER
+	{
+		
+		private string _EQUIP_NO;
+		
+		private string _EQUIP_GRP_ID;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIP_LOCATION;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NUMBER;
+		
+		private string _DESCRIPTION;
+		
+		public VW_R_EQ_NUMBER()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_GRP_ID
+		{
+			get
+			{
+				return this._EQUIP_GRP_ID;
+			}
+			set
+			{
+				if ((this._EQUIP_GRP_ID != value))
+				{
+					this._EQUIP_GRP_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_LOCATION", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string EQUIP_LOCATION
+		{
+			get
+			{
+				return this._EQUIP_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIP_LOCATION != value))
+				{
+					this._EQUIP_LOCATION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this._EQUIP_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NUMBER", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		public string SERIAL_NUMBER
+		{
+			get
+			{
+				return this._SERIAL_NUMBER;
+			}
+			set
+			{
+				if ((this._SERIAL_NUMBER != value))
+				{
+					this._SERIAL_NUMBER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPTION", DbType="Char(40) NOT NULL", CanBeNull=false)]
+		public string DESCRIPTION
+		{
+			get
+			{
+				return this._DESCRIPTION;
+			}
+			set
+			{
+				if ((this._DESCRIPTION != value))
+				{
+					this._DESCRIPTION = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER_HAULING")]
+	public partial class VW_R_EQ_NUMBER_HAULING
+	{
+		
+		private string _EQUIP_NO;
+		
+		private string _EQUIP_GRP_ID;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIP_LOCATION;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NUMBER;
+		
+		private string _DESCRIPTION;
+		
+		public VW_R_EQ_NUMBER_HAULING()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_GRP_ID
+		{
+			get
+			{
+				return this._EQUIP_GRP_ID;
+			}
+			set
+			{
+				if ((this._EQUIP_GRP_ID != value))
+				{
+					this._EQUIP_GRP_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_LOCATION", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string EQUIP_LOCATION
+		{
+			get
+			{
+				return this._EQUIP_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIP_LOCATION != value))
+				{
+					this._EQUIP_LOCATION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this._EQUIP_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NUMBER", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		public string SERIAL_NUMBER
+		{
+			get
+			{
+				return this._SERIAL_NUMBER;
+			}
+			set
+			{
+				if ((this._SERIAL_NUMBER != value))
+				{
+					this._SERIAL_NUMBER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPTION", DbType="Char(40) NOT NULL", CanBeNull=false)]
+		public string DESCRIPTION
+		{
+			get
+			{
+				return this._DESCRIPTION;
+			}
+			set
+			{
+				if ((this._DESCRIPTION != value))
+				{
+					this._DESCRIPTION = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER_TRACK")]
+	public partial class VW_R_EQ_NUMBER_TRACK
+	{
+		
+		private string _EQUIP_NO;
+		
+		private string _EQUIP_GRP_ID;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIP_LOCATION;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NUMBER;
+		
+		private string _DESCRIPTION;
+		
+		public VW_R_EQ_NUMBER_TRACK()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_GRP_ID
+		{
+			get
+			{
+				return this._EQUIP_GRP_ID;
+			}
+			set
+			{
+				if ((this._EQUIP_GRP_ID != value))
+				{
+					this._EQUIP_GRP_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_LOCATION", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string EQUIP_LOCATION
+		{
+			get
+			{
+				return this._EQUIP_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIP_LOCATION != value))
+				{
+					this._EQUIP_LOCATION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this._EQUIP_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NUMBER", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		public string SERIAL_NUMBER
+		{
+			get
+			{
+				return this._SERIAL_NUMBER;
+			}
+			set
+			{
+				if ((this._SERIAL_NUMBER != value))
+				{
+					this._SERIAL_NUMBER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPTION", DbType="Char(40) NOT NULL", CanBeNull=false)]
+		public string DESCRIPTION
+		{
+			get
+			{
+				return this._DESCRIPTION;
+			}
+			set
+			{
+				if ((this._DESCRIPTION != value))
+				{
+					this._DESCRIPTION = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_EQ_NUMBER_WHEEL")]
+	public partial class VW_R_EQ_NUMBER_WHEEL
+	{
+		
+		private string _EQUIP_NO;
+		
+		private string _EQUIP_GRP_ID;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIP_LOCATION;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NUMBER;
+		
+		private string _DESCRIPTION;
+		
+		public VW_R_EQ_NUMBER_WHEEL()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_GRP_ID", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_GRP_ID
+		{
+			get
+			{
+				return this._EQUIP_GRP_ID;
+			}
+			set
+			{
+				if ((this._EQUIP_GRP_ID != value))
+				{
+					this._EQUIP_GRP_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_LOCATION", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string EQUIP_LOCATION
+		{
+			get
+			{
+				return this._EQUIP_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIP_LOCATION != value))
+				{
+					this._EQUIP_LOCATION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this._EQUIP_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NUMBER", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		public string SERIAL_NUMBER
+		{
+			get
+			{
+				return this._SERIAL_NUMBER;
+			}
+			set
+			{
+				if ((this._SERIAL_NUMBER != value))
+				{
+					this._SERIAL_NUMBER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPTION", DbType="Char(40) NOT NULL", CanBeNull=false)]
+		public string DESCRIPTION
+		{
+			get
+			{
+				return this._DESCRIPTION;
+			}
+			set
+			{
+				if ((this._DESCRIPTION != value))
+				{
+					this._DESCRIPTION = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_H_APPROVAL_PPE")]
+	public partial class TBL_H_APPROVAL_PPE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Ppe_NO;
+		
+		private string _Equip_No;
+		
+		private string _Posisi_Ppe;
+		
+		private System.Nullable<System.DateTime> _Approved_Date;
+		
+		private string _Approved_By;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnPpe_NOChanging(string value);
+    partial void OnPpe_NOChanged();
+    partial void OnEquip_NoChanging(string value);
+    partial void OnEquip_NoChanged();
+    partial void OnPosisi_PpeChanging(string value);
+    partial void OnPosisi_PpeChanged();
+    partial void OnApproved_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnApproved_DateChanged();
+    partial void OnApproved_ByChanging(string value);
+    partial void OnApproved_ByChanged();
+    #endregion
+		
+		public TBL_H_APPROVAL_PPE()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ppe_NO", DbType="VarChar(200)")]
+		public string Ppe_NO
+		{
+			get
+			{
+				return this._Ppe_NO;
+			}
+			set
+			{
+				if ((this._Ppe_NO != value))
+				{
+					this.OnPpe_NOChanging(value);
+					this.SendPropertyChanging();
+					this._Ppe_NO = value;
+					this.SendPropertyChanged("Ppe_NO");
+					this.OnPpe_NOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Equip_No", DbType="VarChar(100)")]
+		public string Equip_No
+		{
+			get
+			{
+				return this._Equip_No;
+			}
+			set
+			{
+				if ((this._Equip_No != value))
+				{
+					this.OnEquip_NoChanging(value);
+					this.SendPropertyChanging();
+					this._Equip_No = value;
+					this.SendPropertyChanged("Equip_No");
+					this.OnEquip_NoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Posisi_Ppe", DbType="VarChar(150)")]
+		public string Posisi_Ppe
+		{
+			get
+			{
+				return this._Posisi_Ppe;
+			}
+			set
+			{
+				if ((this._Posisi_Ppe != value))
+				{
+					this.OnPosisi_PpeChanging(value);
+					this.SendPropertyChanging();
+					this._Posisi_Ppe = value;
+					this.SendPropertyChanged("Posisi_Ppe");
+					this.OnPosisi_PpeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Approved_Date
+		{
+			get
+			{
+				return this._Approved_Date;
+			}
+			set
+			{
+				if ((this._Approved_Date != value))
+				{
+					this.OnApproved_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Approved_Date = value;
+					this.SendPropertyChanged("Approved_Date");
+					this.OnApproved_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_By", DbType="VarChar(50)")]
+		public string Approved_By
+		{
+			get
+			{
+				return this._Approved_By;
+			}
+			set
+			{
+				if ((this._Approved_By != value))
+				{
+					this.OnApproved_ByChanging(value);
+					this.SendPropertyChanging();
+					this._Approved_By = value;
+					this.SendPropertyChanged("Approved_By");
+					this.OnApproved_ByChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_MAPPING_APPROVALSS")]
+	public partial class TBL_M_MAPPING_APPROVALSS
+	{
+		
+		private System.Nullable<int> _APPROVAL_ACTION;
+		
+		private System.Nullable<int> _APPROVAL_ORDER;
+		
+		private string _APPROVAL_FROM;
+		
+		private string _APPROVAL_TO;
+		
+		private string _CURR_POSITION_ID;
+		
+		private string _NEXT_POSITION_ID;
+		
+		private string _APPROVAL_STATUS;
+		
+		private string _CURRENT_STATUS;
+		
+		public TBL_M_MAPPING_APPROVALSS()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ACTION", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ACTION
+		{
+			get
+			{
+				return this._APPROVAL_ACTION;
+			}
+			set
+			{
+				if ((this._APPROVAL_ACTION != value))
+				{
+					this._APPROVAL_ACTION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ORDER", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ORDER
+		{
+			get
+			{
+				return this._APPROVAL_ORDER;
+			}
+			set
+			{
+				if ((this._APPROVAL_ORDER != value))
+				{
+					this._APPROVAL_ORDER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_FROM", DbType="VarChar(10)")]
+		public string APPROVAL_FROM
+		{
+			get
+			{
+				return this._APPROVAL_FROM;
+			}
+			set
+			{
+				if ((this._APPROVAL_FROM != value))
+				{
+					this._APPROVAL_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_TO", DbType="VarChar(10)")]
+		public string APPROVAL_TO
+		{
+			get
+			{
+				return this._APPROVAL_TO;
+			}
+			set
+			{
+				if ((this._APPROVAL_TO != value))
+				{
+					this._APPROVAL_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURR_POSITION_ID", DbType="VarChar(20)")]
+		public string CURR_POSITION_ID
+		{
+			get
+			{
+				return this._CURR_POSITION_ID;
+			}
+			set
+			{
+				if ((this._CURR_POSITION_ID != value))
+				{
+					this._CURR_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEXT_POSITION_ID", DbType="VarChar(20)")]
+		public string NEXT_POSITION_ID
+		{
+			get
+			{
+				return this._NEXT_POSITION_ID;
+			}
+			set
+			{
+				if ((this._NEXT_POSITION_ID != value))
+				{
+					this._NEXT_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_STATUS", DbType="VarChar(50)")]
+		public string APPROVAL_STATUS
+		{
+			get
+			{
+				return this._APPROVAL_STATUS;
+			}
+			set
+			{
+				if ((this._APPROVAL_STATUS != value))
+				{
+					this._APPROVAL_STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURRENT_STATUS", DbType="VarChar(50)")]
+		public string CURRENT_STATUS
+		{
+			get
+			{
+				return this._CURRENT_STATUS;
+			}
+			set
+			{
+				if ((this._CURRENT_STATUS != value))
+				{
+					this._CURRENT_STATUS = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_T_PPE")]
+	public partial class VW_T_PPE
+	{
+		
+		private int _ID;
+		
+		private string _PPE_NO;
+		
+		private System.Nullable<int> _APPROVAL_ORDER;
+		
+		private string _CURR_POSITION_ID;
+		
+		private string _NEXT_POSITION_ID;
+		
+		private System.Nullable<System.DateTime> _DATE;
+		
+		private string _DISTRICT_FROM;
+		
+		private string _DISTRICT_TO;
+		
+		private string _LOC_FROM;
+		
+		private string _LOC_TO;
+		
+		private string _EQUIP_NO;
+		
+		private string _EGI;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NO;
+		
+		private string _PPE_DESC;
+		
+		private string _POSISI_PPE;
+		
+		private string _STATUS;
+		
+		private System.Nullable<System.DateTime> _CREATED_DATE;
+		
+		private string _CREATED_BY;
+		
+		private string _NAME;
+		
+		private System.Nullable<System.DateTime> _UPDATED_DATE;
+		
+		private string _UPDATED_BY;
+		
+		private string _REMARKS;
+		
+		private string _PATH_ATTACHMENT;
+		
+		private string _UPLOAD_FORM_CAAB;
+		
+		public VW_T_PPE()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_NO", DbType="VarChar(200)")]
+		public string PPE_NO
+		{
+			get
+			{
+				return this._PPE_NO;
+			}
+			set
+			{
+				if ((this._PPE_NO != value))
+				{
+					this._PPE_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ORDER", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ORDER
+		{
+			get
+			{
+				return this._APPROVAL_ORDER;
+			}
+			set
+			{
+				if ((this._APPROVAL_ORDER != value))
+				{
+					this._APPROVAL_ORDER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURR_POSITION_ID", DbType="VarChar(20)")]
+		public string CURR_POSITION_ID
+		{
+			get
+			{
+				return this._CURR_POSITION_ID;
+			}
+			set
+			{
+				if ((this._CURR_POSITION_ID != value))
+				{
+					this._CURR_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEXT_POSITION_ID", DbType="VarChar(20)")]
+		public string NEXT_POSITION_ID
+		{
+			get
+			{
+				return this._NEXT_POSITION_ID;
+			}
+			set
+			{
+				if ((this._NEXT_POSITION_ID != value))
+				{
+					this._NEXT_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> DATE
+		{
+			get
+			{
+				return this._DATE;
+			}
+			set
+			{
+				if ((this._DATE != value))
+				{
+					this._DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_FROM", DbType="VarChar(50)")]
+		public string DISTRICT_FROM
+		{
+			get
+			{
+				return this._DISTRICT_FROM;
+			}
+			set
+			{
+				if ((this._DISTRICT_FROM != value))
+				{
+					this._DISTRICT_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_TO", DbType="VarChar(50)")]
+		public string DISTRICT_TO
+		{
+			get
+			{
+				return this._DISTRICT_TO;
+			}
+			set
+			{
+				if ((this._DISTRICT_TO != value))
+				{
+					this._DISTRICT_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_FROM", DbType="VarChar(50)")]
+		public string LOC_FROM
+		{
+			get
+			{
+				return this._LOC_FROM;
+			}
+			set
+			{
+				if ((this._LOC_FROM != value))
+				{
+					this._LOC_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_TO", DbType="VarChar(50)")]
+		public string LOC_TO
+		{
+			get
+			{
+				return this._LOC_TO;
+			}
+			set
+			{
+				if ((this._LOC_TO != value))
+				{
+					this._LOC_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="VarChar(50)")]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGI", DbType="VarChar(20)")]
+		public string EGI
+		{
+			get
+			{
+				return this._EGI;
+			}
+			set
+			{
+				if ((this._EGI != value))
+				{
+					this._EGI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="VarChar(10)")]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this._EQUIP_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NO", DbType="VarChar(50)")]
+		public string SERIAL_NO
+		{
+			get
+			{
+				return this._SERIAL_NO;
+			}
+			set
+			{
+				if ((this._SERIAL_NO != value))
+				{
+					this._SERIAL_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_DESC", DbType="VarChar(200)")]
+		public string PPE_DESC
+		{
+			get
+			{
+				return this._PPE_DESC;
+			}
+			set
+			{
+				if ((this._PPE_DESC != value))
+				{
+					this._PPE_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSISI_PPE", DbType="VarChar(100)")]
+		public string POSISI_PPE
+		{
+			get
+			{
+				return this._POSISI_PPE;
+			}
+			set
+			{
+				if ((this._POSISI_PPE != value))
+				{
+					this._POSISI_PPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="VarChar(50)")]
+		public string STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this._STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATED_DATE
+		{
+			get
+			{
+				return this._CREATED_DATE;
+			}
+			set
+			{
+				if ((this._CREATED_DATE != value))
+				{
+					this._CREATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="VarChar(50)")]
+		public string CREATED_BY
+		{
+			get
+			{
+				return this._CREATED_BY;
+			}
+			set
+			{
+				if ((this._CREATED_BY != value))
+				{
+					this._CREATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="VarChar(61)")]
+		public string NAME
+		{
+			get
+			{
+				return this._NAME;
+			}
+			set
+			{
+				if ((this._NAME != value))
+				{
+					this._NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> UPDATED_DATE
+		{
+			get
+			{
+				return this._UPDATED_DATE;
+			}
+			set
+			{
+				if ((this._UPDATED_DATE != value))
+				{
+					this._UPDATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_BY", DbType="VarChar(50)")]
+		public string UPDATED_BY
+		{
+			get
+			{
+				return this._UPDATED_BY;
+			}
+			set
+			{
+				if ((this._UPDATED_BY != value))
+				{
+					this._UPDATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REMARKS", DbType="VarChar(MAX)")]
+		public string REMARKS
+		{
+			get
+			{
+				return this._REMARKS;
+			}
+			set
+			{
+				if ((this._REMARKS != value))
+				{
+					this._REMARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH_ATTACHMENT", DbType="VarChar(200)")]
+		public string PATH_ATTACHMENT
+		{
+			get
+			{
+				return this._PATH_ATTACHMENT;
+			}
+			set
+			{
+				if ((this._PATH_ATTACHMENT != value))
+				{
+					this._PATH_ATTACHMENT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPLOAD_FORM_CAAB", DbType="VarChar(200)")]
+		public string UPLOAD_FORM_CAAB
+		{
+			get
+			{
+				return this._UPLOAD_FORM_CAAB;
+			}
+			set
+			{
+				if ((this._UPLOAD_FORM_CAAB != value))
+				{
+					this._UPLOAD_FORM_CAAB = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_T_PPE")]
 	public partial class TBL_T_PPE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -5290,6 +5947,8 @@ namespace API_PLANT_PPE.Models
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
+		
+		private System.Nullable<int> _APPROVAL_ORDER;
 		
 		private string _PPE_NO;
 		
@@ -5321,6 +5980,8 @@ namespace API_PLANT_PPE.Models
 		
 		private string _CREATED_BY;
 		
+		private string _CREATED_POS_BY;
+		
 		private System.Nullable<System.DateTime> _UPDATED_DATE;
 		
 		private string _UPDATED_BY;
@@ -5337,6 +5998,8 @@ namespace API_PLANT_PPE.Models
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
+    partial void OnAPPROVAL_ORDERChanging(System.Nullable<int> value);
+    partial void OnAPPROVAL_ORDERChanged();
     partial void OnPPE_NOChanging(string value);
     partial void OnPPE_NOChanged();
     partial void OnDATEChanging(System.Nullable<System.DateTime> value);
@@ -5367,6 +6030,8 @@ namespace API_PLANT_PPE.Models
     partial void OnCREATED_DATEChanged();
     partial void OnCREATED_BYChanging(string value);
     partial void OnCREATED_BYChanged();
+    partial void OnCREATED_POS_BYChanging(string value);
+    partial void OnCREATED_POS_BYChanged();
     partial void OnUPDATED_DATEChanging(System.Nullable<System.DateTime> value);
     partial void OnUPDATED_DATEChanged();
     partial void OnUPDATED_BYChanging(string value);
@@ -5400,6 +6065,26 @@ namespace API_PLANT_PPE.Models
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ORDER", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ORDER
+		{
+			get
+			{
+				return this._APPROVAL_ORDER;
+			}
+			set
+			{
+				if ((this._APPROVAL_ORDER != value))
+				{
+					this.OnAPPROVAL_ORDERChanging(value);
+					this.SendPropertyChanging();
+					this._APPROVAL_ORDER = value;
+					this.SendPropertyChanged("APPROVAL_ORDER");
+					this.OnAPPROVAL_ORDERChanged();
 				}
 			}
 		}
@@ -5704,6 +6389,26 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_POS_BY", DbType="VarChar(50)")]
+		public string CREATED_POS_BY
+		{
+			get
+			{
+				return this._CREATED_POS_BY;
+			}
+			set
+			{
+				if ((this._CREATED_POS_BY != value))
+				{
+					this.OnCREATED_POS_BYChanging(value);
+					this.SendPropertyChanging();
+					this._CREATED_POS_BY = value;
+					this.SendPropertyChanged("CREATED_POS_BY");
+					this.OnCREATED_POS_BYChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="Date")]
 		public System.Nullable<System.DateTime> UPDATED_DATE
 		{
@@ -5825,48 +6530,69 @@ namespace API_PLANT_PPE.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_H_APPROVAL_PPE")]
-	public partial class TBL_H_APPROVAL_PPE : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_T_SECHEAD")]
+	public partial class VW_T_SECHEAD
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
 		
-		private string _Ppe_NO;
+		private string _PPE_NO;
 		
-		private string _Equip_No;
+		private System.Nullable<int> _APPROVAL_ORDER;
 		
-		private string _Posisi_Ppe;
+		private string _CURR_POSITION_ID;
 		
-		private System.Nullable<System.DateTime> _Approved_Date;
+		private string _NEXT_POSITION_ID;
 		
-		private string _Approved_By;
+		private System.Nullable<System.DateTime> _DATE;
 		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnPpe_NOChanging(string value);
-    partial void OnPpe_NOChanged();
-    partial void OnEquip_NoChanging(string value);
-    partial void OnEquip_NoChanged();
-    partial void OnPosisi_PpeChanging(string value);
-    partial void OnPosisi_PpeChanged();
-    partial void OnApproved_DateChanging(System.Nullable<System.DateTime> value);
-    partial void OnApproved_DateChanged();
-    partial void OnApproved_ByChanging(string value);
-    partial void OnApproved_ByChanged();
-    #endregion
+		private string _DISTRICT_FROM;
 		
-		public TBL_H_APPROVAL_PPE()
+		private string _DISTRICT_TO;
+		
+		private string _LOC_FROM;
+		
+		private string _LOC_TO;
+		
+		private string _EQUIP_NO;
+		
+		private string _EGI;
+		
+		private string _EQUIP_CLASS;
+		
+		private string _SERIAL_NO;
+		
+		private string _PPE_DESC;
+		
+		private string _POSISI_PPE;
+		
+		private string _STATUS;
+		
+		private System.Nullable<System.DateTime> _CREATED_DATE;
+		
+		private string _CREATED_BY;
+		
+		private string _CREATED_POS_BY;
+		
+		private string _NAME;
+		
+		private System.Nullable<System.DateTime> _UPDATED_DATE;
+		
+		private string _UPDATED_BY;
+		
+		private string _UPDATED_NAME;
+		
+		private string _REMARKS;
+		
+		private string _PATH_ATTACHMENT;
+		
+		private string _UPLOAD_FORM_CAAB;
+		
+		public VW_T_SECHEAD()
 		{
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
 		public int ID
 		{
 			get
@@ -5877,132 +6603,424 @@ namespace API_PLANT_PPE.Models
 			{
 				if ((this._ID != value))
 				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
 					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ppe_NO", DbType="VarChar(200)")]
-		public string Ppe_NO
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_NO", DbType="VarChar(200)")]
+		public string PPE_NO
 		{
 			get
 			{
-				return this._Ppe_NO;
+				return this._PPE_NO;
 			}
 			set
 			{
-				if ((this._Ppe_NO != value))
+				if ((this._PPE_NO != value))
 				{
-					this.OnPpe_NOChanging(value);
-					this.SendPropertyChanging();
-					this._Ppe_NO = value;
-					this.SendPropertyChanged("Ppe_NO");
-					this.OnPpe_NOChanged();
+					this._PPE_NO = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Equip_No", DbType="VarChar(100)")]
-		public string Equip_No
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ORDER", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ORDER
 		{
 			get
 			{
-				return this._Equip_No;
+				return this._APPROVAL_ORDER;
 			}
 			set
 			{
-				if ((this._Equip_No != value))
+				if ((this._APPROVAL_ORDER != value))
 				{
-					this.OnEquip_NoChanging(value);
-					this.SendPropertyChanging();
-					this._Equip_No = value;
-					this.SendPropertyChanged("Equip_No");
-					this.OnEquip_NoChanged();
+					this._APPROVAL_ORDER = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Posisi_Ppe", DbType="VarChar(150)")]
-		public string Posisi_Ppe
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURR_POSITION_ID", DbType="VarChar(20)")]
+		public string CURR_POSITION_ID
 		{
 			get
 			{
-				return this._Posisi_Ppe;
+				return this._CURR_POSITION_ID;
 			}
 			set
 			{
-				if ((this._Posisi_Ppe != value))
+				if ((this._CURR_POSITION_ID != value))
 				{
-					this.OnPosisi_PpeChanging(value);
-					this.SendPropertyChanging();
-					this._Posisi_Ppe = value;
-					this.SendPropertyChanged("Posisi_Ppe");
-					this.OnPosisi_PpeChanged();
+					this._CURR_POSITION_ID = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Approved_Date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEXT_POSITION_ID", DbType="VarChar(20)")]
+		public string NEXT_POSITION_ID
 		{
 			get
 			{
-				return this._Approved_Date;
+				return this._NEXT_POSITION_ID;
 			}
 			set
 			{
-				if ((this._Approved_Date != value))
+				if ((this._NEXT_POSITION_ID != value))
 				{
-					this.OnApproved_DateChanging(value);
-					this.SendPropertyChanging();
-					this._Approved_Date = value;
-					this.SendPropertyChanged("Approved_Date");
-					this.OnApproved_DateChanged();
+					this._NEXT_POSITION_ID = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_By", DbType="VarChar(50)")]
-		public string Approved_By
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> DATE
 		{
 			get
 			{
-				return this._Approved_By;
+				return this._DATE;
 			}
 			set
 			{
-				if ((this._Approved_By != value))
+				if ((this._DATE != value))
 				{
-					this.OnApproved_ByChanging(value);
-					this.SendPropertyChanging();
-					this._Approved_By = value;
-					this.SendPropertyChanged("Approved_By");
-					this.OnApproved_ByChanged();
+					this._DATE = value;
 				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_FROM", DbType="VarChar(50)")]
+		public string DISTRICT_FROM
 		{
-			if ((this.PropertyChanging != null))
+			get
 			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
+				return this._DISTRICT_FROM;
+			}
+			set
+			{
+				if ((this._DISTRICT_FROM != value))
+				{
+					this._DISTRICT_FROM = value;
+				}
 			}
 		}
 		
-		protected virtual void SendPropertyChanged(String propertyName)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DISTRICT_TO", DbType="VarChar(50)")]
+		public string DISTRICT_TO
 		{
-			if ((this.PropertyChanged != null))
+			get
 			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this._DISTRICT_TO;
+			}
+			set
+			{
+				if ((this._DISTRICT_TO != value))
+				{
+					this._DISTRICT_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_FROM", DbType="VarChar(50)")]
+		public string LOC_FROM
+		{
+			get
+			{
+				return this._LOC_FROM;
+			}
+			set
+			{
+				if ((this._LOC_FROM != value))
+				{
+					this._LOC_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOC_TO", DbType="VarChar(50)")]
+		public string LOC_TO
+		{
+			get
+			{
+				return this._LOC_TO;
+			}
+			set
+			{
+				if ((this._LOC_TO != value))
+				{
+					this._LOC_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="VarChar(50)")]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGI", DbType="VarChar(20)")]
+		public string EGI
+		{
+			get
+			{
+				return this._EGI;
+			}
+			set
+			{
+				if ((this._EGI != value))
+				{
+					this._EGI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_CLASS", DbType="VarChar(10)")]
+		public string EQUIP_CLASS
+		{
+			get
+			{
+				return this._EQUIP_CLASS;
+			}
+			set
+			{
+				if ((this._EQUIP_CLASS != value))
+				{
+					this._EQUIP_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SERIAL_NO", DbType="VarChar(50)")]
+		public string SERIAL_NO
+		{
+			get
+			{
+				return this._SERIAL_NO;
+			}
+			set
+			{
+				if ((this._SERIAL_NO != value))
+				{
+					this._SERIAL_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PPE_DESC", DbType="VarChar(200)")]
+		public string PPE_DESC
+		{
+			get
+			{
+				return this._PPE_DESC;
+			}
+			set
+			{
+				if ((this._PPE_DESC != value))
+				{
+					this._PPE_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSISI_PPE", DbType="VarChar(100)")]
+		public string POSISI_PPE
+		{
+			get
+			{
+				return this._POSISI_PPE;
+			}
+			set
+			{
+				if ((this._POSISI_PPE != value))
+				{
+					this._POSISI_PPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="VarChar(50)")]
+		public string STATUS
+		{
+			get
+			{
+				return this._STATUS;
+			}
+			set
+			{
+				if ((this._STATUS != value))
+				{
+					this._STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_DATE", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CREATED_DATE
+		{
+			get
+			{
+				return this._CREATED_DATE;
+			}
+			set
+			{
+				if ((this._CREATED_DATE != value))
+				{
+					this._CREATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_BY", DbType="VarChar(50)")]
+		public string CREATED_BY
+		{
+			get
+			{
+				return this._CREATED_BY;
+			}
+			set
+			{
+				if ((this._CREATED_BY != value))
+				{
+					this._CREATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATED_POS_BY", DbType="VarChar(50)")]
+		public string CREATED_POS_BY
+		{
+			get
+			{
+				return this._CREATED_POS_BY;
+			}
+			set
+			{
+				if ((this._CREATED_POS_BY != value))
+				{
+					this._CREATED_POS_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="VarChar(61)")]
+		public string NAME
+		{
+			get
+			{
+				return this._NAME;
+			}
+			set
+			{
+				if ((this._NAME != value))
+				{
+					this._NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_DATE", DbType="Date")]
+		public System.Nullable<System.DateTime> UPDATED_DATE
+		{
+			get
+			{
+				return this._UPDATED_DATE;
+			}
+			set
+			{
+				if ((this._UPDATED_DATE != value))
+				{
+					this._UPDATED_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_BY", DbType="VarChar(50)")]
+		public string UPDATED_BY
+		{
+			get
+			{
+				return this._UPDATED_BY;
+			}
+			set
+			{
+				if ((this._UPDATED_BY != value))
+				{
+					this._UPDATED_BY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPDATED_NAME", DbType="VarChar(61)")]
+		public string UPDATED_NAME
+		{
+			get
+			{
+				return this._UPDATED_NAME;
+			}
+			set
+			{
+				if ((this._UPDATED_NAME != value))
+				{
+					this._UPDATED_NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REMARKS", DbType="VarChar(MAX)")]
+		public string REMARKS
+		{
+			get
+			{
+				return this._REMARKS;
+			}
+			set
+			{
+				if ((this._REMARKS != value))
+				{
+					this._REMARKS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PATH_ATTACHMENT", DbType="VarChar(200)")]
+		public string PATH_ATTACHMENT
+		{
+			get
+			{
+				return this._PATH_ATTACHMENT;
+			}
+			set
+			{
+				if ((this._PATH_ATTACHMENT != value))
+				{
+					this._PATH_ATTACHMENT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPLOAD_FORM_CAAB", DbType="VarChar(200)")]
+		public string UPLOAD_FORM_CAAB
+		{
+			get
+			{
+				return this._UPLOAD_FORM_CAAB;
+			}
+			set
+			{
+				if ((this._UPLOAD_FORM_CAAB != value))
+				{
+					this._UPLOAD_FORM_CAAB = value;
+				}
 			}
 		}
 	}

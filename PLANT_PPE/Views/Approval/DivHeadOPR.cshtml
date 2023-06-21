@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Division Head";
-    ViewBag.JS = "/Scripts/Page/ApprovalDivHead.js";
+    ViewBag.JS = "/Scripts/Page/ApprovalDivHeadOPR.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,15 +11,15 @@
 <div class="block block-rounded">
     <div class="block-header block-header-default">
         <h3 class="block-title">
-            Approval Engineering GM <small>All list Approval ENG GM</small>
+            Approval Opeartor GM <small>All list Approval OPR GM</small>
         </h3>
     </div>
     <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_ppe_eng">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_ppe_opr">
             <thead class="text-center bg-primary text-white">
                 <tr>
                     @*<th>NO</th>*@
-                    <th><input type="checkbox" id="checkAll"></th>
+                    <th><input type="checkbox" id="checkAll2"></th>
                     <th>PPE NUMBER</th>
                     <th>EGI</th>
                     <th>EQP NUMBER</th>
@@ -35,34 +35,6 @@
         </table>
     </div>
 </div>
-
-<!--<div class="block block-rounded">
-    <div class="block-header block-header-default">
-        <h3 class="block-title">
-            Approval Opeartor GM <small>All list Approval OPR GM</small>
-        </h3>
-    </div>
-    <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_ppe_opr">
-            <thead class="text-center bg-primary text-white">
-                <tr>-->
-                    @*<th>NO</th>*@
-                    <!--<th><input type="checkbox" id="checkAll2"></th>
-                    <th>PPE NUMBER</th>
-                    <th>EGI</th>
-                    <th>EQP NUMBER</th>
-                    <th>FROM DISTRICT</th>
-                    <th>TO DISTRICT</th>
-                    <th>CREATED DATE</th>
-                    <th>STATUS</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</div>-->
 
 <div class="block block-rounded block-link-shadow">
     <div class="block-header">
@@ -80,12 +52,12 @@
                     <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="submitApproval(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-sm btn-success" value="DIVISION HEAD ENG APPROVED" onclick="submitApproval(this.value)">
+                    @*<button type="submit" class="btn btn-sm btn-success" value="DIVISION HEAD ENG APPROVED" onclick="submitApproval(this.value)">
+                        <i class="fa fa-check-circle opacity-50 me-1"></i> Approve (Division Head ENG)
+                    </button>*@
+                    <button type="submit" class="btn btn-sm btn-success" value="DIVISION HEAD OPR APPROVED" onclick="submitApprovalOPR(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
                     </button>
-                    @*<button type="submit" class="btn btn-sm btn-success" value="DIVISION HEAD OPR APPROVED" onclick="submitApprovalOPR(this.value)">
-                        <i class="fa fa-check-circle opacity-50 me-1"></i> Approve (Division Head OPR)
-                    </button>*@
                 </div>
             </div>
         </div>

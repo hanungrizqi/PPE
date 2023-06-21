@@ -49,7 +49,23 @@ namespace PLANT_PPE.Controllers
             }
             return View();
         }
+        public ActionResult ProjectManagerPenerima()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
         public ActionResult DivHead()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
+        public ActionResult DivHeadOPR()
         {
             if (Session["nrp"] == null)
             {

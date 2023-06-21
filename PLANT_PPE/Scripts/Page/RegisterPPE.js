@@ -29,6 +29,8 @@ $("#txt_eqNumber").on("change", function () {
     $("#txt_eqClass").val(eqClass);
     let Sn = $(this).find(':selected').attr('data-Sn');
     $("#txt_serialNo").val(Sn);
+    let desc = $(this).find(':selected').attr('data-desc');
+    $("#txt_ppeDesc").val(desc);
 })
 
 var selectedDistrict;
@@ -117,7 +119,7 @@ function getEqNumber() {
             $('#txt_eqNumber').empty();
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.EQUIP_NO + '" data-egi="' + val.EQUIP_GRP_ID + '" data-eqclass="' + val.EQUIP_CLASS + '" data-Sn="' + val.SERIAL_NUMBER + '">' + val.EQUIP_NO + '</option>';
+                text += '<option value="' + val.EQUIP_NO + '" data-egi="' + val.EQUIP_GRP_ID + '" data-eqclass="' + val.EQUIP_CLASS + '" data-Sn="' + val.SERIAL_NUMBER + '" data-desc="' + val.DESCRIPTION + '">' + val.EQUIP_NO + '</option>';
             });
             $("#txt_eqNumber").append(text);
 
@@ -187,11 +189,12 @@ function savePPEtoTable() {
                         confirmButtonText: 'OK',
                         allowOutsideClick: false,
                         allowEscapeKey: false
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "/PPE/Register";
-                        }
-                    });
+                    })
+                    //.then((result) => {
+                    //    if (result.isConfirmed) {
+                    //        window.location.href = "/PPE/Register";
+                    //    }
+                    //});
                 } if (data.Remarkss == false) {
                     $.ajax({
                         url: $("#web_link").val() + "/api/PPE/UploadAttachment", // URI
@@ -302,11 +305,12 @@ function savePPEtoTable() {
                         confirmButtonText: 'OK',
                         allowOutsideClick: false,
                         allowEscapeKey: false
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "/PPE/Register";
-                        }
-                    });
+                    })
+                    //.then((result) => {
+                    //    if (result.isConfirmed) {
+                    //        window.location.href = "/PPE/Register";
+                    //    }
+                    //});
                 } if (data.Remarkss == false) {
                     var rowCount = $("#table_equipment tbody tr").length + 1;
                     var row = "<tr>" +
@@ -444,7 +448,9 @@ function savePPE(postStatus) {
         //rowData.PATH_ATTACHMENT = cells.eq(13).text();
         rowData.PATH_ATTACHMENT = cells.eq(13).find("a").attr("href");
         rowData.CREATED_BY = $("#txt_createBy").val();
+        rowData.CREATED_POS_BY = $("#hd_PositionID").val();
         rowData.STATUS = postStatus;
+        rowData.APPROVAL_ORDER = 1;
         
         if (postStatus == "CREATED") {
             rowData.POSISI_PPE = "Sect. Head";

@@ -1,12 +1,15 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
+console.log($("#txt_PositionID").val());
 var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE",
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE",
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE?pos_id=" + id, //URI
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE/" + $("#hd_PositionID").val(),
         dataSrc: "Data",
     },
 
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11] },
+        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] },
         { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
@@ -23,9 +26,6 @@ var table = $("#tbl_ppe").DataTable({
         { data: 'PPE_NO' },
         { data: 'EGI' },
         { data: 'EQUIP_NO' },
-        { data: 'PPE_DESC' },
-        { data: 'EQUIP_CLASS' },
-        { data: 'SERIAL_NO' },
         { data: 'DISTRICT_FROM' },
         { data: 'DISTRICT_TO' },
         {
@@ -40,6 +40,13 @@ var table = $("#tbl_ppe").DataTable({
             render: function (data, type, row) {
                 text = `<span class="badge bg-success">${data}</span>`;
                 return text;
+            }
+        },
+        {
+            data: 'UPLOAD_FORM_CAAB',
+            render: function (data, type, row) {
+                return '<td><input class="form-control form-control-sm input-file" type="file" accept=".pdf" multiple></td>';
+                //return '<input class="form-control form-control-sm" type="file" accept=".pdf" id="txt_formCAAB">';
             }
         },
         {
@@ -103,12 +110,28 @@ function submitApproval(postStatus) {
         return;
     }
     debugger
+    
+    ////let fille;
+    //let selectedRows = [];
+    //$('.row-checkbox:checked').each(function () {
+    //    //selectedRows.push($(this).data('id'));
+    //    let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+    //    //fille = $(this).closest('tr').find('td:eq(8)')[0].childNodes[0].files[0].name;
+    //    //console.log(fille);
+    //    selectedRows.push(equipNo/*, fille*/);
+    //});
     let selectedRows = [];
+    let attachmentFiles = [];
     $('.row-checkbox:checked').each(function () {
-        //selectedRows.push($(this).data('id'));
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
         selectedRows.push(equipNo);
+
+        let files = $(this).closest('tr').find('td:eq(8)')[0].childNodes[0].files;
+        for (let i = 0; i < files.length; i++) {
+            attachmentFiles.push(files[i]);
+        }
     });
+    
     debugger
     if (selectedRows.length === 0) {
         Swal.fire(
@@ -120,20 +143,43 @@ function submitApproval(postStatus) {
     }
 
     let dataPPE = [];
+    let isAnyFileMissing = false;
     $('.row-checkbox:checked').each(function () {
         debugger
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        //let attachmentFile = $(this).closest('tr').find('td:eq(8)')[0].childNodes[0].files[0].name;
+        let attachmentFile = $(this).closest('tr').find('td:eq(8)')[0].childNodes[0].files[0];
+        console.log(attachmentFile);
+        if (attachmentFile === undefined) {
+            isAnyFileMissing = true;
+            return false; 
+        }
         let ppe = {
             PPE_NO: $(this).data('id'),
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Plant Dept. Head" : "Project Manager",
+            //POSISI_PPE: postStatus === "REJECT" ? "Plant Dept. Head" : "Project Manager",
+            POSISI_PPE: postStatus === "REJECT" ? "Plant Dept. Head" : "Project Manager Pengirim",
             // kolom lain jika diperlukan
-            STATUS: postStatus
+            STATUS: postStatus,
+            APPROVAL_ORDER: postStatus === "REJECT" ? 4 : 4
         };
         dataPPE.push(ppe);
     });
+
+    if (isAnyFileMissing) {
+        Swal.fire({
+            title: 'Warning',
+            text: "Please upload file for all selected rows.",
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+        return; // Menghentikan eksekusi fungsi jika ada baris yang belum mengunggah file
+    }
     
     $.ajax({
         url: $("#web_link").val() + "/api/Approval/Approve_PPE",
@@ -146,7 +192,10 @@ function submitApproval(postStatus) {
         },
         success: function (data) {
             if (data.Remarks == true) {
+                debugger
                 submitCAAB();
+                //submitCAAB(dataPPE);
+                //submitCAAB(attachmentFiles);
             } if (data.Remarks == false) {
                 Swal.fire(
                     'Error!',
@@ -166,12 +215,26 @@ function submitApproval(postStatus) {
 
 function submitCAAB() {
     debugger
-    let selectedRows = [];
+    //let equipNo;
+    //let selectedRows = [];
+    let selectedEquipNos = [];
+    let selectedPpeNos = [];
+    let attachmentFiles = [];
     $('.row-checkbox:checked').each(function () {
-        //selectedRows.push($(this).data('id'));
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
-        selectedRows.push(equipNo);
+        let nomPPE = $(this).closest('tr').find('td:eq(1)').text();
+        selectedEquipNos.push(equipNo);
+        selectedPpeNos.push(nomPPE);
+        let files = $(this).closest('tr').find('td:eq(8)')[0].childNodes[0].files;
+        for (let i = 0; i < files.length; i++) {
+            attachmentFiles.push(files[i]);
+        }
     });
+
+    console.log(selectedEquipNos);
+    console.log(selectedPpeNos);
+    console.log(attachmentFiles);
+
     let dataPPE = [];
     $('.row-checkbox:checked').each(function () {
         debugger
@@ -186,20 +249,33 @@ function submitCAAB() {
     });
 
     debugger
-    let nomorPPE = dataPPE[0].PPE_NO;
-    let attachmentFile = $("#txt_formCAAB")[0].files[0]; // Mendapatkan file yang dipilih
+    let nomorPPE = selectedPpeNos;
+    let attachmentFile = attachmentFiles;
+    let nomorEQP = selectedEquipNos;
 
-    // Buat objek FormData dan tambahkan data yang ingin dikirim
     let formData = new FormData();
-    formData.append('nomorPPE', nomorPPE);
-    formData.append('attachmentFile', attachmentFile);
+    //formData.append('nomorPPE[]', nomorPPE);
+    //formData.append('nomorEQP[]', nomorEQP);
+    for (let i = 0; i < nomorPPE.length; i++) {
+        formData.append('nomorPPE[]', nomorPPE[i]);
+    }
+    for (let i = 0; i < nomorEQP.length; i++) {
+        formData.append('nomorEQP[]', nomorEQP[i]);
+    }
+    for (let i = 0; i < attachmentFile.length; i++) {
+        formData.append('attachmentFiles', attachmentFile[i]);
+    }
+
+    console.log(nomorPPE);
+    console.log(nomorEQP);
+    console.log(attachmentFile);
 
     $.ajax({
         url: $("#web_link").val() + "/api/Approval/Upload_CAAB", //URI
         data: formData,
         type: "POST",
-        contentType: false, // Hapus pengaturan contentType
-        processData: false, // Tidak memproses data secara otomatis
+        contentType: false,
+        processData: false,
         success: function (data) {
             if (data.Remarks == true) {
                 Swal.fire({
@@ -239,3 +315,74 @@ function submitCAAB() {
         }
     })
 }
+
+//function submitCAAB(dataPPE) {
+//    debugger
+//    let formData = new FormData();
+
+//    for (let i = 0; i < dataPPE.length; i++) {
+//        debugger
+//        let ppe = dataPPE[i];
+//        let equipNo = ppe.EQUIP_NO;
+//        let attachmentFiles = $(`.row-checkbox:checked[data-id="${ppe.PPE_NO}"]`).closest('tr').find('td:eq(8) input[type="file"]');
+
+//        for (let j = 0; j < attachmentFiles.length; j++) {
+//            debugger
+//            let attachmentFile = attachmentFiles[j].files[0];
+//            let nomorPPE = ppe.PPE_NO;
+//            let nomorEQP = equipNo;
+//            //formData.append('nomorPPE', nomorPPE);
+//            //formData.append('attachmentFile', attachmentFile);
+//            //formData.append('nomorEQP', nomorEQP);
+
+//            formData.append(`attachmentFiles[${i}][${j}]`, attachmentFile);
+//            formData.append(`nomorPPE[${i}][${j}]`, nomorPPE);
+//            formData.append(`nomorEQP[${i}][${j}]`, nomorEQP);
+//        }
+//    }
+
+//    $.ajax({
+//        url: $("#web_link").val() + "/api/Approval/Upload_CAAB", //URI
+//        data: formData,
+//        type: "POST",
+//        contentType: false,
+//        processData: false,
+//        success: function (data) {
+//            if (data.Remarks == true) {
+//                Swal.fire({
+//                    title: 'Saved',
+//                    text: "Data has been Saved.",
+//                    icon: 'success',
+//                    confirmButtonColor: '#3085d6',
+//                    confirmButtonText: 'OK',
+//                    allowOutsideClick: false,
+//                    allowEscapeKey: false
+//                }).then((result) => {
+//                    if (result.isConfirmed) {
+//                        window.location.href = "/Approval/PlantDeptHead";
+//                    }
+//                });
+//            } else if (data.Remarks == false) {
+//                Swal.fire({
+//                    title: 'Warning',
+//                    text: "File already exist.",
+//                    icon: 'warning',
+//                    confirmButtonColor: '#3085d6',
+//                    confirmButtonText: 'OK',
+//                    allowOutsideClick: false,
+//                    allowEscapeKey: false
+//                });
+//            } else {
+//                Swal.fire(
+//                    'Error!',
+//                    'Message: ' + data.Message,
+//                    'error'
+//                );
+//            }
+
+//        },
+//        error: function (xhr) {
+//            alert(xhr.responseText);
+//        }
+//    })
+//}

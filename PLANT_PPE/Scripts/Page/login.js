@@ -1,11 +1,15 @@
 ﻿var e = Swal.mixin({ buttonsStyling: !1, customClass: { confirmButton: "btn btn-alt-success m-5", cancelButton: "btn btn-alt-danger m-5", input: "form-control" } });
-//addJobsite();
+
+$("document").ready(function () {
+    addRoled();
+})
 
 function PostLogin() {
     var obj = new Object();
     obj.Username = $("#login-username").val();
     obj.Password = $("#login-password").val();
     obj.Jobsite = $("#jobSite").val();
+    obj.Roled = $("#roled").val();
     $.ajax({
         url: $("#web_link").val() + "/api/Login/Get_Login", //URI
         data: JSON.stringify(obj),
@@ -18,7 +22,7 @@ function PostLogin() {
         },
         success: function (data) {
             if (data.Remarks == true) {
-                MakeSession(obj.Username, obj.Jobsite);
+                MakeSession(obj.Username, obj.Jobsite, obj.Roled);
             }
             else {
                 swal.fire({
@@ -40,11 +44,12 @@ function PostLogin() {
     })
 }
 
-function MakeSession(nrp, site) {
+function MakeSession(nrp, site, role) {
     //debugger
     var obj = {
         NRP: nrp,
-        Jobsite: site
+        Jobsite: site,
+        Roled: role
     };
 
     $.ajax({
@@ -86,6 +91,23 @@ function addJobsite() {
                 text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
             });
             $("#jobSite").append(text);
+        }
+    });
+}
+
+function addRoled() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Master/Get_Roled", //URI,
+        //url: $("#web_link").val() + "/api/Master/Get_RoledByUsername?username=" + $("#login-username").val(), //URI,
+        type: "GET",
+        cache: false,
+        success: function (result) {
+            $('#roled').empty();
+            text = '<option></option>';
+            $.each(result.Data, function (key, val) {
+                text += '<option value="' + val.RoleName + '">' + val.RoleName + '</option>';
+            });
+            $("#roled").append(text);
         }
     });
 }

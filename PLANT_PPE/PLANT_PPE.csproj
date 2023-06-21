@@ -138,6 +138,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApprovalController.cs" />
+    <Compile Include="Controllers\ReceivedController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -4353,13 +4354,16 @@
     </None>
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\Page\ApprovalDivHead.js" />
+    <Content Include="Scripts\Page\ApprovalDivHeadOPR.js" />
     <Content Include="Scripts\Page\ApprovalPlantDeptHead.js" />
     <Content Include="Scripts\Page\ApprovalPlantManager.js" />
     <Content Include="Scripts\Page\ApprovalProjectManager.js" />
+    <Content Include="Scripts\Page\ApprovalProjectManagerPenerima.js" />
     <Content Include="Scripts\Page\ApprovalSecHead.js" />
     <Content Include="Scripts\Page\DetailPPE.js" />
     <Content Include="Scripts\Page\DetailReview.js" />
     <Content Include="Scripts\Page\login.js" />
+    <Content Include="Scripts\Page\Received.js" />
     <Content Include="Scripts\Page\Review.js" />
     <Content Include="Scripts\Page\RegisterPPE.js" />
     <Content Include="Scripts\Page\SettingAgreement.js" />
@@ -4396,6 +4400,9 @@
     <Content Include="Views\PPE\Review.cshtml" />
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\PPE\DetailPPE.cshtml" />
+    <Content Include="Views\Received\Index.cshtml" />
+    <Content Include="Views\Approval\ProjectManagerPenerima.cshtml" />
+    <Content Include="Views\Approval\DivHeadOPR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

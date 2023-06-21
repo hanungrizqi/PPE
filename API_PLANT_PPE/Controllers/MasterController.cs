@@ -78,6 +78,22 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Get_Roled")]
+        public IHttpActionResult Get_Roled()
+        {
+            try
+            {
+                var data = db.TBL_M_ROLEs.ToList();
+
+                return Ok(new { Data = data, Total = data.Count() });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         //Keperluan Transaksi
         [HttpGet]
         [Route("getDistrict")]
