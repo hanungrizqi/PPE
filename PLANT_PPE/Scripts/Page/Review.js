@@ -76,7 +76,8 @@ var table = $("#tbl_reviewppe").DataTable({
         dataSrc: "Data",
     },
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9] }
+        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+        { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
     columns: [
@@ -89,9 +90,9 @@ var table = $("#tbl_reviewppe").DataTable({
         },
         { data: 'PPE_NO' },
         { data: 'EGI' },
-        { data: 'EQUIP_CLASS' },
+        /*{ data: 'EQUIP_CLASS' },*/
         { data: 'EQUIP_NO' },
-        { data: 'SERIAL_NO' },
+        /*{ data: 'SERIAL_NO' },*/
         { data: 'DISTRICT_FROM' },
         { data: 'DISTRICT_TO' },
         { data: 'POSISI_PPE' },

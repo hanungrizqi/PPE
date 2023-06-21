@@ -326,7 +326,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderByDescending(b => b.ID).ToList();
+                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approved_Date).ToList();
 
                 return Ok(new { Data = data });
             }
