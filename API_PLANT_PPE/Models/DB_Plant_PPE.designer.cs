@@ -5841,6 +5841,8 @@ namespace API_PLANT_PPE.Models
 		
 		private System.Nullable<System.DateTime> _Approved_Date;
 		
+		private string _Approved_By;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5855,6 +5857,8 @@ namespace API_PLANT_PPE.Models
     partial void OnPosisi_PpeChanged();
     partial void OnApproved_DateChanging(System.Nullable<System.DateTime> value);
     partial void OnApproved_DateChanged();
+    partial void OnApproved_ByChanging(string value);
+    partial void OnApproved_ByChanged();
     #endregion
 		
 		public TBL_H_APPROVAL_PPE()
@@ -5958,6 +5962,26 @@ namespace API_PLANT_PPE.Models
 					this._Approved_Date = value;
 					this.SendPropertyChanged("Approved_Date");
 					this.OnApproved_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_By", DbType="VarChar(50)")]
+		public string Approved_By
+		{
+			get
+			{
+				return this._Approved_By;
+			}
+			set
+			{
+				if ((this._Approved_By != value))
+				{
+					this.OnApproved_ByChanging(value);
+					this.SendPropertyChanging();
+					this._Approved_By = value;
+					this.SendPropertyChanged("Approved_By");
+					this.OnApproved_ByChanged();
 				}
 			}
 		}

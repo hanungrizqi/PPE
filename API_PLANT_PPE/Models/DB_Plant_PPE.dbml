@@ -374,6 +374,7 @@
       <Column Name="Equip_No" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Posisi_Ppe" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="Approved_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Approved_By" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

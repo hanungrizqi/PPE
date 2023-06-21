@@ -214,13 +214,31 @@ namespace API_PLANT_PPE.Controllers
 
         //Get Detail PPE
         [HttpGet]
-        [Route("Get_PPEDetail/{idppe}")]
-        public IHttpActionResult Get_PPEDetail(int idppe)
+        [Route("Get_PPEDetail/{no_quip}")]
+        public IHttpActionResult Get_PPEDetail(int no_quip)
         {
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.ID == idppe).FirstOrDefault();
+                var data = db.TBL_T_PPEs.Where(a => a.ID == no_quip).FirstOrDefault();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+        [HttpGet]
+        [Route("Get_History")]
+        public IHttpActionResult Get_History(String Equip_No)
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderByDescending(b => b.ID).ToList();
 
                 return Ok(new { Data = data });
             }

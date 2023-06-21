@@ -164,10 +164,10 @@
         <elementListCompartment Id="81368ebc-a7bd-4e50-951d-1fad2df1b3cf" absoluteBounds="2.64, 0.96, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="12bf7422-5d0e-404f-882d-787e8745f670" isExpanded="false" absoluteBounds="2.625, 1, 2, 0.45">
+    <classShape Id="e6c9c2f7-14a0-4aa5-8fe4-dc0cf6c854b9" isExpanded="false" absoluteBounds="2.625, 1, 2, 0.45">
       <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_H_APPROVAL_PPE" />
       <nestedChildShapes>
-        <elementListCompartment Id="aac54c06-ef6e-4e27-8138-aa5a0e484048" absoluteBounds="2.64, 1.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="59c86c80-8695-47f9-94f4-839d0bada9a8" absoluteBounds="2.64, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

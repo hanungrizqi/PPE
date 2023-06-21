@@ -8,9 +8,67 @@ $("document").ready(function () {
    
 })
 
-function getReview() {
+var table2
+function getdetail(nomor_equip) {
+    /*var nomor_equip = 'DR0010';*/
 
+    console.log(nomor_equip);
+
+   
+
+    table2 = $("#tbl_detail").DataTable({
+        ajax: {
+            url: $("#web_link").val() + "/api/PPE/Get_History",
+            type: "GET",
+            data: {
+                Equip_No : nomor_equip
+            },
+            dataSrc: "Data",
+        },
+        "columnDefs": [
+            { "className": "dt-center", "targets": [0, 1, 2, 3] }
+        ],
+        scrollX: true,
+        columns: [
+
+            { data: 'Posisi_Ppe' },
+            { data: 'Approved_By' },
+            { data: 'Equip_No' },
+            {
+                data: 'Approved_Date',
+                render: function (data, type, row) {
+                    const tanggal = moment(data).format("DD/MM/YYYY");
+                    return tanggal;
+                }
+            }
+            
+        ]
+    });
+
+    
 }
+
+
+function detailClose() {
+    var text = `<thead class="text-center">
+                                <tr>
+                                    <th>POSITION</th>
+                                    <th>STATUS</th>
+                                    <th>PIC</th>
+                                    @*<th>REMAKS</th>*@
+                                    <th>APPROVAL DATE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>`;
+    table2.destroy();
+    table2.val(text);
+}
+
+
+
+
+
 
 var table = $("#tbl_reviewppe").DataTable({
     ajax: {
@@ -22,7 +80,13 @@ var table = $("#tbl_reviewppe").DataTable({
     ],
     scrollX: true,
     columns: [
-        { data: 'CREATED_DATE' },
+        {
+            data: 'CREATED_DATE',
+            render: function (data, type, row) {
+                const tanggal = moment(data).format("DD/MM/YYYY");
+                return tanggal;
+            }
+        },
         { data: 'PPE_NO' },
         { data: 'EGI' },
         { data: 'EQUIP_CLASS' },
@@ -36,8 +100,8 @@ var table = $("#tbl_reviewppe").DataTable({
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                action += `<a href="/PPE/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
-
+                /*action += `<a href="/PPE/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`*/
+                action += `<button onClick="getdetail('${row.EQUIP_NO}')" type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail">Detail</button>`
                 action += `</div>`
                 return action;
             }
