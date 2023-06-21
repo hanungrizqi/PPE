@@ -526,7 +526,16 @@ var table = $("#tbl_mappingApproval").DataTable({
     ],
     scrollX: true,
     columns: [
-        { data: 'APPROVAL_ACTION' },
+        {
+            render: function (data, type, row) {
+                var text;
+                if (row.APPROVAL_ACTION == 1) {
+                    text = '<p>Approved</p>'
+                } else {
+                    text = '<p>Rejected</p>'
+                }
+                return text;
+            } },
         { data: 'APPROVAL_ORDER' },
         { data: 'APPROVAL_FROM' },
         { data: 'APPROVAL_TO' },

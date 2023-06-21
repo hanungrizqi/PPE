@@ -4361,6 +4361,7 @@
     <Content Include="Scripts\Page\ApprovalProjectManagerPenerima.js" />
     <Content Include="Scripts\Page\ApprovalSecHead.js" />
     <Content Include="Scripts\Page\DetailPPE.js" />
+    <Content Include="Scripts\Page\DetailReview.js" />
     <Content Include="Scripts\Page\login.js" />
     <Content Include="Scripts\Page\Received.js" />
     <Content Include="Scripts\Page\Review.js" />
