@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230621\API</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230622\Api</_PublishTargetUrl>
     <History>True|2023-06-21T04:42:32.8182655Z;True|2023-06-09T10:13:26.9243086+07:00;True|2023-06-06T10:59:13.0331636+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
@@ -79,10 +79,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/API_PLANT_PPE.dll">
-      <publishTime>06/21/2023 11:42:31</publishTime>
+      <publishTime>06/22/2023 08:29:29</publishTime>
     </File>
     <File Include="bin/API_PLANT_PPE.pdb">
-      <publishTime>06/21/2023 11:42:31</publishTime>
+      <publishTime>06/22/2023 08:29:29</publishTime>
     </File>
     <File Include="bin/LdapAuthentication.dll">
       <publishTime>01/30/2023 14:15:59</publishTime>
