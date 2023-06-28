@@ -46,7 +46,8 @@ var table = $("#tbl_ppe").DataTable({
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
                 //action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
-                action += `<a href="/Reports/ReportSH.aspx?PPE_NO=${row.PPE_NO}" class="btn btn-sm btn-info print-link">Print</a>`;
+                //action += `<a href="/Reports/ReportSH.aspx?PPE_NO=${row.PPE_NO}" class="btn btn-sm btn-info print-link">Print</a>`;
+                action += `<button onClick="printReport('${row.PPE_NO}')" type="button" class="btn btn-primary btn-sm">Print</button>`
                 return action;
             }
         }
@@ -89,12 +90,11 @@ $('#tbl_ppe').on('click', '.print-link', function () {
     window.location.href = printUrl;
 });
 
-// Event handler untuk link action
-//$('#tbl_ppe').on('click', '.print-link', function () {
-//    var ppeNo = $(this).attr('href').split('PPE_NO=')[1];
-//    var printUrl = "/Reports/ReportSH.aspx?PPE_NO=" + ppeNo;
-//    window.location.href = printUrl;
-//});
+function printReport(ppeno) {
+    debugger
+    window.open("/Reports/ReportSH.aspx?PPE_NO=" + ppeno);
+    //"/Reports/ReportSH.aspx?PPE_NO=${row.PPE_NO}"
+}
 
 table.on('draw', function () {
     var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');
