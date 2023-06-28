@@ -17,12 +17,14 @@ function getdetail(nomor_equip) {
    
 
     table2 = $("#tbl_detail").DataTable({
+        
         ajax: {
             url: $("#web_link").val() + "/api/PPE/Get_History",
             type: "GET",
             data: {
                 Equip_No : nomor_equip
             },
+            order: [[3, 'asc']],
             dataSrc: "Data",
         },
         "columnDefs": [
@@ -37,7 +39,7 @@ function getdetail(nomor_equip) {
             {
                 data: 'Approved_Date',
                 render: function (data, type, row) {
-                    const tanggal = moment(data).format("DD/MM/YYYY");
+                    const tanggal = moment(data).format("DD/MM/YYYY HH:MM:SS");
                     return tanggal;
                 }
             }
@@ -65,12 +67,27 @@ function detailClose() {
     table2.val(text);
 }
 
+function printReport(ppeno) {
+    
 
-
-
-
+    window.open("/Reports/ReportReview.aspx?PPE_NO=" + ppeno);
+}
 
 var table = $("#tbl_reviewppe").DataTable({
+    dom: 'Bfrtip',
+    buttons: [
+        {
+            extend: "pdfHtml5",
+            title: "REVIEW PPE",
+            exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            },
+            customize: function (doc) {
+                doc.content[1].margin = [0, 0, 0, 0]
+            },
+            orientation: 'landscape'
+        },
+    ],
     ajax: {
         url: $("#web_link").val() + "/api/PPE/Get_FirstNoPPE",
         dataSrc: "Data",
@@ -103,6 +120,7 @@ var table = $("#tbl_reviewppe").DataTable({
                 action = `<div class="btn-group">`
                 /*action += `<a href="/PPE/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`*/
                 action += `<button onClick="getdetail('${row.EQUIP_NO}')" type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail">Detail</button>`
+                action += `<button onClick="printReport('${row.PPE_NO}')" type="button" class="btn btn-primary btn-sm">Print</button>`
                 action += `</div>`
                 return action;
             }

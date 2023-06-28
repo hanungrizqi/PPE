@@ -190,6 +190,14 @@
       <DependentUpon>ReportSH.aspx</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Reports\ReportReview.aspx.cs">
+      <DependentUpon>ReportReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportReview.aspx.designer.cs">
+      <DependentUpon>ReportReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModel\Cls_PPE.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4389,6 +4397,7 @@
       <DependentUpon>DB_PLANT_PPE.dbml</DependentUpon>
     </None>
     <Content Include="Reports\ReportSH.aspx" />
+    <Content Include="Reports\ReportReview.aspx" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\Page\ApprovalDivHead.js" />
     <Content Include="Scripts\Page\ApprovalDivHeadOPR.js" />
