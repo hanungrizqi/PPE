@@ -430,6 +430,7 @@ function savePPE(postStatus) {
 
     $("#table_equipment tbody tr").each(function () {
         debugger
+        var url = window.location.origin;
         var rowData = {};
         var cells = $(this).find("td");
 
@@ -451,6 +452,7 @@ function savePPE(postStatus) {
         rowData.CREATED_POS_BY = $("#hd_PositionID").val();
         rowData.STATUS = postStatus;
         rowData.APPROVAL_ORDER = 1;
+        rowData.URL_FORM_SH = `${url}/Reports/ReportSH.aspx?PPE_NO=` + $("#txt_noPPE").val();
         
         if (postStatus == "CREATED") {
             rowData.POSISI_PPE = "Sect. Head";
@@ -489,6 +491,17 @@ function savePPE(postStatus) {
                     'error'
                 );
             }
+            //if (data.Remarks == true) {
+            //    debugger
+            //    inputUrl();
+            //} if (data.Remarks == false) {
+            //    Swal.fire(
+            //        'Error!',
+            //        'Message : ' + data.Message,
+            //        'error'
+            //    );
+            //    $("#overlay").hide();
+            //}
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -514,3 +527,64 @@ function getContent() {
         }
     });
 }
+
+//function inputUrl() {
+//    debugger
+//    $("#table_equipment tbody tr").each(function () {
+//        debugger
+//        var rowData = {};
+//        var cells = $(this).find("td");
+        
+//        rowData.PPE_NO = cells.eq(2).text();
+//        rowData.EQUIP_NO = cells.eq(3).text();
+//        rowData.URL_FORM_SH = "/Reports/ReportSH.aspx?PPE_NO=" + $("#txt_noPPE").val();
+        
+//        tableData.push(rowData);
+//    });
+
+//    $.ajax({
+//        url: "/Approval/Input_Url_SH", //URI
+//        //data: formData,
+//        data: JSON.stringify(tableData),
+//        type: "POST",
+//        contentType: false,
+//        processData: false,
+//        success: function (data) {
+//            if (data.Remarks == true) {
+//                Swal.fire({
+//                    title: 'Saved',
+//                    text: "Data has been Saved.",
+//                    icon: 'success',
+//                    confirmButtonColor: '#3085d6',
+//                    confirmButtonText: 'OK',
+//                    allowOutsideClick: false,
+//                    allowEscapeKey: false
+//                }).then((result) => {
+//                    if (result.isConfirmed) {
+//                        window.location.href = "/PPE/Register";
+//                    }
+//                });
+//            } else if (data.Remarks == false) {
+//                Swal.fire({
+//                    title: 'Warning',
+//                    text: "File already exist.",
+//                    icon: 'warning',
+//                    confirmButtonColor: '#3085d6',
+//                    confirmButtonText: 'OK',
+//                    allowOutsideClick: false,
+//                    allowEscapeKey: false
+//                });
+//            } else {
+//                Swal.fire(
+//                    'Error!',
+//                    'Message: ' + data.Message,
+//                    'error'
+//                );
+//            }
+
+//        },
+//        error: function (xhr) {
+//            alert(xhr.responseText);
+//        }
+//    })
+//}

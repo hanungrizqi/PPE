@@ -46,8 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LdapAuthentication">
-      <HintPath>..\..\..\..\..\Documents\WORK in KPP\Audit\Audit\AUDIT_API\AUDIT_API\bin\LdapAuthentication.dll</HintPath>
+    <Reference Include="LdapAuthentication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\New folder\plant_bcs\API_PLANT_BCS\bin\LdapAuthentication.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
@@ -181,6 +182,14 @@
       <DependentUpon>DB_PLANT_PPE.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportSH.aspx.cs">
+      <DependentUpon>ReportSH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportSH.aspx.designer.cs">
+      <DependentUpon>ReportSH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Reports\ReportReview.aspx.cs">
       <DependentUpon>ReportReview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4387,6 +4396,7 @@
     <None Include="Models\DB_PLANT_PPE.dbml.layout">
       <DependentUpon>DB_PLANT_PPE.dbml</DependentUpon>
     </None>
+    <Content Include="Reports\ReportSH.aspx" />
     <Content Include="Reports\ReportReview.aspx" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\Page\ApprovalDivHead.js" />

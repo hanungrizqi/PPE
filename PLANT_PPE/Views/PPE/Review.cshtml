@@ -23,17 +23,17 @@
 
     <div class="block-content block-content-full">
         <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_reviewppe">
-            <thead class="text-center">
+            <thead class="text-center bg-primary text-white">
                 <tr>
                     <th>DATE</th>
-                    <th>NUMBER PPE</th>
-                    <th>EQUIPMENT GROUP ID</th>
-                    <th>CLASS</th>
-                    <th>EQUIPMENT NUMBER</th>
-                    <th>SERIAL NUMBER</th>
+                    <th>PPE NO</th>
+                    <th>EGI</th>
+                    @*<th>EQUIP CLASS</th>*@
+                    <th>EQUIP NO</th>
+                    @*<th>SERIAL NUMBER</th>*@
                     <th>FROM</th>
                     <th>TO</th>
-                    <th>POSITION</th>
+                    <th>POSISI PPE</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
@@ -61,13 +61,13 @@
 
                     <div class="row">
                         <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_detail">
-                            <thead class="text-center">
+                            <thead class="text-center bg-primary text-white">
                                 <tr>
                                     <th>POSITION</th>
                                     <th>NRP</th>
                                     <th>NO QUIPMENT</th>
                                     @*<th>REMAKS</th>*@
-                                    <th>APPROVAL DATE</th>
+                                    <th>APPROVED DATE</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="block-content block-content-full block-content-sm text-end border-top">
                     <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal" onclick="detailClose()">
-                        Cancel
+                        Close
                     </button>
                 </div>
             </div>

@@ -80,6 +80,7 @@ namespace API_PLANT_PPE.Controllers
                     tbl.UPDATED_DATE = param.UPDATED_DATE;
                     tbl.UPDATED_BY = param.UPDATED_BY;
                     tbl.PATH_ATTACHMENT = param.PATH_ATTACHMENT;
+                    tbl.URL_FORM_SH = param.URL_FORM_SH;
 
                     db.TBL_T_PPEs.InsertOnSubmit(tbl);
                     //db.GetTable<TBL_T_PPE>().InsertAllOnSubmit(ppeList);
@@ -326,7 +327,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderByDescending(b => b.ID).ToList();
+                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approved_Date).ToList();
 
                 return Ok(new { Data = data });
             }
