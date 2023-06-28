@@ -45,7 +45,8 @@ var table = $("#tbl_ppe").DataTable({
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+                //action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+                action += `<a href="/Reports/ReportSH.aspx?PPE_NO=${row.PPE_NO}" class="btn btn-sm btn-info print-link">Print</a>`;
                 return action;
             }
         }
@@ -81,6 +82,19 @@ var table = $("#tbl_ppe").DataTable({
             });
     },
 });
+
+$('#tbl_ppe').on('click', '.print-link', function () {
+    var ppeNo = $(this).closest('tr').find('td:nth-child(2)').text(); // Mengambil nilai PPE_NO dari kolom kedua (indeks 1)
+    var printUrl = "/Reports/ReportSH.aspx?PPE_NO=" + ppeNo;
+    window.location.href = printUrl;
+});
+
+// Event handler untuk link action
+//$('#tbl_ppe').on('click', '.print-link', function () {
+//    var ppeNo = $(this).attr('href').split('PPE_NO=')[1];
+//    var printUrl = "/Reports/ReportSH.aspx?PPE_NO=" + ppeNo;
+//    window.location.href = printUrl;
+//});
 
 table.on('draw', function () {
     var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');

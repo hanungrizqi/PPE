@@ -80,6 +80,7 @@ namespace API_PLANT_PPE.Controllers
                     tbl.UPDATED_DATE = param.UPDATED_DATE;
                     tbl.UPDATED_BY = param.UPDATED_BY;
                     tbl.PATH_ATTACHMENT = param.PATH_ATTACHMENT;
+                    tbl.URL_FORM_SH = param.URL_FORM_SH;
 
                     db.TBL_T_PPEs.InsertOnSubmit(tbl);
                     //db.GetTable<TBL_T_PPE>().InsertAllOnSubmit(ppeList);
