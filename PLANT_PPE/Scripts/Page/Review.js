@@ -68,9 +68,8 @@ function detailClose() {
 }
 
 function printReport(ppeno) {
-    
-
-    window.open("/Reports/ReportReview.aspx?PPE_NO=" + ppeno);
+    var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/ReviewPPE&PPE_NO=" + ppeno;
+    window.open(printUrl, '_blank');
 }
 
 var table = $("#tbl_reviewppe").DataTable({

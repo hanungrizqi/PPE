@@ -41,11 +41,12 @@ var table = $("#tbl_ppe").DataTable({
             }
         },
         {
-            data: 'ID',
+            data: 'PPE_NO',
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
                 //action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+                //action += `<a href="/Approval/PrintSectHead" class="btn btn-sm btn-info">Print</a>`
                 //action += `<a href="/Reports/ReportSH.aspx?PPE_NO=${row.PPE_NO}" class="btn btn-sm btn-info print-link">Print</a>`;
                 action += `<button onClick="printReport('${row.PPE_NO}')" type="button" class="btn btn-primary btn-sm">Print</button>`
                 return action;
@@ -92,8 +93,14 @@ $('#tbl_ppe').on('click', '.print-link', function () {
 
 function printReport(ppeno) {
     debugger
-    window.open("/Reports/ReportSH.aspx?PPE_NO=" + ppeno);
-    //"/Reports/ReportSH.aspx?PPE_NO=${row.PPE_NO}"
+    //var printUrl = "/Reports/ReportSH.aspx?PPE_NO=" + ppeno;
+    //window.open(printUrl, '_blank');
+
+    //var printUrl = "/Approval/PrintSectHead?nomorppe=" + ppeno;
+    //var printUrl = "/Approval/PrintSectHead";
+    //var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead";
+    var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead&PPE_NO=" + ppeno;
+    window.open(printUrl, '_blank');
 }
 
 table.on('draw', function () {

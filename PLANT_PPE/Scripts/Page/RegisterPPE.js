@@ -452,7 +452,9 @@ function savePPE(postStatus) {
         rowData.CREATED_POS_BY = $("#hd_PositionID").val();
         rowData.STATUS = postStatus;
         rowData.APPROVAL_ORDER = 1;
-        rowData.URL_FORM_SH = `${url}/Reports/ReportSH.aspx?PPE_NO=` + $("#txt_noPPE").val();
+        //rowData.URL_FORM_SH = `${url}/Reports/ReportSH.aspx?PPE_NO=` + $("#txt_noPPE").val();
+        rowData.URL_FORM_SH = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead&PPE_NO=" + $("#txt_noPPE").val();
+        //var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead&PPE_NO=" + ppeno;
         
         if (postStatus == "CREATED") {
             rowData.POSISI_PPE = "Sect. Head";

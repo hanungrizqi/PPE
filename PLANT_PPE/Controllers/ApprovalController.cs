@@ -74,6 +74,15 @@ namespace PLANT_PPE.Controllers
             return View();
         }
 
-        
+        public ActionResult PrintSectHead(/*string nomorppe*/)
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            //ViewBag.nomorppe = nomorppe;
+            return Redirect("http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead");
+            //return View();
+        }
     }
 }
