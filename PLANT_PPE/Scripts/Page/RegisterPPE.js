@@ -446,15 +446,12 @@ function savePPE(postStatus) {
         rowData.DISTRICT_TO = cells.eq(10).text();
         rowData.LOC_TO = cells.eq(11).text();
         rowData.REMARKS = cells.eq(12).text();
-        //rowData.PATH_ATTACHMENT = cells.eq(13).text();
         rowData.PATH_ATTACHMENT = cells.eq(13).find("a").attr("href");
         rowData.CREATED_BY = $("#txt_createBy").val();
         rowData.CREATED_POS_BY = $("#hd_PositionID").val();
         rowData.STATUS = postStatus;
         rowData.APPROVAL_ORDER = 1;
-        //rowData.URL_FORM_SH = `${url}/Reports/ReportSH.aspx?PPE_NO=` + $("#txt_noPPE").val();
         rowData.URL_FORM_SH = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead&PPE_NO=" + $("#txt_noPPE").val();
-        //var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead&PPE_NO=" + ppeno;
         
         if (postStatus == "CREATED") {
             rowData.POSISI_PPE = "Sect. Head";
@@ -468,6 +465,107 @@ function savePPE(postStatus) {
     $.ajax({
         url: $("#web_link").val() + "/api/PPE/Create_PPE", // URI
         data: JSON.stringify(tableData),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function () {
+            $("#overlay").show();
+        },
+        success: function (data) {
+            //if (data.Remarks) {
+            //    Swal.fire({
+            //        title: 'Saved',
+            //        text: "Data has been Saved.",
+            //        icon: 'success',
+            //        confirmButtonColor: '#3085d6',
+            //        confirmButtonText: 'OK',
+            //        allowOutsideClick: false,
+            //        allowEscapeKey: false
+            //    }).then((result) => {
+            //        if (result.isConfirmed) {
+            //            window.location.href = "/PPE/Register";
+            //        }
+            //    });
+            //} else {
+            //    Swal.fire(
+            //        'Error!',
+            //        'Message: ' + data.Message,
+            //        'error'
+            //    );
+            //}
+            if (data.Remarks == true) {
+                debugger
+                Insert_Approved_Create(tableData);
+                //sendMailSection_head($("#txt_noPPE").val());
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+            $("#overlay").hide();
+        }
+    });
+
+    console.log(tableData);
+}
+
+function getContent() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
+        dataType: "json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var content = data.Data;
+            $("#agreeModals").html(content);
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function Insert_Approved_Create(tableData) {
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/PPE/Insert_Approved_Create",
+        data: JSON.stringify(tableData),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks == true) {
+                debugger
+                sendMailSection_head($("#txt_noPPE").val());
+            } else if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+
+function sendMailSection_head(ppenosh) {
+    debugger
+    var encodedPPENo = encodeURIComponent(ppenosh);
+    debugger
+    $.ajax({
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Section_Head", //URI
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Section_Head?ppe=" + encodedPPENo,
+        //data: JSON.stringify({ ppenosh: ppenosh }),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -493,36 +591,6 @@ function savePPE(postStatus) {
                     'error'
                 );
             }
-            //if (data.Remarks == true) {
-            //    debugger
-            //    inputUrl();
-            //} if (data.Remarks == false) {
-            //    Swal.fire(
-            //        'Error!',
-            //        'Message : ' + data.Message,
-            //        'error'
-            //    );
-            //    $("#overlay").hide();
-            //}
-        },
-        error: function (xhr) {
-            alert(xhr.responseText);
-        }
-    });
-
-    console.log(tableData);
-}
-
-function getContent() {
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
-        dataType: "json",
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            var content = data.Data;
-            $("#agreeModals").html(content);
-
         },
         error: function (xhr) {
             alert(xhr.responseText);

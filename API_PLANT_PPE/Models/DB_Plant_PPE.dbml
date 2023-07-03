@@ -408,15 +408,15 @@
       <Column Name="Ppe_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Equip_No" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Posisi_Ppe" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Approval_Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Approved_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Approved_By" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="District_From" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="District_To" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.TBL_T_PPE" Member="TBL_T_PPEs">
     <Type Name="TBL_T_PPE">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_PPE" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
@@ -440,6 +440,37 @@
       <Column Name="PATH_ATTACHMENT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="URL_FORM_SH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PLNTMNGR" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PLNTDH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PM_PENGIRIM" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_SectionHeadResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PlantManager" Method="cusp_insertNotifEmail_PlantManager">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PlantManagerResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PlantDeptHead" Method="cusp_insertNotifEmail_PlantDeptHead">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PlantDeptHeadResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PMPengirim" Method="cusp_insertNotifEmail_PMPengirim">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PMPengirimResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

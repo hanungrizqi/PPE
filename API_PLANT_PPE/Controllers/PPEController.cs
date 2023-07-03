@@ -59,6 +59,7 @@ namespace API_PLANT_PPE.Controllers
                 foreach (var param in ppeList)
                 {
                     TBL_T_PPE tbl = new TBL_T_PPE();
+                    tbl.ID_PPE = Guid.NewGuid();
                     tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
                     tbl.PPE_NO = param.PPE_NO;
                     tbl.DATE = param.DATE;
@@ -94,6 +95,50 @@ namespace API_PLANT_PPE.Controllers
                 return Ok(new { Remarks = false, Message = e });
             }
         }
+
+        [HttpPost]
+        [Route("Insert_Approved_Create")]
+        public IHttpActionResult Insert_Approved_Create(TBL_T_PPE[] param)
+        {
+            try
+            {
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
+
+                    // update TBL_T_PPE
+                    //cek.PPE_NO = ppe.PPE_NO;
+                    //cek.EQUIP_NO = ppe.EQUIP_NO;
+                    //cek.Posisi_Ppe = "Created";
+                    //cek.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    //cek.Approved_By = ppe.UPDATED_BY;
+
+                    if (cek.PPE_NO != null)
+                    {
+                        // insert into TBL_H_APPROVAL_PPE
+                        TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = "Created";
+                        his.Approval_Order = 1;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.CREATED_BY;
+
+                        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                    }
+                }
+
+                db.SubmitChanges();
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Remarks = false, Message = e });
+            }
+        }
+
 
         [HttpPost]
         [Route("UploadAttachment")]
@@ -366,6 +411,82 @@ namespace API_PLANT_PPE.Controllers
 
                 }
 
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Section_Head")]
+        public IHttpActionResult Sendmail_Section_Head(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_SectionHead(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Plant_Manager")]
+        public IHttpActionResult Sendmail_Plant_Manager(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PlantManager(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Plant_DeptHead")]
+        public IHttpActionResult Sendmail_Plant_DeptHead(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PlantDeptHead(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_PM_Pengirim")]
+        public IHttpActionResult Sendmail_PM_Pengirim(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PMPengirim(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
             }
             catch (Exception)
             {

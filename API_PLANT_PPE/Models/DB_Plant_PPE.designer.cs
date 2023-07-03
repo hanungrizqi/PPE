@@ -331,6 +331,34 @@ namespace API_PLANT_PPE.Models
 				return this.GetTable<TBL_T_PPE>();
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_insertNotifEmail_SectionHead")]
+		public ISingleResult<cusp_insertNotifEmail_SectionHeadResult> cusp_insertNotifEmail_SectionHead([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PPE_NO", DbType="VarChar(20)")] string pPE_NO)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pPE_NO);
+			return ((ISingleResult<cusp_insertNotifEmail_SectionHeadResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_insertNotifEmail_PlantManager")]
+		public ISingleResult<cusp_insertNotifEmail_PlantManagerResult> cusp_insertNotifEmail_PlantManager([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PPE_NO", DbType="VarChar(20)")] string pPE_NO)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pPE_NO);
+			return ((ISingleResult<cusp_insertNotifEmail_PlantManagerResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_insertNotifEmail_PlantDeptHead")]
+		public ISingleResult<cusp_insertNotifEmail_PlantDeptHeadResult> cusp_insertNotifEmail_PlantDeptHead([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PPE_NO", DbType="VarChar(20)")] string pPE_NO)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pPE_NO);
+			return ((ISingleResult<cusp_insertNotifEmail_PlantDeptHeadResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_insertNotifEmail_PMPengirim")]
+		public ISingleResult<cusp_insertNotifEmail_PMPengirimResult> cusp_insertNotifEmail_PMPengirim([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PPE_NO", DbType="VarChar(20)")] string pPE_NO)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pPE_NO);
+			return ((ISingleResult<cusp_insertNotifEmail_PMPengirimResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_AKSES")]
@@ -6267,13 +6295,11 @@ namespace API_PLANT_PPE.Models
 		
 		private string _Posisi_Ppe;
 		
+		private System.Nullable<int> _Approval_Order;
+		
 		private System.Nullable<System.DateTime> _Approved_Date;
 		
 		private string _Approved_By;
-		
-		private string _District_From;
-		
-		private string _District_To;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -6287,14 +6313,12 @@ namespace API_PLANT_PPE.Models
     partial void OnEquip_NoChanged();
     partial void OnPosisi_PpeChanging(string value);
     partial void OnPosisi_PpeChanged();
+    partial void OnApproval_OrderChanging(System.Nullable<int> value);
+    partial void OnApproval_OrderChanged();
     partial void OnApproved_DateChanging(System.Nullable<System.DateTime> value);
     partial void OnApproved_DateChanged();
     partial void OnApproved_ByChanging(string value);
     partial void OnApproved_ByChanged();
-    partial void OnDistrict_FromChanging(string value);
-    partial void OnDistrict_FromChanged();
-    partial void OnDistrict_ToChanging(string value);
-    partial void OnDistrict_ToChanged();
     #endregion
 		
 		public TBL_H_APPROVAL_PPE()
@@ -6382,6 +6406,26 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approval_Order", DbType="Int")]
+		public System.Nullable<int> Approval_Order
+		{
+			get
+			{
+				return this._Approval_Order;
+			}
+			set
+			{
+				if ((this._Approval_Order != value))
+				{
+					this.OnApproval_OrderChanging(value);
+					this.SendPropertyChanging();
+					this._Approval_Order = value;
+					this.SendPropertyChanged("Approval_Order");
+					this.OnApproval_OrderChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
 		public System.Nullable<System.DateTime> Approved_Date
 		{
@@ -6422,46 +6466,6 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District_From", DbType="VarChar(50)")]
-		public string District_From
-		{
-			get
-			{
-				return this._District_From;
-			}
-			set
-			{
-				if ((this._District_From != value))
-				{
-					this.OnDistrict_FromChanging(value);
-					this.SendPropertyChanging();
-					this._District_From = value;
-					this.SendPropertyChanged("District_From");
-					this.OnDistrict_FromChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District_To", DbType="VarChar(50)")]
-		public string District_To
-		{
-			get
-			{
-				return this._District_To;
-			}
-			set
-			{
-				if ((this._District_To != value))
-				{
-					this.OnDistrict_ToChanging(value);
-					this.SendPropertyChanging();
-					this._District_To = value;
-					this.SendPropertyChanged("District_To");
-					this.OnDistrict_ToChanged();
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -6488,6 +6492,8 @@ namespace API_PLANT_PPE.Models
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ID_PPE;
 		
 		private int _ID;
 		
@@ -6537,10 +6543,18 @@ namespace API_PLANT_PPE.Models
 		
 		private string _URL_FORM_SH;
 		
+		private string _URL_FORM_PLNTMNGR;
+		
+		private string _URL_FORM_PLNTDH;
+		
+		private string _URL_FORM_PM_PENGIRIM;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnID_PPEChanging(System.Guid value);
+    partial void OnID_PPEChanged();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
     partial void OnAPPROVAL_ORDERChanging(System.Nullable<int> value);
@@ -6589,6 +6603,12 @@ namespace API_PLANT_PPE.Models
     partial void OnUPLOAD_FORM_CAABChanged();
     partial void OnURL_FORM_SHChanging(string value);
     partial void OnURL_FORM_SHChanged();
+    partial void OnURL_FORM_PLNTMNGRChanging(string value);
+    partial void OnURL_FORM_PLNTMNGRChanged();
+    partial void OnURL_FORM_PLNTDHChanging(string value);
+    partial void OnURL_FORM_PLNTDHChanged();
+    partial void OnURL_FORM_PM_PENGIRIMChanging(string value);
+    partial void OnURL_FORM_PM_PENGIRIMChanged();
     #endregion
 		
 		public TBL_T_PPE()
@@ -6596,7 +6616,27 @@ namespace API_PLANT_PPE.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PPE", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID_PPE
+		{
+			get
+			{
+				return this._ID_PPE;
+			}
+			set
+			{
+				if ((this._ID_PPE != value))
+				{
+					this.OnID_PPEChanging(value);
+					this.SendPropertyChanging();
+					this._ID_PPE = value;
+					this.SendPropertyChanged("ID_PPE");
+					this.OnID_PPEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
 		public int ID
 		{
 			get
@@ -7076,6 +7116,66 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL_FORM_PLNTMNGR", DbType="VarChar(100)")]
+		public string URL_FORM_PLNTMNGR
+		{
+			get
+			{
+				return this._URL_FORM_PLNTMNGR;
+			}
+			set
+			{
+				if ((this._URL_FORM_PLNTMNGR != value))
+				{
+					this.OnURL_FORM_PLNTMNGRChanging(value);
+					this.SendPropertyChanging();
+					this._URL_FORM_PLNTMNGR = value;
+					this.SendPropertyChanged("URL_FORM_PLNTMNGR");
+					this.OnURL_FORM_PLNTMNGRChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL_FORM_PLNTDH", DbType="VarChar(100)")]
+		public string URL_FORM_PLNTDH
+		{
+			get
+			{
+				return this._URL_FORM_PLNTDH;
+			}
+			set
+			{
+				if ((this._URL_FORM_PLNTDH != value))
+				{
+					this.OnURL_FORM_PLNTDHChanging(value);
+					this.SendPropertyChanging();
+					this._URL_FORM_PLNTDH = value;
+					this.SendPropertyChanged("URL_FORM_PLNTDH");
+					this.OnURL_FORM_PLNTDHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL_FORM_PM_PENGIRIM", DbType="VarChar(100)")]
+		public string URL_FORM_PM_PENGIRIM
+		{
+			get
+			{
+				return this._URL_FORM_PM_PENGIRIM;
+			}
+			set
+			{
+				if ((this._URL_FORM_PM_PENGIRIM != value))
+				{
+					this.OnURL_FORM_PM_PENGIRIMChanging(value);
+					this.SendPropertyChanging();
+					this._URL_FORM_PM_PENGIRIM = value;
+					this.SendPropertyChanged("URL_FORM_PM_PENGIRIM");
+					this.OnURL_FORM_PM_PENGIRIMChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -7093,6 +7193,182 @@ namespace API_PLANT_PPE.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class cusp_insertNotifEmail_SectionHeadResult
+	{
+		
+		private string _TO_LIST;
+		
+		private string _BODY;
+		
+		public cusp_insertNotifEmail_SectionHeadResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TO_LIST", DbType="VarChar(MAX)")]
+		public string TO_LIST
+		{
+			get
+			{
+				return this._TO_LIST;
+			}
+			set
+			{
+				if ((this._TO_LIST != value))
+				{
+					this._TO_LIST = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BODY", DbType="VarChar(MAX)")]
+		public string BODY
+		{
+			get
+			{
+				return this._BODY;
+			}
+			set
+			{
+				if ((this._BODY != value))
+				{
+					this._BODY = value;
+				}
+			}
+		}
+	}
+	
+	public partial class cusp_insertNotifEmail_PlantManagerResult
+	{
+		
+		private string _TO_LIST;
+		
+		private string _BODY;
+		
+		public cusp_insertNotifEmail_PlantManagerResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TO_LIST", DbType="VarChar(MAX)")]
+		public string TO_LIST
+		{
+			get
+			{
+				return this._TO_LIST;
+			}
+			set
+			{
+				if ((this._TO_LIST != value))
+				{
+					this._TO_LIST = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BODY", DbType="VarChar(MAX)")]
+		public string BODY
+		{
+			get
+			{
+				return this._BODY;
+			}
+			set
+			{
+				if ((this._BODY != value))
+				{
+					this._BODY = value;
+				}
+			}
+		}
+	}
+	
+	public partial class cusp_insertNotifEmail_PlantDeptHeadResult
+	{
+		
+		private string _TO_LIST;
+		
+		private string _BODY;
+		
+		public cusp_insertNotifEmail_PlantDeptHeadResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TO_LIST", DbType="VarChar(MAX)")]
+		public string TO_LIST
+		{
+			get
+			{
+				return this._TO_LIST;
+			}
+			set
+			{
+				if ((this._TO_LIST != value))
+				{
+					this._TO_LIST = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BODY", DbType="VarChar(MAX)")]
+		public string BODY
+		{
+			get
+			{
+				return this._BODY;
+			}
+			set
+			{
+				if ((this._BODY != value))
+				{
+					this._BODY = value;
+				}
+			}
+		}
+	}
+	
+	public partial class cusp_insertNotifEmail_PMPengirimResult
+	{
+		
+		private string _TO_LIST;
+		
+		private string _BODY;
+		
+		public cusp_insertNotifEmail_PMPengirimResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TO_LIST", DbType="VarChar(MAX)")]
+		public string TO_LIST
+		{
+			get
+			{
+				return this._TO_LIST;
+			}
+			set
+			{
+				if ((this._TO_LIST != value))
+				{
+					this._TO_LIST = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BODY", DbType="VarChar(MAX)")]
+		public string BODY
+		{
+			get
+			{
+				return this._BODY;
+			}
+			set
+			{
+				if ((this._BODY != value))
+				{
+					this._BODY = value;
+				}
 			}
 		}
 	}

@@ -118,6 +118,7 @@ function submitApproval(postStatus) {
     }
 
     let dataPPE = [];
+    let uniquePPE_NO = new Set();
     $('.row-checkbox:checked').each(function () {
         debugger
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
@@ -130,9 +131,17 @@ function submitApproval(postStatus) {
             // kolom lain jika diperlukan
             STATUS: postStatus,
             APPROVAL_ORDER: postStatus === "REJECT" ? 3 : 3,
+            URL_FORM_PLNTDH: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + $(this).data('id'),
         };
         dataPPE.push(ppe);
+        if (!uniquePPE_NO.has(ppe.PPE_NO)) {
+            debugger
+            //dataPPE.push(ppe);
+            uniquePPE_NO.add(ppe.PPE_NO);
+        }
     });
+    console.log(uniquePPE_NO);
+    console.log(dataPPE);
 
     $.ajax({
         url: $("#web_link").val() + "/api/Approval/Approve_PPE",
@@ -143,6 +152,47 @@ function submitApproval(postStatus) {
         beforeSend: function () {
             $("#overlay").show();
         },
+        success: function (data) {
+            //if (data.Remarks == true) {
+            //    Swal.fire({
+            //        title: 'Saved',
+            //        text: "Your data has been saved!",
+            //        icon: 'success',
+            //        confirmButtonColor: '#3085d6',
+            //        confirmButtonText: 'OK',
+            //        allowOutsideClick: false,
+            //        allowEscapeKey: false
+            //    }).then((result) => {
+            //        if (result.isConfirmed) {
+            //            window.location.href = "/Approval/PlantManager";
+            //        }
+            //    })
+            //} if (data.Remarks == false) {
+            //    Swal.fire(
+            //        'Error!',
+            //        'Message : ' + data.Message,
+            //        'error'
+            //    );
+            //    $("#overlay").hide();
+            //}
+            sendMailPlant_DeptHead(Array.from(uniquePPE_NO));
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+            $("#overlay").hide();
+        }
+    });
+}
+
+function sendMailPlant_DeptHead(uniquePPE_NO) {
+    debugger
+    var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
         success: function (data) {
             if (data.Remarks == true) {
                 Swal.fire({
@@ -166,11 +216,9 @@ function submitApproval(postStatus) {
                 );
                 $("#overlay").hide();
             }
-
         },
         error: function (xhr) {
             alert(xhr.responseText);
-            $("#overlay").hide();
         }
     });
 }

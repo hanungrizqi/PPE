@@ -224,6 +224,7 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="System\Web\UI\ScriptManager.cs" />
     <Compile Include="ViewModel\ClsLogin.cs" />
+    <Compile Include="ViewModel\ClsPPE.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

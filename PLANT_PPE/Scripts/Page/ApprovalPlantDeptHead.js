@@ -143,6 +143,7 @@ function submitApproval(postStatus) {
     }
 
     let dataPPE = [];
+    let uniquePPE_NO = new Set();
     let isAnyFileMissing = false;
     $('.row-checkbox:checked').each(function () {
         debugger
@@ -163,9 +164,15 @@ function submitApproval(postStatus) {
             POSISI_PPE: postStatus === "REJECT" ? "Plant Dept. Head" : "Project Manager Pengirim",
             // kolom lain jika diperlukan
             STATUS: postStatus,
-            APPROVAL_ORDER: postStatus === "REJECT" ? 4 : 4
+            APPROVAL_ORDER: postStatus === "REJECT" ? 4 : 4,
+            URL_FORM_PM_PENGIRIM: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPengirim&PPE_NO=" + $(this).data('id'),
         };
         dataPPE.push(ppe);
+        if (!uniquePPE_NO.has(ppe.PPE_NO)) {
+            debugger
+            //dataPPE.push(ppe);
+            uniquePPE_NO.add(ppe.PPE_NO);
+        }
     });
 
     if (isAnyFileMissing) {
@@ -236,6 +243,7 @@ function submitCAAB() {
     console.log(attachmentFiles);
 
     let dataPPE = [];
+    let uniquePPE_NO = new Set();
     $('.row-checkbox:checked').each(function () {
         debugger
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
@@ -246,7 +254,14 @@ function submitCAAB() {
             EQUIP_NO: equipNo,
         };
         dataPPE.push(ppe);
+        if (!uniquePPE_NO.has(ppe.PPE_NO)) {
+            debugger
+            //dataPPE.push(ppe);
+            uniquePPE_NO.add(ppe.PPE_NO);
+        }
     });
+    console.log(uniquePPE_NO);
+    console.log(dataPPE);
 
     debugger
     let nomorPPE = selectedPpeNos;
@@ -278,19 +293,20 @@ function submitCAAB() {
         processData: false,
         success: function (data) {
             if (data.Remarks == true) {
-                Swal.fire({
-                    title: 'Saved',
-                    text: "Data has been Saved.",
-                    icon: 'success',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "/Approval/PlantDeptHead";
-                    }
-                });
+                //Swal.fire({
+                //    title: 'Saved',
+                //    text: "Data has been Saved.",
+                //    icon: 'success',
+                //    confirmButtonColor: '#3085d6',
+                //    confirmButtonText: 'OK',
+                //    allowOutsideClick: false,
+                //    allowEscapeKey: false
+                //}).then((result) => {
+                //    if (result.isConfirmed) {
+                //        window.location.href = "/Approval/PlantDeptHead";
+                //    }
+                //});
+                sendMailPM_Pengirim(Array.from(uniquePPE_NO));
             } else if (data.Remarks == false) {
                 Swal.fire({
                     title: 'Warning',
@@ -316,73 +332,41 @@ function submitCAAB() {
     })
 }
 
-//function submitCAAB(dataPPE) {
-//    debugger
-//    let formData = new FormData();
-
-//    for (let i = 0; i < dataPPE.length; i++) {
-//        debugger
-//        let ppe = dataPPE[i];
-//        let equipNo = ppe.EQUIP_NO;
-//        let attachmentFiles = $(`.row-checkbox:checked[data-id="${ppe.PPE_NO}"]`).closest('tr').find('td:eq(8) input[type="file"]');
-
-//        for (let j = 0; j < attachmentFiles.length; j++) {
-//            debugger
-//            let attachmentFile = attachmentFiles[j].files[0];
-//            let nomorPPE = ppe.PPE_NO;
-//            let nomorEQP = equipNo;
-//            //formData.append('nomorPPE', nomorPPE);
-//            //formData.append('attachmentFile', attachmentFile);
-//            //formData.append('nomorEQP', nomorEQP);
-
-//            formData.append(`attachmentFiles[${i}][${j}]`, attachmentFile);
-//            formData.append(`nomorPPE[${i}][${j}]`, nomorPPE);
-//            formData.append(`nomorEQP[${i}][${j}]`, nomorEQP);
-//        }
-//    }
-
-//    $.ajax({
-//        url: $("#web_link").val() + "/api/Approval/Upload_CAAB", //URI
-//        data: formData,
-//        type: "POST",
-//        contentType: false,
-//        processData: false,
-//        success: function (data) {
-//            if (data.Remarks == true) {
-//                Swal.fire({
-//                    title: 'Saved',
-//                    text: "Data has been Saved.",
-//                    icon: 'success',
-//                    confirmButtonColor: '#3085d6',
-//                    confirmButtonText: 'OK',
-//                    allowOutsideClick: false,
-//                    allowEscapeKey: false
-//                }).then((result) => {
-//                    if (result.isConfirmed) {
-//                        window.location.href = "/Approval/PlantDeptHead";
-//                    }
-//                });
-//            } else if (data.Remarks == false) {
-//                Swal.fire({
-//                    title: 'Warning',
-//                    text: "File already exist.",
-//                    icon: 'warning',
-//                    confirmButtonColor: '#3085d6',
-//                    confirmButtonText: 'OK',
-//                    allowOutsideClick: false,
-//                    allowEscapeKey: false
-//                });
-//            } else {
-//                Swal.fire(
-//                    'Error!',
-//                    'Message: ' + data.Message,
-//                    'error'
-//                );
-//            }
-
-//        },
-//        error: function (xhr) {
-//            alert(xhr.responseText);
-//        }
-//    })
-//}
+function sendMailPM_Pengirim(uniquePPE_NO) {
+    debugger
+    var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Pengirim?ppe=" + encodedPPENo,
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks == true) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Your data has been saved!",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantDeptHead";
+                    }
+                })
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}

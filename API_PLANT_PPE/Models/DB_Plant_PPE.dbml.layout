@@ -170,16 +170,16 @@
         <elementListCompartment Id="1d487693-4df4-4909-84e5-20e4f4f8c03a" absoluteBounds="4.765, 5.46, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="2c488820-1e34-47bc-9240-c948f9d5e85a" isExpanded="false" absoluteBounds="2.625, 1, 2, 0.45">
+    <classShape Id="b723fa64-00b9-463e-81f2-495fa3904152" isExpanded="false" absoluteBounds="2.625, 1, 2, 0.45">
       <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_H_APPROVAL_PPE" />
       <nestedChildShapes>
-        <elementListCompartment Id="733fd05f-7cf8-4d59-934e-15b9e32d1b56" absoluteBounds="2.64, 1.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9d0f64a8-6306-4390-95dc-64267e1cc21f" absoluteBounds="2.64, 1.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="863a5d8e-51d0-4a0c-bfd8-c82a59b2075d" isExpanded="false" absoluteBounds="2.625, 0.5, 2, 0.45">
+    <classShape Id="834df615-797c-4df2-bdfb-c472fb49d8c9" isExpanded="false" absoluteBounds="2.625, 0.5, 2, 0.45">
       <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_T_PPE" />
       <nestedChildShapes>
-        <elementListCompartment Id="311433ba-c774-41bb-8922-402025f1dbe5" absoluteBounds="2.64, 0.96, 1.9700000000000002, 4.8646240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="43c57933-4dd0-4759-8f03-361849487388" absoluteBounds="2.64, 0.96, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
