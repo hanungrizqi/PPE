@@ -443,6 +443,10 @@
       <Column Name="URL_FORM_PLNTMNGR" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="URL_FORM_PLNTDH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="URL_FORM_PM_PENGIRIM" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PM_PENERIMA" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DIVHEAD_ENG" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DIVHEAD_OPR" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DONE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
@@ -469,6 +473,34 @@
   <Function Name="dbo.cusp_insertNotifEmail_PMPengirim" Method="cusp_insertNotifEmail_PMPengirim">
     <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="cusp_insertNotifEmail_PMPengirimResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PMPenerima" Method="cusp_insertNotifEmail_PMPenerima">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PMPenerimaResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_Divhead_Eng" Method="cusp_insertNotifEmail_Divhead_Eng">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cusp_insertNotifEmail_Divhead_EngResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_Divhead_Opr" Method="cusp_insertNotifEmail_Divhead_Opr">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cusp_insertNotifEmail_Divhead_OprResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PPE_Done" Method="cusp_insertNotifEmail_PPE_Done">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cusp_insertNotifEmail_PPE_DoneResult">
       <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </ElementType>

@@ -84,10 +84,8 @@ namespace API_PLANT_PPE.Controllers
                     tbl.URL_FORM_SH = param.URL_FORM_SH;
 
                     db.TBL_T_PPEs.InsertOnSubmit(tbl);
-                    //db.GetTable<TBL_T_PPE>().InsertAllOnSubmit(ppeList);
                     db.SubmitChanges();
                 }
-                //db.SubmitChanges();
                 return Ok(new { Remarks = true });
             }
             catch (Exception e)
@@ -105,14 +103,7 @@ namespace API_PLANT_PPE.Controllers
                 foreach (var ppe in param)
                 {
                     var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
-
-                    // update TBL_T_PPE
-                    //cek.PPE_NO = ppe.PPE_NO;
-                    //cek.EQUIP_NO = ppe.EQUIP_NO;
-                    //cek.Posisi_Ppe = "Created";
-                    //cek.Approved_Date = DateTime.UtcNow.ToLocalTime();
-                    //cek.Approved_By = ppe.UPDATED_BY;
-
+                    
                     if (cek.PPE_NO != null)
                     {
                         // insert into TBL_H_APPROVAL_PPE
@@ -151,14 +142,12 @@ namespace API_PLANT_PPE.Controllers
                 {
                     var file = httpRequest.Files[0];
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    //tambah ini kalo pengin buat folder otomatis.....
                     var folderPath = HttpContext.Current.Server.MapPath("~/Content/AttachmentFile");
                     if (!Directory.Exists(folderPath))
                     {
                         Directory.CreateDirectory(folderPath);
                     }
-                    var filePath = Path.Combine(folderPath, fileName); //pake filepath ini kalo buat foldernya otomatis
-                    //var filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/AttachmentFile"), fileName);
+                    var filePath = Path.Combine(folderPath, fileName);
                     file.SaveAs(filePath);
 
                     var attachmentUrl = Url.Content("~/Content/AttachmentFile/" + fileName);
@@ -233,7 +222,6 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
                 var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
@@ -485,6 +473,82 @@ namespace API_PLANT_PPE.Controllers
 
                 db.CommandTimeout = 120;
                 db.cusp_insertNotifEmail_PMPengirim(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_PM_Penerima")]
+        public IHttpActionResult Sendmail_PM_Penerima(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PMPenerima(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Divhead_Eng")]
+        public IHttpActionResult Sendmail_Divhead_Eng(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_Divhead_Eng(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Divhead_Opr")]
+        public IHttpActionResult Sendmail_Divhead_Opr(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_Divhead_Opr(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Done")]
+        public IHttpActionResult Sendmail_Done(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PPE_Done(decodedPpenosh);
 
                 return Ok(new { Remarks = true });
             }

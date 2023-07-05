@@ -57,8 +57,6 @@ namespace PLANT_PPE.Controllers
             {
                 return RedirectToAction("index", "login");
             }
-            /*ViewBag.dstrct = db.VW_DISTRICTs.ToList();
-            ViewBag.loc = db.VW_LOCATIONs.ToList();*/
             return View();
         }
     }

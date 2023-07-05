@@ -63,9 +63,7 @@ namespace PLANT_PPE.Controllers
             }
 
         }
-
-
-
+        
         public ActionResult Logout()
         {
             Session.RemoveAll();

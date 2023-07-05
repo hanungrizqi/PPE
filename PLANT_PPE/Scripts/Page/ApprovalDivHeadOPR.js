@@ -1,7 +1,6 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
 var table = $("#tbl_ppe_opr").DataTable({
     ajax: {
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalDivHead_OPR",
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalDivHead_OPR/" + $("#hd_PositionID").val(),
         dataSrc: "Data",
     },
@@ -15,9 +14,6 @@ var table = $("#tbl_ppe_opr").DataTable({
         {
             "data": null,
             render: function (data, type, row, meta) {
-                /*return meta.row + meta.settings._iDisplayStart + 1;*/
-                //return '<input type="checkbox">';
-                //return '<input type="checkbox" class="row-checkbox">';
                 return '<input type="checkbox" class="row-checkbox" data-id="' + row.PPE_NO + '">';
             }
         },
@@ -64,7 +60,7 @@ var table = $("#tbl_ppe_opr").DataTable({
             .every(function () {
                 var column = this;
                 var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- PPE NUMBER --</option></select>')
-                    .appendTo($("#tbl_ppe_filter.dataTables_filter"))
+                    .appendTo($("#tbl_ppe_opr_filter.dataTables_filter"))
                     .on('change', function () {
                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
@@ -90,92 +86,6 @@ table.on('draw', function () {
     });
 });
 
-//function submitApproval(postStatus) {
-//    debugger
-//    if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
-//        Swal.fire(
-//            'Warning',
-//            'Mohon sertakan Remarks Approval!',
-//            'warning'
-//        );
-//        return;
-//    }
-//    debugger
-//    let selectedRows = [];
-//    $('.row-checkbox:checked').each(function () {
-//        //selectedRows.push($(this).data('id'));
-//        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
-//        selectedRows.push(equipNo);
-//    });
-//    debugger
-//    if (selectedRows.length === 0) {
-//        Swal.fire(
-//            'Warning',
-//            'Tidak ada baris yang tercentang!',
-//            'warning'
-//        );
-//        return;
-//    }
-
-//    let dataPPE = [];
-//    $('.row-checkbox:checked').each(function () {
-//        debugger
-//        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
-//        let ppe = {
-//            PPE_NO: $(this).data('id'),
-//            UPDATED_BY: $("#hd_nrp").val(),
-//            REMARKS: $("#txt_remark").val(),
-//            EQUIP_NO: equipNo,
-//            //POSISI_PPE: postStatus === "REJECT" ? "Division Head" : "Waiting SM Dept",
-//            POSISI_PPE: postStatus === "REJECT" ? "Division Head ENG" : "Division Head OPR",
-//            // kolom lain jika diperlukan
-//            STATUS: postStatus,
-//            APPROVAL_ORDER: 7
-//        };
-//        dataPPE.push(ppe);
-//    });
-
-//    $.ajax({
-//        url: $("#web_link").val() + "/api/Approval/Approve_PPE",
-//        data: JSON.stringify(dataPPE),
-//        dataType: "json",
-//        type: "POST",
-//        contentType: "application/json; charset=utf-8",
-//        beforeSend: function () {
-//            $("#overlay").show();
-//        },
-//        success: function (data) {
-//            if (data.Remarks == true) {
-//                Swal.fire({
-//                    title: 'Saved',
-//                    text: "Your data has been saved!",
-//                    icon: 'success',
-//                    confirmButtonColor: '#3085d6',
-//                    confirmButtonText: 'OK',
-//                    allowOutsideClick: false,
-//                    allowEscapeKey: false
-//                }).then((result) => {
-//                    if (result.isConfirmed) {
-//                        window.location.href = "/Approval/DivHead";
-//                    }
-//                })
-//            } if (data.Remarks == false) {
-//                Swal.fire(
-//                    'Error!',
-//                    'Message : ' + data.Message,
-//                    'error'
-//                );
-//                $("#overlay").hide();
-//            }
-
-//        },
-//        error: function (xhr) {
-//            alert(xhr.responseText);
-//            $("#overlay").hide();
-//        }
-//    });
-//}
-
 function submitApprovalOPR(postStatus) {
     debugger
     if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
@@ -189,7 +99,6 @@ function submitApprovalOPR(postStatus) {
     debugger
     let selectedRows = [];
     $('.row-checkbox:checked').each(function () {
-        //selectedRows.push($(this).data('id'));
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
         selectedRows.push(equipNo);
     });
@@ -204,6 +113,7 @@ function submitApprovalOPR(postStatus) {
     }
 
     let dataPPE = [];
+    let uniquePPE_NO = new Set();
     $('.row-checkbox:checked').each(function () {
         debugger
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
@@ -212,17 +122,135 @@ function submitApprovalOPR(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            //POSISI_PPE: postStatus === "REJECT" ? "Division Head" : "Waiting SM Dept",
             POSISI_PPE: postStatus === "REJECT" ? "Division Head OPR" : "Waiting SM Dept",
-            // kolom lain jika diperlukan
             STATUS: postStatus,
-            APPROVAL_ORDER: 8
+            APPROVAL_ORDER: 8,
+            URL_FORM_DONE: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $(this).data('id'),
         };
         dataPPE.push(ppe);
+        if (!uniquePPE_NO.has(ppe.PPE_NO)) {
+            debugger
+            uniquePPE_NO.add(ppe.PPE_NO);
+        }
     });
 
     $.ajax({
-        url: $("#web_link").val() + "/api/Approval/Approve_PPE",
+        url: $("#web_link").val() + "/api/Approval/Approve_PPE_DivHead_Opr",
+        data: JSON.stringify(dataPPE),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function () {
+            $("#overlay").show();
+        },
+        success: function (data) {
+            if (data.Remarks == true) {
+                sendMailPPE_DONE(Array.from(uniquePPE_NO));
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+            $("#overlay").hide();
+        }
+    });
+}
+
+function sendMailPPE_DONE(uniquePPE_NO) {
+    debugger
+    var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Done?ppe=" + encodedPPENo,
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks == true) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Your data has been saved!",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/DivHeadOPR";
+                    }
+                })
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function rejectApproval(postStatus) {
+    debugger
+    if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
+        Swal.fire(
+            'Warning',
+            'Mohon sertakan Remarks Approval!',
+            'warning'
+        );
+        return;
+    }
+    debugger
+    let selectedRows = [];
+    $('.row-checkbox:checked').each(function () {
+        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        selectedRows.push(equipNo);
+    });
+    debugger
+    if (selectedRows.length === 0) {
+        Swal.fire(
+            'Warning',
+            'Tidak ada baris yang tercentang!',
+            'warning'
+        );
+        return;
+    }
+
+    let dataPPE = [];
+    let uniquePPE_NO = new Set();
+    $('.row-checkbox:checked').each(function () {
+        debugger
+        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        let ppe = {
+            PPE_NO: $(this).data('id'),
+            UPDATED_BY: $("#hd_nrp").val(),
+            REMARKS: $("#txt_remark").val(),
+            EQUIP_NO: equipNo,
+            POSISI_PPE: postStatus === "REJECT" ? "Division Head OPR" : "Waiting SM Dept",
+            STATUS: postStatus,
+            APPROVAL_ORDER: 8,
+        };
+        dataPPE.push(ppe);
+        if (!uniquePPE_NO.has(ppe.PPE_NO)) {
+            debugger
+            uniquePPE_NO.add(ppe.PPE_NO);
+        }
+    });
+
+    $.ajax({
+        url: $("#web_link").val() + "/api/Approval/Reject_Approval",
         data: JSON.stringify(dataPPE),
         dataType: "json",
         type: "POST",

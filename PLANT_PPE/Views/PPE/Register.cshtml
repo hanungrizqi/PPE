@@ -139,14 +139,6 @@
                         <input class="form-control" type="file" accept=".pdf,.docx" id="txt_attach">
                     </div>
                 </div>
-                @*<div class="mb-4">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-terms">Terms &amp; Conditions</a>
-                        <span class="text-danger">*</span>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="val-terms" name="val-terms" value="1" disabled>
-                            <label class="form-check-label" for="val-terms">I agree</label>
-                        </div>
-                    </div>*@
                 <div class="mb-4">
                     <div class="row">
                         <div class="col-auto">
@@ -167,11 +159,6 @@
     <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
         <div class="block-options justify-content-center">
             <div class="row text-center">
-                @*<div class="col-md-6">
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="clearPPE()">
-                            <i class="fa fa-broom opacity-50 me-1"></i> Clear
-                        </button>
-                    </div>*@
                 <div class="col-md-12">
                     <a href="/Home/Index" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
                     <button type="submit" class="btn btn-sm btn-info" onclick="savePPEtoTable()">
@@ -245,9 +232,7 @@
     </div>
 </div>
 
-<!-- Bootstrap Toasts -->
 <div class="toast-container position-fixed top-0 end-0 p-3">
-    <!-- Toast Example 1 -->
     <div id="toast-example-1" class="toast fade hide" data-delay="4000" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <i class="si si-wrench text-danger me-2"></i>
@@ -259,14 +244,12 @@
             Your data success to add in equipment table. Check now!
         </div>
     </div>
-    <!-- END Toast Example 1 -->
 </div>
 
 <script>
     function savePPEtoTable() {
         var date = $("#txt_date").val();
         var formattedDate = formatDate(date);
-
         var ppeNo = $("#txt_noPPE").val();
         var eqNumber = $("#txt_eqNumber").val();
         var ppeDescription = $("#txt_ppeDesc").val();
@@ -298,23 +281,7 @@
             "<td>" + attch + "</td>" +
             "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
             "</tr>";
-
         $("#table_equipment tbody").append(row);
-
-        // Clear input
-        //$("#txt_date").val("");
-        //$("#txt_noPPE").val("");
-        //$("#txt_eqNumber").val("");
-        //$("#txt_ppeDesc").val("");
-        //$("#txt_egi").val("");
-        //$("#txt_eqClass").val("");
-        //$("#txt_serialNo").val("");
-        //$("#txt_districtFrom").val("");
-        //$("#txt_locFrom").val("");
-        //$("#txt_districtTo").val("");
-        //$("#txt_locTo").val("");
-        //$("#txt_remark").val("");
-        //$("#txt_attach").val("");
     }
 
     function removeRow(button) {

@@ -4472,7 +4472,6 @@
     <Content Include="Views\Received\Index.cshtml" />
     <Content Include="Views\Approval\ProjectManagerPenerima.cshtml" />
     <Content Include="Views\Approval\DivHeadOPR.cshtml" />
-    <Content Include="Views\Approval\PrintSectHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

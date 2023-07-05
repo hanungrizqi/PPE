@@ -42,25 +42,11 @@
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">Agreement's <small>Content Agreement's</small></h3>
-                @*<div class="block-options">
-                        <div class="block-options-item">
-                            <div class="alert alert-warning py-2 mb-0">
-                                <i class="fa fa-exclamation-triangle opacity-50 me-1"></i> This is important!
-                            </div>
-                        </div>
-                    </div>*@
             </div>
-            @*<div class="block-content">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-terms" style="color:blue">Terms &amp; Conditions</a>
-                    <span class="text-danger">*</span>
-                </div>*@
             <div class="block-content block-content-full">
                 <label class="col-sm-7" for="txtxt">*klik untuk membaca agreement</label>
                 <button type="button" class="btn btn-alt-primary" data-bs-toggle="modal" data-bs-target="#modal-terms" id="txtxt">Agreement's Approval</button>
             </div>
-            @*<div class="block-content" id="agreementss">
-
-                </div>*@
             <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
                 <div class="block-options justify-content-center">
                     <div class="row text-center">
@@ -90,12 +76,9 @@
         <div class="block-options justify-content-center">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="submitApproval(this.value)">
+                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="rejectApproval(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>
-                    @*<button type="submit" class="btn btn-sm btn-success" value="PM PENGIRIM APPROVED" onclick="submitApproval(this.value)">
-                        <i class="fa fa-check-circle opacity-50 me-1"></i> Approve (PM Pengirim)
-                    </button>*@
                     <button type="submit" class="btn btn-sm btn-success" value="PM PENERIMA APPROVED" onclick="submitApprovalPenerima(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
                     </button>

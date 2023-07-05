@@ -10,14 +10,8 @@ $("document").ready(function () {
 
 var table2
 function getdetail(nomor_equip) {
-    /*var nomor_equip = 'DR0010';*/
-
     console.log(nomor_equip);
-
-   
-
     table2 = $("#tbl_detail").DataTable({
-        
         ajax: {
             url: $("#web_link").val() + "/api/PPE/Get_History",
             type: "GET",
@@ -46,23 +40,20 @@ function getdetail(nomor_equip) {
             
         ]
     });
-
-    
 }
-
 
 function detailClose() {
     var text = `<thead class="text-center">
-                                <tr>
-                                    <th>POSITION</th>
-                                    <th>STATUS</th>
-                                    <th>PIC</th>
-                                    @*<th>REMAKS</th>*@
-                                    <th>APPROVAL DATE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>`;
+                    <tr>
+                        <th>POSITION</th>
+                        <th>STATUS</th>
+                        <th>PIC</th>
+                        @*<th>REMAKS</th>*@
+                        <th>APPROVAL DATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>`;
     table2.destroy();
     table2.val(text);
 }
@@ -106,9 +97,7 @@ var table = $("#tbl_reviewppe").DataTable({
         },
         { data: 'PPE_NO' },
         { data: 'EGI' },
-        /*{ data: 'EQUIP_CLASS' },*/
         { data: 'EQUIP_NO' },
-        /*{ data: 'SERIAL_NO' },*/
         { data: 'DISTRICT_FROM' },
         { data: 'DISTRICT_TO' },
         { data: 'POSISI_PPE' },
@@ -117,14 +106,12 @@ var table = $("#tbl_reviewppe").DataTable({
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                /*action += `<a href="/PPE/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`*/
                 action += `<button onClick="getdetail('${row.EQUIP_NO}')" type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail">Detail</button>`
                 action += `<button onClick="printReport('${row.PPE_NO}')" type="button" class="btn btn-primary btn-sm">Print</button>`
                 action += `</div>`
                 return action;
             }
         }
-
     ],
     initComplete: function () {
         this.api()
@@ -135,10 +122,8 @@ var table = $("#tbl_reviewppe").DataTable({
                     .appendTo($("#tbl_reviewppe_filter.dataTables_filter"))
                     .on('change', function () {
                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
                         column.search(val ? '^' + val + '$' : '', true, false).draw();
                     });
-
                 column
                     .data()
                     .unique()
@@ -148,7 +133,4 @@ var table = $("#tbl_reviewppe").DataTable({
                     });
             });
     },
-
 });
-/*
-editMapApproval('${row.ID}')*/
