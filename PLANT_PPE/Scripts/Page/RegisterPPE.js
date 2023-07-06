@@ -1,4 +1,13 @@
-﻿Codebase.helpersOnLoad(['jq-select2']);
+﻿//KP1PT015
+//KP1PT015
+//KP1PT015
+//KP1PT02
+//RT1D01
+//RT11
+//AS11
+//KP0161
+//KP0111
+Codebase.helpersOnLoad(['jq-select2']);
 
 $("document").ready(function () {
     var txtDateInput = document.getElementById("txt_date");
