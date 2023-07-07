@@ -95,8 +95,6 @@ function getloc_to() {
 }
 
 function getCurrPosition() {
-
-
     $.ajax({
         url: $("#web_link").val() + "/api/Setting/Get_Position" ,
         type: "GET",
@@ -115,8 +113,6 @@ function getCurrPosition() {
 }
 
 function getNextPosition() {
-
-
     $.ajax({
         url: $("#web_link").val() + "/api/Setting/Get_Position",
         type: "GET",
@@ -133,128 +129,6 @@ function getNextPosition() {
 
     });
 }
-
-/*
-function Editgetapprv_from() {
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_DistrictMap", //URI,
-        type: "GET",
-        cache: false,
-        success: function (result) {
-            
-            *//*text = '<option>PILIH</option>';*//*
-            $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
-            });
-            $("#editapprv_from").append(text);
-
-        }
-
-    });
-}
-
-function Editgetapprv_to() {
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_DistrictMap", //URI,
-        type: "GET",
-        cache: false,
-        success: function (result) {
-            
-            *//*text = '<option>PILIH</option>';*//*
-            $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
-            });
-            $("#editapprv_to").append(text);
-
-        }
-
-
-    });
-
-
-}
-
-function Editgetloc_from() {
-
-    var district = $("#editapprv_from").val();
-
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_DistrictLocation?dstrct=" + district, //URI,
-        type: "GET",
-        cache: false,
-        success: function (result) {
-            
-            *//*text = '<option>PILIH</option>';*//*
-            $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.LOCATION + '">' + val.LOCATION + '</option>';
-            });
-            $("#editloc_from").append(text);
-
-        }
-
-    });
-}
-
-function Editgetloc_to() {
-
-    var district = $("#editapprv_to").val();
-
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_DistrictLocation?dstrct=" + district, //URI,
-        type: "GET",
-        cache: false,
-        success: function (result) {
-            
-            *//*text = '<option>PILIH</option>';*//*
-            $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.LOCATION + '">' + val.LOCATION + '</option>';
-            });
-            $("#editloc_to").append(text);
-
-        }
-
-    });
-}
-
-function EditgetCurrPosition() {
-
-
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_Position",
-        type: "GET",
-        cache: false,
-        success: function (result) {
-            
-            *//*text = '<option>PILIH</option>';*//*
-            $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_FULL + '</option>';
-            });
-            $("#editcurr_position").append(text);
-
-        }
-
-    });
-}
-
-function EditgetNextPosition() {
-
-
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_Position",
-        type: "GET",
-        cache: false,
-        success: function (result) {
-           
-            *//*text = '<option>PILIH</option>';*//*
-            $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_FULL + '</option>';
-            });
-            $("#editnext_position").append(text);
-
-        }
-
-    });
-}*/
 
 function insertMapApproval() {
     let obj = new Object();
@@ -357,11 +231,8 @@ function showInsert(){
     $('#buttonInsert').show();
 }
 function editMapApproval(approveNo) {
-
     $('#buttonUpdate').show();
     $('#buttonInsert').hide();
-
-
     var text1;
     var text2;
     var text3;
@@ -373,8 +244,6 @@ function editMapApproval(approveNo) {
     var text9;
     var text10;
     var text11;
-    
-    
     $.ajax({
         url: $("#web_link").val() + "/api/Setting/Get_MappingbyId", //URI,
         type: "GET",
@@ -385,13 +254,11 @@ function editMapApproval(approveNo) {
         success: function (result) {
             console.log(result);
             $.each(result.Data, function (key, val) {
-
                 if (val.APPROVAL_ACTION == 0) {
                     text1 = '<option selected value="' + val.APPROVAL_ACTION + '"> REJECT </option>';
                 } else if (val.APPROVAL_ACTION == 1) {
                     text1 = '<option selected value="' + val.APPROVAL_ACTION + '">  APPROVE  </option>';
                 }
-                
                 text2 = val.APPROVAL_ORDER;
                 text3 = '<option  value="' + val.APPROVAL_FROM + '" selected >' + val.APPROVAL_FROM + '</option>';
                 text4 = '<option  value="' + val.APPROVAL_TO + '" selected >' + val.APPROVAL_TO + '</option>'; 
@@ -402,11 +269,7 @@ function editMapApproval(approveNo) {
                 text9 = val.APPROVAL_STATUS;
                 text10 = val.CURRENT_STATUS;
                 text11 = val.APPROVAL_NO;
-
-
-
             });
-
             $('#apprv_no').val(text11);
             $('#txt_action').append(text1);
             $('#apprv_order').val(text2);
@@ -414,11 +277,8 @@ function editMapApproval(approveNo) {
             $('#apprv_to').append(text4);
             $('#loc_from').append(text5);
             $('#loc_to').append(text6);
-            /*$('#curr_position').append(text7);
-            $('#next_position').append(text8);*/
             $('#apprv_status').val(text9);
             $('#curr_status').val(text10);
-
 
             $.ajax({
                 url: $("#web_link").val() + "/api/Setting/Get_PositionById",
@@ -428,15 +288,11 @@ function editMapApproval(approveNo) {
                     },
                 cache: false,
                 success: function (result) {
-                    
-                    
                     $.each(result.Data, function (key, val) {
                         text += '<option value="' + val.POSITION_ID + '" selected>' + val.POSITION_FULL + '</option>';
                     });
                     $("#curr_position").append(text);
-
                 }
-
             });
 
             $.ajax({
@@ -447,27 +303,14 @@ function editMapApproval(approveNo) {
                 },
                 cache: false,
                 success: function (result) {
-                  
                     $.each(result.Data, function (key, val) {
                         text += '<option value="' + val.POSITION_ID + '" selected >' + val.POSITION_FULL + '</option>';
                     });
                     $("#next_position").append(text);
-
                 }
-
             });
-
-
-
             getloc_from();
             getloc_to();
-            /*Editgetapprv_from();
-            Editgetapprv_to();
-            Editgetloc_from();
-            Editgetloc_to();
-            EditgetCurrPosition();
-            EditgetNextPosition();*/
-
         }
         
     });
@@ -559,45 +402,3 @@ var table = $("#tbl_mappingApproval").DataTable({
     ],
 
 });
-
-
-/*
-function deleteDstrct(id) {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You will not be able to recover this data!",
-        icon: "warning",
-        showCancelButton: !0,
-        customClass: { confirmButton: "btn btn-alt-danger m-1", cancelButton: "btn btn-alt-secondary m-1" },
-        confirmButtonText: "Yes, delete it!",
-        html: !1,
-        preConfirm: function (e) {
-            return new Promise(function (e) {
-                setTimeout(function () {
-                    e();
-                }, 50);
-            });
-        },
-    }).then(function (n) {
-        if (n.value == true) {
-            $.ajax({
-                url: $("#web_link").val() + "/api/Setting/Delete_District?id=" + id, //URI
-                type: "POST",
-                success: function (data) {
-                    if (data.Remarks == true) {
-                        Swal.fire("Deleted!", "Your Data has been deleted.", "success");
-                        table.ajax.reload();
-                    } if (data.Remarks == false) {
-                        Swal.fire("Cancelled", "Message : " + data.Message, "error");
-                    }
-
-                },
-                error: function (xhr) {
-                    alert(xhr.responseText);
-                }
-            })
-        } else {
-            Swal.fire("Cancelled", "Your Data is safe", "error");
-        }
-    });
-}*/

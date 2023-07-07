@@ -7,6 +7,7 @@
 //AS11
 //KP0161
 //KP0111
+
 Codebase.helpersOnLoad(['jq-select2']);
 
 $("document").ready(function () {

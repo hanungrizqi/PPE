@@ -174,6 +174,92 @@ function sendMailPPE_DONE(uniquePPE_NO) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             if (data.Remarks == true) {
+                //Swal.fire({
+                //    title: 'Saved',
+                //    text: "Your data has been saved!",
+                //    icon: 'success',
+                //    confirmButtonColor: '#3085d6',
+                //    confirmButtonText: 'OK',
+                //    allowOutsideClick: false,
+                //    allowEscapeKey: false
+                //}).then((result) => {
+                //    if (result.isConfirmed) {
+                //        window.location.href = "/Approval/DivHeadOPR";
+                //    }
+                //})
+                update_MSE600();
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function update_MSE600() {
+    debugger
+    if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
+        Swal.fire(
+            'Warning',
+            'Mohon sertakan Remarks Approval!',
+            'warning'
+        );
+        return;
+    }
+    debugger
+    let selectedRows = [];
+    $('.row-checkbox:checked').each(function () {
+        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        selectedRows.push(equipNo);
+    });
+    debugger
+    if (selectedRows.length === 0) {
+        Swal.fire(
+            'Warning',
+            'Tidak ada baris yang tercentang!',
+            'warning'
+        );
+        return;
+    }
+
+    let dataPPE = [];
+    let uniquePPE_NO = new Set();
+    $('.row-checkbox:checked').each(function () {
+        debugger
+        let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        let ppe = {
+            PPE_NO: $(this).data('id'),
+            UPDATED_BY: $("#hd_nrp").val(),
+            REMARKS: $("#txt_remark").val(),
+            EQUIP_NO: equipNo,
+            APPROVAL_ORDER: 8,
+            URL_FORM_DONE: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $(this).data('id'),
+        };
+        dataPPE.push(ppe);
+        if (!uniquePPE_NO.has(ppe.PPE_NO)) {
+            debugger
+            uniquePPE_NO.add(ppe.PPE_NO);
+        }
+    });
+
+    $.ajax({
+        url: $("#web_link").val() + "/api/MSE600/Update_Equipment",
+        data: JSON.stringify(dataPPE),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function () {
+            $("#overlay").show();
+        },
+        success: function (data) {
+            if (data.Remarks == true) {
                 Swal.fire({
                     title: 'Saved',
                     text: "Your data has been saved!",
@@ -195,9 +281,11 @@ function sendMailPPE_DONE(uniquePPE_NO) {
                 );
                 $("#overlay").hide();
             }
+
         },
         error: function (xhr) {
             alert(xhr.responseText);
+            $("#overlay").hide();
         }
     });
 }
