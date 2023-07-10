@@ -50,6 +50,22 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Get_PPENO_SM")]
+        public IHttpActionResult Get_PPENO_SM()
+        {
+            try
+            {
+                var data = db.TBL_T_PPEs.Where(a => a.STATUS != "REJECT").OrderBy(a => a.ID).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost]
         [Route("Create_PPE")]
         public IHttpActionResult Create_PPE(List<TBL_T_PPE> ppeList)

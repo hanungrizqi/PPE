@@ -8,7 +8,7 @@ $("document").ready(function () {
 
 var table = $("#tbl_reviewppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_FirstNoPPE",
+        url: $("#web_link").val() + "/api/PPE/Get_PPENO_SM",
         dataSrc: "Data",
     },
     "columnDefs": [
@@ -97,8 +97,7 @@ function getdetail(nomor_equip) {
                     return tanggal;
                 }
             }
-
-        ]
+        ], order: [[3, 'asc']]
     });
 }
 

@@ -32,5 +32,25 @@ namespace API_PLANT_PPE.Properties {
                 return ((string)(this["API_PLANT_PPE_EquipmentServices_EquipmentService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpd.kppmining.net/ews/services/RefCodesService")]
+        public string API_PLANT_PPE_RefCodesService_RefCodesService {
+            get {
+                return ((string)(this["API_PLANT_PPE_RefCodesService_RefCodesService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpd.kppmining.net/ews/services/EquipmentReferenceService")]
+        public string API_PLANT_PPE_EquipmentReferenceService_EquipmentReferenceService {
+            get {
+                return ((string)(this["API_PLANT_PPE_EquipmentReferenceService_EquipmentReferenceService"]));
+            }
+        }
     }
 }
