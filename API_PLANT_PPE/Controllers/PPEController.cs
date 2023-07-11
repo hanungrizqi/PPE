@@ -350,6 +350,23 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("List_ApprovalSM/{posid}")]
+        public IHttpActionResult List_ApprovalSM(string posid)
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Waiting SM Dept" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").OrderBy(a => a.ID).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         //Get Detail PPE
         [HttpGet]
         [Route("Get_PPEDetail/{no_quip}")]

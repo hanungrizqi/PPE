@@ -4418,6 +4418,7 @@
     <Content Include="Scripts\Page\SettingMenu.js" />
     <Content Include="Scripts\Page\SettingDistrict.js" />
     <Content Include="Scripts\Page\SettingUser.js" />
+    <Content Include="Scripts\Page\SMApproval.js" />
     <Content Include="Scripts\Page\SMReview.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -4475,6 +4476,7 @@
     <Content Include="Views\Approval\ProjectManagerPenerima.cshtml" />
     <Content Include="Views\Approval\DivHeadOPR.cshtml" />
     <Content Include="Views\SM\Review.cshtml" />
+    <Content Include="Views\SM\Approve.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

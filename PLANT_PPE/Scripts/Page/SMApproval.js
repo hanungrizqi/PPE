@@ -1,12 +1,12 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
-var table = $("#tbl_ppe").DataTable({
+var table = $("#tbl_ppe_sm").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE/" + $("#hd_PositionID").val(),
+        url: $("#web_link").val() + "/api/PPE/List_ApprovalSM/" + $("#hd_PositionID").val(),
         dataSrc: "Data",
     },
 
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] },
+        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
         { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
@@ -36,15 +36,15 @@ var table = $("#tbl_ppe").DataTable({
                 return text;
             }
         },
-        {
-            data: 'ID',
-            targets: 'no-sort', orderable: false,
-            render: function (data, type, row) {
-                action = `<div class="btn-group">`
-                action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
-                return action;
-            }
-        }
+        //{
+        //    data: 'ID',
+        //    targets: 'no-sort', orderable: false,
+        //    render: function (data, type, row) {
+        //        action = `<div class="btn-group">`
+        //        action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+        //        return action;
+        //    }
+        //}
     ],
     initComplete: function () {
         var headerCheckbox = document.getElementById('checkAll');
@@ -63,7 +63,7 @@ var table = $("#tbl_ppe").DataTable({
         this.api().columns(1).every(function () {
             var column = this;
             var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"></select>')
-                .appendTo($("#tbl_ppe_filter.dataTables_filter"))
+                .appendTo($("#tbl_ppe_sm_filter.dataTables_filter"))
                 .on('change', function () {
                     var val = $.fn.dataTable.util.escapeRegex($(this).val());
                     column.search(val ? '^' + val + '$' : '', true, false).draw();
@@ -93,7 +93,7 @@ var table = $("#tbl_ppe").DataTable({
 });
 
 table.on('draw', function () {
-    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');
+    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe_sm tbody .row-checkbox:checked');
 
     visibleCheckboxes.forEach(function (checkbox) {
         checkbox.checked = false;
@@ -136,10 +136,10 @@ function submitApproval(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Plant Manager" : "Plant Dept. Head",
+            POSISI_PPE: postStatus === "REJECT" ? "Division Head ENG" : "Division Head OPR",
             STATUS: postStatus,
-            APPROVAL_ORDER: postStatus === "REJECT" ? 3 : 3,
-            URL_FORM_PLNTDH: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + $(this).data('id'),
+            APPROVAL_ORDER: 7,
+            URL_FORM_DIVHEAD_OPR: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Opr&PPE_NO=" + $(this).data('id'),
         };
         dataPPE.push(ppe);
         if (!uniquePPE_NO.has(ppe.PPE_NO)) {
@@ -147,11 +147,9 @@ function submitApproval(postStatus) {
             uniquePPE_NO.add(ppe.PPE_NO);
         }
     });
-    console.log(uniquePPE_NO);
-    console.log(dataPPE);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/Approval/Approve_PPE_PlantManager",
+        url: $("#web_link").val() + "/api/Approval/Approve_PPE_DivHead_Eng",
         data: JSON.stringify(dataPPE),
         dataType: "json",
         type: "POST",
@@ -160,7 +158,17 @@ function submitApproval(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
-            sendMailPlant_DeptHead(Array.from(uniquePPE_NO));
+            if (data.Remarks == true) {
+                sendMailDivhead_Opr(Array.from(uniquePPE_NO));
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -169,12 +177,12 @@ function submitApproval(postStatus) {
     });
 }
 
-function sendMailPlant_DeptHead(uniquePPE_NO) {
+function sendMailDivhead_Opr(uniquePPE_NO) {
     debugger
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Opr?ppe=" + encodedPPENo,
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -190,7 +198,7 @@ function sendMailPlant_DeptHead(uniquePPE_NO) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/PlantManager";
+                        window.location.href = "/Approval/DivHead";
                     }
                 })
             } if (data.Remarks == false) {
@@ -244,9 +252,9 @@ function rejectApproval(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Plant Manager" : "Plant Dept. Head",
+            POSISI_PPE: postStatus === "REJECT" ? "Division Head ENG" : "Division Head OPR",
             STATUS: postStatus,
-            APPROVAL_ORDER: postStatus === "REJECT" ? 3 : 3,
+            APPROVAL_ORDER: 7,
         };
         dataPPE.push(ppe);
         if (!uniquePPE_NO.has(ppe.PPE_NO)) {
@@ -254,11 +262,9 @@ function rejectApproval(postStatus) {
             uniquePPE_NO.add(ppe.PPE_NO);
         }
     });
-    console.log(uniquePPE_NO);
-    console.log(dataPPE);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/Approval/Reject_PPE_PlantManager",
+        url: $("#web_link").val() + "/api/Approval/Reject_Approval",
         data: JSON.stringify(dataPPE),
         dataType: "json",
         type: "POST",
@@ -278,7 +284,7 @@ function rejectApproval(postStatus) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/PlantManager";
+                        window.location.href = "/Approval/DivHead";
                     }
                 })
             } if (data.Remarks == false) {
@@ -289,6 +295,7 @@ function rejectApproval(postStatus) {
                 );
                 $("#overlay").hide();
             }
+
         },
         error: function (xhr) {
             alert(xhr.responseText);

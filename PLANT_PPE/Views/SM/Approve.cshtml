@@ -1,21 +1,21 @@
 ﻿
 @{
-    ViewBag.Title = "Section Head";
-    ViewBag.JS = "/Scripts/Page/ApprovalSecHead.js";
+    ViewBag.Title = "SM Approval";
+    ViewBag.JS = "/Scripts/Page/SMApproval.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @*<input type="hidden" id="hd_PositionID" value="@Session["PositionID"]" />*@
 
-<h2 class="content-heading">Approval Section Head</h2>
+<h2 class="content-heading">Supply Management Approval</h2>
 <div class="block block-rounded">
     <div class="block-header block-header-default">
         <h3 class="block-title">
-            Table Approval PPE <small>All list Approval Section Head</small>
+            SM Approval <small>All list equipment</small>
         </h3>
     </div>
     <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_ppe">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_ppe_sm">
             <thead class="text-center bg-primary text-white">
                 <tr>
                     @*<th>NO</th>*@
@@ -27,7 +27,7 @@
                     <th>TO DISTRICT</th>
                     <th>CREATED DATE</th>
                     <th>STATUS</th>
-                    <th>ACTION</th>
+                    @*<th>ACTION</th>*@
                 </tr>
             </thead>
             <tbody>
@@ -49,10 +49,10 @@
         <div class="block-options justify-content-center">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="rejectApproval(this.value)">
+                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="r(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-sm btn-success" value="SEC.HEAD APPROVED" onclick="submitApproval(this.value)">
+                    <button type="submit" class="btn btn-sm btn-success" value="SM APPROVED" onclick="s(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
                     </button>
                 </div>

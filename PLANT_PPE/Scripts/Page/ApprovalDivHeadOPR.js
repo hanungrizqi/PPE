@@ -55,31 +55,45 @@ var table = $("#tbl_ppe_opr").DataTable({
                 rowCheckboxes[i].checked = isChecked;
             }
         });
-        this.api()
-            .columns(1)
-            .every(function () {
-                var column = this;
-                var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- PPE NUMBER --</option></select>')
-                    .appendTo($("#tbl_ppe_opr_filter.dataTables_filter"))
-                    .on('change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
-                        column.search(val ? '^' + val + '$' : '', true, false).draw();
-                    });
+        var firstPPE = this.api().column(1).data()[0];
+        debugger
+        this.api().column(1).order('asc').draw();
 
-                column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d, j) {
+        this.api().columns(1).every(function () {
+            var column = this;
+            var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"></select>')
+                .appendTo($("#tbl_ppe_opr_filter.dataTables_filter"))
+                .on('change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                });
+
+            if (firstPPE) {
+                select.append('<option value="' + firstPPE + '">' + firstPPE + '</option>');
+            } else {
+                select.append('<option value="-- PPE NUMBER --">-- PPE NUMBER --</option>');
+            }
+            column
+                .data()
+                .unique()
+                .sort()
+                .each(function (d, j) {
+                    if (d !== firstPPE) {
                         select.append('<option value="' + d + '">' + d + '</option>');
-                    });
-            });
+                    }
+                });
+            if (firstPPE) {
+                column.search('^' + firstPPE + '$', true, false).draw();
+            } else {
+                column.search('^-- PPE NUMBER --$', true, false).draw();
+            }
+        });
     },
 });
 
 table.on('draw', function () {
-    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');
+    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe_opr tbody .row-checkbox:checked');
 
     visibleCheckboxes.forEach(function (checkbox) {
         checkbox.checked = false;
@@ -174,19 +188,6 @@ function sendMailPPE_DONE(uniquePPE_NO) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             if (data.Remarks == true) {
-                //Swal.fire({
-                //    title: 'Saved',
-                //    text: "Your data has been saved!",
-                //    icon: 'success',
-                //    confirmButtonColor: '#3085d6',
-                //    confirmButtonText: 'OK',
-                //    allowOutsideClick: false,
-                //    allowEscapeKey: false
-                //}).then((result) => {
-                //    if (result.isConfirmed) {
-                //        window.location.href = "/Approval/DivHeadOPR";
-                //    }
-                //})
                 update_MSE600();
             } if (data.Remarks == false) {
                 Swal.fire(

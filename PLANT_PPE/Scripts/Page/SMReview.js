@@ -96,7 +96,8 @@ function getdetail(nomor_equip) {
                     const tanggal = moment(data).format("DD/MM/YYYY");
                     return tanggal;
                 }
-            }
+            },
+            //{ data: 'UPLOAD_FORM_CAAB' }
         ], order: [[3, 'asc']]
     });
 }
