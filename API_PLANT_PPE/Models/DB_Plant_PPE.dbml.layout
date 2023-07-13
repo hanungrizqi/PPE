@@ -182,5 +182,11 @@
         <elementListCompartment Id="466daee7-6bb9-466f-98a0-f2c5b79b9b89" absoluteBounds="2.64, 0.96, 1.9700000000000002, 6.403035481770833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="c9dc6028-0ce1-48f6-8f48-05d985e2daf6" isExpanded="false" absoluteBounds="2.625, 2, 2, 0.45">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_H_EQUIPNO_DONE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="74743f87-893b-4eed-be52-17718151875f" absoluteBounds="2.64, 2.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

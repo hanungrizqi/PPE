@@ -449,6 +449,16 @@
       <Column Name="URL_FORM_DONE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TBL_H_EQUIPNO_DONE" Member="TBL_H_EQUIPNO_DONEs">
+    <Type Name="TBL_H_EQUIPNO_DONE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Equip_No" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="District_From" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="District_To" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Updated_By" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Updated_Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
     <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="cusp_insertNotifEmail_SectionHeadResult">

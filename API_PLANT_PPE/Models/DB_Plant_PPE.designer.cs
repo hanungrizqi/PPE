@@ -60,6 +60,9 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_T_PPE(TBL_T_PPE instance);
     partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
     partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
+    partial void InsertTBL_H_EQUIPNO_DONE(TBL_H_EQUIPNO_DONE instance);
+    partial void UpdateTBL_H_EQUIPNO_DONE(TBL_H_EQUIPNO_DONE instance);
+    partial void DeleteTBL_H_EQUIPNO_DONE(TBL_H_EQUIPNO_DONE instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -329,6 +332,14 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<TBL_T_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_H_EQUIPNO_DONE> TBL_H_EQUIPNO_DONEs
+		{
+			get
+			{
+				return this.GetTable<TBL_H_EQUIPNO_DONE>();
 			}
 		}
 		
@@ -7296,6 +7307,188 @@ namespace API_PLANT_PPE.Models
 					this._URL_FORM_DONE = value;
 					this.SendPropertyChanged("URL_FORM_DONE");
 					this.OnURL_FORM_DONEChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_H_EQUIPNO_DONE")]
+	public partial class TBL_H_EQUIPNO_DONE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Equip_No;
+		
+		private string _District_From;
+		
+		private string _District_To;
+		
+		private string _Updated_By;
+		
+		private System.Nullable<System.DateTime> _Updated_Date;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnEquip_NoChanging(string value);
+    partial void OnEquip_NoChanged();
+    partial void OnDistrict_FromChanging(string value);
+    partial void OnDistrict_FromChanged();
+    partial void OnDistrict_ToChanging(string value);
+    partial void OnDistrict_ToChanged();
+    partial void OnUpdated_ByChanging(string value);
+    partial void OnUpdated_ByChanged();
+    partial void OnUpdated_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdated_DateChanged();
+    #endregion
+		
+		public TBL_H_EQUIPNO_DONE()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Equip_No", DbType="VarChar(50)")]
+		public string Equip_No
+		{
+			get
+			{
+				return this._Equip_No;
+			}
+			set
+			{
+				if ((this._Equip_No != value))
+				{
+					this.OnEquip_NoChanging(value);
+					this.SendPropertyChanging();
+					this._Equip_No = value;
+					this.SendPropertyChanged("Equip_No");
+					this.OnEquip_NoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District_From", DbType="VarChar(50)")]
+		public string District_From
+		{
+			get
+			{
+				return this._District_From;
+			}
+			set
+			{
+				if ((this._District_From != value))
+				{
+					this.OnDistrict_FromChanging(value);
+					this.SendPropertyChanging();
+					this._District_From = value;
+					this.SendPropertyChanged("District_From");
+					this.OnDistrict_FromChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District_To", DbType="VarChar(50)")]
+		public string District_To
+		{
+			get
+			{
+				return this._District_To;
+			}
+			set
+			{
+				if ((this._District_To != value))
+				{
+					this.OnDistrict_ToChanging(value);
+					this.SendPropertyChanging();
+					this._District_To = value;
+					this.SendPropertyChanged("District_To");
+					this.OnDistrict_ToChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Updated_By", DbType="VarChar(50)")]
+		public string Updated_By
+		{
+			get
+			{
+				return this._Updated_By;
+			}
+			set
+			{
+				if ((this._Updated_By != value))
+				{
+					this.OnUpdated_ByChanging(value);
+					this.SendPropertyChanging();
+					this._Updated_By = value;
+					this.SendPropertyChanged("Updated_By");
+					this.OnUpdated_ByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Updated_Date", DbType="Date")]
+		public System.Nullable<System.DateTime> Updated_Date
+		{
+			get
+			{
+				return this._Updated_Date;
+			}
+			set
+			{
+				if ((this._Updated_Date != value))
+				{
+					this.OnUpdated_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Updated_Date = value;
+					this.SendPropertyChanged("Updated_Date");
+					this.OnUpdated_DateChanged();
 				}
 			}
 		}
