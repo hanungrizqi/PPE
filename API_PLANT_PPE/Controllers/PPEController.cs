@@ -367,6 +367,23 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Received")]
+        public IHttpActionResult Received()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "DIVISION HEAD OPR APPROVED").OrderBy(a => a.PPE_NO).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         //Get Detail PPE
         [HttpGet]
         [Route("Get_PPEDetail/{no_quip}")]
@@ -376,6 +393,23 @@ namespace API_PLANT_PPE.Controllers
             {
                 db.CommandTimeout = 120;
                 var data = db.TBL_T_PPEs.Where(a => a.ID == no_quip).FirstOrDefault();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Detail_SM")]
+        public IHttpActionResult Detail_SM(string ppe_no)
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe_no).FirstOrDefault();
 
                 return Ok(new { Data = data });
             }

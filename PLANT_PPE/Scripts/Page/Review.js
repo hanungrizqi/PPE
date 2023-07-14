@@ -4,8 +4,6 @@ $("document").ready(function () {
     $('.select2-modal').select2({
         dropdownParent: $('.modal')
     });
-
-   
 })
 
 var table2
@@ -16,9 +14,8 @@ function getdetail(nomor_equip) {
             url: $("#web_link").val() + "/api/PPE/Get_History",
             type: "GET",
             data: {
-                Equip_No : nomor_equip
+                Equip_No: nomor_equip
             },
-            order: [[3, 'asc']],
             dataSrc: "Data",
         },
         "columnDefs": [
@@ -33,12 +30,12 @@ function getdetail(nomor_equip) {
             {
                 data: 'Approved_Date',
                 render: function (data, type, row) {
-                    const tanggal = moment(data).format("DD/MM/YYYY HH:MM:SS");
+                    const tanggal = moment(data).format("DD/MM/YYYY");
                     return tanggal;
                 }
-            }
-            
-        ]
+            },
+            //{ data: 'UPLOAD_FORM_CAAB' }
+        ], order: [[3, 'asc']]
     });
 }
 
@@ -83,11 +80,16 @@ var table = $("#tbl_reviewppe").DataTable({
         dataSrc: "Data",
     },
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 8] },
         { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
     columns: [
+        { data: 'PPE_NO' },
+        { data: 'EGI' },
+        { data: 'EQUIP_NO' },
+        { data: 'DISTRICT_FROM' },
+        { data: 'DISTRICT_TO' },
         {
             data: 'CREATED_DATE',
             render: function (data, type, row) {
@@ -95,12 +97,21 @@ var table = $("#tbl_reviewppe").DataTable({
                 return tanggal;
             }
         },
-        { data: 'PPE_NO' },
-        { data: 'EGI' },
-        { data: 'EQUIP_NO' },
-        { data: 'DISTRICT_FROM' },
-        { data: 'DISTRICT_TO' },
         { data: 'POSISI_PPE' },
+        {
+            data: 'STATUS',
+            render: function (data, type, row) {
+                text = '';
+                if (data == "SM APPROVED") {
+                    text = `<span class="badge bg-success">${data}</span>`;
+                } else if (data == "REJECT") {
+                    text = `<span class="badge bg-danger">${data}</span>`;
+                } else {
+                    text = `<span class="badge bg-info">${data}</span>`;
+                }
+                return text;
+            }
+        },
         {
             data: 'ID',
             targets: 'no-sort', orderable: false,

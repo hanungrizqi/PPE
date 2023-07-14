@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModel\Cls_PPE.cs" />
+    <Compile Include="ViewModel\Cls_PPEDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\codebase.css" />
@@ -4419,6 +4420,7 @@
     <Content Include="Scripts\Page\SettingDistrict.js" />
     <Content Include="Scripts\Page\SettingUser.js" />
     <Content Include="Scripts\Page\SMApproval.js" />
+    <Content Include="Scripts\Page\SMDetail.js" />
     <Content Include="Scripts\Page\SMReview.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -4477,6 +4479,7 @@
     <Content Include="Views\Approval\DivHeadOPR.cshtml" />
     <Content Include="Views\SM\Review.cshtml" />
     <Content Include="Views\SM\Approve.cshtml" />
+    <Content Include="Views\Received\DetailPPE_EQP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
