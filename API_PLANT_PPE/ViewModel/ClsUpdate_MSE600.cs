@@ -191,7 +191,7 @@ namespace API_PLANT_PPE.ViewModel
 
                 i_obj_equipment_dto1.equipmentNo = dataEquipment.EQUIP_NO;
                 i_obj_equipment_dto1.costingFlag = "A";
-                i_obj_equipment_dto1.equipmentClassif3 = "KP";
+                i_obj_equipment_dto1.equipmentClassif3 = "SC";
                 //i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
 
                 i_obj_services.modify(i_obj_context, i_obj_equipment_dto1);

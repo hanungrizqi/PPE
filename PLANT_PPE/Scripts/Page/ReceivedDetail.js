@@ -220,7 +220,7 @@ function SM_Update_MSE600() {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/SM/Approval";
+                        window.location.href = "/Received/Index";
                     }
                 })
             } if (data.Remarks == false) {

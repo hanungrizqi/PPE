@@ -87,12 +87,17 @@
                                     {
                                         <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM">
                                     }
+                                    else
+                                    {
+                                        <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM" value="@equip.DATE_RECEIVED_SM.ToString("yyyy-MM-dd")">
+                                    }
                                 </td>
                                 <td>
-                                    @if (equip.BERITA_ACARA_SM == null)
+                                    <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_BA" multiple>
+                                    @*@if (equip.BERITA_ACARA_SM == null)
                                     {
                                         <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_BA" multiple>
-                                    }
+                                    }*@
                                 </td>
                             </tr>
                         }
