@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Detail PPE";
-    ViewBag.JS = "/Scripts/Page/SMDetail.js";
+    ViewBag.JS = "/Scripts/Page/ReceivedDetail.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -110,9 +110,9 @@
             <div class="row text-center">
                 <div class="col-md-12">
                     <a href="/Received/Index" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
-                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="r(this.value)">
+                    @*<button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="r(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
-                    </button>
+                    </button>*@
                     <button type="submit" class="btn btn-sm btn-success" value="SM APPROVED" onclick="submitApproval(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
                     </button>

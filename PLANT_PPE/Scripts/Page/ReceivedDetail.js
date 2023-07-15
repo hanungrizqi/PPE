@@ -148,7 +148,7 @@ function submitBA() {
         processData: false,
         success: function (data) {
             if (data.Remarks == true) {
-                sendMailPM_Pengirim(Array.from(uniquePPE_NO));
+                SM_Update_MSE600();
             } else if (data.Remarks == false) {
                 Swal.fire({
                     title: 'Warning',
@@ -172,4 +172,70 @@ function submitBA() {
             alert(xhr.responseText);
         }
     })
+}
+
+function SM_Update_MSE600() {
+    debugger
+    var dataEquipment = [];
+    $.each($("#table_eqp tbody tr"), function () {
+        debugger
+        let ppe = {
+            PPE_NO: $("#txt_noPPE").val(),
+            EQUIP_NO: $(this).find("td:nth-child(1)").text(),
+            EGI: $(this).find("td:nth-child(2)").text(),
+            EQUIP_CLASS: $(this).find("td:nth-child(3)").text(),
+            SERIAL_NO: $(this).find("td:nth-child(4)").text(),
+            PPE_DESC: $(this).find("td:nth-child(5)").text(),
+            DISTRICT_FROM: $(this).find("td:nth-child(6)").text(),
+            DISTRICT_TO: $(this).find("td:nth-child(7)").text(),
+            LOC_FROM: $(this).find("td:nth-child(8)").text(),
+            LOC_TO: $(this).find("td:nth-child(9)").text(),
+            DATE_RECEIVED_SM: $(this).find("input[name='txt_DateRecivSM']").val(),
+            BERITA_ACARA_SM: $(this).find("input[name='txt_BA']").val(),
+            UPDATED_BY: $("#hd_nrp").val(),
+            APPROVAL_ORDER: 9,
+        };
+        dataEquipment.push(ppe);
+    });
+    console.log(dataEquipment);
+
+    $.ajax({
+        url: $("#web_link").val() + "/api/MSE600/SM_Update",
+        data: JSON.stringify(dataEquipment),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function () {
+            $("#overlay").show();
+        },
+        success: function (data) {
+            if (data.Remarks == true) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Your data has been saved!",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/SM/Approval";
+                    }
+                })
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+            $("#overlay").hide();
+        }
+    });
 }

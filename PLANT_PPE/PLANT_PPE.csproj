@@ -4420,7 +4420,7 @@
     <Content Include="Scripts\Page\SettingDistrict.js" />
     <Content Include="Scripts\Page\SettingUser.js" />
     <Content Include="Scripts\Page\SMApproval.js" />
-    <Content Include="Scripts\Page\SMDetail.js" />
+    <Content Include="Scripts\Page\ReceivedDetail.js" />
     <Content Include="Scripts\Page\SMReview.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
