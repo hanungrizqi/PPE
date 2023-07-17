@@ -33,9 +33,6 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_M_AKSE(TBL_M_AKSE instance);
     partial void UpdateTBL_M_AKSE(TBL_M_AKSE instance);
     partial void DeleteTBL_M_AKSE(TBL_M_AKSE instance);
-    partial void InsertTBL_M_USER(TBL_M_USER instance);
-    partial void UpdateTBL_M_USER(TBL_M_USER instance);
-    partial void DeleteTBL_M_USER(TBL_M_USER instance);
     partial void InsertTBL_M_ROLE(TBL_M_ROLE instance);
     partial void UpdateTBL_M_ROLE(TBL_M_ROLE instance);
     partial void DeleteTBL_M_ROLE(TBL_M_ROLE instance);
@@ -66,6 +63,9 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
     partial void UpdateTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
     partial void DeleteTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
+    partial void InsertTBL_M_USER(TBL_M_USER instance);
+    partial void UpdateTBL_M_USER(TBL_M_USER instance);
+    partial void DeleteTBL_M_USER(TBL_M_USER instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -103,14 +103,6 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<TBL_M_AKSE>();
-			}
-		}
-		
-		public System.Data.Linq.Table<TBL_M_USER> TBL_M_USERs
-		{
-			get
-			{
-				return this.GetTable<TBL_M_USER>();
 			}
 		}
 		
@@ -346,6 +338,22 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<TBL_M_USER_APPROVAL> TBL_M_USER_APPROVALs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_USER_APPROVAL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_USER> TBL_M_USERs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_USER>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_insertNotifEmail_SectionHead")]
 		public ISingleResult<cusp_insertNotifEmail_SectionHeadResult> cusp_insertNotifEmail_SectionHead([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PPE_NO", DbType="VarChar(20)")] string pPE_NO)
 		{
@@ -406,16 +414,6 @@ namespace API_PLANT_PPE.Models
 		public IQueryable<cufn_getPPE_NOResult> cufn_getPPE_NO()
 		{
 			return this.CreateMethodCallQuery<cufn_getPPE_NOResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-	}
-	
-		
-		public System.Data.Linq.Table<TBL_M_USER_APPROVAL> TBL_M_USER_APPROVALs
-		{
-			get
-			{
-				return this.GetTable<TBL_M_USER_APPROVAL>();
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_historycalPPE")]
@@ -511,92 +509,6 @@ namespace API_PLANT_PPE.Models
 					this._IS_ALLOW = value;
 					this.SendPropertyChanged("IS_ALLOW");
 					this.OnIS_ALLOWChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_USER")]
-	public partial class TBL_M_USER : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Role;
-		
-		private string _Username;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_RoleChanging(int value);
-    partial void OnID_RoleChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    #endregion
-		
-		public TBL_M_USER()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Role", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID_Role
-		{
-			get
-			{
-				return this._ID_Role;
-			}
-			set
-			{
-				if ((this._ID_Role != value))
-				{
-					this.OnID_RoleChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Role = value;
-					this.SendPropertyChanged("ID_Role");
-					this.OnID_RoleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(150) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
 				}
 			}
 		}
@@ -7823,6 +7735,92 @@ namespace API_PLANT_PPE.Models
 					this._dstrct_code = value;
 					this.SendPropertyChanged("dstrct_code");
 					this.Ondstrct_codeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_USER")]
+	public partial class TBL_M_USER : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Role;
+		
+		private string _Username;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_RoleChanging(int value);
+    partial void OnID_RoleChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    #endregion
+		
+		public TBL_M_USER()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Role", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Role
+		{
+			get
+			{
+				return this._ID_Role;
+			}
+			set
+			{
+				if ((this._ID_Role != value))
+				{
+					this.OnID_RoleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Role = value;
+					this.SendPropertyChanged("ID_Role");
+					this.OnID_RoleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(150) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
 				}
 			}
 		}

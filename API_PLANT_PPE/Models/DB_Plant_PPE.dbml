@@ -7,12 +7,6 @@
       <Column Name="IS_ALLOW" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TBL_M_USER" Member="TBL_M_USERs">
-    <Type Name="TBL_M_USER">
-      <Column Name="ID_Role" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.TBL_M_ROLE" Member="TBL_M_ROLEs">
     <Type Name="TBL_M_ROLE">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -465,6 +459,22 @@
       <Column Name="BA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TBL_M_USER_APPROVAL" Member="TBL_M_USER_APPROVALs">
+    <Type Name="TBL_M_USER_APPROVAL">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Position_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Employee_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="sub_menu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dstrct_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_M_USER" Member="TBL_M_USERs">
+    <Type Name="TBL_M_USER">
+      <Column Name="ID_Role" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
     <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="cusp_insertNotifEmail_SectionHeadResult">
@@ -530,16 +540,6 @@
       <Column Name="STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Table Name="dbo.TBL_M_USER_APPROVAL" Member="TBL_M_USER_APPROVALs">
-    <Type Name="TBL_M_USER_APPROVAL">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Position_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Employee_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="sub_menu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="dstrct_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Function Name="dbo.cusp_historycalPPE" Method="cusp_historycalPPE">
     <Parameter Name="equip_no" Type="System.String" DbType="VarChar(50)" />
     <ElementType Name="cusp_historycalPPEResult">
