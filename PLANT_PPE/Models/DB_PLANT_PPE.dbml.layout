@@ -68,5 +68,17 @@
         <elementListCompartment Id="f59440d4-1f4d-4558-8d31-5072ebe88bce" absoluteBounds="2.64, 2.46, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="eb242b80-a551-478f-90de-c69e3e464b34" isExpanded="false" absoluteBounds="0.5, 4.75, 2, 0.45">
+      <DataClassMoniker Name="/DB_PLANT_PPEDataContext/TBL_MAPPING_APPROVALS_NIH" />
+      <nestedChildShapes>
+        <elementListCompartment Id="21398906-7b86-4259-8ab5-1195be4e662d" absoluteBounds="0.51500000000000012, 5.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1db4b120-5adf-4a35-ba38-32ff09f64867" absoluteBounds="0.875, 2.75, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DB_PLANT_PPEDataContext/TBL_M_USER_APPROVAL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8a1887c9-301b-45cc-90ff-b69ac4136d6b" absoluteBounds="0.89, 3.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

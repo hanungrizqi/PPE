@@ -31,6 +31,7 @@ namespace PLANT_PPE.Controllers
             }
             var dataUser = db.VW_KARYAWAN_ALLs.Where(a => a.EMPLOYEE_ID == nrp).FirstOrDefault();
             var dataRole = db.TBL_M_USERs.Where(a => a.Username == nrp).FirstOrDefault();
+            //var dataRoledakun = db.TBL_M_ROLEs.Where(a => a.ID == dataRole.ID_Role).FirstOrDefault();
 
             if (dataRole != null)
             {
@@ -52,6 +53,8 @@ namespace PLANT_PPE.Controllers
                 //Session["Site"] = Jobsite;
                 Session["Site"] = dataUser.DSTRCT_CODE;
                 Session["Role"] = dataRoledakun.RoleName;
+                //Session["Pos"]
+                //Session[Pos_Code] = 
                 Session["PositionID"] = dataUser.POSITION_ID;
                 ViewBag.POSID = dataUser.POSITION_ID;
                 return new JsonResult() { Data = new { Remarks = true }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

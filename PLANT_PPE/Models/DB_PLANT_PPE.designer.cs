@@ -42,6 +42,9 @@ namespace PLANT_PPE.Models
     partial void InsertTBL_T_PPE(TBL_T_PPE instance);
     partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
     partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
+    partial void InsertTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
+    partial void UpdateTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
+    partial void DeleteTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
     #endregion
 		
 		public DB_PLANT_PPEDataContext() : 
@@ -159,6 +162,24 @@ namespace PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<VW_T_PPE>();
+			}
+		}
+	}
+	
+		
+		public System.Data.Linq.Table<TBL_MAPPING_APPROVALS_NIH> TBL_MAPPING_APPROVALS_NIHs
+		{
+			get
+			{
+				return this.GetTable<TBL_MAPPING_APPROVALS_NIH>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_USER_APPROVAL> TBL_M_USER_APPROVALs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_USER_APPROVAL>();
 			}
 		}
 	}
@@ -2792,6 +2813,335 @@ namespace PLANT_PPE.Models
 				{
 					this._BERITA_ACARA_SM = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_MAPPING_APPROVALS_NIH")]
+	public partial class TBL_MAPPING_APPROVALS_NIH
+	{
+		
+		private System.Nullable<int> _APPROVAL_ACTION;
+		
+		private System.Nullable<int> _APPROVAL_ORDER;
+		
+		private string _APPROVAL_FROM;
+		
+		private string _APPROVAL_TO;
+		
+		private string _CURR_POSITION_ID;
+		
+		private string _NEXT_POSITION_ID;
+		
+		private string _APPROVAL_STATUS;
+		
+		private string _CURRENT_STATUS;
+		
+		private string _POSITION_CODE;
+		
+		public TBL_MAPPING_APPROVALS_NIH()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ACTION", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ACTION
+		{
+			get
+			{
+				return this._APPROVAL_ACTION;
+			}
+			set
+			{
+				if ((this._APPROVAL_ACTION != value))
+				{
+					this._APPROVAL_ACTION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_ORDER", DbType="Int")]
+		public System.Nullable<int> APPROVAL_ORDER
+		{
+			get
+			{
+				return this._APPROVAL_ORDER;
+			}
+			set
+			{
+				if ((this._APPROVAL_ORDER != value))
+				{
+					this._APPROVAL_ORDER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_FROM", DbType="VarChar(10)")]
+		public string APPROVAL_FROM
+		{
+			get
+			{
+				return this._APPROVAL_FROM;
+			}
+			set
+			{
+				if ((this._APPROVAL_FROM != value))
+				{
+					this._APPROVAL_FROM = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_TO", DbType="VarChar(10)")]
+		public string APPROVAL_TO
+		{
+			get
+			{
+				return this._APPROVAL_TO;
+			}
+			set
+			{
+				if ((this._APPROVAL_TO != value))
+				{
+					this._APPROVAL_TO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURR_POSITION_ID", DbType="VarChar(20)")]
+		public string CURR_POSITION_ID
+		{
+			get
+			{
+				return this._CURR_POSITION_ID;
+			}
+			set
+			{
+				if ((this._CURR_POSITION_ID != value))
+				{
+					this._CURR_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NEXT_POSITION_ID", DbType="VarChar(20)")]
+		public string NEXT_POSITION_ID
+		{
+			get
+			{
+				return this._NEXT_POSITION_ID;
+			}
+			set
+			{
+				if ((this._NEXT_POSITION_ID != value))
+				{
+					this._NEXT_POSITION_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_APPROVAL_STATUS", DbType="VarChar(50)")]
+		public string APPROVAL_STATUS
+		{
+			get
+			{
+				return this._APPROVAL_STATUS;
+			}
+			set
+			{
+				if ((this._APPROVAL_STATUS != value))
+				{
+					this._APPROVAL_STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CURRENT_STATUS", DbType="VarChar(50)")]
+		public string CURRENT_STATUS
+		{
+			get
+			{
+				return this._CURRENT_STATUS;
+			}
+			set
+			{
+				if ((this._CURRENT_STATUS != value))
+				{
+					this._CURRENT_STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSITION_CODE", DbType="VarChar(50)")]
+		public string POSITION_CODE
+		{
+			get
+			{
+				return this._POSITION_CODE;
+			}
+			set
+			{
+				if ((this._POSITION_CODE != value))
+				{
+					this._POSITION_CODE = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_USER_APPROVAL")]
+	public partial class TBL_M_USER_APPROVAL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _Position_id;
+		
+		private string _Employee_id;
+		
+		private string _Name;
+		
+		private string _sub_menu;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnPosition_idChanging(string value);
+    partial void OnPosition_idChanged();
+    partial void OnEmployee_idChanging(string value);
+    partial void OnEmployee_idChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void Onsub_menuChanging(string value);
+    partial void Onsub_menuChanged();
+    #endregion
+		
+		public TBL_M_USER_APPROVAL()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position_id", DbType="VarChar(50)")]
+		public string Position_id
+		{
+			get
+			{
+				return this._Position_id;
+			}
+			set
+			{
+				if ((this._Position_id != value))
+				{
+					this.OnPosition_idChanging(value);
+					this.SendPropertyChanging();
+					this._Position_id = value;
+					this.SendPropertyChanged("Position_id");
+					this.OnPosition_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_id", DbType="VarChar(50)")]
+		public string Employee_id
+		{
+			get
+			{
+				return this._Employee_id;
+			}
+			set
+			{
+				if ((this._Employee_id != value))
+				{
+					this.OnEmployee_idChanging(value);
+					this.SendPropertyChanging();
+					this._Employee_id = value;
+					this.SendPropertyChanged("Employee_id");
+					this.OnEmployee_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sub_menu", DbType="VarChar(50)")]
+		public string sub_menu
+		{
+			get
+			{
+				return this._sub_menu;
+			}
+			set
+			{
+				if ((this._sub_menu != value))
+				{
+					this.Onsub_menuChanging(value);
+					this.SendPropertyChanging();
+					this._sub_menu = value;
+					this.SendPropertyChanged("sub_menu");
+					this.Onsub_menuChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

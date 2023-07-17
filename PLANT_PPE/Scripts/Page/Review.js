@@ -21,6 +21,8 @@ function getdetail(nomor_equip) {
         "columnDefs": [
             { "className": "dt-center", "targets": [0, 1, 2, 3] }
         ],
+
+        order: [[3, 'desc']],
         scrollX: true,
         columns: [
 

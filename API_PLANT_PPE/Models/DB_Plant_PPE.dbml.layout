@@ -188,5 +188,11 @@
         <elementListCompartment Id="d9a0c428-68e1-4222-9a1c-509bdcf45022" absoluteBounds="2.64, 2.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="6211b0fc-ed06-429b-95f0-d4401afd98ab" absoluteBounds="3, 2.625, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_M_USER_APPROVAL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9a04407c-77e4-4b3a-bf28-d639fd029396" absoluteBounds="3.015, 3.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
