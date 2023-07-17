@@ -15,14 +15,6 @@ namespace PLANT_PPE.Controllers
     public class PPEController : Controller
     {
         DB_PLANT_PPEDataContext db = new DB_PLANT_PPEDataContext();
-        //public ActionResult Register()
-        //{
-        //    if (Session["nrp"] == null)
-        //    {
-        //        return RedirectToAction("index", "login");
-        //    }
-        //    return View();
-        //}
         private static string RomanMonth(int month)
         {
             switch (month)
@@ -377,10 +369,7 @@ namespace PLANT_PPE.Controllers
                 return RedirectToAction("index", "login");
             }
             ViewBag.idppe = idppe;
-            //ViewBag.EQP = db.TBL_T_PPEs.ToList();
             return View();
         }
     }
-
-
 }

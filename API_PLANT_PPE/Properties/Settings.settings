@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="API_PLANT_PPE.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="API_PLANT_PPE_EquipmentServices_EquipmentService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ews-kpd.kppmining.net/ews/services/EquipmentService</Value>
+    </Setting>
+    <Setting Name="API_PLANT_PPE_RefCodesService_RefCodesService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ews-kpd.kppmining.net/ews/services/RefCodesService</Value>
+    </Setting>
+    <Setting Name="API_PLANT_PPE_EquipmentReferenceService_EquipmentReferenceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ews-kpd.kppmining.net/ews/services/EquipmentReferenceService</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

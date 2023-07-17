@@ -1,13 +1,10 @@
-﻿/*Codebase.helpersOnLoad(['js-ckeditor5']);*/
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     getContent()
 })
 
 function getContent() {
     $.ajax({
         url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
-        /*data: JSON.stringify(obj),*/
         dataType: "json",
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -16,7 +13,6 @@ function getContent() {
             var dateParts = data.DATE.split('T');
             var date = dateParts[0];
             var formattedDate = formatDate(date);
-            //document.getElementById('getModifiedDate').textContent = ' lastmodified:' + date;
             document.getElementById('getModifiedDate').textContent = ' lastmodified: ' + formattedDate;
         },
         error: function (xhr) {
@@ -29,7 +25,6 @@ function submitEditor() {
     debugger
     let obj = new Object
     obj.ID = 99;
-    //obj.LAST_MODIFIED_DATE = new Date().toISOString().split('T')[0];
     obj.CONTENT = editor.getData();
     
     $.ajax({

@@ -14,7 +14,7 @@ namespace API_PLANT_PPE.ViewModel
 
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Jobsite { get; set; }
+        //public string Jobsite { get; set; }
         public string Roled { get; set; }
 
         public bool Login()
@@ -43,7 +43,8 @@ namespace API_PLANT_PPE.ViewModel
             {
 
                 var data_user = db.VW_KARYAWAN_ALLs.Where(x => x.EMPLOYEE_ID == nrp).SingleOrDefault();
-                if (data_user.DSTRCT_CODE == Jobsite || data_user.DSTRCT_CODE == "KPHO")
+                //if (data_user.DSTRCT_CODE == Jobsite || data_user.DSTRCT_CODE == "KPHO")
+                if (data_user != null)
                 {
                     status = true;
                 }

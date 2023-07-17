@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "SM Review";
+    ViewBag.JS = "/Scripts/Page/SMReview.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-heading">Supply Management Review</h2>
+<div class="block block-rounded">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">
+            SM Review <small>All list equipment</small>
+        </h3>
+    </div>
+    <div class="block-content block-content-full">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_reviewppe">
+            <thead class="text-center bg-primary text-white">
+                <tr>
+                    <th>NO</th>
+                    <th>PPE NO</th>
+                    <th>DATE</th>
+                    <th>EGI</th>
+                    <th>EQUIP NO</th>
+                    <th>FROM</th>
+                    <th>TO</th>
+                    <th>POSISI PPE</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" id="modal-detail" tabindex="-1" aria-labelledby="modal-large" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Review PPE</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close" onclick="detailClose()">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="row">
+                        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_detail">
+                            <thead class="text-center bg-primary text-white">
+                                <tr>
+                                    <th>POSITION</th>
+                                    <th>APPROVED NRP</th>
+                                    <th>EQUIP NO</th>
+                                    <th>APPROVED DATE</th>
+                                    @*<th>CAAB</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm text-end border-top">
+                    <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal" onclick="detailClose()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

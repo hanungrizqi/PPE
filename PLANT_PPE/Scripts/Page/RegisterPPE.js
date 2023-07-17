@@ -1,4 +1,14 @@
-﻿Codebase.helpersOnLoad(['jq-select2']);
+﻿//KP1PT015
+//KP1PT015
+//KP1PT015
+//KP1PT02
+//RT1D01
+//RT11
+//AS11
+//KP0161
+//KP0111
+
+Codebase.helpersOnLoad(['jq-select2']);
 
 $("document").ready(function () {
     var txtDateInput = document.getElementById("txt_date");
@@ -165,8 +175,7 @@ function savePPEtoTable() {
 
         var formData = new FormData();
         formData.append("attachment", file);
-
-        //upcoming cek posisi equip number
+        
         debugger
         let pep = new Object();
         pep.PPE_NO = $("#txt_noPPE").val(),
@@ -190,11 +199,6 @@ function savePPEtoTable() {
                         allowOutsideClick: false,
                         allowEscapeKey: false
                     })
-                    //.then((result) => {
-                    //    if (result.isConfirmed) {
-                    //        window.location.href = "/PPE/Register";
-                    //    }
-                    //});
                 } if (data.Remarkss == false) {
                     $.ajax({
                         url: $("#web_link").val() + "/api/PPE/UploadAttachment", // URI
@@ -221,14 +225,12 @@ function savePPEtoTable() {
                                 "<td>" + districtTo + "</td>" +
                                 "<td>" + locTo + "</td>" +
                                 "<td>" + remark + "</td>" +
-                                //"<td>" + attch + "</td>" +
                                 "<td><a href='" + attachmentUrl + "' target='_blank'>View Attachment</a></td>" +
                                 "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
                                 "</tr>";
                             $("#table_equipment tbody").append(row);
                             savePPEtoTableClicked = true;
-
-                            //tambahh ini
+                            
                             var toastElement = document.getElementById('toast-example-1');
                             var toast = new bootstrap.Toast(toastElement);
                             toast.show();
@@ -244,44 +246,6 @@ function savePPEtoTable() {
                 alert(xhr.responseText);
             }
         });
-        //sampe sini
-
-        //$.ajax({
-        //    url: $("#web_link").val() + "/api/PPE/UploadAttachment", // URI
-        //    type: "POST",
-        //    data: formData,
-        //    processData: false,
-        //    contentType: false,
-        //    success: function (response) {
-        //        debugger
-        //        var attachmentUrl = response.AttachmentUrl;
-
-        //        var rowCount = $("#table_equipment tbody tr").length + 1;
-        //        var row = "<tr>" +
-        //            "<td class='text-center'>" + rowCount + "</td>" +
-        //            "<td>" + formattedDate + "</td>" +
-        //            "<td>" + ppeNo + "</td>" +
-        //            "<td>" + eqNumber + "</td>" +
-        //            "<td>" + ppeDescription + "</td>" +
-        //            "<td>" + egi + "</td>" +
-        //            "<td>" + eqClass + "</td>" +
-        //            "<td>" + serialNumber + "</td>" +
-        //            "<td>" + districtFrom + "</td>" +
-        //            "<td>" + locFrom + "</td>" +
-        //            "<td>" + districtTo + "</td>" +
-        //            "<td>" + locTo + "</td>" +
-        //            "<td>" + remark + "</td>" +
-        //            //"<td>" + attch + "</td>" +
-        //            "<td><a href='" + attachmentUrl + "' target='_blank'>View Attachment</a></td>" +
-        //            "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
-        //            "</tr>";
-        //            $("#table_equipment tbody").append(row);
-        //            savePPEtoTableClicked = true;
-        //    },
-        //    error: function (xhr) {
-        //        alert(xhr.responseText);
-        //    }
-        //});
     } else if (attch == "") {
         debugger
         let pep = new Object();
@@ -306,11 +270,6 @@ function savePPEtoTable() {
                         allowOutsideClick: false,
                         allowEscapeKey: false
                     })
-                    //.then((result) => {
-                    //    if (result.isConfirmed) {
-                    //        window.location.href = "/PPE/Register";
-                    //    }
-                    //});
                 } if (data.Remarkss == false) {
                     var rowCount = $("#table_equipment tbody tr").length + 1;
                     var row = "<tr>" +
@@ -332,8 +291,7 @@ function savePPEtoTable() {
                         "</tr>";
                     $("#table_equipment tbody").append(row);
                     savePPEtoTableClicked = true;
-
-                    //tambahh ini
+                    
                     var toastElement = document.getElementById('toast-example-1');
                     var toast = new bootstrap.Toast(toastElement);
                     toast.show();
@@ -344,66 +302,7 @@ function savePPEtoTable() {
                 alert(xhr.responseText);
             }
         });
-
-        //var rowCount = $("#table_equipment tbody tr").length + 1;
-        //var row = "<tr>" +
-        //    "<td class='text-center'>" + rowCount + "</td>" +
-        //    "<td>" + formattedDate + "</td>" +
-        //    "<td>" + ppeNo + "</td>" +
-        //    "<td>" + eqNumber + "</td>" +
-        //    "<td>" + ppeDescription + "</td>" +
-        //    "<td>" + egi + "</td>" +
-        //    "<td>" + eqClass + "</td>" +
-        //    "<td>" + serialNumber + "</td>" +
-        //    "<td>" + districtFrom + "</td>" +
-        //    "<td>" + locFrom + "</td>" +
-        //    "<td>" + districtTo + "</td>" +
-        //    "<td>" + locTo + "</td>" +
-        //    "<td>" + remark + "</td>" +
-        //    "<td>" + attch + "</td>" +
-        //    "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
-        //    "</tr>";
-        //    $("#table_equipment tbody").append(row);
-        //    savePPEtoTableClicked = true;
     }
-
-    //var rowCount = $("#table_equipment tbody tr").length + 1;
-    //var row = "<tr>" +
-    //    "<td class='text-center'>" + rowCount + "</td>" +
-    //    "<td>" + formattedDate + "</td>" +
-    //    "<td>" + ppeNo + "</td>" +
-    //    "<td>" + eqNumber + "</td>" +
-    //    "<td>" + ppeDescription + "</td>" +
-    //    "<td>" + egi + "</td>" +
-    //    "<td>" + eqClass + "</td>" +
-    //    "<td>" + serialNumber + "</td>" +
-    //    "<td>" + districtFrom + "</td>" +
-    //    "<td>" + locFrom + "</td>" +
-    //    "<td>" + districtTo + "</td>" +
-    //    "<td>" + locTo + "</td>" +
-    //    "<td>" + remark + "</td>" +
-    //    "<td>" + attch + "</td>" +
-    //    "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
-    //    "</tr>";
-
-    //$("#table_equipment tbody").append(row);
-
-    // Clear input
-    //$("#txt_date").val("");
-    //$("#txt_noPPE").val("");
-    //$("#txt_eqNumber").val("").trigger("change");
-    //$("#txt_ppeDesc").val("");
-    //$("#txt_egi").val("");
-    //$("#txt_eqClass").val("");
-    //$("#txt_serialNo").val("");
-    //$("#txt_districtFrom").val("").trigger("change");
-    //$("#txt_locFrom").val("").trigger("change");
-    //$("#txt_districtTo").val("").trigger("change");
-    //$("#txt_locTo").val("").trigger("change");
-
-    // disable dropdown setelah save
-    //$("#txt_districtFrom").prop("disabled", true);
-    //$("#txt_locFrom").prop("disabled", true);
     $("#txt_districtTo").prop("disabled", true);
     //$("#txt_locTo").prop("disabled", true);
 };
@@ -446,15 +345,12 @@ function savePPE(postStatus) {
         rowData.DISTRICT_TO = cells.eq(10).text();
         rowData.LOC_TO = cells.eq(11).text();
         rowData.REMARKS = cells.eq(12).text();
-        //rowData.PATH_ATTACHMENT = cells.eq(13).text();
         rowData.PATH_ATTACHMENT = cells.eq(13).find("a").attr("href");
         rowData.CREATED_BY = $("#txt_createBy").val();
         rowData.CREATED_POS_BY = $("#hd_PositionID").val();
         rowData.STATUS = postStatus;
         rowData.APPROVAL_ORDER = 1;
-        //rowData.URL_FORM_SH = `${url}/Reports/ReportSH.aspx?PPE_NO=` + $("#txt_noPPE").val();
         rowData.URL_FORM_SH = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead&PPE_NO=" + $("#txt_noPPE").val();
-        //var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_SecHead&PPE_NO=" + ppeno;
         
         if (postStatus == "CREATED") {
             rowData.POSISI_PPE = "Sect. Head";
@@ -468,6 +364,83 @@ function savePPE(postStatus) {
     $.ajax({
         url: $("#web_link").val() + "/api/PPE/Create_PPE", // URI
         data: JSON.stringify(tableData),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function () {
+            $("#overlay").show();
+        },
+        success: function (data) {
+            if (data.Remarks == true) {
+                debugger
+                Insert_Approved_Create(tableData);
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+            $("#overlay").hide();
+        }
+    });
+
+    console.log(tableData);
+}
+
+function getContent() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
+        dataType: "json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var content = data.Data;
+            $("#agreeModals").html(content);
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function Insert_Approved_Create(tableData) {
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/PPE/Insert_Approved_Create",
+        data: JSON.stringify(tableData),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks == true) {
+                debugger
+                sendMailSection_head($("#txt_noPPE").val());
+            } else if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+
+function sendMailSection_head(ppenosh) {
+    debugger
+    var encodedPPENo = encodeURIComponent(ppenosh);
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Section_Head?ppe=" + encodedPPENo,
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -493,100 +466,9 @@ function savePPE(postStatus) {
                     'error'
                 );
             }
-            //if (data.Remarks == true) {
-            //    debugger
-            //    inputUrl();
-            //} if (data.Remarks == false) {
-            //    Swal.fire(
-            //        'Error!',
-            //        'Message : ' + data.Message,
-            //        'error'
-            //    );
-            //    $("#overlay").hide();
-            //}
-        },
-        error: function (xhr) {
-            alert(xhr.responseText);
-        }
-    });
-
-    console.log(tableData);
-}
-
-function getContent() {
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
-        dataType: "json",
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            var content = data.Data;
-            $("#agreeModals").html(content);
-
         },
         error: function (xhr) {
             alert(xhr.responseText);
         }
     });
 }
-
-//function inputUrl() {
-//    debugger
-//    $("#table_equipment tbody tr").each(function () {
-//        debugger
-//        var rowData = {};
-//        var cells = $(this).find("td");
-        
-//        rowData.PPE_NO = cells.eq(2).text();
-//        rowData.EQUIP_NO = cells.eq(3).text();
-//        rowData.URL_FORM_SH = "/Reports/ReportSH.aspx?PPE_NO=" + $("#txt_noPPE").val();
-        
-//        tableData.push(rowData);
-//    });
-
-//    $.ajax({
-//        url: "/Approval/Input_Url_SH", //URI
-//        //data: formData,
-//        data: JSON.stringify(tableData),
-//        type: "POST",
-//        contentType: false,
-//        processData: false,
-//        success: function (data) {
-//            if (data.Remarks == true) {
-//                Swal.fire({
-//                    title: 'Saved',
-//                    text: "Data has been Saved.",
-//                    icon: 'success',
-//                    confirmButtonColor: '#3085d6',
-//                    confirmButtonText: 'OK',
-//                    allowOutsideClick: false,
-//                    allowEscapeKey: false
-//                }).then((result) => {
-//                    if (result.isConfirmed) {
-//                        window.location.href = "/PPE/Register";
-//                    }
-//                });
-//            } else if (data.Remarks == false) {
-//                Swal.fire({
-//                    title: 'Warning',
-//                    text: "File already exist.",
-//                    icon: 'warning',
-//                    confirmButtonColor: '#3085d6',
-//                    confirmButtonText: 'OK',
-//                    allowOutsideClick: false,
-//                    allowEscapeKey: false
-//                });
-//            } else {
-//                Swal.fire(
-//                    'Error!',
-//                    'Message: ' + data.Message,
-//                    'error'
-//                );
-//            }
-
-//        },
-//        error: function (xhr) {
-//            alert(xhr.responseText);
-//        }
-//    })
-//}

@@ -4,25 +4,17 @@ $("document").ready(function () {
     $('.select2-modal').select2({
         dropdownParent: $('.modal')
     });
-
-   
 })
 
 var table2
 function getdetail(nomor_equip) {
-    /*var nomor_equip = 'DR0010';*/
-
     console.log(nomor_equip);
-
-   
-
     table2 = $("#tbl_detail").DataTable({
-        
         ajax: {
             url: $("#web_link").val() + "/api/PPE/Get_History",
             type: "GET",
             data: {
-                Equip_No : nomor_equip
+                Equip_No: nomor_equip
             },
             dataSrc: "Data",
         },
@@ -40,30 +32,27 @@ function getdetail(nomor_equip) {
             {
                 data: 'Approved_Date',
                 render: function (data, type, row) {
-                    const tanggal = moment(data).format("DD/MM/YYYY HH:MM:SS");
+                    const tanggal = moment(data).format("DD/MM/YYYY");
                     return tanggal;
                 }
-            }
-            
-        ]
+            },
+            //{ data: 'UPLOAD_FORM_CAAB' }
+        ], order: [[3, 'asc']]
     });
-
-    
 }
-
 
 function detailClose() {
     var text = `<thead class="text-center">
-                                <tr>
-                                    <th>POSITION</th>
-                                    <th>STATUS</th>
-                                    <th>PIC</th>
-                                    @*<th>REMAKS</th>*@
-                                    <th>APPROVAL DATE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>`;
+                    <tr>
+                        <th>POSITION</th>
+                        <th>STATUS</th>
+                        <th>PIC</th>
+                        @*<th>REMAKS</th>*@
+                        <th>APPROVAL DATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>`;
     table2.destroy();
     table2.val(text);
 }
@@ -93,11 +82,16 @@ var table = $("#tbl_reviewppe").DataTable({
         dataSrc: "Data",
     },
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7] },
+        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 8] },
         { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
     columns: [
+        { data: 'PPE_NO' },
+        { data: 'EGI' },
+        { data: 'EQUIP_NO' },
+        { data: 'DISTRICT_FROM' },
+        { data: 'DISTRICT_TO' },
         {
             data: 'CREATED_DATE',
             render: function (data, type, row) {
@@ -105,27 +99,32 @@ var table = $("#tbl_reviewppe").DataTable({
                 return tanggal;
             }
         },
-        { data: 'PPE_NO' },
-        { data: 'EGI' },
-        /*{ data: 'EQUIP_CLASS' },*/
-        { data: 'EQUIP_NO' },
-        /*{ data: 'SERIAL_NO' },*/
-        { data: 'DISTRICT_FROM' },
-        { data: 'DISTRICT_TO' },
         { data: 'POSISI_PPE' },
+        {
+            data: 'STATUS',
+            render: function (data, type, row) {
+                text = '';
+                if (data == "SM APPROVED") {
+                    text = `<span class="badge bg-success">${data}</span>`;
+                } else if (data == "REJECT") {
+                    text = `<span class="badge bg-danger">${data}</span>`;
+                } else {
+                    text = `<span class="badge bg-info">${data}</span>`;
+                }
+                return text;
+            }
+        },
         {
             data: 'ID',
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                /*action += `<a href="/PPE/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`*/
                 action += `<button onClick="getdetail('${row.EQUIP_NO}')" type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail">Detail</button>`
                 action += `<button onClick="printReport('${row.PPE_NO}')" type="button" class="btn btn-primary btn-sm">Print</button>`
                 action += `</div>`
                 return action;
             }
         }
-
     ],
     initComplete: function () {
         this.api()
@@ -136,10 +135,8 @@ var table = $("#tbl_reviewppe").DataTable({
                     .appendTo($("#tbl_reviewppe_filter.dataTables_filter"))
                     .on('change', function () {
                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
                         column.search(val ? '^' + val + '$' : '', true, false).draw();
                     });
-
                 column
                     .data()
                     .unique()
@@ -149,7 +146,4 @@ var table = $("#tbl_reviewppe").DataTable({
                     });
             });
     },
-
 });
-/*
-editMapApproval('${row.ID}')*/

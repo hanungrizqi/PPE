@@ -1,0 +1,1457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:ns4="http://instances.base.types.ellipse.mincom.com" xmlns:ns5="http://attribute.ellipse.mincom.com" xmlns:ns6="http://errors.ellipse.mincom.com" xmlns:ns1="http://connectivity.service.ews.mincom.com" xmlns:ns2="http://service.ellipse.mincom.com" xmlns:ns3="http://instances.m3601.types.ellipse.mincom.com" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope" xmlns:tns="http://equipmentreference.m3601.service.ellipse.mincom.com" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://equipmentreference.m3601.service.ellipse.mincom.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://connectivity.service.ews.mincom.com">
+      <xsd:complexType name="OperationContext">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="applicationClientId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="district" type="xsd:string" />
+          <xsd:element minOccurs="0" name="eventDisable" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="maxInstances" type="xsd:int" />
+          <xsd:element minOccurs="0" name="position" type="xsd:string" />
+          <xsd:element minOccurs="0" name="returnWarnings" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="runAs" type="ns1:RunAs" />
+          <xsd:element minOccurs="0" name="tenantId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="trace" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="transaction" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RunAs">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="district" type="xsd:string" />
+          <xsd:element minOccurs="0" name="position" type="xsd:string" />
+          <xsd:element minOccurs="0" name="user" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://instances.m3601.types.ellipse.mincom.com">
+      <xsd:import namespace="http://equipmentreference.m3601.service.ellipse.mincom.com" />
+      <xsd:import namespace="http://service.ellipse.mincom.com" />
+      <xsd:simpleType name="eqListId">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf18">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="colloqEq">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf19">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="plantNo">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf16">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf17">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentActive">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf14">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf15">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf12">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf13">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf10">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf11">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="includeProductiveUnit">
+        <xsd:restriction base="xsd:boolean" />
+      </xsd:simpleType>
+      <xsd:simpleType name="alternateReference">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="includeAssociatedEquipment">
+        <xsd:restriction base="xsd:boolean" />
+      </xsd:simpleType>
+      <xsd:simpleType name="mnemonic">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="8" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipNo">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipRef">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="includeSubList">
+        <xsd:restriction base="xsd:boolean" />
+      </xsd:simpleType>
+      <xsd:simpleType name="includeMaintainable">
+        <xsd:restriction base="xsd:boolean" />
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf5">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf6">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf7">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="conAstSegEn">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:maxInclusive value="9999999.999999" />
+          <xsd:minInclusive value="-9999999.999999" />
+          <xsd:fractionDigits value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf8">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="serialNumber">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="dstrctCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf9">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="conAstSegSt">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:maxInclusive value="9999999.999999" />
+          <xsd:minInclusive value="-9999999.999999" />
+          <xsd:fractionDigits value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="stockCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="9" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="assetType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipDesc">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="searchMethod">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="descSearchType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="alternateReferenceType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="eqListType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="location">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf0">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf1">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf2">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf3">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClassIf4">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="partNo">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="EquipmentSearchParam">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:AbstractSearchParam">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="alternateReference" type="ns3:alternateReference" />
+              <xsd:element minOccurs="0" name="alternateReferenceType" type="ns3:alternateReferenceType" />
+              <xsd:element minOccurs="0" name="assetType" type="ns3:assetType" />
+              <xsd:element minOccurs="0" name="colloqEq" type="ns3:colloqEq" />
+              <xsd:element minOccurs="0" name="compCode" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="conAstSegEn" type="ns3:conAstSegEn" />
+              <xsd:element minOccurs="0" name="conAstSegSt" type="ns3:conAstSegSt" />
+              <xsd:element minOccurs="0" name="conditionRanking" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="descSearchType" type="ns3:descSearchType" />
+              <xsd:element minOccurs="0" name="dstrctCode" type="ns3:dstrctCode" />
+              <xsd:element minOccurs="0" name="eqListId" type="ns3:eqListId" />
+              <xsd:element minOccurs="0" name="eqListType" type="ns3:eqListType" />
+              <xsd:element minOccurs="0" name="equipClass" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="equipClassIf0" type="ns3:equipClassIf0" />
+              <xsd:element minOccurs="0" name="equipClassIf1" type="ns3:equipClassIf1" />
+              <xsd:element minOccurs="0" name="equipClassIf10" type="ns3:equipClassIf10" />
+              <xsd:element minOccurs="0" name="equipClassIf11" type="ns3:equipClassIf11" />
+              <xsd:element minOccurs="0" name="equipClassIf12" type="ns3:equipClassIf12" />
+              <xsd:element minOccurs="0" name="equipClassIf13" type="ns3:equipClassIf13" />
+              <xsd:element minOccurs="0" name="equipClassIf14" type="ns3:equipClassIf14" />
+              <xsd:element minOccurs="0" name="equipClassIf15" type="ns3:equipClassIf15" />
+              <xsd:element minOccurs="0" name="equipClassIf16" type="ns3:equipClassIf16" />
+              <xsd:element minOccurs="0" name="equipClassIf17" type="ns3:equipClassIf17" />
+              <xsd:element minOccurs="0" name="equipClassIf18" type="ns3:equipClassIf18" />
+              <xsd:element minOccurs="0" name="equipClassIf19" type="ns3:equipClassIf19" />
+              <xsd:element minOccurs="0" name="equipClassIf2" type="ns3:equipClassIf2" />
+              <xsd:element minOccurs="0" name="equipClassIf3" type="ns3:equipClassIf3" />
+              <xsd:element minOccurs="0" name="equipClassIf4" type="ns3:equipClassIf4" />
+              <xsd:element minOccurs="0" name="equipClassIf5" type="ns3:equipClassIf5" />
+              <xsd:element minOccurs="0" name="equipClassIf6" type="ns3:equipClassIf6" />
+              <xsd:element minOccurs="0" name="equipClassIf7" type="ns3:equipClassIf7" />
+              <xsd:element minOccurs="0" name="equipClassIf8" type="ns3:equipClassIf8" />
+              <xsd:element minOccurs="0" name="equipClassIf9" type="ns3:equipClassIf9" />
+              <xsd:element minOccurs="0" name="equipDesc" type="ns3:equipDesc" />
+              <xsd:element minOccurs="0" name="equipGrpId" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="equipLocation" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="equipNo" type="ns3:equipNo" />
+              <xsd:element minOccurs="0" name="equipRef" type="ns3:equipRef" />
+              <xsd:element minOccurs="0" name="equipStatus" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="equipmentActive" type="ns3:equipmentActive" />
+              <xsd:element minOccurs="0" name="equipmentContains" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="equipmentCriticality" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="equipmentImpact" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="equipmentType" type="tns:ArrayOfString" />
+              <xsd:element minOccurs="0" name="includeAssociatedEquipment" type="ns3:includeAssociatedEquipment" />
+              <xsd:element minOccurs="0" name="includeMaintainable" type="ns3:includeMaintainable" />
+              <xsd:element minOccurs="0" name="includeProductiveUnit" type="ns3:includeProductiveUnit" />
+              <xsd:element minOccurs="0" name="includeSubList" type="ns3:includeSubList" />
+              <xsd:element minOccurs="0" name="location" type="ns3:location" />
+              <xsd:element minOccurs="0" name="mnemonic" type="ns3:mnemonic" />
+              <xsd:element minOccurs="0" name="nameplates" type="ns3:ArrayOfNameplateDTO" />
+              <xsd:element minOccurs="0" name="partNo" type="ns3:partNo" />
+              <xsd:element minOccurs="0" name="plantNo" type="ns3:plantNo" />
+              <xsd:element minOccurs="0" name="searchMethod" type="ns3:searchMethod" />
+              <xsd:element minOccurs="0" name="serialNumber" type="ns3:serialNumber" />
+              <xsd:element minOccurs="0" name="stockCode" type="ns3:stockCode" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfNameplateDTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="NameplateDTO" nillable="true" type="ns3:NameplateDTO" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="tableType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="keyField">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="length">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="name">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="description">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="objectName">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="specialEdit">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="fieldType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="value">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="NameplateDTO">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceDTO">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="description" type="ns3:description" />
+              <xsd:element minOccurs="0" name="fieldType" type="ns3:fieldType" />
+              <xsd:element minOccurs="0" name="keyField" type="ns3:keyField" />
+              <xsd:element minOccurs="0" name="length" type="ns3:length" />
+              <xsd:element minOccurs="0" name="name" type="ns3:name" />
+              <xsd:element minOccurs="0" name="objectName" type="ns3:objectName" />
+              <xsd:element minOccurs="0" name="specialEdit" type="ns3:specialEdit" />
+              <xsd:element minOccurs="0" name="tableType" type="ns3:tableType" />
+              <xsd:element minOccurs="0" name="value" type="ns3:value" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="equipmentClassif18">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif19">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif16">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif17">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif14">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif15">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="parentEquipRef">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif12">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="latestConditionDate">
+        <xsd:restriction base="xsd:date" />
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif13">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif10">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif11">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="locationD">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="conditionRanking">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentImpact">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="expenseElement">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="8" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="accountCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="24" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipPoolIdD">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="80" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipNoD2">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipNoD1">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="stockCodeD">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="prodUnitItem">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="plantCode4">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentNo">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="plantCode5">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="plantCode2">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="plantCode3">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="compCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="plantCode0">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipClass">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="plantCode1">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="disposalDate">
+        <xsd:restriction base="xsd:date" />
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentCriticality">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="accountCodeD">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="costSegLgth">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="14" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipGrpId">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="segmentUom">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipLocation">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="activeFlag">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="assocEquipItemSwitch">
+        <xsd:restriction base="xsd:boolean" />
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif0">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif1">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif2">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="custodian">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif3">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif4">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif5">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif6">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipPoolId">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="assetSegLgth">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:maxInclusive value="99999999.999999" />
+          <xsd:minInclusive value="0" />
+          <xsd:fractionDigits value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipStatus">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentRef">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif7">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif8">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentClassif9">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="conditionRating">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:maxInclusive value="999.99" />
+          <xsd:minInclusive value="0" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="EquipmentDTO">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceDTO">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="accountCode" type="ns3:accountCode" />
+              <xsd:element minOccurs="0" name="accountCodeD" type="ns3:accountCodeD" />
+              <xsd:element minOccurs="0" name="activeFlag" type="ns3:activeFlag" />
+              <xsd:element minOccurs="0" name="assetSegLgth" type="ns3:assetSegLgth" />
+              <xsd:element minOccurs="0" name="assocEquipItemSwitch" type="ns3:assocEquipItemSwitch" />
+              <xsd:element minOccurs="0" name="compCode" type="ns3:compCode" />
+              <xsd:element minOccurs="0" name="conAstSegEn" type="ns3:conAstSegEn" />
+              <xsd:element minOccurs="0" name="conAstSegSt" type="ns3:conAstSegSt" />
+              <xsd:element minOccurs="0" name="conditionRanking" type="ns3:conditionRanking" />
+              <xsd:element minOccurs="0" name="conditionRating" type="ns3:conditionRating" />
+              <xsd:element minOccurs="0" name="costSegLgth" type="ns3:costSegLgth" />
+              <xsd:element minOccurs="0" name="custodian" type="ns3:custodian" />
+              <xsd:element minOccurs="0" name="disposalDate" type="ns3:disposalDate" />
+              <xsd:element minOccurs="0" name="dstrctCode" type="ns3:dstrctCode" />
+              <xsd:element minOccurs="0" name="equipClass" type="ns3:equipClass" />
+              <xsd:element minOccurs="0" name="equipGrpId" type="ns3:equipGrpId" />
+              <xsd:element minOccurs="0" name="equipLocation" type="ns3:equipLocation" />
+              <xsd:element minOccurs="0" name="equipNoD1" type="ns3:equipNoD1" />
+              <xsd:element minOccurs="0" name="equipNoD2" type="ns3:equipNoD2" />
+              <xsd:element minOccurs="0" name="equipPoolId" type="ns3:equipPoolId" />
+              <xsd:element minOccurs="0" name="equipPoolIdD" type="ns3:equipPoolIdD" />
+              <xsd:element minOccurs="0" name="equipStatus" type="ns3:equipStatus" />
+              <xsd:element minOccurs="0" name="equipmentClassif0" type="ns3:equipmentClassif0" />
+              <xsd:element minOccurs="0" name="equipmentClassif1" type="ns3:equipmentClassif1" />
+              <xsd:element minOccurs="0" name="equipmentClassif10" type="ns3:equipmentClassif10" />
+              <xsd:element minOccurs="0" name="equipmentClassif11" type="ns3:equipmentClassif11" />
+              <xsd:element minOccurs="0" name="equipmentClassif12" type="ns3:equipmentClassif12" />
+              <xsd:element minOccurs="0" name="equipmentClassif13" type="ns3:equipmentClassif13" />
+              <xsd:element minOccurs="0" name="equipmentClassif14" type="ns3:equipmentClassif14" />
+              <xsd:element minOccurs="0" name="equipmentClassif15" type="ns3:equipmentClassif15" />
+              <xsd:element minOccurs="0" name="equipmentClassif16" type="ns3:equipmentClassif16" />
+              <xsd:element minOccurs="0" name="equipmentClassif17" type="ns3:equipmentClassif17" />
+              <xsd:element minOccurs="0" name="equipmentClassif18" type="ns3:equipmentClassif18" />
+              <xsd:element minOccurs="0" name="equipmentClassif19" type="ns3:equipmentClassif19" />
+              <xsd:element minOccurs="0" name="equipmentClassif2" type="ns3:equipmentClassif2" />
+              <xsd:element minOccurs="0" name="equipmentClassif3" type="ns3:equipmentClassif3" />
+              <xsd:element minOccurs="0" name="equipmentClassif4" type="ns3:equipmentClassif4" />
+              <xsd:element minOccurs="0" name="equipmentClassif5" type="ns3:equipmentClassif5" />
+              <xsd:element minOccurs="0" name="equipmentClassif6" type="ns3:equipmentClassif6" />
+              <xsd:element minOccurs="0" name="equipmentClassif7" type="ns3:equipmentClassif7" />
+              <xsd:element minOccurs="0" name="equipmentClassif8" type="ns3:equipmentClassif8" />
+              <xsd:element minOccurs="0" name="equipmentClassif9" type="ns3:equipmentClassif9" />
+              <xsd:element minOccurs="0" name="equipmentCriticality" type="ns3:equipmentCriticality" />
+              <xsd:element minOccurs="0" name="equipmentImpact" type="ns3:equipmentImpact" />
+              <xsd:element minOccurs="0" name="equipmentNo" type="ns3:equipmentNo" />
+              <xsd:element minOccurs="0" name="equipmentRef" type="ns3:equipmentRef" />
+              <xsd:element minOccurs="0" name="equipmentType" type="ns3:equipmentType" />
+              <xsd:element minOccurs="0" name="expenseElement" type="ns3:expenseElement" />
+              <xsd:element minOccurs="0" name="includeMaintainable" type="ns3:includeMaintainable" />
+              <xsd:element minOccurs="0" name="latestConditionDate" type="ns3:latestConditionDate" />
+              <xsd:element minOccurs="0" name="location" type="ns3:location" />
+              <xsd:element minOccurs="0" name="locationD" type="ns3:locationD" />
+              <xsd:element minOccurs="0" name="mnemonic" type="ns3:mnemonic" />
+              <xsd:element minOccurs="0" name="parentEquipRef" type="ns3:parentEquipRef" />
+              <xsd:element minOccurs="0" name="partNo" type="ns3:partNo" />
+              <xsd:element minOccurs="0" name="plantCode0" type="ns3:plantCode0" />
+              <xsd:element minOccurs="0" name="plantCode1" type="ns3:plantCode1" />
+              <xsd:element minOccurs="0" name="plantCode2" type="ns3:plantCode2" />
+              <xsd:element minOccurs="0" name="plantCode3" type="ns3:plantCode3" />
+              <xsd:element minOccurs="0" name="plantCode4" type="ns3:plantCode4" />
+              <xsd:element minOccurs="0" name="plantCode5" type="ns3:plantCode5" />
+              <xsd:element minOccurs="0" name="prodUnitItem" type="ns3:prodUnitItem" />
+              <xsd:element minOccurs="0" name="segmentUom" type="ns3:segmentUom" />
+              <xsd:element minOccurs="0" name="serialNumber" type="ns3:serialNumber" />
+              <xsd:element minOccurs="0" name="stockCode" type="ns3:stockCode" />
+              <xsd:element minOccurs="0" name="stockCodeD" type="ns3:stockCodeD" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquipmentServiceResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="EquipmentServiceResult" nillable="true" type="ns3:EquipmentServiceResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EquipmentServiceResult">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceResult">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="equipmentDTO" type="ns3:EquipmentDTO" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquipmentListDTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="EquipmentListDTO" nillable="true" type="ns3:EquipmentListDTO" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="listId">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="listDesc1">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="listType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="6" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="EquipmentListDTO">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceDTO">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="equipmentNo" type="ns3:equipmentNo" />
+              <xsd:element minOccurs="0" name="listDesc1" type="ns3:listDesc1" />
+              <xsd:element minOccurs="0" name="listId" type="ns3:listId" />
+              <xsd:element minOccurs="0" name="listType" type="ns3:listType" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquipmentListServiceResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="EquipmentListServiceResult" nillable="true" type="ns3:EquipmentListServiceResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EquipmentListServiceResult">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceResult">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="equipmentListDTO" type="ns3:EquipmentListDTO" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="equipmentReference">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="EquipmentReferenceSearchParam">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:AbstractSearchParam">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="equipmentReference" type="ns3:equipmentReference" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:simpleType name="districtCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentNumber">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="equipmentGrpId">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="0" />
+          <xsd:maxLength value="12" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="EquipmentReferenceDTO">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceDTO">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="description" type="ns3:description" />
+              <xsd:element minOccurs="0" name="districtCode" type="ns3:districtCode" />
+              <xsd:element minOccurs="0" name="equipmentGrpId" type="ns3:equipmentGrpId" />
+              <xsd:element minOccurs="0" name="equipmentNumber" type="ns3:equipmentNumber" />
+              <xsd:element minOccurs="0" name="equipmentReference" type="ns3:equipmentReference" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquipmentReferenceServiceResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="EquipmentReferenceServiceResult" nillable="true" type="ns3:EquipmentReferenceServiceResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EquipmentReferenceServiceResult">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceResult">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="equipmentReferenceDTO" type="ns3:EquipmentReferenceDTO" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquipmentReferenceDTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="EquipmentReferenceDTO" nillable="true" type="ns3:EquipmentReferenceDTO" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NameplateAttributeSearchParam">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:AbstractSearchParam">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="name" type="ns3:name" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfNameplateServiceResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="NameplateServiceResult" nillable="true" type="ns3:NameplateServiceResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="NameplateServiceResult">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceResult">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="nameplateDTO" type="ns3:NameplateDTO" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquipmentValidationDTO">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="EquipmentValidationDTO" nillable="true" type="ns3:EquipmentValidationDTO" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EquipmentValidationDTO">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceDTO">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="conAstSegEn" type="ns3:conAstSegEn" />
+              <xsd:element minOccurs="0" name="conAstSegSt" type="ns3:conAstSegSt" />
+              <xsd:element minOccurs="0" name="equipmentNo" type="ns3:equipmentNo" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfEquipmentValidationServiceResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="EquipmentValidationServiceResult" nillable="true" type="ns3:EquipmentValidationServiceResult" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EquipmentValidationServiceResult">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceResult">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="equipmentValidationDTO" type="ns3:EquipmentValidationDTO" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.ellipse.mincom.com">
+      <xsd:import namespace="http://errors.ellipse.mincom.com" />
+      <xsd:import namespace="http://instances.base.types.ellipse.mincom.com" />
+      <xsd:import namespace="http://attribute.ellipse.mincom.com" />
+      <xsd:complexType name="ServiceDTO" abstract="true">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns4:Base">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="customAttributes" type="ns5:ArrayOfAttribute" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AbstractSearchParam" abstract="true">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:ServiceDTO">
+            <xsd:sequence>
+              <xsd:element minOccurs="0" name="serviceRequiredAttributes" type="ns2:ServiceRequiredAttributes" />
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ServiceRequiredAttributes" />
+      <xsd:complexType name="ServiceResult">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns2:BaseServiceResult" />
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="BaseServiceResult" abstract="true">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="errors" type="ns6:ArrayOfError" />
+          <xsd:element minOccurs="0" name="informationalMessages" type="ns6:ArrayOfMessage" />
+          <xsd:element minOccurs="0" name="warnings" type="ns6:ArrayOfWarning" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://instances.base.types.ellipse.mincom.com">
+      <xsd:complexType name="Base" abstract="true" />
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://attribute.ellipse.mincom.com">
+      <xsd:import namespace="http://equipmentreference.m3601.service.ellipse.mincom.com" />
+      <xsd:complexType name="ArrayOfAttribute">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Attribute" nillable="true" type="ns5:Attribute" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Attribute">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="dataType" type="xsd:string" />
+          <xsd:element minOccurs="0" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" name="namespace" type="xsd:string" />
+          <xsd:element minOccurs="0" name="properties" type="tns:anyType2anyTypeMap" />
+          <xsd:element minOccurs="0" name="value" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://equipmentreference.m3601.service.ellipse.mincom.com">
+      <xsd:import namespace="http://connectivity.service.ews.mincom.com" />
+      <xsd:import namespace="http://instances.m3601.types.ellipse.mincom.com" />
+      <xsd:complexType name="anyType2anyTypeMap">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="entry">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element minOccurs="0" maxOccurs="1" name="key" type="xsd:anyType" />
+                <xsd:element minOccurs="0" maxOccurs="1" name="value" type="xsd:anyType" />
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfString">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="search">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="searchParams" nillable="true" type="ns3:EquipmentSearchParam" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="restart" nillable="true" type="ns3:EquipmentDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="searchResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:ArrayOfEquipmentServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="multipleCreateUpdateEquipmentList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="inputDtos" nillable="true" type="ns3:ArrayOfEquipmentListDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="multipleCreateUpdateEquipmentListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:ArrayOfEquipmentListServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="searchAll">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="searchParams" nillable="true" type="ns3:EquipmentReferenceSearchParam" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="restart" nillable="true" type="ns3:EquipmentReferenceDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="searchAllResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:ArrayOfEquipmentReferenceServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="multipleResolveToEquipmentNumber">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="inputDtos" nillable="true" type="ns3:ArrayOfEquipmentReferenceDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="multipleResolveToEquipmentNumberResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:ArrayOfEquipmentReferenceServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="retrieveNameplateAttributes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="searchParams" nillable="true" type="ns3:NameplateAttributeSearchParam" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="restart" nillable="true" type="ns3:NameplateDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="retrieveNameplateAttributesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:ArrayOfNameplateServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="multipleValidate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="inputDtos" nillable="true" type="ns3:ArrayOfEquipmentValidationDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="multipleValidateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:ArrayOfEquipmentValidationServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createUpdateEquipmentList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="serviceDTO" nillable="true" type="ns3:EquipmentListDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createUpdateEquipmentListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:EquipmentListServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="resolveToEquipmentNumber">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="serviceDTO" nillable="true" type="ns3:EquipmentReferenceDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="resolveToEquipmentNumberResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:EquipmentReferenceServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="validate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="context" nillable="true" type="ns1:OperationContext" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="serviceDTO" nillable="true" type="ns3:EquipmentValidationDTO" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="validateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="out" nillable="true" type="ns3:EquipmentValidationServiceResult" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://errors.ellipse.mincom.com">
+      <xsd:complexType name="ArrayOfMessage">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Message" nillable="true" type="ns6:Message" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Message">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="fieldId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fieldIndex" type="xsd:int" />
+          <xsd:element minOccurs="0" name="localisable" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="messageId" type="xsd:string" />
+          <xsd:element minOccurs="0" name="messageInstance" type="xsd:string" />
+          <xsd:element minOccurs="0" name="messageText" type="xsd:string" />
+          <xsd:element minOccurs="0" name="parentInstance" type="xsd:string" />
+          <xsd:element minOccurs="0" name="user" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfError">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Error" nillable="true" type="ns6:Error" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Error">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns6:Message" />
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfWarning">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Warning" nillable="true" type="ns6:Warning" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Warning">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="ns6:Message" />
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createUpdateEquipmentListRequest">
+    <wsdl:part name="parameters" element="tns:createUpdateEquipmentList" />
+  </wsdl:message>
+  <wsdl:message name="multipleCreateUpdateEquipmentListResponse">
+    <wsdl:part name="parameters" element="tns:multipleCreateUpdateEquipmentListResponse" />
+  </wsdl:message>
+  <wsdl:message name="retrieveNameplateAttributesRequest">
+    <wsdl:part name="parameters" element="tns:retrieveNameplateAttributes" />
+  </wsdl:message>
+  <wsdl:message name="multipleValidateRequest">
+    <wsdl:part name="parameters" element="tns:multipleValidate" />
+  </wsdl:message>
+  <wsdl:message name="resolveToEquipmentNumberRequest">
+    <wsdl:part name="parameters" element="tns:resolveToEquipmentNumber" />
+  </wsdl:message>
+  <wsdl:message name="searchResponse">
+    <wsdl:part name="parameters" element="tns:searchResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchAllRequest">
+    <wsdl:part name="parameters" element="tns:searchAll" />
+  </wsdl:message>
+  <wsdl:message name="multipleCreateUpdateEquipmentListRequest">
+    <wsdl:part name="parameters" element="tns:multipleCreateUpdateEquipmentList" />
+  </wsdl:message>
+  <wsdl:message name="retrieveNameplateAttributesResponse">
+    <wsdl:part name="parameters" element="tns:retrieveNameplateAttributesResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchAllResponse">
+    <wsdl:part name="parameters" element="tns:searchAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="multipleResolveToEquipmentNumberResponse">
+    <wsdl:part name="parameters" element="tns:multipleResolveToEquipmentNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="resolveToEquipmentNumberResponse">
+    <wsdl:part name="parameters" element="tns:resolveToEquipmentNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="validateResponse">
+    <wsdl:part name="parameters" element="tns:validateResponse" />
+  </wsdl:message>
+  <wsdl:message name="createUpdateEquipmentListResponse">
+    <wsdl:part name="parameters" element="tns:createUpdateEquipmentListResponse" />
+  </wsdl:message>
+  <wsdl:message name="multipleValidateResponse">
+    <wsdl:part name="parameters" element="tns:multipleValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="multipleResolveToEquipmentNumberRequest">
+    <wsdl:part name="parameters" element="tns:multipleResolveToEquipmentNumber" />
+  </wsdl:message>
+  <wsdl:message name="searchRequest">
+    <wsdl:part name="parameters" element="tns:search" />
+  </wsdl:message>
+  <wsdl:message name="validateRequest">
+    <wsdl:part name="parameters" element="tns:validate" />
+  </wsdl:message>
+  <wsdl:portType name="EquipmentReference">
+    <wsdl:operation name="search">
+      <wsdl:input name="searchRequest" message="tns:searchRequest" />
+      <wsdl:output name="searchResponse" message="tns:searchResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="multipleCreateUpdateEquipmentList">
+      <wsdl:input name="multipleCreateUpdateEquipmentListRequest" message="tns:multipleCreateUpdateEquipmentListRequest" />
+      <wsdl:output name="multipleCreateUpdateEquipmentListResponse" message="tns:multipleCreateUpdateEquipmentListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchAll">
+      <wsdl:input name="searchAllRequest" message="tns:searchAllRequest" />
+      <wsdl:output name="searchAllResponse" message="tns:searchAllResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="multipleResolveToEquipmentNumber">
+      <wsdl:input name="multipleResolveToEquipmentNumberRequest" message="tns:multipleResolveToEquipmentNumberRequest" />
+      <wsdl:output name="multipleResolveToEquipmentNumberResponse" message="tns:multipleResolveToEquipmentNumberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="retrieveNameplateAttributes">
+      <wsdl:input name="retrieveNameplateAttributesRequest" message="tns:retrieveNameplateAttributesRequest" />
+      <wsdl:output name="retrieveNameplateAttributesResponse" message="tns:retrieveNameplateAttributesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="multipleValidate">
+      <wsdl:input name="multipleValidateRequest" message="tns:multipleValidateRequest" />
+      <wsdl:output name="multipleValidateResponse" message="tns:multipleValidateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createUpdateEquipmentList">
+      <wsdl:input name="createUpdateEquipmentListRequest" message="tns:createUpdateEquipmentListRequest" />
+      <wsdl:output name="createUpdateEquipmentListResponse" message="tns:createUpdateEquipmentListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="resolveToEquipmentNumber">
+      <wsdl:input name="resolveToEquipmentNumberRequest" message="tns:resolveToEquipmentNumberRequest" />
+      <wsdl:output name="resolveToEquipmentNumberResponse" message="tns:resolveToEquipmentNumberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="validate">
+      <wsdl:input name="validateRequest" message="tns:validateRequest" />
+      <wsdl:output name="validateResponse" message="tns:validateResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EquipmentReferenceServiceHttpBinding" type="tns:EquipmentReference">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="search">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="searchRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="multipleCreateUpdateEquipmentList">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="multipleCreateUpdateEquipmentListRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="multipleCreateUpdateEquipmentListResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchAll">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="searchAllRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchAllResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="multipleResolveToEquipmentNumber">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="multipleResolveToEquipmentNumberRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="multipleResolveToEquipmentNumberResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveNameplateAttributes">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="retrieveNameplateAttributesRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="retrieveNameplateAttributesResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="multipleValidate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="multipleValidateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="multipleValidateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createUpdateEquipmentList">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createUpdateEquipmentListRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createUpdateEquipmentListResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="resolveToEquipmentNumber">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="resolveToEquipmentNumberRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="resolveToEquipmentNumberResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="validateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="validateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EquipmentReferenceService">
+    <wsdl:port name="EquipmentReferenceServiceHttpPort" binding="tns:EquipmentReferenceServiceHttpBinding">
+      <wsdlsoap:address location="https://ews-kpd.kppmining.net/ews/services/EquipmentReferenceService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

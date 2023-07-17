@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<input type="hidden" id="hd_idProfile" value="@Session["ID_Role"]" />
+@*<input type="hidden" id="hd_idProfile" value="@Session["ID_Role"]" />
 <input type="hidden" id="hd_idNrp" value="@Session["Nrp"]" />
 <input type="hidden" id="hd_PositionID" value="@Session["PositionID"]" />
-<input type="text" id="txt_PositionID" value="@ViewBag.POSID" hidden />
+<input type="text" id="txt_PositionID" value="@ViewBag.POSID" hidden />*@
 
 <h2 class="content-heading">Approval Plant Dept. Head</h2>
 <div class="block block-rounded">
@@ -30,7 +30,7 @@
                     <th>TO DISTRICT</th>
                     <th>CREATED DATE</th>
                     <th>STATUS</th>
-                    <th style="width: 400px;">UPLOAD FORM CAAB</th>
+                    <th>UPLOAD FORM CAAB</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
@@ -39,21 +39,6 @@
         </table>
     </div>
 </div>
-
-@*<div class="row">
-        <div class="col-md-6">
-            <div class="block block-rounded">
-                <div class="block-content">
-                    <div class="row mb-3">
-                        <label class="col-sm-4 col-form-label" for="txt_formCAAB">Upload Form CAAB</label>
-                        <div class="col-sm-8">
-                            <input class="form-control" type="file" accept=".pdf" id="txt_formCAAB">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
 
 <div class="block block-rounded block-link-shadow">
     <div class="block-header">
@@ -68,7 +53,7 @@
         <div class="block-options justify-content-center">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="submitApproval(this.value)">
+                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="rejectApproval(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>
                     <button type="submit" class="btn btn-sm btn-success" value="PLANT DEPT. HEAD APPROVED" onclick="submitApproval(this.value)">

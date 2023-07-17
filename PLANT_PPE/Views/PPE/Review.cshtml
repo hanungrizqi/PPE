@@ -11,29 +11,19 @@
         <h3 class="block-title">
             Table Review <small>Permohonan Pemindahan Equipment</small>
         </h3>
-        @*<div class="block-options">
-                <div class="block-options-item">
-                    <button type="button" class="btn btn-success py-2 mb-0" data-bs-toggle="modal" data-bs-target="#modal-insert" onclick="showInsert();">
-                        <i class="fa fa-add opacity-50 me-1"></i> Add Mapping Approval
-                    </button>
-                </div>
-            </div>*@
     </div>
-
-
     <div class="block-content block-content-full">
         <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_reviewppe">
             <thead class="text-center bg-primary text-white">
                 <tr>
-                    <th>DATE</th>
                     <th>PPE NO</th>
                     <th>EGI</th>
-                    @*<th>EQUIP CLASS</th>*@
                     <th>EQUIP NO</th>
-                    @*<th>SERIAL NUMBER</th>*@
                     <th>FROM</th>
                     <th>TO</th>
+                    <th>CREATED DATE</th>
                     <th>POSISI PPE</th>
+                    <th>STATUS</th>
                     <th>ACTION</th>
                 </tr>
             </thead>
@@ -42,7 +32,6 @@
         </table>
     </div>
 </div>
-
 
 <div class="modal" id="modal-detail" tabindex="-1" aria-labelledby="modal-large" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
@@ -57,8 +46,6 @@
                     </div>
                 </div>
                 <div class="block-content fs-sm">
-
-
                     <div class="row">
                         <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_detail">
                             <thead class="text-center bg-primary text-white">
@@ -66,7 +53,6 @@
                                     <th>POSITION</th>
                                     <th>NRP</th>
                                     <th>NO QUIPMENT</th>
-                                    @*<th>REMAKS</th>*@
                                     <th>APPROVED DATE</th>
                                 </tr>
                             </thead>
@@ -74,7 +60,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
                 <div class="block-content block-content-full block-content-sm text-end border-top">
                     <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal" onclick="detailClose()">

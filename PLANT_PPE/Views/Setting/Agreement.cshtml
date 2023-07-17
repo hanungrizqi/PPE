@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h2>Agreement</h2>*@
-
 <h2 class="content-heading">Setting Agreement</h2>
 <div class="block block-rounded">
     <div class="block-header block-header-default">
@@ -20,18 +18,8 @@
         </div>
     </div>
     <div class="block-content">
-        <!--<form action="be_forms_editors.html" method="POST" onsubmit="return false;">
-            <div class="mb-4">
-                <!-- CKEditor 5 Classic Container -->
-        <!--@*<div id="editor">
-                    Hello classic CKEditor 5!
-                </div>*@
-                <textarea id="editor" name="editor"></textarea>
-            </div>
-        </form>-->
         <form action="be_forms_editors.html" method="POST" onsubmit="return false;">
             <div class="mb-4">
-                <!-- CKEditor 5 Classic Container -->
                 <div id="js-ckeditor5-classic"><input type="text" id="txt_ID" hidden /></div>
             </div>
         </form>
@@ -42,13 +30,3 @@
         </button>
     </div>
 </div>
-
-@*<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>*@
-
-@*<script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>*@

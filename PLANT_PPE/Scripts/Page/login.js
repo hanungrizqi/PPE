@@ -8,7 +8,7 @@ function PostLogin() {
     var obj = new Object();
     obj.Username = $("#login-username").val();
     obj.Password = $("#login-password").val();
-    obj.Jobsite = $("#jobSite").val();
+    //obj.Jobsite = $("#jobSite").val();
     obj.Roled = $("#roled").val();
     $.ajax({
         url: $("#web_link").val() + "/api/Login/Get_Login", //URI
@@ -22,7 +22,7 @@ function PostLogin() {
         },
         success: function (data) {
             if (data.Remarks == true) {
-                MakeSession(obj.Username, obj.Jobsite, obj.Roled);
+                MakeSession(obj.Username/*, obj.Jobsite*/, obj.Roled);
             }
             else {
                 swal.fire({
@@ -44,11 +44,11 @@ function PostLogin() {
     })
 }
 
-function MakeSession(nrp, site, role) {
+function MakeSession(nrp, /*site,*/ role) {
     //debugger
     var obj = {
         NRP: nrp,
-        Jobsite: site,
+        //Jobsite: site,
         Roled: role
     };
 

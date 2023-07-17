@@ -342,35 +342,6 @@
       <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.VW_T_PPE" Member="VW_T_PPEs">
-    <Type Name="VW_T_PPE">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DISTRICT_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="DISTRICT_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="LOC_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="LOC_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EQUIP_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="EGI" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="EQUIP_CLASS" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="SERIAL_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PPE_DESC" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="POSISI_PPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CREATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
-      <Column Name="UPDATED_DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="UPDATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="REMARKS" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="PATH_ATTACHMENT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.VW_T_SECHEAD" Member="VW_T_SECHEADs">
     <Type Name="VW_T_SECHEAD">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -408,15 +379,15 @@
       <Column Name="Ppe_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="Equip_No" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Posisi_Ppe" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Approval_Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Approved_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Approved_By" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="District_From" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="District_To" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.TBL_T_PPE" Member="TBL_T_PPEs">
     <Type Name="TBL_T_PPE">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_PPE" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
@@ -440,8 +411,125 @@
       <Column Name="PATH_ATTACHMENT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="URL_FORM_SH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PLNTMNGR" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PLNTDH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PM_PENGIRIM" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PM_PENERIMA" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DIVHEAD_ENG" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DIVHEAD_OPR" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DONE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DATE_RECEIVED_SM" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BERITA_ACARA_SM" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_T_PPE" Member="VW_T_PPEs">
+    <Type Name="VW_T_PPE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DISTRICT_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DISTRICT_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOC_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOC_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EQUIP_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EGI" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EQUIP_CLASS" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SERIAL_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PPE_DESC" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="POSISI_PPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CREATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
+      <Column Name="UPDATED_DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UPDATED_NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
+      <Column Name="REMARKS" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PATH_ATTACHMENT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="DATE_RECEIVED_SM" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BERITA_ACARA_SM" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_H_EQUIPNO_DONE" Member="TBL_H_EQUIPNO_DONEs">
+    <Type Name="TBL_H_EQUIPNO_DONE">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Equip_No" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="District_From" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="District_To" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Updated_By" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_SectionHeadResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PlantManager" Method="cusp_insertNotifEmail_PlantManager">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PlantManagerResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PlantDeptHead" Method="cusp_insertNotifEmail_PlantDeptHead">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PlantDeptHeadResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PMPengirim" Method="cusp_insertNotifEmail_PMPengirim">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PMPengirimResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PMPenerima" Method="cusp_insertNotifEmail_PMPenerima">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PMPenerimaResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_Divhead_Eng" Method="cusp_insertNotifEmail_Divhead_Eng">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cusp_insertNotifEmail_Divhead_EngResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_Divhead_Opr" Method="cusp_insertNotifEmail_Divhead_Opr">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cusp_insertNotifEmail_Divhead_OprResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PPE_Done" Method="cusp_insertNotifEmail_PPE_Done">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cusp_insertNotifEmail_PPE_DoneResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cufn_getPPE_NO" Method="cufn_getPPE_NO" IsComposable="true">
+    <ElementType Name="cufn_getPPE_NOResult">
+      <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DISTRICT_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DISTRICT_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Table Name="dbo.TBL_M_USER_APPROVAL" Member="TBL_M_USER_APPROVALs">
     <Type Name="TBL_M_USER_APPROVAL">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

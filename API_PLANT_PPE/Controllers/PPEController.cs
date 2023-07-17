@@ -50,6 +50,22 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Get_PPENO_SM")]
+        public IHttpActionResult Get_PPENO_SM()
+        {
+            try
+            {
+                var data = db.TBL_T_PPEs.Where(a => a.STATUS != "REJECT").OrderBy(a => a.ID).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost]
         [Route("Create_PPE")]
         public IHttpActionResult Create_PPE(List<TBL_T_PPE> ppeList)
@@ -59,6 +75,7 @@ namespace API_PLANT_PPE.Controllers
                 foreach (var param in ppeList)
                 {
                     TBL_T_PPE tbl = new TBL_T_PPE();
+                    tbl.ID_PPE = Guid.NewGuid();
                     tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
                     tbl.PPE_NO = param.PPE_NO;
                     tbl.DATE = param.DATE;
@@ -83,10 +100,8 @@ namespace API_PLANT_PPE.Controllers
                     tbl.URL_FORM_SH = param.URL_FORM_SH;
 
                     db.TBL_T_PPEs.InsertOnSubmit(tbl);
-                    //db.GetTable<TBL_T_PPE>().InsertAllOnSubmit(ppeList);
                     db.SubmitChanges();
                 }
-                //db.SubmitChanges();
                 return Ok(new { Remarks = true });
             }
             catch (Exception e)
@@ -94,6 +109,43 @@ namespace API_PLANT_PPE.Controllers
                 return Ok(new { Remarks = false, Message = e });
             }
         }
+
+        [HttpPost]
+        [Route("Insert_Approved_Create")]
+        public IHttpActionResult Insert_Approved_Create(TBL_T_PPE[] param)
+        {
+            try
+            {
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
+                    
+                    if (cek.PPE_NO != null)
+                    {
+                        // insert into TBL_H_APPROVAL_PPE
+                        TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = "Created";
+                        his.Approval_Order = 1;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.CREATED_BY;
+
+                        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                    }
+                }
+
+                db.SubmitChanges();
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Remarks = false, Message = e });
+            }
+        }
+
 
         [HttpPost]
         [Route("UploadAttachment")]
@@ -106,14 +158,12 @@ namespace API_PLANT_PPE.Controllers
                 {
                     var file = httpRequest.Files[0];
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    //tambah ini kalo pengin buat folder otomatis.....
                     var folderPath = HttpContext.Current.Server.MapPath("~/Content/AttachmentFile");
                     if (!Directory.Exists(folderPath))
                     {
                         Directory.CreateDirectory(folderPath);
                     }
-                    var filePath = Path.Combine(folderPath, fileName); //pake filepath ini kalo buat foldernya otomatis
-                    //var filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/AttachmentFile"), fileName);
+                    var filePath = Path.Combine(folderPath, fileName);
                     file.SaveAs(filePath);
 
                     var attachmentUrl = Url.Content("~/Content/AttachmentFile/" + fileName);
@@ -188,7 +238,6 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
                 var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
@@ -301,6 +350,40 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("List_ApprovalSM/{posid}")]
+        public IHttpActionResult List_ApprovalSM(string posid)
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Waiting SM Dept" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").OrderBy(a => a.ID).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Received")]
+        public IHttpActionResult Received()
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "DIVISION HEAD OPR APPROVED").OrderBy(a => a.PPE_NO).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         //Get Detail PPE
         [HttpGet]
         [Route("Get_PPEDetail/{no_quip}")]
@@ -319,6 +402,23 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Detail_SM")]
+        public IHttpActionResult Detail_SM(string ppe_no)
+        {
+            try
+            {
+                db.CommandTimeout = 120;
+                var data = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe_no).FirstOrDefault();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
 
         [HttpGet]
         [Route("Get_History")]
@@ -327,8 +427,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.cusp_historycalPPE(Equip_No);
-                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approved_Date).ToList();
+                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approval_Order).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -348,7 +447,7 @@ namespace API_PLANT_PPE.Controllers
                 if (cek != null)
                 {
 
-                    if (cek.EQUIP_NO == param.EQUIP_NO)
+                    if (cek.EQUIP_NO == param.EQUIP_NO && cek.STATUS != "REJECT")
                     {
                         var noppe = cek.PPE_NO;
                         var eqpno = cek.EQUIP_NO;
@@ -358,15 +457,169 @@ namespace API_PLANT_PPE.Controllers
                         var message = string.Format("Equipment {0} Sedang ada pemindahan di No. PPE : {1}, Dengan Status {2}, dan Posisi PPE : {3}", eqpno, noppe, stts, posppe);
                         return Ok(new { Remarkss = true, Datas = cek, ppe = noppe, eq = eqpno, st = stts, Messages = message });
                     }
+                    if (cek.EQUIP_NO == param.EQUIP_NO && cek.STATUS == "REJECT")
+                    {
+                        return Ok(new { Remarkss = false });
+                    }
                     return Ok(new { Remarks = true });
                 }
                 else
                 {
-                    
                     return Ok(new { Remarkss = false });
-
                 }
 
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Section_Head")]
+        public IHttpActionResult Sendmail_Section_Head(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_SectionHead(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Plant_Manager")]
+        public IHttpActionResult Sendmail_Plant_Manager(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PlantManager(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Plant_DeptHead")]
+        public IHttpActionResult Sendmail_Plant_DeptHead(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PlantDeptHead(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_PM_Pengirim")]
+        public IHttpActionResult Sendmail_PM_Pengirim(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PMPengirim(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_PM_Penerima")]
+        public IHttpActionResult Sendmail_PM_Penerima(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PMPenerima(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Divhead_Eng")]
+        public IHttpActionResult Sendmail_Divhead_Eng(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_Divhead_Eng(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Divhead_Opr")]
+        public IHttpActionResult Sendmail_Divhead_Opr(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_Divhead_Opr(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Done")]
+        public IHttpActionResult Sendmail_Done(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PPE_Done(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
             }
             catch (Exception)
             {

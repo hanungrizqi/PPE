@@ -17,7 +17,7 @@ namespace PLANT_PPE.Controllers
             return View();
         }
 
-        public JsonResult MakeSession(string NRP, string Jobsite, string Roled)
+        public JsonResult MakeSession(string NRP, /*string Jobsite,*/ string Roled)
         {
             string nrp = "";
 
@@ -32,16 +32,15 @@ namespace PLANT_PPE.Controllers
             var dataUser = db.VW_KARYAWAN_ALLs.Where(a => a.EMPLOYEE_ID == nrp).FirstOrDefault();
             var dataRole = db.TBL_M_USERs.Where(a => a.Username == nrp).FirstOrDefault();
             //var dataRoledakun = db.TBL_M_ROLEs.Where(a => a.ID == dataRole.ID_Role).FirstOrDefault();
-            //var dataMap = db.TBL_MAPPING_APPROVALS_NIHs.Where
 
             if (dataRole != null)
             {
                 var dataRoledakun = db.TBL_M_ROLEs.Where(a => a.ID == dataRole.ID_Role).FirstOrDefault();
                 var dataApprovalid = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.NEXT_POSITION_ID == dataUser.POSITION_ID).FirstOrDefault();
-                if (Jobsite == null || Jobsite == "")
-                {
-                    return new JsonResult() { Data = new { Remarks = false, Message = "Jobsite tidak sesuai" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-                }
+                //if (Jobsite == null || Jobsite == "")
+                //{
+                //    return new JsonResult() { Data = new { Remarks = false, Message = "Jobsite tidak sesuai" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                //}
                 if (Roled == null || Roled == "" || Roled != dataRoledakun.RoleName)
                 {
                     return new JsonResult() { Data = new { Remarks = false, Message = "Role tidak sesuai" }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -51,13 +50,13 @@ namespace PLANT_PPE.Controllers
                 Session["Nrp"] = nrp;
                 Session["ID_Role"] = dataRole.ID_Role;
                 Session["Name"] = dataUser.NAME;
-                Session["Site"] = Jobsite;
+                //Session["Site"] = Jobsite;
+                Session["Site"] = dataUser.DSTRCT_CODE;
                 Session["Role"] = dataRoledakun.RoleName;
                 //Session["Pos"]
                 //Session[Pos_Code] = 
                 Session["PositionID"] = dataUser.POSITION_ID;
                 ViewBag.POSID = dataUser.POSITION_ID;
-                //Session["Site"] = dataUser.DSTRCT_CODE;
                 return new JsonResult() { Data = new { Remarks = true }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
             else
@@ -66,9 +65,7 @@ namespace PLANT_PPE.Controllers
             }
 
         }
-
-
-
+        
         public ActionResult Logout()
         {
             Session.RemoveAll();

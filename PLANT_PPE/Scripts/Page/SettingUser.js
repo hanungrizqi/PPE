@@ -45,7 +45,28 @@ var table = $("#tbl_user").DataTable({
             }
         }
     ],
+    initComplete: function () {
+        this.api()
+            .columns(3)
+            .every(function () {
+                var column = this;
+                var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- GROUP --</option></select>')
+                    .appendTo($("#tbl_user_filter.dataTables_filter"))
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
+                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                    });
+
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>');
+                    });
+            });
+    },
 });
 
 
