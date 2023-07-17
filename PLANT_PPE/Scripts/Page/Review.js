@@ -24,12 +24,13 @@ function getdetail(nomor_equip) {
             data: {
                 Equip_No : nomor_equip
             },
-            order: [[3, 'asc']],
             dataSrc: "Data",
         },
         "columnDefs": [
             { "className": "dt-center", "targets": [0, 1, 2, 3] }
         ],
+
+        order: [[3, 'desc']],
         scrollX: true,
         columns: [
 

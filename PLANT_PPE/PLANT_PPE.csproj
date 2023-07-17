@@ -189,6 +189,13 @@
     <Compile Include="Reports\ReportSH.aspx.designer.cs">
       <DependentUpon>ReportSH.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Reports\ReportReview.aspx.cs">
       <DependentUpon>ReportReview.aspx</DependentUpon>
@@ -4398,6 +4405,7 @@
     </None>
     <Content Include="Reports\ReportSH.aspx" />
     <Content Include="Reports\ReportReview.aspx" />
+    <Content Include="Reports\WebForm1.aspx" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\Page\ApprovalDivHead.js" />
     <Content Include="Scripts\Page\ApprovalDivHeadOPR.js" />
@@ -4416,6 +4424,7 @@
     <Content Include="Scripts\Page\MappingApproval.js" />
     <Content Include="Scripts\Page\SettingMenu.js" />
     <Content Include="Scripts\Page\SettingDistrict.js" />
+    <Content Include="Scripts\Page\SettingUserApprove.js" />
     <Content Include="Scripts\Page\SettingUser.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -4473,6 +4482,7 @@
     <Content Include="Views\Approval\ProjectManagerPenerima.cshtml" />
     <Content Include="Views\Approval\DivHeadOPR.cshtml" />
     <Content Include="Views\Approval\PrintSectHead.cshtml" />
+    <Content Include="Views\Setting\UserApprove.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

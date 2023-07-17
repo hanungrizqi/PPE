@@ -327,6 +327,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
+                //var data = db.cusp_historycalPPE(Equip_No);
                 var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approved_Date).ToList();
 
                 return Ok(new { Data = data });

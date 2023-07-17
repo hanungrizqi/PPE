@@ -122,4 +122,26 @@
       <Column Name="URL_FORM_SH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TBL_MAPPING_APPROVALS_NIH" Member="TBL_MAPPING_APPROVALS_NIHs">
+    <Type Name="TBL_MAPPING_APPROVALS_NIH">
+      <Column Name="APPROVAL_ACTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_FROM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="APPROVAL_TO" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="APPROVAL_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="POSITION_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_M_USER_APPROVAL" Member="TBL_M_USER_APPROVALs">
+    <Type Name="TBL_M_USER_APPROVAL">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Position_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Employee_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="sub_menu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

@@ -60,6 +60,9 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_T_PPE(TBL_T_PPE instance);
     partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
     partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
+    partial void InsertTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
+    partial void UpdateTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
+    partial void DeleteTBL_M_USER_APPROVAL(TBL_M_USER_APPROVAL instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -330,6 +333,21 @@ namespace API_PLANT_PPE.Models
 			{
 				return this.GetTable<TBL_T_PPE>();
 			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_USER_APPROVAL> TBL_M_USER_APPROVALs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_USER_APPROVAL>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_historycalPPE")]
+		public ISingleResult<cusp_historycalPPEResult> cusp_historycalPPE([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string equip_no)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), equip_no);
+			return ((ISingleResult<cusp_historycalPPEResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -7093,6 +7111,340 @@ namespace API_PLANT_PPE.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_USER_APPROVAL")]
+	public partial class TBL_M_USER_APPROVAL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _Position_id;
+		
+		private string _Employee_id;
+		
+		private string _Name;
+		
+		private string _sub_menu;
+		
+		private string _dstrct_code;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnPosition_idChanging(string value);
+    partial void OnPosition_idChanged();
+    partial void OnEmployee_idChanging(string value);
+    partial void OnEmployee_idChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void Onsub_menuChanging(string value);
+    partial void Onsub_menuChanged();
+    partial void Ondstrct_codeChanging(string value);
+    partial void Ondstrct_codeChanged();
+    #endregion
+		
+		public TBL_M_USER_APPROVAL()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position_id", DbType="VarChar(50)")]
+		public string Position_id
+		{
+			get
+			{
+				return this._Position_id;
+			}
+			set
+			{
+				if ((this._Position_id != value))
+				{
+					this.OnPosition_idChanging(value);
+					this.SendPropertyChanging();
+					this._Position_id = value;
+					this.SendPropertyChanged("Position_id");
+					this.OnPosition_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Employee_id", DbType="VarChar(50)")]
+		public string Employee_id
+		{
+			get
+			{
+				return this._Employee_id;
+			}
+			set
+			{
+				if ((this._Employee_id != value))
+				{
+					this.OnEmployee_idChanging(value);
+					this.SendPropertyChanging();
+					this._Employee_id = value;
+					this.SendPropertyChanged("Employee_id");
+					this.OnEmployee_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sub_menu", DbType="VarChar(50)")]
+		public string sub_menu
+		{
+			get
+			{
+				return this._sub_menu;
+			}
+			set
+			{
+				if ((this._sub_menu != value))
+				{
+					this.Onsub_menuChanging(value);
+					this.SendPropertyChanging();
+					this._sub_menu = value;
+					this.SendPropertyChanged("sub_menu");
+					this.Onsub_menuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dstrct_code", DbType="VarChar(50)")]
+		public string dstrct_code
+		{
+			get
+			{
+				return this._dstrct_code;
+			}
+			set
+			{
+				if ((this._dstrct_code != value))
+				{
+					this.Ondstrct_codeChanging(value);
+					this.SendPropertyChanging();
+					this._dstrct_code = value;
+					this.SendPropertyChanged("dstrct_code");
+					this.Ondstrct_codeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class cusp_historycalPPEResult
+	{
+		
+		private int _ID;
+		
+		private string _Ppe_NO;
+		
+		private string _Equip_No;
+		
+		private string _Posisi_Ppe;
+		
+		private System.Nullable<System.DateTime> _Approved_Date;
+		
+		private string _Approved_By;
+		
+		private string _District_From;
+		
+		private string _District_To;
+		
+		public cusp_historycalPPEResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ppe_NO", DbType="VarChar(200)")]
+		public string Ppe_NO
+		{
+			get
+			{
+				return this._Ppe_NO;
+			}
+			set
+			{
+				if ((this._Ppe_NO != value))
+				{
+					this._Ppe_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Equip_No", DbType="VarChar(100)")]
+		public string Equip_No
+		{
+			get
+			{
+				return this._Equip_No;
+			}
+			set
+			{
+				if ((this._Equip_No != value))
+				{
+					this._Equip_No = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Posisi_Ppe", DbType="VarChar(150)")]
+		public string Posisi_Ppe
+		{
+			get
+			{
+				return this._Posisi_Ppe;
+			}
+			set
+			{
+				if ((this._Posisi_Ppe != value))
+				{
+					this._Posisi_Ppe = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Approved_Date
+		{
+			get
+			{
+				return this._Approved_Date;
+			}
+			set
+			{
+				if ((this._Approved_Date != value))
+				{
+					this._Approved_Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_By", DbType="VarChar(50)")]
+		public string Approved_By
+		{
+			get
+			{
+				return this._Approved_By;
+			}
+			set
+			{
+				if ((this._Approved_By != value))
+				{
+					this._Approved_By = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District_From", DbType="VarChar(50)")]
+		public string District_From
+		{
+			get
+			{
+				return this._District_From;
+			}
+			set
+			{
+				if ((this._District_From != value))
+				{
+					this._District_From = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_District_To", DbType="VarChar(50)")]
+		public string District_To
+		{
+			get
+			{
+				return this._District_To;
+			}
+			set
+			{
+				if ((this._District_To != value))
+				{
+					this._District_To = value;
+				}
 			}
 		}
 	}

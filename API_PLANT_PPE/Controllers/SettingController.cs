@@ -36,11 +36,42 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Create_UserApprove")]
+        public IHttpActionResult Create_UserApprove(TBL_M_USER_APPROVAL param)
+        {
+            try
+            {
+                TBL_M_USER_APPROVAL tbl = new TBL_M_USER_APPROVAL();
+                tbl.Employee_id = param.Employee_id;
+                tbl.Position_id = param.Position_id;
+                tbl.Name = param.Name;
+                tbl.sub_menu= param.sub_menu;
+                tbl.dstrct_code = param.dstrct_code;
+
+                db.TBL_M_USER_APPROVALs.InsertOnSubmit(tbl);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
         [HttpGet]
         [Route("Get_UserSetting")]
         public IHttpActionResult Get_UserSetting()
         {
             var data = db.VW_Users.ToList();
+            return Ok(new { Data = data });
+        }
+
+        [HttpGet]
+        [Route("Get_UserApproveSetting")]
+        public IHttpActionResult Get_UserApproveSetting()
+        {
+            var data = db.TBL_M_USER_APPROVALs.ToList();
             return Ok(new { Data = data });
         }
 
@@ -53,6 +84,25 @@ namespace API_PLANT_PPE.Controllers
                 var data = db.TBL_M_USERs.Where(a => a.ID_Role == role && a.Username == nrp).FirstOrDefault();
 
                 db.TBL_M_USERs.DeleteOnSubmit(data);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+
+        }
+
+        [HttpPost]
+        [Route("Delete_UserApprove")]
+        public IHttpActionResult Delete_UserApprove(int id)
+        {
+            try
+            {
+                var data = db.TBL_M_USER_APPROVALs.Where(a => a.id == id).FirstOrDefault();
+
+                db.TBL_M_USER_APPROVALs.DeleteOnSubmit(data);
                 db.SubmitChanges();
                 return Json(new { Remarks = true });
             }
