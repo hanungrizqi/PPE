@@ -4422,6 +4422,7 @@
     <Content Include="Scripts\Page\Received.js" />
     <Content Include="Scripts\Page\Review.js" />
     <Content Include="Scripts\Page\RegisterPPE.js" />
+    <Content Include="Scripts\Page\SettingAccountProfile.js" />
     <Content Include="Scripts\Page\SettingAgreement.js" />
     <Content Include="Scripts\Page\MappingApproval.js" />
     <Content Include="Scripts\Page\SettingMenu.js" />
@@ -4489,8 +4490,8 @@
     <Content Include="Views\SM\Review.cshtml" />
     <Content Include="Views\SM\Approve.cshtml" />
     <Content Include="Views\Received\DetailPPE_EQP.cshtml" />
-    <Content Include="Views\Approval\PrintSectHead.cshtml" />
     <Content Include="Views\Setting\UserApprove.cshtml" />
+    <Content Include="Views\Setting\AccountProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

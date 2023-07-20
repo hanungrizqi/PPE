@@ -22,17 +22,7 @@ $("#txt_nrp").on("change", function () {
     });
 })
 
-
-
-function showTable() {
-
-    /*$('#tbl_userApprove thead tr')
-        .clone(true)
-        .addClass('filters')
-        .appendTo('#my-searches');
-
-    $('#my-searches .filters :last-child').remove();*/
-
+//function showTable() {
     var table = $("#tbl_userApprove").DataTable({
         ajax: {
             url: $("#web_link").val() + "/api/Setting/Get_UserApproveSetting",
@@ -109,14 +99,8 @@ function showTable() {
                         });
                 });
         }
-
-
     });
-
-
-
-}
-
+//}
 
 function insertUserApprove() {
     let obj = new Object();

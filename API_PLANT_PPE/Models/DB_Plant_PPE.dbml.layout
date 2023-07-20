@@ -194,5 +194,17 @@
         <elementListCompartment Id="cc42e770-932c-4da9-8587-50f456eca939" absoluteBounds="0.51500000000000012, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="3cc9db6b-3244-4739-92d8-3a17c483a8ff" isExpanded="false" absoluteBounds="2.625, 3, 2, 0.45">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_R_MASTER_KARYAWAN_ALL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ba597c6a-7dd0-494e-bb41-b2a93299f7a8" absoluteBounds="2.6399999999999997, 3.46, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7303e2f6-b219-438e-990e-82e698e95c91" isExpanded="false" absoluteBounds="0.5, 5, 2, 0.45">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_M_ACCOUNT_PROFILE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a7ab249d-01d3-46f4-9136-14b133e2ba85" absoluteBounds="0.51500000000000012, 5.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -69,7 +69,7 @@ var table = $("#tbl_reviewppe").DataTable({
             extend: "pdfHtml5",
             title: "REVIEW PPE",
             exportOptions: {
-                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                columns: [0, 1, 2, 3, 4, 5, 6, 7]
             },
             customize: function (doc) {
                 doc.content[1].margin = [0, 0, 0, 0]

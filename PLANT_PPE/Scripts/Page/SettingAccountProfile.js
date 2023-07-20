@@ -6,9 +6,9 @@ $("document").ready(function () {
     });
 })
 
-var table = $("#tbl_district").DataTable({
+var table = $("#tbl_accprofile").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/Setting/Get_District",
+        url: $("#web_link").val() + "/api/Setting/Get_AccountProfile",
         dataSrc: "Data",
     },
     "columnDefs": [
@@ -20,39 +20,51 @@ var table = $("#tbl_district").DataTable({
         { data: 'DSTRCT_CODE' },
         { data: 'DSTRCT_LOC' },
         {
-            //render: function (data, type, row) {
-            //    action = `<div class="btn-group">`
-            //    action += `<button type="button" onclick="deleteDstrct(${row.ID})" class="btn btn-sm btn-danger" title="Delete">Delete
-            //                    </button>`
-            //    action += `</div>`
-            //    return action;
-            //}
             data: 'ID',
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                action += `<button type="button" value="${row.ACCT_PROFILE}" onclick="setAccountprofile(${row.ID}, this.value, '${row.DSTRCT_CODE}')" data-bs-toggle="modal" data-bs-target="#modal_update" class="btn btn-sm btn-info" title="Edit">Edit
+                action += `<button type="button" value="${row.DSTRCT_CODE}" onclick="setSource(${row.ID}, this.value)" data-bs-toggle="modal" data-bs-target="#modal_update" class="btn btn-sm btn-info" title="Edit">Edit
                                 </button>`
-                action += `<button type="button" onclick="deleteSource(${row.ID})" class="btn btn-sm btn-danger" title="Delete">Delete
+                action += `<button type="button" value="${row.ACCT_PROFILE}" onclick="deleteUser(${row.ID}, this.value)" class="btn btn-sm btn-danger" title="Delete">Delete
                                 </button>`
                 action += `</div>`
                 return action;
             }
         }
-
     ],
+    initComplete: function () {
+        this.api()
+            .columns(1)
+            .every(function () {
+                var column = this;
+                var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- DISTRICT --</option></select>')
+                    .appendTo($("#tbl_accprofile_filter.dataTables_filter"))
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
+                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                    });
+
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>');
+                    });
+            });
+    },
 });
 
-function insertDistrict() {
-    let obj = new Object();
-    obj.DSTRCT_CODE = $('#txt_dstrct').val(); 
-    obj.LOCATION = $('#txt_location').val();
 
-    console.log(obj);
+function insertUser() {
+    let obj = new Object();
+    obj.ID_Role = $('#txt_group').val();
+    obj.Username = $('#txt_nrp').val();
 
     $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Create_District", //URI
+        url: $("#web_link").val() + "/api/Setting/Create_User", //URI
         data: JSON.stringify(obj),
         dataType: "json",
         type: "POST",
@@ -84,7 +96,7 @@ function insertDistrict() {
     })
 }
 
-function deleteDstrct(id) {
+function deleteUser(role, nrp) {
     Swal.fire({
         title: "Are you sure?",
         text: "You will not be able to recover this data!",
@@ -103,7 +115,7 @@ function deleteDstrct(id) {
     }).then(function (n) {
         if (n.value == true) {
             $.ajax({
-                url: $("#web_link").val() + "/api/Setting/Delete_District?id=" + id, //URI
+                url: $("#web_link").val() + "/api/Setting/Delete_User?role=" + role + "&nrp=" + nrp, //URI
                 type: "POST",
                 success: function (data) {
                     if (data.Remarks == true) {
@@ -124,16 +136,16 @@ function deleteDstrct(id) {
     });
 }
 
-function setAccountprofile(id, source) {
+function setSource(id, distrik) {
     debugger
     $("#txt_id").val(id);
-    $("#txt_accountprofile_update").val(source);
+    $("#txt_distrik_update").val(distrik);
+    $("#txt_lokasi_update").val(lokasi);
 }
 
-function updateAccountDL() {
-    debugger
+function updateSurce() {
     let obj = new Object
-    obj.ACCT_PROFILE = $('#txt_accountprofile_update').val();
+    obj.SOURCE = $('#txt_source_update').val();
     obj.ID = $('#txt_id').val();
 
     $.ajax({

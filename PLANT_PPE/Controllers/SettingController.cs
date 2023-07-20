@@ -20,6 +20,15 @@ namespace PLANT_PPE.Controllers
             ViewBag.Group = db.TBL_M_ROLEs.ToList();
             return View();
         }
+        public ActionResult AccountProfile()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.DistrictLoc = db.VW_R_DISTRICT_LOCATIONs.ToList();
+            return View();
+        }
 
         public ActionResult Menu()
         {
@@ -48,6 +57,7 @@ namespace PLANT_PPE.Controllers
             }
             ViewBag.dstrct = db.VW_DISTRICTs.ToList();
             ViewBag.loc = db.VW_LOCATIONs.ToList();
+            //ViewBag.acctprofile = db.VW_MSF68Cs.ToList();
             return View();
         }
 

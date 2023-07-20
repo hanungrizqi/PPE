@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230628_Testingform\Api</_PublishTargetUrl>
-    <History>True|2023-06-28T07:35:07.9960337Z;True|2023-06-28T10:14:07.2543212+07:00;True|2023-06-21T11:42:32.8182655+07:00;True|2023-06-09T10:13:26.9243086+07:00;True|2023-06-06T10:59:13.0331636+07:00;</History>
+    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230717\API</_PublishTargetUrl>
+    <History>True|2023-07-17T06:53:31.1090919Z;True|2023-07-17T13:37:02.3139276+07:00;True|2023-06-28T14:35:07.9960337+07:00;True|2023-06-28T10:14:07.2543212+07:00;True|2023-06-21T11:42:32.8182655+07:00;True|2023-06-09T10:13:26.9243086+07:00;True|2023-06-06T10:59:13.0331636+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -79,10 +79,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/API_PLANT_PPE.dll">
-      <publishTime>06/28/2023 14:35:05</publishTime>
+      <publishTime>07/17/2023 13:53:26</publishTime>
     </File>
     <File Include="bin/API_PLANT_PPE.pdb">
-      <publishTime>06/28/2023 14:35:05</publishTime>
+      <publishTime>07/17/2023 13:53:26</publishTime>
+    </File>
+    <File Include="bin/API_PLANT_PPE.XmlSerializers.dll">
+      <publishTime>07/17/2023 13:53:28</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>06/25/2023 04:12:12</publishTime>
@@ -101,6 +104,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>06/25/2023 04:12:12</publishTime>
+    </File>
+    <File Include="bin/EllipseWebServicesClient.dll">
+      <publishTime>02/14/2023 16:36:26</publishTime>
     </File>
     <File Include="bin/EnvDTE.dll">
       <publishTime>07/08/2022 09:58:54</publishTime>
@@ -559,7 +565,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 12:55:57</publishTime>
     </File>
     <File Include="Models/DB_Plant_PPE.dbml">
-      <publishTime>06/27/2023 15:07:52</publishTime>
+      <publishTime>07/17/2023 13:10:42</publishTime>
     </File>
     <File Include="Reports/WebForm1.aspx">
       <publishTime>06/28/2023 14:14:39</publishTime>
@@ -654,8 +660,212 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/_ViewStart.cshtml">
       <publishTime>05/23/2023 12:55:57</publishTime>
     </File>
+    <File Include="Web References/EquipmentReferenceService/EquipmentListServiceResult.datasource">
+      <publishTime>07/10/2023 10:13:11</publishTime>
+    </File>
+    <File Include="Web References/EquipmentReferenceService/EquipmentReferenceServiceResult.datasource">
+      <publishTime>07/10/2023 10:13:11</publishTime>
+    </File>
+    <File Include="Web References/EquipmentReferenceService/EquipmentServiceResult.datasource">
+      <publishTime>07/10/2023 10:13:11</publishTime>
+    </File>
+    <File Include="Web References/EquipmentReferenceService/EquipmentValidationServiceResult.datasource">
+      <publishTime>07/10/2023 10:13:10</publishTime>
+    </File>
+    <File Include="Web References/EquipmentReferenceService/NameplateServiceResult.datasource">
+      <publishTime>07/10/2023 10:13:10</publishTime>
+    </File>
+    <File Include="Web References/EquipmentReferenceService/Reference.map">
+      <publishTime>07/10/2023 10:13:09</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateBookReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateBookReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateContAssetSegsReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateContAssetSegsReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:41</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateOptionReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateOptionReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:41</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceCreateReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteBookReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteBookReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteContAssetSegsReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteContAssetSegsReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteOptionReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteOptionReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceDeleteReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceFetchBookReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceFetchBookReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceFetchClassReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceFetchClassReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyBookReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyBookReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:41</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyContAssetSegsReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyContAssetSegsReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyDisposalReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:41</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyDisposalReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:41</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyOptionReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyOptionReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceModifyReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceReadReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceReadReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRelocateEquipmentReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRelocateEquipmentReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrieveAssocEquipItemsReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:41</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrieveComplMaintHistReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrieveContAssetSegsReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:41</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrieveOptionsReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrievePlantStructReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrieveReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrieveSubordinatesReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceRetrieveViaRefCodesReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceShowReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:44</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceShowReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceValidatePlantStructReplyCollectionDTO.datasource">
+      <publishTime>07/07/2023 13:02:43</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/EquipmentServiceValidatePlantStructReplyDTO.datasource">
+      <publishTime>07/07/2023 13:02:42</publishTime>
+    </File>
+    <File Include="Web References/EquipmentServices/Reference.map">
+      <publishTime>07/07/2023 13:02:39</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceFetchHeaderReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceFetchHeaderReplyDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceModifyHeaderReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceModifyHeaderReplyDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceModifyReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceModifyReplyDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceReadReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceReadReplyDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceRetrieveForSearchReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceRetrieveReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceShowReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceShowReplyDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceValidateReplyCollectionDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/RefCodesServiceValidateReplyDTO.datasource">
+      <publishTime>07/10/2023 09:36:24</publishTime>
+    </File>
+    <File Include="Web References/RefCodesService/Reference.map">
+      <publishTime>07/10/2023 09:36:21</publishTime>
+    </File>
     <File Include="Web.config">
-      <publishTime>06/28/2023 14:35:06</publishTime>
+      <publishTime>07/17/2023 13:36:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

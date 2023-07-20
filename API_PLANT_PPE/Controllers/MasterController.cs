@@ -52,7 +52,7 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                var data = db.VW_KARYAWAN_ALLs.ToList();
+                var data = db.TBL_R_MASTER_KARYAWAN_ALLs.ToList();
 
                 return Ok(new { Data = data, Total = data.Count() });
             }

@@ -195,8 +195,6 @@ namespace API_PLANT_PPE.Controllers
         }
         //END Setting Agreement
 
-
-        #region Setting District
         //Setting District
         [HttpPost]
         [Route("Create_District")]
@@ -219,11 +217,19 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
-        [Route("Get_District")]
-        public IHttpActionResult Get_District()
+        [Route("Get_AccountProfile")]
+        public IHttpActionResult Get_AccountProfile()
         {
-            var data = db.TBL_M_DISTRICTs.ToList();
-            return Ok(new { Data = data });
+            try
+            {
+                var data = db.TBL_M_ACCOUNT_PROFILEs.OrderBy(a => a.DSTRCT_CODE).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { Remarks = false, Message = ex });
+            }
         }
 
 
@@ -245,11 +251,6 @@ namespace API_PLANT_PPE.Controllers
             }
 
         }
-
-        #endregion
-
-
-        #region Setting MappingApproval
 
         [HttpGet]
         [Route("Get_MappingApproval")]
@@ -399,7 +400,5 @@ namespace API_PLANT_PPE.Controllers
             return Ok(new { Data = data });
         }
 
-
-        #endregion
     }
 }

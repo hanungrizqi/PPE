@@ -173,4 +173,33 @@
       <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_MSF68C" Member="VW_MSF68Cs">
+    <Type Name="VW_MSF68C">
+      <Column Name="ACCT_PROFILE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="ACCT_RECON_TYPE" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="ACCOUNT_DESC" Type="System.String" DbType="Char(40) NOT NULL" CanBeNull="false" />
+      <Column Name="ACCOUNT_UNIT" Type="System.String" DbType="Char(24) NOT NULL" CanBeNull="false" />
+      <Column Name="ACCT_TYPE" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="ACCUM_DEPR" Type="System.Decimal" DbType="Decimal(21,2) NOT NULL" CanBeNull="false" />
+      <Column Name="COR_RATE" Type="System.Decimal" DbType="Decimal(7,4) NOT NULL" CanBeNull="false" />
+      <Column Name="COST_DSTRCT_CDE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="CREATION_DATE" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="CREATION_TIME" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="CREATION_USER" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DEPR_RATE" Type="System.Decimal" DbType="Decimal(7,4) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_DATE" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_TIME" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_USER" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="REVAL_METHOD" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="SALV_RATE" Type="System.Decimal" DbType="Decimal(7,4) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_EMP" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_R_DISTRICT_LOCATION" Member="VW_R_DISTRICT_LOCATIONs">
+    <Type Name="VW_R_DISTRICT_LOCATION">
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="EQUIP_LOCATION" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>
