@@ -202,4 +202,31 @@
       <Column Name="EQUIP_LOCATION" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.TBL_R_MASTER_KARYAWAN_ALL" Member="TBL_R_MASTER_KARYAWAN_ALLs">
+    <Type Name="TBL_R_MASTER_KARYAWAN_ALL">
+      <Column Name="EMPLOYEE_ID" Type="System.String" DbType="NVarChar(8)" CanBeNull="true" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
+      <Column Name="POSITION_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="POS_TITLE" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="WORK_LOC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="EMP_STATUS" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GENDER_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="STAFF_CATEG" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="STAFF_CATEG_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BIRTH_DATE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="HIRE_DATE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SERVICE_DATE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TERMINATION_DATE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="STATUS_HIRE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="STATUS_HIRE_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SUPERIOR_ID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="POSITION_START_DATE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="GOLONGAN" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DEPT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DEPT_DESC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ACTIVE_STATUS" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

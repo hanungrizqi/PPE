@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLANT_PPE", "PLANT_PPE\PLAN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_PLANT_PPE", "API_PLANT_PPE\API_PLANT_PPE.csproj", "{91C62F73-4127-4DB0-A24E-6B56EB5BD183}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSO687_CONSOLEAPP", "MSO687_CONSOLEAPP\MSO687_CONSOLEAPP.csproj", "{EB127936-8A89-404E-8546-3858023AFFDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{91C62F73-4127-4DB0-A24E-6B56EB5BD183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C62F73-4127-4DB0-A24E-6B56EB5BD183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C62F73-4127-4DB0-A24E-6B56EB5BD183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB127936-8A89-404E-8546-3858023AFFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB127936-8A89-404E-8546-3858023AFFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB127936-8A89-404E-8546-3858023AFFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB127936-8A89-404E-8546-3858023AFFDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

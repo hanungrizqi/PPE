@@ -40,7 +40,7 @@ namespace API_PLANT_PPE.ViewModel
                 i_obj_equipment_result = i_obj_services.read(i_obj_context, i_obj_equipment_request);
 
                 i_obj_equipment_dto1.equipmentNo = dataEquipment.EQUIP_NO;
-                i_obj_equipment_dto1.costingFlag = "W";
+                i_obj_equipment_dto1.costingFlag = "A";
                 i_obj_equipment_dto1.districtCode = dataEquipment.DISTRICT_TO;
                 i_obj_equipment_dto1.equipmentLocation = dataEquipment.LOC_TO;
                 i_obj_equipment_dto1.poNo = "-";
@@ -113,7 +113,7 @@ namespace API_PLANT_PPE.ViewModel
                 }
                 if (lokasi1 != "")
                 {
-                    mod_req.refCode = lokasi1;
+                    mod_req.refCode = "RT";
                     mod_req.refNo = i_obj_result.replyElements[1].refNo;
                     mod_req.seqNum = i_obj_result.replyElements[1].seqNum;
                     mod_req.entityType = "EQP";
@@ -191,8 +191,8 @@ namespace API_PLANT_PPE.ViewModel
 
                 i_obj_equipment_dto1.equipmentNo = dataEquipment.EQUIP_NO;
                 i_obj_equipment_dto1.costingFlag = "A";
-                i_obj_equipment_dto1.equipmentClassif3 = "SC";
-                //i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
+                //i_obj_equipment_dto1.equipmentClassif3 = "SC";
+                i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
 
                 i_obj_services.modify(i_obj_context, i_obj_equipment_dto1);
                 ClsUpdate_MSF600_Result result = SM_ReferenceCodes(dataEquipment);

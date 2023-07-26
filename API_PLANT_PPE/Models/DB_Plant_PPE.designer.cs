@@ -365,11 +365,27 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<VW_MSF685> VW_MSF685s
+		{
+			get
+			{
+				return this.GetTable<VW_MSF685>();
+			}
+		}
+		
 		public System.Data.Linq.Table<TBL_M_ACCOUNT_PROFILE> TBL_M_ACCOUNT_PROFILEs
 		{
 			get
 			{
 				return this.GetTable<TBL_M_ACCOUNT_PROFILE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_R_ACCT_PROFILE> VW_R_ACCT_PROFILEs
+		{
+			get
+			{
+				return this.GetTable<VW_R_ACCT_PROFILE>();
 			}
 		}
 		
@@ -8288,6 +8304,663 @@ namespace API_PLANT_PPE.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_MSF685")]
+	public partial class VW_MSF685
+	{
+		
+		private string _ASSET_NO;
+		
+		private char _ASSET_TY;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _SUB_ASSET_NO;
+		
+		private string _ACCT_PROFILE;
+		
+		private string _ASSET_CLASSIF;
+		
+		private char _CAPITAL_TYPE;
+		
+		private string _CASH_GEN_UNIT;
+		
+		private string _CREATION_DATE;
+		
+		private string _CREATION_TIME;
+		
+		private string _CREATION_USER;
+		
+		private string _DEPR_EXP_CODE;
+		
+		private char _DEPR_IND;
+		
+		private string _DESC_CODEX1;
+		
+		private string _DESC_CODEX2;
+		
+		private string _DESC_CODEX3;
+		
+		private string _DESC_CODEX4;
+		
+		private string _DESC_CODEX5;
+		
+		private string _DESC_CODEX6;
+		
+		private string _DESC_CODEX7;
+		
+		private string _DESC_CODEX8;
+		
+		private string _LAST_MOD_DATE;
+		
+		private string _LAST_MOD_TIME;
+		
+		private string _LAST_MOD_USER;
+		
+		private string _MAA_CODE;
+		
+		private string _REPORT_CODE;
+		
+		private string _RETIREMENT_CODE;
+		
+		private string _RETIREMENT_DETL;
+		
+		private string _REVAL_SUB_CLASS;
+		
+		private char _REVIEWED_STATUS;
+		
+		private string _SUB_ASSET_DESC;
+		
+		private string _SUB_ASSET_STATUS;
+		
+		private string _TRACK_NUMBER;
+		
+		private char _TRACK_TYPE;
+		
+		private string _VINTAGE;
+		
+		private string _LAST_MOD_EMP;
+		
+		public VW_MSF685()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ASSET_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string ASSET_NO
+		{
+			get
+			{
+				return this._ASSET_NO;
+			}
+			set
+			{
+				if ((this._ASSET_NO != value))
+				{
+					this._ASSET_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ASSET_TY", DbType="Char(1) NOT NULL")]
+		public char ASSET_TY
+		{
+			get
+			{
+				return this._ASSET_TY;
+			}
+			set
+			{
+				if ((this._ASSET_TY != value))
+				{
+					this._ASSET_TY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUB_ASSET_NO", DbType="Char(6) NOT NULL", CanBeNull=false)]
+		public string SUB_ASSET_NO
+		{
+			get
+			{
+				return this._SUB_ASSET_NO;
+			}
+			set
+			{
+				if ((this._SUB_ASSET_NO != value))
+				{
+					this._SUB_ASSET_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACCT_PROFILE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string ACCT_PROFILE
+		{
+			get
+			{
+				return this._ACCT_PROFILE;
+			}
+			set
+			{
+				if ((this._ACCT_PROFILE != value))
+				{
+					this._ACCT_PROFILE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ASSET_CLASSIF", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string ASSET_CLASSIF
+		{
+			get
+			{
+				return this._ASSET_CLASSIF;
+			}
+			set
+			{
+				if ((this._ASSET_CLASSIF != value))
+				{
+					this._ASSET_CLASSIF = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAPITAL_TYPE", DbType="Char(1) NOT NULL")]
+		public char CAPITAL_TYPE
+		{
+			get
+			{
+				return this._CAPITAL_TYPE;
+			}
+			set
+			{
+				if ((this._CAPITAL_TYPE != value))
+				{
+					this._CAPITAL_TYPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CASH_GEN_UNIT", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string CASH_GEN_UNIT
+		{
+			get
+			{
+				return this._CASH_GEN_UNIT;
+			}
+			set
+			{
+				if ((this._CASH_GEN_UNIT != value))
+				{
+					this._CASH_GEN_UNIT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATION_DATE", DbType="Char(8) NOT NULL", CanBeNull=false)]
+		public string CREATION_DATE
+		{
+			get
+			{
+				return this._CREATION_DATE;
+			}
+			set
+			{
+				if ((this._CREATION_DATE != value))
+				{
+					this._CREATION_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATION_TIME", DbType="Char(6) NOT NULL", CanBeNull=false)]
+		public string CREATION_TIME
+		{
+			get
+			{
+				return this._CREATION_TIME;
+			}
+			set
+			{
+				if ((this._CREATION_TIME != value))
+				{
+					this._CREATION_TIME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CREATION_USER", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string CREATION_USER
+		{
+			get
+			{
+				return this._CREATION_USER;
+			}
+			set
+			{
+				if ((this._CREATION_USER != value))
+				{
+					this._CREATION_USER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPR_EXP_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DEPR_EXP_CODE
+		{
+			get
+			{
+				return this._DEPR_EXP_CODE;
+			}
+			set
+			{
+				if ((this._DEPR_EXP_CODE != value))
+				{
+					this._DEPR_EXP_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEPR_IND", DbType="Char(1) NOT NULL")]
+		public char DEPR_IND
+		{
+			get
+			{
+				return this._DEPR_IND;
+			}
+			set
+			{
+				if ((this._DEPR_IND != value))
+				{
+					this._DEPR_IND = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX1", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX1
+		{
+			get
+			{
+				return this._DESC_CODEX1;
+			}
+			set
+			{
+				if ((this._DESC_CODEX1 != value))
+				{
+					this._DESC_CODEX1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX2", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX2
+		{
+			get
+			{
+				return this._DESC_CODEX2;
+			}
+			set
+			{
+				if ((this._DESC_CODEX2 != value))
+				{
+					this._DESC_CODEX2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX3", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX3
+		{
+			get
+			{
+				return this._DESC_CODEX3;
+			}
+			set
+			{
+				if ((this._DESC_CODEX3 != value))
+				{
+					this._DESC_CODEX3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX4", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX4
+		{
+			get
+			{
+				return this._DESC_CODEX4;
+			}
+			set
+			{
+				if ((this._DESC_CODEX4 != value))
+				{
+					this._DESC_CODEX4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX5", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX5
+		{
+			get
+			{
+				return this._DESC_CODEX5;
+			}
+			set
+			{
+				if ((this._DESC_CODEX5 != value))
+				{
+					this._DESC_CODEX5 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX6", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX6
+		{
+			get
+			{
+				return this._DESC_CODEX6;
+			}
+			set
+			{
+				if ((this._DESC_CODEX6 != value))
+				{
+					this._DESC_CODEX6 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX7", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX7
+		{
+			get
+			{
+				return this._DESC_CODEX7;
+			}
+			set
+			{
+				if ((this._DESC_CODEX7 != value))
+				{
+					this._DESC_CODEX7 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESC_CODEX8", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string DESC_CODEX8
+		{
+			get
+			{
+				return this._DESC_CODEX8;
+			}
+			set
+			{
+				if ((this._DESC_CODEX8 != value))
+				{
+					this._DESC_CODEX8 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LAST_MOD_DATE", DbType="Char(8) NOT NULL", CanBeNull=false)]
+		public string LAST_MOD_DATE
+		{
+			get
+			{
+				return this._LAST_MOD_DATE;
+			}
+			set
+			{
+				if ((this._LAST_MOD_DATE != value))
+				{
+					this._LAST_MOD_DATE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LAST_MOD_TIME", DbType="Char(6) NOT NULL", CanBeNull=false)]
+		public string LAST_MOD_TIME
+		{
+			get
+			{
+				return this._LAST_MOD_TIME;
+			}
+			set
+			{
+				if ((this._LAST_MOD_TIME != value))
+				{
+					this._LAST_MOD_TIME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LAST_MOD_USER", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string LAST_MOD_USER
+		{
+			get
+			{
+				return this._LAST_MOD_USER;
+			}
+			set
+			{
+				if ((this._LAST_MOD_USER != value))
+				{
+					this._LAST_MOD_USER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MAA_CODE", DbType="Char(24) NOT NULL", CanBeNull=false)]
+		public string MAA_CODE
+		{
+			get
+			{
+				return this._MAA_CODE;
+			}
+			set
+			{
+				if ((this._MAA_CODE != value))
+				{
+					this._MAA_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REPORT_CODE", DbType="Char(15) NOT NULL", CanBeNull=false)]
+		public string REPORT_CODE
+		{
+			get
+			{
+				return this._REPORT_CODE;
+			}
+			set
+			{
+				if ((this._REPORT_CODE != value))
+				{
+					this._REPORT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RETIREMENT_CODE", DbType="Char(2) NOT NULL", CanBeNull=false)]
+		public string RETIREMENT_CODE
+		{
+			get
+			{
+				return this._RETIREMENT_CODE;
+			}
+			set
+			{
+				if ((this._RETIREMENT_CODE != value))
+				{
+					this._RETIREMENT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RETIREMENT_DETL", DbType="Char(40) NOT NULL", CanBeNull=false)]
+		public string RETIREMENT_DETL
+		{
+			get
+			{
+				return this._RETIREMENT_DETL;
+			}
+			set
+			{
+				if ((this._RETIREMENT_DETL != value))
+				{
+					this._RETIREMENT_DETL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REVAL_SUB_CLASS", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string REVAL_SUB_CLASS
+		{
+			get
+			{
+				return this._REVAL_SUB_CLASS;
+			}
+			set
+			{
+				if ((this._REVAL_SUB_CLASS != value))
+				{
+					this._REVAL_SUB_CLASS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_REVIEWED_STATUS", DbType="Char(1) NOT NULL")]
+		public char REVIEWED_STATUS
+		{
+			get
+			{
+				return this._REVIEWED_STATUS;
+			}
+			set
+			{
+				if ((this._REVIEWED_STATUS != value))
+				{
+					this._REVIEWED_STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUB_ASSET_DESC", DbType="Char(40) NOT NULL", CanBeNull=false)]
+		public string SUB_ASSET_DESC
+		{
+			get
+			{
+				return this._SUB_ASSET_DESC;
+			}
+			set
+			{
+				if ((this._SUB_ASSET_DESC != value))
+				{
+					this._SUB_ASSET_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUB_ASSET_STATUS", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string SUB_ASSET_STATUS
+		{
+			get
+			{
+				return this._SUB_ASSET_STATUS;
+			}
+			set
+			{
+				if ((this._SUB_ASSET_STATUS != value))
+				{
+					this._SUB_ASSET_STATUS = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRACK_NUMBER", DbType="Char(30) NOT NULL", CanBeNull=false)]
+		public string TRACK_NUMBER
+		{
+			get
+			{
+				return this._TRACK_NUMBER;
+			}
+			set
+			{
+				if ((this._TRACK_NUMBER != value))
+				{
+					this._TRACK_NUMBER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TRACK_TYPE", DbType="Char(1) NOT NULL")]
+		public char TRACK_TYPE
+		{
+			get
+			{
+				return this._TRACK_TYPE;
+			}
+			set
+			{
+				if ((this._TRACK_TYPE != value))
+				{
+					this._TRACK_TYPE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VINTAGE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string VINTAGE
+		{
+			get
+			{
+				return this._VINTAGE;
+			}
+			set
+			{
+				if ((this._VINTAGE != value))
+				{
+					this._VINTAGE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LAST_MOD_EMP", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string LAST_MOD_EMP
+		{
+			get
+			{
+				return this._LAST_MOD_EMP;
+			}
+			set
+			{
+				if ((this._LAST_MOD_EMP != value))
+				{
+					this._LAST_MOD_EMP = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_ACCOUNT_PROFILE")]
 	public partial class TBL_M_ACCOUNT_PROFILE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -8418,6 +9091,105 @@ namespace API_PLANT_PPE.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_ACCT_PROFILE")]
+	public partial class VW_R_ACCT_PROFILE
+	{
+		
+		private string _EQUIP_NO;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIP_LOCATION;
+		
+		private string _SUB_ASSET_NO;
+		
+		private string _ACCT_PROFILE;
+		
+		public VW_R_ACCT_PROFILE()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_LOCATION", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string EQUIP_LOCATION
+		{
+			get
+			{
+				return this._EQUIP_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIP_LOCATION != value))
+				{
+					this._EQUIP_LOCATION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUB_ASSET_NO", DbType="Char(6)")]
+		public string SUB_ASSET_NO
+		{
+			get
+			{
+				return this._SUB_ASSET_NO;
+			}
+			set
+			{
+				if ((this._SUB_ASSET_NO != value))
+				{
+					this._SUB_ASSET_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACCT_PROFILE", DbType="Char(4)")]
+		public string ACCT_PROFILE
+		{
+			get
+			{
+				return this._ACCT_PROFILE;
+			}
+			set
+			{
+				if ((this._ACCT_PROFILE != value))
+				{
+					this._ACCT_PROFILE = value;
+				}
 			}
 		}
 	}

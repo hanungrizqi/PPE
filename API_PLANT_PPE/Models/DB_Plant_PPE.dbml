@@ -502,12 +502,61 @@
       <Column Name="ACTIVE_STATUS" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_MSF685" Member="VW_MSF685s">
+    <Type Name="VW_MSF685">
+      <Column Name="ASSET_NO" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
+      <Column Name="ASSET_TY" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="SUB_ASSET_NO" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="ACCT_PROFILE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="ASSET_CLASSIF" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="CAPITAL_TYPE" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="CASH_GEN_UNIT" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="CREATION_DATE" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="CREATION_TIME" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="CREATION_USER" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DEPR_EXP_CODE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="DEPR_IND" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX1" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX2" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX3" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX4" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX5" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX6" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX7" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="DESC_CODEX8" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_DATE" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_TIME" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_USER" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MAA_CODE" Type="System.String" DbType="Char(24) NOT NULL" CanBeNull="false" />
+      <Column Name="REPORT_CODE" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="RETIREMENT_CODE" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="RETIREMENT_DETL" Type="System.String" DbType="Char(40) NOT NULL" CanBeNull="false" />
+      <Column Name="REVAL_SUB_CLASS" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="REVIEWED_STATUS" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="SUB_ASSET_DESC" Type="System.String" DbType="Char(40) NOT NULL" CanBeNull="false" />
+      <Column Name="SUB_ASSET_STATUS" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="TRACK_NUMBER" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="TRACK_TYPE" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="VINTAGE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_MOD_EMP" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.TBL_M_ACCOUNT_PROFILE" Member="TBL_M_ACCOUNT_PROFILEs">
     <Type Name="TBL_M_ACCOUNT_PROFILE">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ACCT_PROFILE" Type="System.String" DbType="Char(4)" CanBeNull="true" />
       <Column Name="DSTRCT_CODE" Type="System.String" DbType="Char(4)" CanBeNull="true" />
       <Column Name="DSTRCT_LOC" Type="System.String" DbType="Char(5)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_R_ACCT_PROFILE" Member="VW_R_ACCT_PROFILEs">
+    <Type Name="VW_R_ACCT_PROFILE">
+      <Column Name="EQUIP_NO" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="EQUIP_LOCATION" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="SUB_ASSET_NO" Type="System.String" DbType="Char(6)" CanBeNull="true" />
+      <Column Name="ACCT_PROFILE" Type="System.String" DbType="Char(4)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">

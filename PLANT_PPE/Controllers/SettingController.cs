@@ -16,7 +16,7 @@ namespace PLANT_PPE.Controllers
             {
                 return RedirectToAction("index", "login");
             }
-            ViewBag.Emp = db.VW_KARYAWAN_ALLs.ToList();
+            ViewBag.Emp = db.TBL_R_MASTER_KARYAWAN_ALLs.ToList();
             ViewBag.Group = db.TBL_M_ROLEs.ToList();
             return View();
         }
@@ -76,7 +76,7 @@ namespace PLANT_PPE.Controllers
             {
                 return RedirectToAction("index", "login");
             }
-            ViewBag.Emp = db.VW_KARYAWAN_ALLs.ToList();
+            ViewBag.Emp = db.TBL_R_MASTER_KARYAWAN_ALLs.ToList();
             /*ViewBag.dstrct = db.VW_DISTRICTs.ToList();
             ViewBag.loc = db.VW_LOCATIONs.ToList();*/
             return View();

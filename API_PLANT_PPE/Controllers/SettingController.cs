@@ -232,6 +232,64 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Update_Accountprofile")]
+        public IHttpActionResult Update_Accountprofile(TBL_M_ACCOUNT_PROFILE param)
+        {
+            try
+            {
+                var data = db.TBL_M_ACCOUNT_PROFILEs.Where(a => a.ID == param.ID).FirstOrDefault();
+                data.ACCT_PROFILE = param.ACCT_PROFILE;
+                data.DSTRCT_CODE = param.DSTRCT_CODE;
+                data.DSTRCT_LOC = param.DSTRCT_LOC;
+                db.SubmitChanges();
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Remarks = false, Message = e });
+            }
+        }
+
+        [HttpPost]
+        [Route("Create_Accprofile")]
+        public IHttpActionResult Create_Accprofile(TBL_M_ACCOUNT_PROFILE param)
+        {
+            try
+            {
+                TBL_M_ACCOUNT_PROFILE tbl = new TBL_M_ACCOUNT_PROFILE();
+                tbl.ACCT_PROFILE = param.ACCT_PROFILE;
+                tbl.DSTRCT_CODE = param.DSTRCT_CODE;
+                tbl.DSTRCT_LOC = param.DSTRCT_LOC;
+
+                db.TBL_M_ACCOUNT_PROFILEs.InsertOnSubmit(tbl);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpPost]
+        [Route("Delete_Acctprofile")]
+        public IHttpActionResult Delete_Acctprofile(int id)
+        {
+            try
+            {
+                var data = db.TBL_M_ACCOUNT_PROFILEs.Where(a => a.ID == id).FirstOrDefault();
+
+                db.TBL_M_ACCOUNT_PROFILEs.DeleteOnSubmit(data);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+
+        }
 
         [HttpPost]
         [Route("Delete_District")]

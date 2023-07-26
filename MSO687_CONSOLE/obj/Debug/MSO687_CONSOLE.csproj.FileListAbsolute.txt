@@ -1,0 +1,8 @@
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\bin\Debug\MSO687_CONSOLE.exe.config
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\bin\Debug\MSO687_CONSOLE.exe
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\bin\Debug\MSO687_CONSOLE.pdb
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\obj\Debug\MSO687_CONSOLE.csproj.AssemblyReference.cache
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\obj\Debug\MSO687_CONSOLE.csproj.SuggestedBindingRedirects.cache
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\obj\Debug\MSO687_CONSOLE.csproj.CoreCompileInputs.cache
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\obj\Debug\MSO687_CONSOLE.exe
+D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLE\obj\Debug\MSO687_CONSOLE.pdb

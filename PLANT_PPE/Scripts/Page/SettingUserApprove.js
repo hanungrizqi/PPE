@@ -22,7 +22,7 @@ $("#txt_nrp").on("change", function () {
     });
 })
 
-//function showTable() {
+function showTable() {
     var table = $("#tbl_userApprove").DataTable({
         ajax: {
             url: $("#web_link").val() + "/api/Setting/Get_UserApproveSetting",
@@ -100,7 +100,7 @@ $("#txt_nrp").on("change", function () {
                 });
         }
     });
-//}
+}
 
 function insertUserApprove() {
     let obj = new Object();
@@ -108,7 +108,7 @@ function insertUserApprove() {
     obj.Position_id = $('#txt_positionID').val();
     obj.Name = $('#txt_name').val();
     obj.sub_menu = $('#txt_menu').val();
-    obt.dstrct_code = $('#txt_distrik').val();
+    obj.dstrct_code = $('#txt_distrik').val();
 
     $.ajax({
         url: $("#web_link").val() + "/api/Setting/Create_UserApprove", //URI

@@ -129,6 +129,23 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
+        [Route("getLocation")]
+        public IHttpActionResult getLocation()
+        {
+            try
+            {
+                var data = db.VW_R_DISTRICT_LOCATIONs.OrderBy(a => a.EQUIP_LOCATION).ToList();
+
+                return Ok(new { Data = data, Total = data.Count() });
+
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
         [Route("Get_EqNumber/{site}/{nrp}")]
         public IHttpActionResult Get_EqNumber(string site = "", string nrp = "")
         {

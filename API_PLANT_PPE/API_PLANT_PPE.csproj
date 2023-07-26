@@ -208,6 +208,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\MSE600Controller.cs" />
+    <Compile Include="Controllers\MSO687Controller.cs" />
     <Compile Include="Controllers\PPEController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\SMController.cs" />
@@ -239,6 +240,8 @@
     <Compile Include="ViewModel\ClsPPE.cs" />
     <Compile Include="ViewModel\ClsUpdate_MSE600.cs" />
     <Compile Include="ViewModel\ClsUpdate_MSF600_Result.cs" />
+    <Compile Include="ViewModel\ClsUpdate_MSO687.cs" />
+    <Compile Include="ViewModel\ClsUpdate_MSO687_Result.cs" />
     <Compile Include="Web References\EquipmentReferenceService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -250,6 +253,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\RefCodesService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ScreenService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -552,6 +560,14 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <Content Include="Web References\ScreenService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\ScreenService\ScreenDTO.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\ScreenService\ScreenService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -627,6 +643,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>API_PLANT_PPE_RefCodesService_RefCodesService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://ews-kpd.kppmining.net/ews/services/ScreenService%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ScreenService\</RelPath>
+      <UpdateFromURL>https://ews-kpd.kppmining.net/ews/services/ScreenService%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>API_PLANT_PPE_ScreenService_ScreenService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
