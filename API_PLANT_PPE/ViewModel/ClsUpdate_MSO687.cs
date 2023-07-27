@@ -199,6 +199,14 @@ namespace API_PLANT_PPE.ViewModel
                     
                     // Kosongkan listInsert untuk penggunaan selanjutnya
                     listInsert.Clear();
+
+                    //ubah flag menjadi 1
+                    var flag = db.TBL_T_PPEs.FirstOrDefault(p => p.EQUIP_NO == dataEquipment.EQUIP_NO);
+                    if (flag != null)
+                    {
+                        flag.FLAG = 1;
+                        db.SubmitChanges();
+                    }
                 }
                 
                 cls.Remarks = true;

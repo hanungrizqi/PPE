@@ -25,7 +25,7 @@ namespace MSO687_CONSOLEAPP
             DateTime currentTime = DateTime.Now;
 
             // Set the desired execution time to 14:50 today
-            DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 06, 00, 0);
+            DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 10, 09, 0);
 
             // If the scheduled time has already passed today, schedule it for tomorrow
             if (currentTime > scheduledTime)
@@ -47,7 +47,7 @@ namespace MSO687_CONSOLEAPP
 
             DB_PLANT_PPE_CONSOLEDataContext db = new DB_PLANT_PPE_CONSOLEDataContext();
 
-            var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == DateTime.Today.ToString("yyyy-MM-dd")).ToList();
+            var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == "2023-07-22").ToList();
             
             foreach (var item in dataEquipment)
             {
@@ -63,7 +63,7 @@ namespace MSO687_CONSOLEAPP
                 string str_posisi = ConfigurationManager.AppSettings["pos_id"].ToString();
 
                 string acak = AcakHurufBesarKecil(str_username);
-                
+
                 //login ellipse
                 context.district = item.DISTRICT_FROM;
                 context.position = str_posisi;
@@ -80,7 +80,7 @@ namespace MSO687_CONSOLEAPP
 
                 foreach (var data in dataList)
                 {
-                    var dataAcctSub = db.VW_R_ACCT_PROFILEs.Where(a => a.DSTRCT_CODE == item.DISTRICT_TO && a.EQUIP_LOCATION == item.LOC_TO).FirstOrDefault();
+                    var dataAcctSub = db.VW_R_ACCT_PROFILEs.Where(a => a.DSTRCT_CODE == item.DISTRICT_TO && a.EQUIP_LOCATION == item.LOC_TO && a.SUB_ASSET_NO == data.SUB_ASSET_NO).FirstOrDefault(); //sesuai unit yang dimutasi
                     
                     //deklarasi variabel input
                     List<ScreenNameValueDTO> listInsert = new List<ScreenNameValueDTO>();
@@ -125,6 +125,8 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
+                    Console.WriteLine("DONE EXEC-MSM687A");
+
                     //Remove list
                     listInsert.Remove(fieldDTO0);
                     listInsert.Remove(fieldDTO1);
@@ -152,6 +154,8 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenFields = listInsert.ToArray();
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
+
+                    Console.WriteLine("DONE EXEC-MSM687B");
 
                     //Remove list
                     listInsert.Remove(fieldDTO8);
@@ -185,6 +189,8 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
+                    Console.WriteLine("DONE EXEC-MSM687C");
+
                     //Remove list
                     listInsert.Remove(fieldDTO12);
 
@@ -212,12 +218,25 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
+                    Console.WriteLine("DONE MSO687");
+
                     // Kosongkan listInsert untuk penggunaan selanjutnya
                     listInsert.Clear();
+
                 }
+
+                //ubah flag menjadi 1
+                item.FLAG = 1;
+                db.SubmitChanges();
+                //var flag = db.TBL_T_PPEs.FirstOrDefault(p => p.EQUIP_NO == item.EQUIP_NO);
+                //if (flag != null)
+                //{
+                //    flag.FLAG = 1;
+                //    db.SubmitChanges();
+                //}
                 
                 Console.WriteLine(item.ID); // Print the "Name" property of each object
-                Console.WriteLine(item.ID); // Print the "Name" property of each object
+                Console.WriteLine(item.EQUIP_NO); // Print the "Name" property of each object
             }
         }
         private static string AcakHurufBesarKecil(string input)

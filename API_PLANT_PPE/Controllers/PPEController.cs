@@ -98,6 +98,7 @@ namespace API_PLANT_PPE.Controllers
                     tbl.UPDATED_BY = param.UPDATED_BY;
                     tbl.PATH_ATTACHMENT = param.PATH_ATTACHMENT;
                     tbl.URL_FORM_SH = param.URL_FORM_SH;
+                    tbl.FLAG = 0;
 
                     db.TBL_T_PPEs.InsertOnSubmit(tbl);
                     db.SubmitChanges();

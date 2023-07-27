@@ -2,12 +2,6 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DB_PLANT_PPE_CONSOLE">
   <DataContextMoniker Name="/DB_PLANT_PPE_CONSOLEDataContext" />
   <nestedChildShapes>
-    <classShape Id="0eb2f092-9d27-4b06-ba13-183ecba0f29c" isExpanded="false" absoluteBounds="0.5, 0.5, 2, 0.45">
-      <DataClassMoniker Name="/DB_PLANT_PPE_CONSOLEDataContext/TBL_T_PPE" />
-      <nestedChildShapes>
-        <elementListCompartment Id="f03e03e4-6733-42ce-b014-123190a28cd7" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 6.7876383463541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="fd79ab9b-0ae6-4a58-b378-f5025194b50b" isExpanded="false" absoluteBounds="2.625, 0.5, 2, 0.45">
       <DataClassMoniker Name="/DB_PLANT_PPE_CONSOLEDataContext/VW_MSF685" />
       <nestedChildShapes>
@@ -18,6 +12,12 @@
       <DataClassMoniker Name="/DB_PLANT_PPE_CONSOLEDataContext/VW_R_ACCT_PROFILE" />
       <nestedChildShapes>
         <elementListCompartment Id="37db0289-b6b7-457d-884d-5c21df73d099" absoluteBounds="2.6399999999999997, 1.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c0235504-8100-4a61-982b-dd2df592226a" isExpanded="false" absoluteBounds="0.5, 0.5, 2, 0.45">
+      <DataClassMoniker Name="/DB_PLANT_PPE_CONSOLEDataContext/TBL_T_PPE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bb36caf2-9e95-4a74-baf0-4bfe7e9f4cc7" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 6.979939778645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
