@@ -25,7 +25,7 @@ namespace MSO687_CONSOLEAPP
             DateTime currentTime = DateTime.Now;
 
             // Set the desired execution time to 14:50 today
-            DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 10, 09, 0);
+            DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 15, 07, 13);
 
             // If the scheduled time has already passed today, schedule it for tomorrow
             if (currentTime > scheduledTime)
@@ -47,7 +47,7 @@ namespace MSO687_CONSOLEAPP
 
             DB_PLANT_PPE_CONSOLEDataContext db = new DB_PLANT_PPE_CONSOLEDataContext();
 
-            var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == "2023-07-22").ToList();
+            var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == "2023-07-29").ToList();
             
             foreach (var item in dataEquipment)
             {
@@ -125,7 +125,7 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
-                    Console.WriteLine("DONE EXEC-MSM687A");
+                    Console.WriteLine("EXEC-MSM685A");
 
                     //Remove list
                     listInsert.Remove(fieldDTO0);
@@ -144,7 +144,7 @@ namespace MSO687_CONSOLEAPP
                     fieldDTO8.fieldName = "ACCT_PROFILE2I"; //fieldDTO8.value = "1";
                     fieldDTO8.value = dataAcctSub.ACCT_PROFILE;
                     fieldDTO9.fieldName = "DEPR_EXP_CODE2I"; //fieldDTO9.value = "1";
-                    fieldDTO9.value = dataAcctSub.ACCT_PROFILE;
+                    fieldDTO9.value = "0002"; //dataAcctSub.ACCT_PROFILE;
 
                     //disatukan dalam list
                     listInsert.Add(fieldDTO8);
@@ -155,7 +155,14 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
-                    Console.WriteLine("DONE EXEC-MSM687B");
+                    Console.WriteLine("EXEC-MSM685B");
+
+                    if (screen_DTO.programName != "MSM685C")
+                    {
+                        screen_request.screenFields = null;
+                        screen_request.screenKey = "1";
+                        screen_DTO = service.submit(context, screen_request);
+                    }
 
                     //Remove list
                     listInsert.Remove(fieldDTO8);
@@ -189,7 +196,7 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
-                    Console.WriteLine("DONE EXEC-MSM687C");
+                    Console.WriteLine("EXEC-MSM685C");
 
                     //Remove list
                     listInsert.Remove(fieldDTO12);
@@ -218,7 +225,7 @@ namespace MSO687_CONSOLEAPP
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
-                    Console.WriteLine("DONE MSO687");
+                    Console.WriteLine("MSO687 SUCCESS");
 
                     // Kosongkan listInsert untuk penggunaan selanjutnya
                     listInsert.Clear();
