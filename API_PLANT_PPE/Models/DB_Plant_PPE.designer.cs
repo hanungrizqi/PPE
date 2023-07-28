@@ -457,6 +457,12 @@ namespace API_PLANT_PPE.Models
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), equip_no);
 			return ((ISingleResult<cusp_historycalPPEResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cufn_getHistoryPPE", IsComposable=true)]
+		public IQueryable<cufn_getHistoryPPEResult> cufn_getHistoryPPE([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string equip_no)
+		{
+			return this.CreateMethodCallQuery<cufn_getHistoryPPEResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), equip_no);
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_AKSES")]
@@ -9815,6 +9821,158 @@ namespace API_PLANT_PPE.Models
 				if ((this._District_To != value))
 				{
 					this._District_To = value;
+				}
+			}
+		}
+	}
+	
+	public partial class cufn_getHistoryPPEResult
+	{
+		
+		private int _ID;
+		
+		private string _Ppe_NO;
+		
+		private string _Equip_No;
+		
+		private string _Posisi_Ppe;
+		
+		private System.Nullable<int> _Approval_Order;
+		
+		private System.Nullable<System.DateTime> _Approved_Date;
+		
+		private string _Approved_By;
+		
+		private string _UPLOAD_FORM_CAAB;
+		
+		public cufn_getHistoryPPEResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL")]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this._ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ppe_NO", DbType="VarChar(200)")]
+		public string Ppe_NO
+		{
+			get
+			{
+				return this._Ppe_NO;
+			}
+			set
+			{
+				if ((this._Ppe_NO != value))
+				{
+					this._Ppe_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Equip_No", DbType="VarChar(100)")]
+		public string Equip_No
+		{
+			get
+			{
+				return this._Equip_No;
+			}
+			set
+			{
+				if ((this._Equip_No != value))
+				{
+					this._Equip_No = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Posisi_Ppe", DbType="VarChar(150)")]
+		public string Posisi_Ppe
+		{
+			get
+			{
+				return this._Posisi_Ppe;
+			}
+			set
+			{
+				if ((this._Posisi_Ppe != value))
+				{
+					this._Posisi_Ppe = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approval_Order", DbType="Int")]
+		public System.Nullable<int> Approval_Order
+		{
+			get
+			{
+				return this._Approval_Order;
+			}
+			set
+			{
+				if ((this._Approval_Order != value))
+				{
+					this._Approval_Order = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Approved_Date
+		{
+			get
+			{
+				return this._Approved_Date;
+			}
+			set
+			{
+				if ((this._Approved_Date != value))
+				{
+					this._Approved_Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Approved_By", DbType="VarChar(50)")]
+		public string Approved_By
+		{
+			get
+			{
+				return this._Approved_By;
+			}
+			set
+			{
+				if ((this._Approved_By != value))
+				{
+					this._Approved_By = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UPLOAD_FORM_CAAB", DbType="VarChar(200)")]
+		public string UPLOAD_FORM_CAAB
+		{
+			get
+			{
+				return this._UPLOAD_FORM_CAAB;
+			}
+			set
+			{
+				if ((this._UPLOAD_FORM_CAAB != value))
+				{
+					this._UPLOAD_FORM_CAAB = value;
 				}
 			}
 		}
