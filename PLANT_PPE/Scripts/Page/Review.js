@@ -36,6 +36,19 @@ function getdetail(nomor_equip) {
                     return tanggal;
                 }
             },
+            {
+                data: 'UPLOAD_FORM_CAAB',
+                render: function (data, type, row) {
+                    if (data == null) {
+                        return `<a  target='_blank'>Empty</a>`;
+                    } else if (data != null && row["Approval_Order"] > 4) {
+                        return `<a href="${row["UPLOAD_FORM_CAAB"]}"  target='_blank'>View Attachment</a>`;
+                    } else {
+                        return `<a  target='_blank'>Empty</a>`;
+                    }
+                    
+                }
+            },
             //{ data: 'UPLOAD_FORM_CAAB' }
         ], order: [[3, 'asc']]
     });
@@ -49,6 +62,7 @@ function detailClose() {
                         <th>PIC</th>
                         @*<th>REMAKS</th>*@
                         <th>APPROVAL DATE</th>
+                        <th>FORM CAAB</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +72,7 @@ function detailClose() {
 }
 
 function printReport(ppeno) {
-    var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/ReviewPPE&PPE_NO=" + ppeno;
+    var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + ppeno;
     window.open(printUrl, '_blank');
 }
 
@@ -128,7 +142,7 @@ var table = $("#tbl_reviewppe").DataTable({
     ],
     initComplete: function () {
         this.api()
-            .columns(1)
+            .columns(0)
             .every(function () {
                 var column = this;
                 var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- PPE NUMBER --</option></select>')

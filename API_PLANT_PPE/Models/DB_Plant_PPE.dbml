@@ -588,4 +588,17 @@
       <Column Name="District_To" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.cufn_getHistoryPPE" Method="cufn_getHistoryPPE" IsComposable="true">
+    <Parameter Name="equip_no" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="cufn_getHistoryPPEResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ppe_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Equip_No" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Posisi_Ppe" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Approval_Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Approved_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Approved_By" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

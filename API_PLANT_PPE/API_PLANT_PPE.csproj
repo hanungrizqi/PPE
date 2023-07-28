@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EllipseWebServicesClient">
-      <HintPath>C:\Users\hanungrisqi\Music\EllipseWebServicesClient.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\EllipseWebServicesClient.dll</HintPath>
     </Reference>
     <Reference Include="LdapAuthentication">
-      <HintPath>..\..\..\new_ppe\PLANT_PPE\bin\LdapAuthentication.dll</HintPath>
+      <HintPath>..\..\ppe1306\API_PLANT_PPE\bin\LdapAuthentication.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>

@@ -427,7 +427,8 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approval_Order).ToList();
+                //var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approval_Order).ToList();
+                var data = db.cufn_getHistoryPPE(Equip_No);
 
                 return Ok(new { Data = data });
             }
