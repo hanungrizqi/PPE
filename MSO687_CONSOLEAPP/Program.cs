@@ -25,7 +25,7 @@ namespace MSO687_CONSOLEAPP
             DateTime currentTime = DateTime.Now;
 
             // Set the desired execution time to 14:50 today
-            DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 13, 43, 40);
+            DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 06, 00, 0);
 
             // If the scheduled time has already passed today, schedule it for tomorrow
             if (currentTime > scheduledTime)
