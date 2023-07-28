@@ -128,7 +128,7 @@ var table = $("#tbl_reviewppe").DataTable({
     ],
     initComplete: function () {
         this.api()
-            .columns(1)
+            .columns(0)
             .every(function () {
                 var column = this;
                 var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- PPE NUMBER --</option></select>')

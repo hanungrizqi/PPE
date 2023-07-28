@@ -1,7 +1,8 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
 var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE_SECHEAD/" + $("#hd_PositionID").val(),
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE_SECHEAD/" + $("#hd_PositionID").val(),
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPPE_SECHEAD",
         dataSrc: "Data",
     },
 

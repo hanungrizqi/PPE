@@ -40,7 +40,7 @@ namespace API_PLANT_PPE.ViewModel
                 i_obj_equipment_result = i_obj_services.read(i_obj_context, i_obj_equipment_request);
 
                 i_obj_equipment_dto1.equipmentNo = dataEquipment.EQUIP_NO;
-                i_obj_equipment_dto1.costingFlag = "A";
+                i_obj_equipment_dto1.costingFlag = "W";
                 i_obj_equipment_dto1.districtCode = dataEquipment.DISTRICT_TO;
                 i_obj_equipment_dto1.equipmentLocation = dataEquipment.LOC_TO;
                 i_obj_equipment_dto1.poNo = "-";

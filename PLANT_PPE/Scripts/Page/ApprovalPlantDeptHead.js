@@ -2,10 +2,11 @@
 
 var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE/" + $("#hd_PositionID").val(),
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE/" + $("#hd_PositionID").val(),
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE",
         dataSrc: "Data",
     },
-
+    
     "columnDefs": [
         { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] },
         { "className": "dt-nowrap", "targets": '_all' }

@@ -134,9 +134,12 @@ namespace API_PLANT_PPE.ViewModel
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
-                    //screen_request.screenFields = null;
-                    //screen_request.screenKey = "1";
-                    //screen_DTO = service.submit(context, screen_request);
+                    if (screen_DTO.programName != "MSM685C")
+                    {
+                        screen_request.screenFields = null;
+                        screen_request.screenKey = "1";
+                        screen_DTO = service.submit(context, screen_request);
+                    }
 
                     //Remove list
                     listInsert.Remove(fieldDTO8);

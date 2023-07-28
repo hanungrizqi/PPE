@@ -2,7 +2,8 @@
 
 var table = $("#tbl_ppe_penerima").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima/" + $("#hd_PositionID").val(),
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima/" + $("#hd_PositionID").val(),
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima",
         dataSrc: "Data",
     },
 
