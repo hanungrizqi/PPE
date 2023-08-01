@@ -88,4 +88,44 @@
       <Column Name="FLAG" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_T_MSF687_TRASNFER_ASSET" Member="VW_T_MSF687_TRASNFER_ASSETs">
+    <Type Name="VW_T_MSF687_TRASNFER_ASSET">
+      <Column Name="JOB_MASTER_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_PPE" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PPE_NO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DISTRICT_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DISTRICT_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOC_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOC_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EQUIP_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EGI" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="EQUIP_CLASS" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SERIAL_NO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PPE_DESC" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="POSISI_PPE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CREATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CREATED_POS_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UPDATED_DATE" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="UPDATED_BY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="REMARKS" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PATH_ATTACHMENT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="URL_FORM_SH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PLNTMNGR" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PLNTDH" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PM_PENGIRIM" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_PM_PENERIMA" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DIVHEAD_ENG" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DIVHEAD_OPR" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="URL_FORM_DONE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DATE_RECEIVED_SM" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="BERITA_ACARA_SM" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="FLAG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

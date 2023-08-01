@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_MANAGEMENT_SERVICES_KPT" Class="DB_MNGMT_SRVCDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=kphosq101\shpol;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;User ID=sqlservices" SettingsObjectName="MSO687_CONSOLEAPP.Properties.Settings" SettingsPropertyName="DB_MANAGEMENT_SERVICES_KPTConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TBL_T_UPLOAD_JOB_MASTER" Member="TBL_T_UPLOAD_JOB_MASTERs">
+    <Type Name="TBL_T_UPLOAD_JOB_MASTER">
+      <Column Name="JOB_ID" Type="System.String" DbType="VarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SERVER_ID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SCRIPT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ELLIPSE_USERNAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ELLIPSE_PASSWORD" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ELLIPSE_POSITION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ELLIPSE_DISTRICT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="POST_DATETIME" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RUN_DATETIME" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FINISH_DATETIME" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="JOB_STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="JOB_REMARK" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DB_SERVER_NAME" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DATABASE_NAME" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

@@ -43,5 +43,16 @@ namespace MSO687_CONSOLEAPP.Properties {
                 return ((string)(this["MSO687_CONSOLEAPP_ScreenService_ScreenService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kphosq101\\shpol;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;User ID=sq" +
+            "lservices;Password=sqlservices1")]
+        public string DB_MANAGEMENT_SERVICES_KPTConnectionString {
+            get {
+                return ((string)(this["DB_MANAGEMENT_SERVICES_KPTConnectionString"]));
+            }
+        }
     }
 }

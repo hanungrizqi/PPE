@@ -320,13 +320,15 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
-        [Route("Get_ListApprovalDivHead_ENG/{posid}")]
-        public IHttpActionResult Get_ListApprovalDivHead_ENG(string posid)
+        //[Route("Get_ListApprovalDivHead_ENG/{posid}")]
+        [Route("Get_ListApprovalDivHead_ENG")]
+        public IHttpActionResult Get_ListApprovalDivHead_ENG()
         {
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
+                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
             }
