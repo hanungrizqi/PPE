@@ -4412,6 +4412,7 @@
     <Content Include="Scripts\Page\ApprovalDivHead.js" />
     <Content Include="Scripts\Page\ApprovalDivHeadOPR.js" />
     <Content Include="Scripts\Page\ApprovalPlantDeptHead.js" />
+    <Content Include="Scripts\Page\ApprovalPlantDeptHead_Detail.js" />
     <Content Include="Scripts\Page\ApprovalPlantManager.js" />
     <Content Include="Scripts\Page\ApprovalProjectManager.js" />
     <Content Include="Scripts\Page\ApprovalProjectManagerPenerima.js" />
@@ -4492,6 +4493,7 @@
     <Content Include="Views\Received\DetailPPE_EQP.cshtml" />
     <Content Include="Views\Setting\UserApprove.cshtml" />
     <Content Include="Views\Setting\AccountProfile.cshtml" />
+    <Content Include="Views\Approval\Detail_DeptHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

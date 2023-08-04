@@ -673,5 +673,143 @@ namespace API_PLANT_PPE.Controllers
                 return Ok(new { Remarks = false, Message = e });
             }
         }
+        
+        [HttpGet]
+        [Route("Get_PPE_EquipmentPart")]
+        public IHttpActionResult Get_PPE_EquipmentPart(string ppe)
+        {
+            try
+            {
+
+                var data = db.VW_T_PPEs.Where(a => a.PPE_NO == ppe).ToList();
+
+                return Ok(new { Data = data, Total = data.Count() });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Approve_Detail_DeptHead")]
+        public IHttpActionResult Approve_Detail_DeptHead(TBL_T_PPE[] param)
+        {
+            try
+            {
+                foreach (var ppe in param)
+                {
+                    string old_posisi = "";
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
+
+                    old_posisi = cek.POSISI_PPE;
+
+                    //update
+                    cek.STATUS = ppe.STATUS;
+                    cek.REMARKS = ppe.REMARKS;
+                    cek.UPDATED_BY = ppe.UPDATED_BY;
+                    cek.POSISI_PPE = ppe.POSISI_PPE;
+                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
+                    cek.URL_FORM_PM_PENGIRIM = ppe.URL_FORM_PM_PENGIRIM;
+
+                    //history ppe
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approval_Order = ppe.APPROVAL_ORDER;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        }
+                    }
+                }
+
+                db.SubmitChanges();
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Remarks = false, Message = e });
+            }
+        }
+
+        [HttpPost]
+        [Route("DetailDeptHead_Upload_CAAB")]
+        public IHttpActionResult DetailDeptHead_Upload_CAAB()
+        {
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                var files = httpRequest.Files;
+                var attachmentUrls = new List<string>();
+
+                var nomorPPE = httpRequest.Form.GetValues("nomorPPE[]");
+                var nomorEQP = httpRequest.Form.GetValues("nomorEQP[]");
+
+                //if (files.Count > 0)
+                if (files.Count > 0 && nomorPPE.Length == files.Count && nomorEQP.Length == files.Count)
+                {
+                    using (var dbContext = new DB_Plant_PPEDataContext())
+                    {
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            var postedFile = files[i];
+                            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(postedFile.FileName);
+                            var folderPath = HttpContext.Current.Server.MapPath("~/Content/UploadCAAB");
+
+                            if (!Directory.Exists(folderPath))
+                            {
+                                Directory.CreateDirectory(folderPath);
+                            }
+
+                            var filePath = Path.Combine(folderPath, fileName);
+                            if (File.Exists(filePath))
+                            {
+                                return Ok(new { Remarks = false });
+                            }
+
+                            using (var fileStream = File.Create(filePath))
+                            {
+                                postedFile.InputStream.CopyTo(fileStream);
+                                fileStream.Flush();
+                            }
+                            File.SetAttributes(filePath, FileAttributes.Normal);
+
+                            var attachmentUrl = Url.Content("~/Content/UploadCAAB/" + fileName);
+                            attachmentUrls.Add(attachmentUrl);
+                            for (int j = 0; j < nomorEQP.Length; j++)
+                            {
+                                //upload path ke tbl tansaksi
+                                var existingPPE = dbContext.TBL_T_PPEs.FirstOrDefault(p => p.PPE_NO == nomorPPE[j] && p.EQUIP_NO == nomorEQP[i]);
+                                if (existingPPE != null)
+                                {
+                                    existingPPE.UPLOAD_FORM_CAAB = attachmentUrl;
+                                }
+                            }
+                        }
+                        dbContext.SubmitChanges();
+                    }
+
+                    return Ok(new { Remarks = true, AttachmentUrls = attachmentUrls });
+                }
+                else
+                {
+                    return Ok(new { Remarks = true });
+                }
+
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

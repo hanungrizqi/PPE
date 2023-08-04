@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230801\Web</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230804_PPE\Web</_PublishTargetUrl>
     <History>True|2023-07-28T07:30:03.1700808Z;False|2023-07-17T13:47:16.6125582+07:00;False|2023-07-17T13:46:27.5839978+07:00;False|2023-07-17T13:44:59.1656268+07:00;False|2023-07-17T13:41:15.6690919+07:00;True|2023-06-06T11:00:29.1914988+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
@@ -169,10 +169,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2019 01:06:16</publishTime>
     </File>
     <File Include="bin/PLANT_PPE.dll">
-      <publishTime>08/01/2023 09:10:24</publishTime>
+      <publishTime>08/04/2023 14:06:40</publishTime>
     </File>
     <File Include="bin/PLANT_PPE.pdb">
-      <publishTime>08/01/2023 09:10:24</publishTime>
+      <publishTime>08/04/2023 14:06:40</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>06/25/2023 04:12:12</publishTime>
@@ -13033,25 +13033,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 13:37:17</publishTime>
     </File>
     <File Include="Scripts/Page/ApprovalDivHead.js">
-      <publishTime>07/28/2023 14:15:02</publishTime>
+      <publishTime>08/04/2023 13:47:38</publishTime>
     </File>
     <File Include="Scripts/Page/ApprovalDivHeadOPR.js">
-      <publishTime>07/28/2023 14:14:47</publishTime>
+      <publishTime>08/04/2023 13:48:38</publishTime>
     </File>
     <File Include="Scripts/Page/ApprovalPlantDeptHead.js">
-      <publishTime>07/28/2023 14:15:10</publishTime>
+      <publishTime>08/04/2023 11:21:33</publishTime>
+    </File>
+    <File Include="Scripts/Page/ApprovalPlantDeptHead_Detail.js">
+      <publishTime>08/04/2023 13:55:13</publishTime>
     </File>
     <File Include="Scripts/Page/ApprovalPlantManager.js">
-      <publishTime>07/28/2023 14:15:10</publishTime>
+      <publishTime>08/04/2023 11:00:15</publishTime>
     </File>
     <File Include="Scripts/Page/ApprovalProjectManager.js">
-      <publishTime>07/28/2023 14:12:50</publishTime>
+      <publishTime>08/04/2023 13:44:00</publishTime>
     </File>
     <File Include="Scripts/Page/ApprovalProjectManagerPenerima.js">
-      <publishTime>07/28/2023 14:12:50</publishTime>
+      <publishTime>08/04/2023 13:46:19</publishTime>
     </File>
     <File Include="Scripts/Page/ApprovalSecHead.js">
-      <publishTime>07/28/2023 14:58:39</publishTime>
+      <publishTime>08/04/2023 10:58:35</publishTime>
     </File>
     <File Include="Scripts/Page/DetailPPE.js">
       <publishTime>05/31/2023 12:06:29</publishTime>
@@ -13072,10 +13075,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/26/2023 13:47:24</publishTime>
     </File>
     <File Include="Scripts/Page/RegisterPPE.js">
-      <publishTime>07/07/2023 13:43:09</publishTime>
+      <publishTime>08/04/2023 10:49:56</publishTime>
     </File>
     <File Include="Scripts/Page/Review.js">
-      <publishTime>07/28/2023 14:53:30</publishTime>
+      <publishTime>08/04/2023 13:50:34</publishTime>
     </File>
     <File Include="Scripts/Page/SettingAccountProfile.js">
       <publishTime>07/25/2023 15:18:28</publishTime>
@@ -13149,6 +13152,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/Approval/DetailPPE.cshtml">
       <publishTime>07/11/2023 15:32:27</publishTime>
     </File>
+    <File Include="Views/Approval/Detail_DeptHead.cshtml">
+      <publishTime>08/04/2023 13:41:45</publishTime>
+    </File>
     <File Include="Views/Approval/DivHead.cshtml">
       <publishTime>07/11/2023 14:34:03</publishTime>
     </File>
@@ -13156,7 +13162,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/11/2023 14:34:03</publishTime>
     </File>
     <File Include="Views/Approval/PlantDeptHead.cshtml">
-      <publishTime>07/14/2023 11:06:14</publishTime>
+      <publishTime>08/04/2023 11:21:37</publishTime>
     </File>
     <File Include="Views/Approval/PlantManager.cshtml">
       <publishTime>07/11/2023 14:34:03</publishTime>
@@ -13174,16 +13180,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 15:30:46</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
-      <publishTime>07/28/2023 14:53:30</publishTime>
+      <publishTime>08/04/2023 10:36:37</publishTime>
     </File>
     <File Include="Views/PPE/DetailPPE.cshtml">
       <publishTime>07/05/2023 15:10:57</publishTime>
     </File>
     <File Include="Views/PPE/Register.cshtml">
-      <publishTime>07/14/2023 10:54:35</publishTime>
+      <publishTime>08/04/2023 10:49:35</publishTime>
     </File>
     <File Include="Views/PPE/Review.cshtml">
-      <publishTime>07/28/2023 14:53:30</publishTime>
+      <publishTime>08/04/2023 13:49:21</publishTime>
     </File>
     <File Include="Views/Received/DetailPPE_EQP.cshtml">
       <publishTime>07/15/2023 09:41:09</publishTime>
@@ -13237,7 +13243,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 12:55:31</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/01/2023 09:10:25</publishTime>
+      <publishTime>08/04/2023 14:06:42</publishTime>
     </File>
   </ItemGroup>
 </Project>

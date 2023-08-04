@@ -22,7 +22,7 @@ function getdetail(nomor_equip) {
             { "className": "dt-center", "targets": [0, 1, 2, 3] }
         ],
 
-        order: [[3, 'desc']],
+        //order: [[3, 'desc']],
         scrollX: true,
         columns: [
 
@@ -39,14 +39,19 @@ function getdetail(nomor_equip) {
             {
                 data: 'UPLOAD_FORM_CAAB',
                 render: function (data, type, row) {
+                    //return `<a href="${row["UPLOAD_FORM_CAAB"]}"  target='_blank'>View Attachment</a>`;
+                    //if (data == null) {
+                    //    return `<a  target='_blank'></a>`;
+                    //} else if (data != null && row["Approval_Order"] >= 4) {
+                    //    return `<a href="${row["UPLOAD_FORM_CAAB"]}"  target='_blank'>View Attachment</a>`;
+                    //} else {
+                    //    return `<a  target='_blank'></a>`;
+                    //}
                     if (data == null) {
-                        return `<a  target='_blank'>Empty</a>`;
-                    } else if (data != null && row["Approval_Order"] > 4) {
-                        return `<a href="${row["UPLOAD_FORM_CAAB"]}"  target='_blank'>View Attachment</a>`;
+                        return `<a  target='_blank'></a>`;
                     } else {
-                        return `<a  target='_blank'>Empty</a>`;
+                        return `<a href="${row["UPLOAD_FORM_CAAB"]}"  target='_blank'>View CAAB</a>`;
                     }
-                    
                 }
             },
             //{ data: 'UPLOAD_FORM_CAAB' }

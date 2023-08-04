@@ -8,20 +8,26 @@ var table = $("#tbl_ppe").DataTable({
     },
     
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] },
+        { "className": "dt-center", "targets": '_all' },
         { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
     columns: [
+        //{
+        //    "data": null,
+        //    render: function (data, type, row, meta) {
+        //        return '<input type="checkbox" class="row-checkbox" data-id="' + row.PPE_NO + '">';
+        //    }
+        //},
         {
             "data": null,
             render: function (data, type, row, meta) {
-                return '<input type="checkbox" class="row-checkbox" data-id="' + row.PPE_NO + '">';
+                return meta.row + meta.settings._iDisplayStart + 1;
             }
         },
         { data: 'PPE_NO' },
-        { data: 'EGI' },
-        { data: 'EQUIP_NO' },
+        //{ data: 'EGI' },
+        //{ data: 'EQUIP_NO' },
         { data: 'DISTRICT_FROM' },
         { data: 'DISTRICT_TO' },
         {
@@ -38,65 +44,50 @@ var table = $("#tbl_ppe").DataTable({
                 return text;
             }
         },
+        //{
+        //    data: 'UPLOAD_FORM_CAAB',
+        //    render: function (data, type, row) {
+        //        return '<td><input class="form-control form-control-sm input-file" type="file" accept=".pdf" multiple></td>';
+        //    }
+        //},
+        //{
+        //    data: 'ID',
+        //    targets: 'no-sort', orderable: false,
+        //    render: function (data, type, row) {
+        //        action = `<div class="btn-group">`
+        //        action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+        //        return action;
+        //    }
+        //},
         {
-            data: 'UPLOAD_FORM_CAAB',
-            render: function (data, type, row) {
-                return '<td><input class="form-control form-control-sm input-file" type="file" accept=".pdf" multiple></td>';
-            }
-        },
-        {
-            data: 'ID',
+            data: 'PPE_NO',
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+                action += `<a href="/Approval/Detail_DeptHead?ppe=${data}" class="btn btn-sm btn-info">Detail</a>`
                 return action;
             }
         }
     ],
     initComplete: function () {
-        var headerCheckbox = document.getElementById('checkAll');
-        var rowCheckboxes = document.getElementsByClassName('row-checkbox');
-        headerCheckbox.addEventListener('change', function () {
-            var isChecked = headerCheckbox.checked;
-            for (var i = 0; i < rowCheckboxes.length; i++) {
-                rowCheckboxes[i].checked = isChecked;
-            }
-        });
-
-        var firstPPE = this.api().column(1).data()[0];
-        debugger
-        this.api().column(1).order('asc').draw();
-
-        this.api().columns(1).every(function () {
-            var column = this;
-            var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"></select>')
-                .appendTo($("#tbl_ppe_filter.dataTables_filter"))
-                .on('change', function () {
-                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                    column.search(val ? '^' + val + '$' : '', true, false).draw();
-                });
-
-            if (firstPPE) {
-                select.append('<option value="' + firstPPE + '">' + firstPPE + '</option>');
-            } else {
-                select.append('<option value="-- PPE NUMBER --">-- PPE NUMBER --</option>');
-            }
-            column
-                .data()
-                .unique()
-                .sort()
-                .each(function (d, j) {
-                    if (d !== firstPPE) {
+        this.api()
+            .columns(1)
+            .every(function () {
+                var column = this;
+                var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- PPE NUMBER --</option></select>')
+                    .appendTo($("#tbl_ppe_filter.dataTables_filter"))
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                    });
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
                         select.append('<option value="' + d + '">' + d + '</option>');
-                    }
-                });
-            if (firstPPE) {
-                column.search('^' + firstPPE + '$', true, false).draw();
-            } else {
-                column.search('^-- PPE NUMBER --$', true, false).draw();
-            }
-        });
+                    });
+            });
     },
 });
 

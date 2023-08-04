@@ -199,15 +199,15 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
-        [Route("Get_ListApprovalPPE_SECHEAD/{posid}")]
-        //[Route("Get_ListApprovalPPE_SECHEAD")]
-        public IHttpActionResult Get_ListApprovalPPE_SECHEAD(string posid)
+        //[Route("Get_ListApprovalPPE_SECHEAD/{posid}")]
+        [Route("Get_ListApprovalPPE_SECHEAD")]
+        public IHttpActionResult Get_ListApprovalPPE_SECHEAD()
         {
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_SECHEADs.Where(a => a.POSISI_PPE == "Sect. Head" && a.NEXT_POSITION_ID == posid || "KP1PT024" == posid && a.STATUS != "REJECT").ToList();
-                //var data = db.VW_T_SECHEADs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").ToList();
+                //var data = db.VW_T_SECHEADs.Where(a => a.POSISI_PPE == "Sect. Head" && a.NEXT_POSITION_ID == posid || "KP1PT024" == posid && a.STATUS != "REJECT").ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
             }
@@ -241,7 +241,8 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
+                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
+                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }

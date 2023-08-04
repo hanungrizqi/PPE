@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Detail Dept Head";
+    ViewBag.JS = "/Scripts/Page/ApprovalPlantDeptHead_Detail.js";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-heading">Detail Dept Head</h2>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">Detail Permohonan Pemindahan Equipment</h3>
+    </div>
+    <div class="block-content">
+        <div class="row justify-content-center">
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_noPPE">No PPE</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_noPPE" name="txt_noPPE" value="@ViewBag.ppe_numberr" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_date">Created Date</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_date" name="txt_date" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtFrom">District From</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_districtFrom" name="txt_districtFrom" readonly>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label" for="txt_districtTo">District To</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control form-control-sm " id="txt_districtTo" name="txt_districtTo" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header block-header-default">
+        <h3 class="block-title">Equipment List</h3>
+    </div>
+    <div class="block-content">
+        <div class="row justify-content-center pb-4">
+            <div class="col-sm-12 col-md-12 table-responsive">
+                <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination w-100" id="table_eqp">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Equip No</th>
+                            <th>Egi</th>
+                            <th>Equip Class</th>
+                            <th>Serial No</th>
+                            <th>Equip Description</th>
+                            <th>District From</th>
+                            <th>District To</th>
+                            <th>Loc From</th>
+                            <th>Loc To</th>
+                            @*<th>Date Received</th>*@
+                            <th>Upload CAAB</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var equip in ViewBag.dataEquipp)
+                        {
+                            <tr>
+                                <td>@equip.EQUIP_NO</td>
+                                <td>@equip.EGI</td>
+                                <td>@equip.EQUIP_CLASS</td>
+                                <td>@equip.SERIAL_NO</td>
+                                <td>@equip.PPE_DESC</td>
+                                <td>@equip.DISTRICT_FROM</td>
+                                <td>@equip.DISTRICT_TO</td>
+                                <td>@equip.LOC_FROM</td>
+                                <td>@equip.LOC_TO</td>
+                                @*<td>
+                                    @if (equip.DATE_RECEIVED_SM == null)
+                                    {
+                                        <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM">
+                                    }
+                                    else
+                                    {
+                                        <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM" value="@equip.DATE_RECEIVED_SM.ToString("yyyy-MM-dd")">
+                                    }
+                                </td>*@
+                                <td>
+                                    <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_CAAB" multiple>
+                                    @*@if (equip.BERITA_ACARA_SM == null)
+                                        {
+                                            <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_BA" multiple>
+                                        }*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block block-rounded block-link-shadow">
+    <div class="block-header">
+        <h3 class="block-title">Remarks</h3>
+    </div>
+    <div class="block-content">
+        <div class="mb-3">
+            <textarea class="form-control form-control-sm" id="txt_remark" name="txt_remark"></textarea>
+        </div>
+    </div>
+    <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+        <div class="block-options justify-content-center">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <a href="/Approval/PlantDeptHead" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
+                    @*<button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="r(this.value)">
+                            <i class="fa fa-times opacity-50 me-1"></i> Cancel
+                        </button>*@
+                    <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="rejectApproval(this.value)">
+                        <i class="fa fa-times opacity-50 me-1"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-success" value="PLANT DEPT. HEAD APPROVED" onclick="submitApproval(this.value)">
+                        <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

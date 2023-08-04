@@ -234,6 +234,15 @@ function savePPEtoTable() {
                             var toastElement = document.getElementById('toast-example-1');
                             var toast = new bootstrap.Toast(toastElement);
                             toast.show();
+
+                            // Clear input fields
+                            $("#txt_eqNumber").val("").trigger("change");
+                            $("#txt_ppeDesc").val("");
+                            $("#txt_egi").val("");
+                            $("#txt_eqClass").val("");
+                            $("#txt_serialNo").val("");
+                            $("#txt_remark").val("");
+                            $("#txt_attach").val("");
                         },
                         error: function (xhr) {
                             alert(xhr.responseText);
@@ -295,6 +304,15 @@ function savePPEtoTable() {
                     var toastElement = document.getElementById('toast-example-1');
                     var toast = new bootstrap.Toast(toastElement);
                     toast.show();
+
+                    // Clear input fields
+                    $("#txt_eqNumber").val("").trigger("change");
+                    $("#txt_ppeDesc").val("");
+                    $("#txt_egi").val("");
+                    $("#txt_eqClass").val("");
+                    $("#txt_serialNo").val("");
+                    $("#txt_remark").val("");
+                    $("#txt_attach").val("");
                 }
 
             },

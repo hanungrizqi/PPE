@@ -130,7 +130,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-4 col-form-label" for="txt_remark">Remarks</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control form-control-alt" id="txt_remark" name="txt_remark" rows="7" placeholder="Textarea content.."></textarea>
+                        <textarea class="form-control" id="txt_remark" name="txt_remark" rows="7"></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -282,6 +282,14 @@
             "<td><button class='btn btn-sm btn-danger' onclick='removeRow(this)'>DELETE</button></td>" +
             "</tr>";
         $("#table_equipment tbody").append(row);
+        // Clear input fields
+        $("#txt_eqNumber").val("").trigger("change");
+        $("#txt_ppeDesc").val("");
+        $("#txt_egi").val("");
+        $("#txt_eqClass").val("");
+        $("#txt_serialNo").val("");
+        $("#txt_remark").val("");
+        $("#txt_attach").val("");
     }
 
     function removeRow(button) {
