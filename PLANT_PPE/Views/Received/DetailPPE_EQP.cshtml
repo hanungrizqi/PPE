@@ -83,14 +83,15 @@
                                 <td>@equip.LOC_FROM</td>
                                 <td>@equip.LOC_TO</td>
                                 <td>
-                                    @if (equip.DATE_RECEIVED_SM == null)
+                                    <input type="date" class="form-control form-control-sm " id="txt_DateRecivSM" name="txt_DateRecivSM">
+                                    @*@if (equip.DATE_RECEIVED_SM == null)
                                     {
-                                        <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM">
+                                        <input type="date" onkeydown="return false" class="form-control form-control-sm " id="txt_DateRecivSM" name="txt_DateRecivSM">
                                     }
                                     else
                                     {
-                                        <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM" value="@equip.DATE_RECEIVED_SM.ToString("yyyy-MM-dd")">
-                                    }
+                                        <input type="date" class="form-control form-control-sm " id="txt_DateRecivSM" name="txt_DateRecivSM" value="@equip.DATE_RECEIVED_SM.ToString("yyyy-MM-dd")">
+                                    }*@
                                 </td>
                                 <td>
                                     <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_BA" multiple>

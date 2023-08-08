@@ -69,5 +69,29 @@ namespace API_PLANT_PPE.Controllers
                 return Ok(new { Remarks = false, Message = ex.Message });
             }
         }
+
+        [HttpPost]
+        [Route("Update_Equipment_FromDetail")]
+        public IHttpActionResult Update_Equipment_FromDetail(TBL_T_PPE ppe)
+        {
+            try
+            {
+                ClsUpdate_MSE600 cls = new ClsUpdate_MSE600();
+                ClsUpdate_MSF600_Result result = new ClsUpdate_MSF600_Result();
+
+                var dataEquipment = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == ppe.EQUIP_NO);
+                if (dataEquipment != null)
+                {
+                    //cls.updatemse600(dataEquipment);
+                    result = cls.updatemse600(dataEquipment);
+                }
+                //db.SubmitChanges();
+                return Ok(new { Remarks = result.Remarks, Message = result.Message });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { Remarks = false, Message = ex.Message });
+            }
+        }
     }
 }

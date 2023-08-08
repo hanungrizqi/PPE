@@ -210,7 +210,9 @@ function sendMailPM_Pengirim(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Pengirim?ppe=" + encodedPPENo,
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Pengirim?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Pengirim",
+        data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",

@@ -1,5 +1,10 @@
 ﻿$("document").ready(function () {
     getDetail();
+    var dateInputs = document.querySelectorAll("input[type='date']");
+
+    dateInputs.forEach(function (dateInput) {
+        dateInput.setAttribute("max", new Date().toISOString().split("T")[0]);
+    });
 })
 
 var table_eqp = $("#table_eqp").DataTable({

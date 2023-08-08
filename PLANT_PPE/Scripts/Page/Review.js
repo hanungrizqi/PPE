@@ -19,11 +19,11 @@ function getdetail(nomor_equip) {
             dataSrc: "Data",
         },
         "columnDefs": [
-            { "className": "dt-center", "targets": [0, 1, 2, 3] }
+            { "className": "dt-center", "targets": [0, 1, 2, 3, 4] },
+            { "className": "dt-nowrap", "targets": [0, 1, 4] }
         ],
 
         //order: [[3, 'desc']],
-        scrollX: true,
         columns: [
 
             { data: 'Posisi_Ppe' },
@@ -60,7 +60,7 @@ function getdetail(nomor_equip) {
 }
 
 function detailClose() {
-    var text = `<thead class="text-center">
+    var text = `<thead class="text-center bg-primary text-white">
                     <tr>
                         <th>POSITION</th>
                         <th>STATUS</th>
@@ -73,7 +73,7 @@ function detailClose() {
                 <tbody>
                 </tbody>`;
     table2.destroy();
-    table2.val(text);
+    //table2.val(text);
 }
 
 function printReport(ppeno) {

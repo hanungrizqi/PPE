@@ -213,10 +213,13 @@ function submitApproval(postStatus) {
 
 function sendMailPlant_Manager(uniquePPE_NO) {
     debugger
-    var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    //var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    var encodedPPENo = uniquePPE_NO.map(ppeNo => encodeURIComponent(ppeNo));
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager",
+        data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",

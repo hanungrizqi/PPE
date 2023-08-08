@@ -42,10 +42,11 @@ function submitApproval(postStatus) {
     dataEQP.PPE_NO = $("#txt_noPPE").val();
     dataEQP.EQUIP_NO = $("#txt_eqNumber").val();
     dataEQP.REMARKS = $("#txt_note").val();
-    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Plant Manager" : "Plant Dept. Head";
     dataEQP.UPDATED_BY = $("#hd_nrp").val();
     dataEQP.STATUS = postStatus;
-    dataEQP.URL_FORM_PLNTMNGR = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantManager&PPE_NO=" + $("#txt_noPPE").val();
+    dataEQP.APPROVAL_ORDER = postStatus === "REJECT" ? 3 : 3;
+    dataEQP.URL_FORM_PLNTDH = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + $("#txt_noPPE").val();
 
     debugger
     let NomorPPEM = dataEQP.PPE_NO;
@@ -53,7 +54,7 @@ function submitApproval(postStatus) {
     console.log(dataEQP);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/DetailApproval/Approve_Section_Head",
+        url: $("#web_link").val() + "/api/DetailApproval/Approve_PPE_PlantManager",
         data: JSON.stringify(dataEQP),
         dataType: "json",
         type: "POST",
@@ -63,7 +64,7 @@ function submitApproval(postStatus) {
         },
         success: function (data) {
             debugger
-            sendMailPlant_Manager(NomorPPEM);
+            sendMailPlant_DeptHead(NomorPPEM);
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -72,11 +73,11 @@ function submitApproval(postStatus) {
     });
 }
 
-function sendMailPlant_Manager(NomorPPEM) {
+function sendMailPlant_DeptHead(NomorPPEM) {
     var encodedPPENo = encodeURIComponent(NomorPPEM.replace(/\//g, '%2F'));
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
         //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
         //data: JSON.stringify(NomorPPEM),
         dataType: "json",
@@ -94,7 +95,7 @@ function sendMailPlant_Manager(NomorPPEM) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
+                        window.location.href = "/Approval/PlantManager";
                     }
                 });
             } else {
@@ -126,9 +127,10 @@ function rejectApproval(postStatus) {
     dataEQP.PPE_NO = $("#txt_noPPE").val();
     dataEQP.EQUIP_NO = $("#txt_eqNumber").val();
     dataEQP.REMARKS = $("#txt_note").val();
-    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Plant Manager" : "Plant Dept. Head",
     dataEQP.UPDATED_BY = $("#hd_nrp").val();
     dataEQP.STATUS = postStatus;
+    dataEQP.APPROVAL_ORDER = postStatus === "REJECT" ? 3 : 3;
     dataEQP.URL_FORM_PLNTMNGR = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantManager&PPE_NO=" + $("#txt_noPPE").val();
 
     debugger
@@ -137,7 +139,7 @@ function rejectApproval(postStatus) {
     console.log(dataEQP);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/DetailApproval/Reject_Section_Head",
+        url: $("#web_link").val() + "/api/DetailApproval/Reject_PPE_PlantManager",
         data: JSON.stringify(dataEQP),
         dataType: "json",
         type: "POST",
@@ -157,7 +159,7 @@ function rejectApproval(postStatus) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
+                        window.location.href = "/Approval/PlantManager";
                     }
                 });
             } else {

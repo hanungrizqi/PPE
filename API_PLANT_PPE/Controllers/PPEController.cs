@@ -207,7 +207,7 @@ namespace API_PLANT_PPE.Controllers
             {
                 db.CommandTimeout = 120;
                 //var data = db.VW_T_SECHEADs.Where(a => a.POSISI_PPE == "Sect. Head" && a.NEXT_POSITION_ID == posid || "KP1PT024" == posid && a.STATUS != "REJECT").ToList();
-                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -224,7 +224,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").ToList();
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -242,7 +242,7 @@ namespace API_PLANT_PPE.Controllers
             {
                 db.CommandTimeout = 120;
                 //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
-                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED").OrderBy(a => a.PPE_NO).ToList();
+                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED").OrderBy(a => a.PPE_NO).OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -276,7 +276,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Pengirim" && a.STATUS != "REJECT").ToList();
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Pengirim" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -293,7 +293,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Penerima" && a.STATUS != "REJECT").ToList();
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Penerima" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -329,7 +329,7 @@ namespace API_PLANT_PPE.Controllers
             {
                 db.CommandTimeout = 120;
                 //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.STATUS != "REJECT").ToList();
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -348,7 +348,7 @@ namespace API_PLANT_PPE.Controllers
             {
                 db.CommandTimeout = 120;
                 //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head OPR" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head OPR" && a.STATUS != "REJECT").ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Division Head OPR" && a.STATUS != "REJECT").OrderBy(a=> a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -503,36 +503,69 @@ namespace API_PLANT_PPE.Controllers
             }
         }
 
+        //[HttpPost]
+        //[Route("Sendmail_Plant_Manager")]
+        //public IHttpActionResult Sendmail_Plant_Manager(string ppe)
+        //{
+        //    try
+        //    {
+        //        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+        //        db.CommandTimeout = 120;
+        //        db.cusp_insertNotifEmail_PlantManager(decodedPpenosh);
+
+        //        return Ok(new { Remarks = true });
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
+
         [HttpPost]
         [Route("Sendmail_Plant_Manager")]
-        public IHttpActionResult Sendmail_Plant_Manager(string ppe)
+        public IHttpActionResult Sendmail_Plant_Manager(string[] param)
         {
             try
             {
-                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
 
-                db.CommandTimeout = 120;
-                db.cusp_insertNotifEmail_PlantManager(decodedPpenosh);
+                    if (cek.PPE_NO != null)
+                    {
 
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_PlantManager(decodedPpenosh);
+                    }
+                }
                 return Ok(new { Remarks = true });
+
             }
             catch (Exception)
             {
                 return BadRequest();
             }
+
         }
 
         [HttpPost]
         [Route("Sendmail_Plant_DeptHead")]
-        public IHttpActionResult Sendmail_Plant_DeptHead(string ppe)
+        public IHttpActionResult Sendmail_Plant_DeptHead(string[] param)
         {
             try
             {
-                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
 
-                db.CommandTimeout = 120;
-                db.cusp_insertNotifEmail_PlantDeptHead(decodedPpenosh);
+                    if (cek.PPE_NO != null)
+                    {
 
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_PlantDeptHead(decodedPpenosh);
+                    }
+                }
                 return Ok(new { Remarks = true });
             }
             catch (Exception)
@@ -543,15 +576,21 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Sendmail_PM_Pengirim")]
-        public IHttpActionResult Sendmail_PM_Pengirim(string ppe)
+        public IHttpActionResult Sendmail_PM_Pengirim(string[] param)
         {
             try
             {
-                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
 
-                db.CommandTimeout = 120;
-                db.cusp_insertNotifEmail_PMPengirim(decodedPpenosh);
+                    if (cek.PPE_NO != null)
+                    {
 
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_PMPengirim(decodedPpenosh);
+                    }
+                }
                 return Ok(new { Remarks = true });
             }
             catch (Exception)
@@ -562,15 +601,21 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Sendmail_PM_Penerima")]
-        public IHttpActionResult Sendmail_PM_Penerima(string ppe)
+        public IHttpActionResult Sendmail_PM_Penerima(string[] param)
         {
             try
             {
-                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
 
-                db.CommandTimeout = 120;
-                db.cusp_insertNotifEmail_PMPenerima(decodedPpenosh);
+                    if (cek.PPE_NO != null)
+                    {
 
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_PMPenerima(decodedPpenosh);
+                    }
+                }
                 return Ok(new { Remarks = true });
             }
             catch (Exception)
@@ -581,15 +626,21 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Sendmail_Divhead_Eng")]
-        public IHttpActionResult Sendmail_Divhead_Eng(string ppe)
+        public IHttpActionResult Sendmail_Divhead_Eng(string[] param)
         {
             try
             {
-                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
 
-                db.CommandTimeout = 120;
-                db.cusp_insertNotifEmail_Divhead_Eng(decodedPpenosh);
+                    if (cek.PPE_NO != null)
+                    {
 
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_Divhead_Eng(decodedPpenosh);
+                    }
+                }
                 return Ok(new { Remarks = true });
             }
             catch (Exception)
@@ -600,15 +651,21 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Sendmail_Divhead_Opr")]
-        public IHttpActionResult Sendmail_Divhead_Opr(string ppe)
+        public IHttpActionResult Sendmail_Divhead_Opr(string[] param)
         {
             try
             {
-                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
 
-                db.CommandTimeout = 120;
-                db.cusp_insertNotifEmail_Divhead_Opr(decodedPpenosh);
+                    if (cek.PPE_NO != null)
+                    {
 
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_Divhead_Opr(decodedPpenosh);
+                    }
+                }
                 return Ok(new { Remarks = true });
             }
             catch (Exception)
@@ -619,15 +676,21 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Sendmail_Done")]
-        public IHttpActionResult Sendmail_Done(string ppe)
+        public IHttpActionResult Sendmail_Done(string[] param)
         {
             try
             {
-                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
 
-                db.CommandTimeout = 120;
-                db.cusp_insertNotifEmail_PPE_Done(decodedPpenosh);
+                    if (cek.PPE_NO != null)
+                    {
 
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_PPE_Done(decodedPpenosh);
+                    }
+                }
                 return Ok(new { Remarks = true });
             }
             catch (Exception)

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using MSO687_CONSOLEAPP.ScreenService;
 using System.Configuration;
 using EllipseWebServicesClient;
+using System.CodeDom.Compiler;
+using System.Data.Linq;
 
 namespace MSO687_CONSOLEAPP
 {
@@ -15,33 +17,34 @@ namespace MSO687_CONSOLEAPP
     {
         static void Main(string[] args)
         {
-            ScheduleExecute();
+            //ScheduleExecute();
+            Execute();
             Console.ReadLine(); // Keep the console application running
         }
 
-        static void ScheduleExecute()
-        {
-            // Get the current time
-            DateTime currentTime = DateTime.Now;
+        //static void ScheduleExecute()
+        //{
+        //    // Get the current time
+        //    DateTime currentTime = DateTime.Now;
 
-            // Set the desired execution time to 14:50 today
-            DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 06, 01, 0);
+        //    // Set the desired execution time to 14:50 today
+        //    DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 06, 01, 0);
 
-            // If the scheduled time has already passed today, schedule it for tomorrow
-            if (currentTime > scheduledTime)
-            {
-                scheduledTime = scheduledTime.AddDays(1);
-            }
+        //    // If the scheduled time has already passed today, schedule it for tomorrow
+        //    if (currentTime > scheduledTime)
+        //    {
+        //        scheduledTime = scheduledTime.AddDays(1);
+        //    }
 
-            // Calculate the time remaining until the scheduled time
-            TimeSpan timeUntilScheduledTime = scheduledTime - currentTime;
+        //    // Calculate the time remaining until the scheduled time
+        //    TimeSpan timeUntilScheduledTime = scheduledTime - currentTime;
 
-            // Create a Timer to execute the Execute method at the scheduled time
-            Timer timer = new Timer(Execute, null, timeUntilScheduledTime, Timeout.InfiniteTimeSpan);
-        }
+        //    // Create a Timer to execute the Execute method at the scheduled time
+        //    Timer timer = new Timer(Execute, null, timeUntilScheduledTime, Timeout.InfiniteTimeSpan);
+        //}
 
-        private static void Execute(object state)
-        //private static void Execute()
+        //private static void Execute(object state)
+        static void Execute()
         {
 
             Console.WriteLine("EXEC-MSO687");
@@ -64,7 +67,7 @@ namespace MSO687_CONSOLEAPP
                 //           item.DATE_RECEIVED_SM.Value.Day >= 15 &&
                 //           item.DATE_RECEIVED_SM.Value.Day <= 26 &&
                 //           item.FLAG == 0).ToList();
-                var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.Where(item => item.FLAG == 0).ToList();
+                var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.ToList();
 
                 foreach (var item in dataEquipment)
                 {
@@ -100,7 +103,7 @@ namespace MSO687_CONSOLEAPP
                             manserv.ELLIPSE_POSITION = str_posisi;
                             manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
                             manserv.POST_DATETIME = DateTime.Now;
-                            manserv.JOB_STATUS = 4;
+                            manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
                             manserv.JOB_REMARK = "Login Ellipse";
                             manserv.DB_SERVER_NAME = "kphosq101\\shpol";
                             manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
@@ -110,7 +113,9 @@ namespace MSO687_CONSOLEAPP
                         }
                         else
                         {
+                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cekmanserv);
                             cekmanserv.POST_DATETIME = DateTime.Now;
+                            cekmanserv.JOB_STATUS = 1;
                             cekmanserv.JOB_REMARK = "Login Ellipse";
                             dbs.SubmitChanges();
                         }
@@ -284,15 +289,17 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
+                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
                             cek.POST_DATETIME = DateTime.Now;
-                            cek.JOB_REMARK = "Success Created MSO687";
+                            cek.JOB_STATUS = 4; // 4 = Success
+                            cek.JOB_REMARK = "Success Created MSO687 " + item.EQUIP_NO;
                             dbs.SubmitChanges();
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
                         if (cek2 != null)
                         {
-                            // If an error occurs during processing, set the flag to 2
+                            // 1 = Success
                             cek2.FLAG = 1;
                             db.SubmitChanges();
                         }
@@ -303,15 +310,17 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
+                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
                             cek.POST_DATETIME = DateTime.Now;
-                            cek.JOB_REMARK = "Failed Created MSO687 - " + exMessage;
+                            cek.JOB_STATUS = 6; // 6 = Failed
+                            cek.JOB_REMARK = "Failed Created " + item.EQUIP_NO + " - " + exMessage;
                             dbs.SubmitChanges();
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
                         if (cek2 != null)
                         {
-                            // If an error occurs during processing, set the flag to 2
+                            // 2 = Error
                             cek2.FLAG = 2;
                             db.SubmitChanges();
                         }
@@ -329,7 +338,7 @@ namespace MSO687_CONSOLEAPP
             {
                 //var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == "2023-07-18" && item.FLAG == 0).ToList();
                 //var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == DateTime.Today.ToString("yyyy-MM-dd") && item.FLAG == 0).ToList();
-                var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.Where(item => item.FLAG == 0).ToList();
+                var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.ToList();
 
                 foreach (var item in dataEquipment)
                 {
@@ -365,7 +374,7 @@ namespace MSO687_CONSOLEAPP
                             manserv.ELLIPSE_POSITION = str_posisi;
                             manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
                             manserv.POST_DATETIME = DateTime.Now;
-                            manserv.JOB_STATUS = 4;
+                            manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
                             manserv.JOB_REMARK = "Login Ellipse";
                             manserv.DB_SERVER_NAME = "kphosq101\\shpol";
                             manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
@@ -375,7 +384,9 @@ namespace MSO687_CONSOLEAPP
                         }
                         else
                         {
+                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cekmanserv);
                             cekmanserv.POST_DATETIME = DateTime.Now;
+                            cekmanserv.JOB_STATUS = 1;
                             cekmanserv.JOB_REMARK = "Login Ellipse";
                             dbs.SubmitChanges();
                         }
@@ -549,15 +560,17 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
+                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
                             cek.POST_DATETIME = DateTime.Now;
-                            cek.JOB_REMARK = "Success Created MSO687";
+                            cek.JOB_STATUS = 4; //4 = Success
+                            cek.JOB_REMARK = "Success Created MSO687 " + item.EQUIP_NO;
                             dbs.SubmitChanges();
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
                         if (cek2 != null)
                         {
-                            // If an error occurs during processing, set the flag to 2
+                            // 1 = Success
                             cek2.FLAG = 1;
                             db.SubmitChanges();
                         }
@@ -568,15 +581,17 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
+                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
                             cek.POST_DATETIME = DateTime.Now;
-                            cek.JOB_REMARK = "Failed Created MSO687 - " + exMessage;
+                            cek.JOB_STATUS = 6; //6 = Failed
+                            cek.JOB_REMARK = "Failed Created " + item.EQUIP_NO + " - " + exMessage;
                             dbs.SubmitChanges();
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
                         if (cek2 != null)
                         {
-                            // If an error occurs during processing, set the flag to 2
+                            // 2 = Error
                             cek2.FLAG = 2;
                             db.SubmitChanges();
                         }

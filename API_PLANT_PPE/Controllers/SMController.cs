@@ -22,7 +22,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
 
-                var data = db.VW_T_PPEs.Where(a => a.PPE_NO == ppe).ToList();
+                var data = db.VW_T_PPEs.Where(a => a.PPE_NO == ppe && a.STATUS == "DIVISION HEAD OPR APPROVED").ToList();
 
                 return Ok(new { Data = data, Total = data.Count() });
             }

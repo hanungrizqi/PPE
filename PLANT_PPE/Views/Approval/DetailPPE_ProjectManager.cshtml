@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Detail PPE";
-    ViewBag.JS = "/Scripts/Page/DetailPPE.js";
+    ViewBag.JS = "/Scripts/Page/DetailPPE_ProjectManager.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 
 <div class="block block-rounded block-link-shadow">
     <div class="block-header block-header-default">
-        <h3 class="block-title">Detail Approval Section Head</h3>
+        <h3 class="block-title">Detail Approval Project Manager Pengirim</h3>
     </div>
     <div class="block-content">
         <div class="row justify-content-center">
@@ -89,6 +89,32 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-6">
+        <div class="block block-rounded">
+            <div class="block-header block-header-default">
+                <h3 class="block-title">Agreement's <small>Content Agreement's</small></h3>
+            </div>
+            <div class="block-content block-content-full">
+                <label class="col-sm-7" for="txtxt">*klik untuk membaca agreement</label>
+                <button type="button" class="btn btn-alt-primary" data-bs-toggle="modal" data-bs-target="#modal-terms" id="txtxt">Agreement's Approval</button>
+            </div>
+            <div class="block-content block-content-full block-content-sm bg-body-light fs-sm">
+                <div class="block-options justify-content-center">
+                    <div class="row text-center">
+                        <div class="col-auto">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="val-terms" name="val-terms" value="1" disabled>
+                                <label class="form-check-label" for="val-terms">I accept license &amp; terms</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="block block-rounded block-link-shadow">
     <div class="block-header">
         <h3 class="block-title">Remarks</h3>
@@ -102,12 +128,37 @@
         <div class="block-options justify-content-center">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <a href="/Approval/SectionHead" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
+                    <a href="/Approval/ProjectManager" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
                     <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="rejectApproval(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-sm btn-success" value="SEC.HEAD APPROVED" onclick="submitApproval(this.value)">
+                    <button type="submit" class="btn btn-sm btn-success" value="PM PENGIRIM APPROVED" onclick="submitApproval(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-terms" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Terms &amp; Conditions</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm" id="agreementss">
+
+                </div>
+                <div class="block-content block-content-full block-content-sm text-end border-top">
+                    <button type="button" class="btn btn-alt-primary" data-bs-dismiss="modal">
+                        Accept
                     </button>
                 </div>
             </div>

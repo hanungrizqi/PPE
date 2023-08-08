@@ -32,6 +32,51 @@ namespace PLANT_PPE.Controllers
             ViewBag.idppe = idppe;
             return View();
         }
+        public ActionResult DetailPPE_PM(int idppe)
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.idppe = idppe;
+            return View();
+        }
+        public ActionResult DetailPPE_ProjectManager(int idppe)
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.idppe = idppe;
+            return View();
+        }
+        public ActionResult DetailPPE_ProjectManager_Penerima(int idppe)
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.idppe = idppe;
+            return View();
+        }
+        public ActionResult DetailPPE_DivHead(int idppe)
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.idppe = idppe;
+            return View();
+        }
+        public ActionResult DetailPPE_DivHead_OPR(int idppe)
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.idppe = idppe;
+            return View();
+        }
         public ActionResult PlantManager()
         {
             if (Session["nrp"] == null)

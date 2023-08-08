@@ -42,7 +42,7 @@ var table = $("#tbl_ppe").DataTable({
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+                action += `<a href="/Approval/DetailPPE_PM?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
                 return action;
             }
         }
@@ -203,7 +203,9 @@ function sendMailPlant_DeptHead(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead",
+        data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",

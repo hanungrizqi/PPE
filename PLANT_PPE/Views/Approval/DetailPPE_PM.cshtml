@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Detail PPE";
-    ViewBag.JS = "/Scripts/Page/DetailPPE.js";
+    ViewBag.JS = "/Scripts/Page/DetailPPE_PM.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
 
 <div class="block block-rounded block-link-shadow">
     <div class="block-header block-header-default">
-        <h3 class="block-title">Detail Approval Section Head</h3>
+        <h3 class="block-title">Detail Approval Plant Manager</h3>
     </div>
     <div class="block-content">
         <div class="row justify-content-center">
@@ -102,11 +102,11 @@
         <div class="block-options justify-content-center">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <a href="/Approval/SectionHead" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
+                    <a href="/Approval/PlantManager" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
                     <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="rejectApproval(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-sm btn-success" value="SEC.HEAD APPROVED" onclick="submitApproval(this.value)">
+                    <button type="submit" class="btn btn-sm btn-success" value="PLANT MANAGER APPROVED" onclick="submitApproval(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
                     </button>
                 </div>

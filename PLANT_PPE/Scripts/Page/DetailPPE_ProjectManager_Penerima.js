@@ -1,6 +1,35 @@
 ﻿$("document").ready(function () {
     getDetail();
+
+    $('#modal-terms').on('show.bs.modal', function () {
+        getContent();
+    });
+    $('#modal-terms').on('hidden.bs.modal', function () {
+        var agreeCheckbox = document.getElementById('val-terms');
+        agreeCheckbox.checked = true;
+    });
+    $('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
+        var agreeCheckbox = document.getElementById('val-terms');
+        agreeCheckbox.disabled = false;
+    });
 })
+
+function getContent() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
+        dataType: "json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var content = data.Data;
+            $("#agreementss").html(content);
+
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
 
 function getDetail() {
     $.ajax({
@@ -29,6 +58,7 @@ function getDetail() {
 
 function submitApproval(postStatus) {
     debugger
+    var agreeCheckbox = document.getElementById('val-terms');
     if ($("#txt_note").val() == "" || $("#txt_note").val() == null) {
         Swal.fire(
             'Warning',
@@ -36,16 +66,25 @@ function submitApproval(postStatus) {
             'warning'
         );
         return;
+    } else if (!agreeCheckbox.checked) {
+        Swal.fire(
+            'Warning!',
+            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
+            'warning'
+        );
+        return;
     }
+
     debugger
     let dataEQP = new Object();
     dataEQP.PPE_NO = $("#txt_noPPE").val();
     dataEQP.EQUIP_NO = $("#txt_eqNumber").val();
     dataEQP.REMARKS = $("#txt_note").val();
-    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Project Manager Penerima" : "Division Head ENG";
     dataEQP.UPDATED_BY = $("#hd_nrp").val();
     dataEQP.STATUS = postStatus;
-    dataEQP.URL_FORM_PLNTMNGR = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantManager&PPE_NO=" + $("#txt_noPPE").val();
+    dataEQP.APPROVAL_ORDER = 6;
+    dataEQP.URL_FORM_DIVHEAD_ENG = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + $("#txt_noPPE").val();
 
     debugger
     let NomorPPEM = dataEQP.PPE_NO;
@@ -53,7 +92,7 @@ function submitApproval(postStatus) {
     console.log(dataEQP);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/DetailApproval/Approve_Section_Head",
+        url: $("#web_link").val() + "/api/DetailApproval/Approve_PPE_PMPenerima",
         data: JSON.stringify(dataEQP),
         dataType: "json",
         type: "POST",
@@ -76,7 +115,7 @@ function sendMailPlant_Manager(NomorPPEM) {
     var encodedPPENo = encodeURIComponent(NomorPPEM.replace(/\//g, '%2F'));
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Divhead_Eng?ppe=" + encodedPPENo,
         //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
         //data: JSON.stringify(NomorPPEM),
         dataType: "json",
@@ -94,7 +133,7 @@ function sendMailPlant_Manager(NomorPPEM) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
+                        window.location.href = "/Approval/ProjectManagerPenerima";
                     }
                 });
             } else {
@@ -113,6 +152,7 @@ function sendMailPlant_Manager(NomorPPEM) {
 
 function rejectApproval(postStatus) {
     debugger
+    var agreeCheckbox = document.getElementById('val-terms');
     if ($("#txt_note").val() == "" || $("#txt_note").val() == null) {
         Swal.fire(
             'Warning',
@@ -120,16 +160,25 @@ function rejectApproval(postStatus) {
             'warning'
         );
         return;
+    } else if (!agreeCheckbox.checked) {
+        Swal.fire(
+            'Warning!',
+            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
+            'warning'
+        );
+        return;
     }
+
     debugger
     let dataEQP = new Object();
     dataEQP.PPE_NO = $("#txt_noPPE").val();
     dataEQP.EQUIP_NO = $("#txt_eqNumber").val();
     dataEQP.REMARKS = $("#txt_note").val();
-    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
+    dataEQP.POSISI_PPE = postStatus === "REJECT" ? "Project Manager Penerima" : "Division Head ENG";
     dataEQP.UPDATED_BY = $("#hd_nrp").val();
     dataEQP.STATUS = postStatus;
-    dataEQP.URL_FORM_PLNTMNGR = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantManager&PPE_NO=" + $("#txt_noPPE").val();
+    dataEQP.APPROVAL_ORDER = 6;
+    dataEQP.URL_FORM_DIVHEAD_ENG = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + $("#txt_noPPE").val();
 
     debugger
     let NomorPPEM = dataEQP.PPE_NO;
@@ -137,7 +186,7 @@ function rejectApproval(postStatus) {
     console.log(dataEQP);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/DetailApproval/Reject_Section_Head",
+        url: $("#web_link").val() + "/api/DetailApproval/Reject_Approval",
         data: JSON.stringify(dataEQP),
         dataType: "json",
         type: "POST",
@@ -157,7 +206,7 @@ function rejectApproval(postStatus) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/SectionHead";
+                        window.location.href = "/Approval/ProjectManagerPenerima";
                     }
                 });
             } else {
