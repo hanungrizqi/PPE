@@ -78,7 +78,7 @@ function submitApproval(postStatus) {
     if (emptyFields) {
         Swal.fire(
             'Warning!',
-            'Silahkan isi Date Receive atau Berita Acara!!',
+            'Silahkan lengkapi Date Receive atau Berita Acara.',
             'warning'
         );
         return;

@@ -538,14 +538,14 @@ namespace API_PLANT_PPE.Controllers
                         }
                     }
                     
-                    if (ppe.STATUS == "REJECT")
-                    {
-                        var rejectEquipments = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe.PPE_NO).ToList();
-                        foreach (var equipment in rejectEquipments)
-                        {
-                            equipment.STATUS = "REJECT";
-                        }
-                    }
+                    //if (ppe.STATUS == "REJECT")
+                    //{
+                    //    var rejectEquipments = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe.PPE_NO).ToList();
+                    //    foreach (var equipment in rejectEquipments)
+                    //    {
+                    //        equipment.STATUS = "REJECT";
+                    //    }
+                    //}
                 }
                 db.SubmitChanges();
                 return Ok(new { Remarks = true });
@@ -595,14 +595,14 @@ namespace API_PLANT_PPE.Controllers
                         }
                     }
                     
-                    if (ppe.STATUS == "REJECT")
-                    {
-                        var rejectEquipments = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe.PPE_NO).ToList();
-                        foreach (var equipment in rejectEquipments)
-                        {
-                            equipment.STATUS = "REJECT";
-                        }
-                    }
+                    //if (ppe.STATUS == "REJECT")
+                    //{
+                    //    var rejectEquipments = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe.PPE_NO).ToList();
+                    //    foreach (var equipment in rejectEquipments)
+                    //    {
+                    //        equipment.STATUS = "REJECT";
+                    //    }
+                    //}
                 }
 
                 db.SubmitChanges();
@@ -654,14 +654,14 @@ namespace API_PLANT_PPE.Controllers
                         }
                     }
                     
-                    if (ppe.STATUS == "REJECT")
-                    {
-                        var rejectEquipments = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe.PPE_NO).ToList();
-                        foreach (var equipment in rejectEquipments)
-                        {
-                            equipment.STATUS = "REJECT";
-                        }
-                    }
+                    //if (ppe.STATUS == "REJECT")
+                    //{
+                    //    var rejectEquipments = db.TBL_T_PPEs.Where(a => a.PPE_NO == ppe.PPE_NO).ToList();
+                    //    foreach (var equipment in rejectEquipments)
+                    //    {
+                    //        equipment.STATUS = "REJECT";
+                    //    }
+                    //}
                 }
 
                 db.SubmitChanges();

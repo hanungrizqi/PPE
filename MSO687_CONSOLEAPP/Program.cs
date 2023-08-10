@@ -51,22 +51,12 @@ namespace MSO687_CONSOLEAPP
 
             DB_PLANT_PPE_CONSOLEDataContext db = new DB_PLANT_PPE_CONSOLEDataContext();
             DB_MNGMT_SRVCDataContext dbs = new DB_MNGMT_SRVCDataContext();
-
-            //penambahan if currentDay
+            
             DateTime today = DateTime.Today;
-            //DateTime yesterday = today.AddDays(-1);
             int currentDay = today.Day;
             int currentMonth = today.Month;
             if (currentDay == 27)
             {
-                //var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == "2023-07-18" && item.FLAG == 0).ToList();
-                //var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == DateTime.Today.ToString("yyyy-MM-dd") && item.FLAG == 0).ToList();
-                //var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.HasValue &&
-                //           item.DATE_RECEIVED_SM.Value.Year == today.Year &&
-                //           item.DATE_RECEIVED_SM.Value.Month == currentMonth &&
-                //           item.DATE_RECEIVED_SM.Value.Day >= 15 &&
-                //           item.DATE_RECEIVED_SM.Value.Day <= 26 &&
-                //           item.FLAG == 0).ToList();
                 var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.ToList();
 
                 foreach (var item in dataEquipment)
@@ -91,33 +81,38 @@ namespace MSO687_CONSOLEAPP
                         context.position = str_posisi;
                         ClientConversation.authenticate(acak, str_password);
 
-                        var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
-                        if (cekmanserv == null)
+                        bool conditionMet = false;
+                        while (!conditionMet)
                         {
-                            TBL_T_UPLOAD_JOB_MASTER manserv = new TBL_T_UPLOAD_JOB_MASTER();
-                            manserv.JOB_ID = item.JOB_MASTER_ID; //"NEWPPE-MSO687-BY-TEAM-KPP-2023";
-                            manserv.SERVER_ID = "TESTING";
-                            manserv.SCRIPT_CODE = "NEWPPE_MSO687";
-                            manserv.ELLIPSE_USERNAME = str_username;
-                            manserv.ELLIPSE_PASSWORD = str_password;
-                            manserv.ELLIPSE_POSITION = str_posisi;
-                            manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
-                            manserv.POST_DATETIME = DateTime.Now;
-                            manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
-                            manserv.JOB_REMARK = "Login Ellipse";
-                            manserv.DB_SERVER_NAME = "kphosq101\\shpol";
-                            manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
+                            var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
+                            if (cekmanserv == null)
+                            {
+                                TBL_T_UPLOAD_JOB_MASTER manserv = new TBL_T_UPLOAD_JOB_MASTER();
+                                manserv.JOB_ID = item.JOB_MASTER_ID; //"NEWPPE-MSO687-BY-TEAM-KPP-2023";
+                                manserv.SERVER_ID = "TESTING";
+                                manserv.SCRIPT_CODE = "NEWPPE_MSO687";
+                                manserv.ELLIPSE_USERNAME = str_username;
+                                manserv.ELLIPSE_PASSWORD = str_password;
+                                manserv.ELLIPSE_POSITION = str_posisi;
+                                manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
+                                manserv.POST_DATETIME = DateTime.Now;
+                                manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
+                                manserv.JOB_REMARK = "Login Ellipse";
+                                manserv.DB_SERVER_NAME = "kphosq101\\shpol";
+                                manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
 
-                            dbs.TBL_T_UPLOAD_JOB_MASTERs.InsertOnSubmit(manserv);
-                            dbs.SubmitChanges();
-                        }
-                        else
-                        {
-                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cekmanserv);
-                            cekmanserv.POST_DATETIME = DateTime.Now;
-                            cekmanserv.JOB_STATUS = 1;
-                            cekmanserv.JOB_REMARK = "Login Ellipse";
-                            dbs.SubmitChanges();
+                                dbs.TBL_T_UPLOAD_JOB_MASTERs.InsertOnSubmit(manserv);
+                                dbs.SubmitChanges();
+                                conditionMet = true;
+                            }
+                            else
+                            {
+                                cekmanserv.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
+                                cekmanserv.JOB_STATUS = 1;
+                                cekmanserv.JOB_REMARK = "Login Ellipse";
+                                dbs.SubmitChanges();
+                                conditionMet = true;
+                            }
                         }
 
                         screen_DTO = service.executeScreen(context, "MSO687");
@@ -131,7 +126,6 @@ namespace MSO687_CONSOLEAPP
 
                         foreach (var data in dataList)
                         {
-                            //var dataAcctSub = db.VW_R_ACCT_PROFILEs.Where(a => a.DSTRCT_CODE == item.DISTRICT_FROM && a.EQUIP_LOCATION == item.LOC_FROM && a.SUB_ASSET_NO == data.SUB_ASSET_NO).FirstOrDefault(); //sesuai unit yang dimutasi
                             var dataAcctSub = db.VW_R_ACCT_PROFILEs.Where(a => a.EQUIP_NO == data.ASSET_NO && a.SUB_ASSET_NO == data.SUB_ASSET_NO).FirstOrDefault();
 
                             //deklarasi variabel input
@@ -209,7 +203,7 @@ namespace MSO687_CONSOLEAPP
 
                             Console.WriteLine("EXEC-MSM685B");
 
-                            if (screen_DTO.programName != "MSM685C")
+                            while (screen_DTO.mapName != "MSM685C")
                             {
                                 screen_request.screenFields = null;
                                 screen_request.screenKey = "1";
@@ -222,26 +216,25 @@ namespace MSO687_CONSOLEAPP
 
                             //ScreenNameValueDTO fieldDTO10 = new ScreenNameValueDTO();
                             //ScreenNameValueDTO fieldDTO11 = new ScreenNameValueDTO();
-                            ScreenNameValueDTO fieldDTO12 = new ScreenNameValueDTO();
+                            //ScreenNameValueDTO fieldDTO12 = new ScreenNameValueDTO();
 
                             //input dengan parameter fieldname dan value
                             //fieldDTO10.fieldName = "DEPR_METHOD3I";
                             //fieldDTO10.value = "L";
                             //fieldDTO11.fieldName = "DEPR_RATE3I";
                             //fieldDTO11.value = "";
-                            fieldDTO12.fieldName = "EST_MM_LIFE3I";
-                            fieldDTO12.value = "12";
+                            //fieldDTO12.fieldName = "EST_MM_LIFE3I";
+                            //fieldDTO12.value = "12";
 
                             //disatukan dalam list
                             //listInsert.Add(fieldDTO10);
                             //listInsert.Add(fieldDTO11);
-                            listInsert.Add(fieldDTO12);
+                            //listInsert.Add(fieldDTO12);
 
                             //submit data
-                            screen_request.screenFields = listInsert.ToArray();
-                            //screen_request.screenFields = null;
-                            screen_request.screenKey = "1";
-                            screen_DTO = service.submit(context, screen_request);
+                            //screen_request.screenFields = listInsert.ToArray();
+                            //screen_request.screenKey = "1";
+                            //screen_DTO = service.submit(context, screen_request);
 
                             //submit data
                             screen_request.screenFields = null;
@@ -250,8 +243,15 @@ namespace MSO687_CONSOLEAPP
 
                             Console.WriteLine("EXEC-MSM685C");
 
+                            while (screen_DTO.mapName != "MSM687A")
+                            {
+                                screen_request.screenFields = null;
+                                screen_request.screenKey = "1";
+                                screen_DTO = service.submit(context, screen_request);
+                            }
+                            
                             //Remove list
-                            listInsert.Remove(fieldDTO12);
+                            //listInsert.Remove(fieldDTO12);
 
                             ScreenNameValueDTO fieldDTO13 = new ScreenNameValueDTO();
                             ScreenNameValueDTO fieldDTO14 = new ScreenNameValueDTO();
@@ -282,15 +282,11 @@ namespace MSO687_CONSOLEAPP
                             listInsert.Clear();
 
                         }
-
-                        //Console.WriteLine(item.ID); // Print the "Name" property of each object
-                        //Console.WriteLine(item.EQUIP_NO); // Print the "Name" property of each object
-                        //ubah flag menjadi 1
+                        
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
-                            cek.POST_DATETIME = DateTime.Now;
+                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
                             cek.JOB_STATUS = 4; // 4 = Success
                             cek.JOB_REMARK = "Success Created MSO687 " + item.EQUIP_NO;
                             dbs.SubmitChanges();
@@ -310,8 +306,7 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
-                            cek.POST_DATETIME = DateTime.Now;
+                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
                             cek.JOB_STATUS = 6; // 6 = Failed
                             cek.JOB_REMARK = "Failed Created " + item.EQUIP_NO + " - " + exMessage;
                             dbs.SubmitChanges();
@@ -336,8 +331,6 @@ namespace MSO687_CONSOLEAPP
             }
             else
             {
-                //var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == "2023-07-18" && item.FLAG == 0).ToList();
-                //var dataEquipment = db.TBL_T_PPEs.Where(item => item.DATE_RECEIVED_SM.ToString() == DateTime.Today.ToString("yyyy-MM-dd") && item.FLAG == 0).ToList();
                 var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.ToList();
 
                 foreach (var item in dataEquipment)
@@ -362,33 +355,39 @@ namespace MSO687_CONSOLEAPP
                         context.position = str_posisi;
                         ClientConversation.authenticate(acak, str_password);
 
-                        var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
-                        if (cekmanserv == null)
+                        bool conditionMet = false;
+                        while (!conditionMet)
                         {
-                            TBL_T_UPLOAD_JOB_MASTER manserv = new TBL_T_UPLOAD_JOB_MASTER();
-                            manserv.JOB_ID = item.JOB_MASTER_ID; //"NEWPPE-MSO687-BY-TEAM-KPP-2023";
-                            manserv.SERVER_ID = "TESTING";
-                            manserv.SCRIPT_CODE = "NEWPPE_MSO687";
-                            manserv.ELLIPSE_USERNAME = str_username;
-                            manserv.ELLIPSE_PASSWORD = str_password;
-                            manserv.ELLIPSE_POSITION = str_posisi;
-                            manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
-                            manserv.POST_DATETIME = DateTime.Now;
-                            manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
-                            manserv.JOB_REMARK = "Login Ellipse";
-                            manserv.DB_SERVER_NAME = "kphosq101\\shpol";
-                            manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
+                            var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
+                            if (cekmanserv == null)
+                            {
+                                TBL_T_UPLOAD_JOB_MASTER manserv = new TBL_T_UPLOAD_JOB_MASTER();
+                                manserv.JOB_ID = item.JOB_MASTER_ID; //"NEWPPE-MSO687-BY-TEAM-KPP-2023";
+                                manserv.SERVER_ID = "TESTING";
+                                manserv.SCRIPT_CODE = "NEWPPE_MSO687";
+                                manserv.ELLIPSE_USERNAME = str_username;
+                                manserv.ELLIPSE_PASSWORD = str_password;
+                                manserv.ELLIPSE_POSITION = str_posisi;
+                                manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
+                                manserv.POST_DATETIME = DateTime.Now;
+                                manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
+                                manserv.JOB_REMARK = "Login Ellipse";
+                                manserv.DB_SERVER_NAME = "kphosq101\\shpol";
+                                manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
 
-                            dbs.TBL_T_UPLOAD_JOB_MASTERs.InsertOnSubmit(manserv);
-                            dbs.SubmitChanges();
-                        }
-                        else
-                        {
-                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cekmanserv);
-                            cekmanserv.POST_DATETIME = DateTime.Now;
-                            cekmanserv.JOB_STATUS = 1;
-                            cekmanserv.JOB_REMARK = "Login Ellipse";
-                            dbs.SubmitChanges();
+                                dbs.TBL_T_UPLOAD_JOB_MASTERs.InsertOnSubmit(manserv);
+                                dbs.SubmitChanges();
+                                conditionMet = true;
+                            }
+                            else
+                            {
+                                //dbs.Refresh(RefreshMode.OverwriteCurrentValues, cekmanserv);
+                                cekmanserv.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
+                                cekmanserv.JOB_STATUS = 1;
+                                cekmanserv.JOB_REMARK = "Login Ellipse";
+                                dbs.SubmitChanges();
+                                conditionMet = true;
+                            }
                         }
 
                         screen_DTO = service.executeScreen(context, "MSO687");
@@ -402,7 +401,6 @@ namespace MSO687_CONSOLEAPP
 
                         foreach (var data in dataList)
                         {
-                            //var dataAcctSub = db.VW_R_ACCT_PROFILEs.Where(a => a.DSTRCT_CODE == item.DISTRICT_FROM && a.EQUIP_LOCATION == item.LOC_FROM && a.SUB_ASSET_NO == data.SUB_ASSET_NO).FirstOrDefault(); //sesuai unit yang dimutasi
                             var dataAcctSub = db.VW_R_ACCT_PROFILEs.Where(a => a.EQUIP_NO == data.ASSET_NO && a.SUB_ASSET_NO == data.SUB_ASSET_NO).FirstOrDefault();
 
                             //deklarasi variabel input
@@ -480,7 +478,7 @@ namespace MSO687_CONSOLEAPP
 
                             Console.WriteLine("EXEC-MSM685B");
 
-                            if (screen_DTO.programName != "MSM685C")
+                            while (screen_DTO.mapName != "MSM685C")
                             {
                                 screen_request.screenFields = null;
                                 screen_request.screenKey = "1";
@@ -493,26 +491,25 @@ namespace MSO687_CONSOLEAPP
 
                             //ScreenNameValueDTO fieldDTO10 = new ScreenNameValueDTO();
                             //ScreenNameValueDTO fieldDTO11 = new ScreenNameValueDTO();
-                            ScreenNameValueDTO fieldDTO12 = new ScreenNameValueDTO();
+                            //ScreenNameValueDTO fieldDTO12 = new ScreenNameValueDTO(); (AKTIF)
 
                             //input dengan parameter fieldname dan value
                             //fieldDTO10.fieldName = "DEPR_METHOD3I";
                             //fieldDTO10.value = "L";
                             //fieldDTO11.fieldName = "DEPR_RATE3I";
                             //fieldDTO11.value = "";
-                            fieldDTO12.fieldName = "EST_MM_LIFE3I";
-                            fieldDTO12.value = "12";
+                            //fieldDTO12.fieldName = "EST_MM_LIFE3I"; (AKTIF)
+                            //fieldDTO12.value = "12";
 
                             //disatukan dalam list
                             //listInsert.Add(fieldDTO10);
                             //listInsert.Add(fieldDTO11);
-                            listInsert.Add(fieldDTO12);
+                            //listInsert.Add(fieldDTO12); (AKTIF)
 
-                            //submit data
-                            screen_request.screenFields = listInsert.ToArray();
-                            //screen_request.screenFields = null;
-                            screen_request.screenKey = "1";
-                            screen_DTO = service.submit(context, screen_request);
+                            //submit data (AKTIF)
+                            //screen_request.screenFields = listInsert.ToArray();
+                            //screen_request.screenKey = "1";
+                            //screen_DTO = service.submit(context, screen_request);
 
                             //submit data
                             screen_request.screenFields = null;
@@ -522,7 +519,14 @@ namespace MSO687_CONSOLEAPP
                             Console.WriteLine("EXEC-MSM685C");
 
                             //Remove list
-                            listInsert.Remove(fieldDTO12);
+                            //listInsert.Remove(fieldDTO12); (AKTIF)
+
+                            while (screen_DTO.mapName != "MSM687A")
+                            {
+                                screen_request.screenFields = null;
+                                screen_request.screenKey = "1";
+                                screen_DTO = service.submit(context, screen_request);
+                            }
 
                             ScreenNameValueDTO fieldDTO13 = new ScreenNameValueDTO();
                             ScreenNameValueDTO fieldDTO14 = new ScreenNameValueDTO();
@@ -548,20 +552,15 @@ namespace MSO687_CONSOLEAPP
                             screen_DTO = service.submit(context, screen_request);
 
                             Console.WriteLine("MSO687 SUCCESS");
-
-                            // Kosongkan listInsert untuk penggunaan selanjutnya
+                            
                             listInsert.Clear();
 
                         }
-
-                        //Console.WriteLine(item.ID); // Print the "Name" property of each object
-                        //Console.WriteLine(item.EQUIP_NO); // Print the "Name" property of each object
-                        //ubah flag menjadi 1
+                        
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
-                            cek.POST_DATETIME = DateTime.Now;
+                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
                             cek.JOB_STATUS = 4; //4 = Success
                             cek.JOB_REMARK = "Success Created MSO687 " + item.EQUIP_NO;
                             dbs.SubmitChanges();
@@ -581,8 +580,7 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            dbs.Refresh(RefreshMode.OverwriteCurrentValues, cek);
-                            cek.POST_DATETIME = DateTime.Now;
+                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
                             cek.JOB_STATUS = 6; //6 = Failed
                             cek.JOB_REMARK = "Failed Created " + item.EQUIP_NO + " - " + exMessage;
                             dbs.SubmitChanges();
@@ -595,37 +593,24 @@ namespace MSO687_CONSOLEAPP
                             cek2.FLAG = 2;
                             db.SubmitChanges();
                         }
-
-                        // You can also log the error here if needed
+                        
                         Console.WriteLine("Error occurred: " + exMessage);
                     }
                 }
-                //Console.WriteLine("Not the 27th of the month. Skipping execution.");
-                //return;
             }
 
         }
         private static string AcakHurufBesarKecil(string input)
         {
-            // Konversi string ke array karakter agar dapat diubah
             char[] characters = input.ToCharArray();
-
-            // Menggunakan waktu saat ini sebagai seed untuk Random
             Random random = new Random(DateTime.Now.Millisecond);
-
-            // Loop untuk mengacak setiap karakter
             for (int i = 0; i < characters.Length; i++)
             {
-                // Jika karakter merupakan huruf (bukan angka atau simbol), maka acak besar atau kecilnya
                 if (char.IsLetter(characters[i]))
                 {
-                    // Jika angka acak lebih besar dari 0.5, maka huruf menjadi besar
-                    // Jika angka acak lebih kecil atau sama dengan 0.5, maka huruf menjadi kecil
                     characters[i] = random.NextDouble() > 0.5 ? char.ToUpper(characters[i]) : char.ToLower(characters[i]);
                 }
             }
-
-            // Kembalikan string hasil pengacakan
             return new string(characters);
         }
     }

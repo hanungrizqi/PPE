@@ -59,6 +59,7 @@ namespace API_PLANT_PPE.Controllers
                     {
                         //cls.updatemse600(dataEquipment);
                         result = cls.updatemse600_SM(dataEquipment);
+                        //result = cls.SM_ReferenceCodes(dataEquipment);
                     }
                 }
                 //db.SubmitChanges();

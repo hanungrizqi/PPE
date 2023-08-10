@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DB_MNGMT_SRVC">
   <DataContextMoniker Name="/DB_MNGMT_SRVCDataContext" />
   <nestedChildShapes>
-    <classShape Id="189f7088-4b8b-4ccc-84c1-764d7bca4ce4" isExpanded="false" absoluteBounds="0.5, 0.5, 2, 0.45">
+    <classShape Id="521f7a7f-cd4f-492a-8457-3d844c075cd4" isExpanded="false" absoluteBounds="0.75, 0.5, 2, 0.45">
       <DataClassMoniker Name="/DB_MNGMT_SRVCDataContext/TBL_T_UPLOAD_JOB_MASTER" />
       <nestedChildShapes>
-        <elementListCompartment Id="d2169e42-22d4-4bd5-a3f6-1f36f6b9cb5a" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="aa0bcc6c-3326-40a4-aad6-9c74de87fe3f" absoluteBounds="0.76499999999999968, 0.96, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
