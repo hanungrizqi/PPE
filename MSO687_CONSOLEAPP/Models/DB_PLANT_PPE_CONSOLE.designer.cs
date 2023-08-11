@@ -96,6 +96,22 @@ namespace MSO687_CONSOLEAPP.Models
 				return this.GetTable<VW_T_MSF687_TRASNFER_ASSET>();
 			}
 		}
+		
+		public System.Data.Linq.Table<VW_R_SUB_ASSET_BALANCE_SHEET> VW_R_SUB_ASSET_BALANCE_SHEETs
+		{
+			get
+			{
+				return this.GetTable<VW_R_SUB_ASSET_BALANCE_SHEET>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_R_ASSET_LOCATION> TBL_R_ASSET_LOCATIONs
+		{
+			get
+			{
+				return this.GetTable<TBL_R_ASSET_LOCATION>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_MSF685")]
@@ -2384,6 +2400,240 @@ namespace MSO687_CONSOLEAPP.Models
 				if ((this._FLAG != value))
 				{
 					this._FLAG = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_R_SUB_ASSET_BALANCE_SHEET")]
+	public partial class VW_R_SUB_ASSET_BALANCE_SHEET
+	{
+		
+		private string _EQUIP_NO;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIP_LOCATION;
+		
+		private string _SUB_ASSET_NO;
+		
+		private string _ACCT_PROFILE;
+		
+		public VW_R_SUB_ASSET_BALANCE_SHEET()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_NO", DbType="Char(12) NOT NULL", CanBeNull=false)]
+		public string EQUIP_NO
+		{
+			get
+			{
+				return this._EQUIP_NO;
+			}
+			set
+			{
+				if ((this._EQUIP_NO != value))
+				{
+					this._EQUIP_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIP_LOCATION", DbType="Char(5) NOT NULL", CanBeNull=false)]
+		public string EQUIP_LOCATION
+		{
+			get
+			{
+				return this._EQUIP_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIP_LOCATION != value))
+				{
+					this._EQUIP_LOCATION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUB_ASSET_NO", DbType="Char(6)")]
+		public string SUB_ASSET_NO
+		{
+			get
+			{
+				return this._SUB_ASSET_NO;
+			}
+			set
+			{
+				if ((this._SUB_ASSET_NO != value))
+				{
+					this._SUB_ASSET_NO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACCT_PROFILE", DbType="Char(4)")]
+		public string ACCT_PROFILE
+		{
+			get
+			{
+				return this._ACCT_PROFILE;
+			}
+			set
+			{
+				if ((this._ACCT_PROFILE != value))
+				{
+					this._ACCT_PROFILE = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_R_ASSET_LOCATION")]
+	public partial class TBL_R_ASSET_LOCATION
+	{
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIPMENT_LOCATION;
+		
+		private string _EQUIPMENT_DESC;
+		
+		private string _ACTIVE_FLAG;
+		
+		private string _PRODUCTION_EQUIPMENT;
+		
+		private string _SUPPORT_EQUIPMENT;
+		
+		private string _WORKSHOP_EQUIPMENT;
+		
+		public TBL_R_ASSET_LOCATION()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="NChar(4)")]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_LOCATION", DbType="NChar(2)")]
+		public string EQUIPMENT_LOCATION
+		{
+			get
+			{
+				return this._EQUIPMENT_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIPMENT_LOCATION != value))
+				{
+					this._EQUIPMENT_LOCATION = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_DESC", DbType="VarChar(50)")]
+		public string EQUIPMENT_DESC
+		{
+			get
+			{
+				return this._EQUIPMENT_DESC;
+			}
+			set
+			{
+				if ((this._EQUIPMENT_DESC != value))
+				{
+					this._EQUIPMENT_DESC = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACTIVE_FLAG", DbType="Char(10)")]
+		public string ACTIVE_FLAG
+		{
+			get
+			{
+				return this._ACTIVE_FLAG;
+			}
+			set
+			{
+				if ((this._ACTIVE_FLAG != value))
+				{
+					this._ACTIVE_FLAG = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCTION_EQUIPMENT", DbType="NChar(4)")]
+		public string PRODUCTION_EQUIPMENT
+		{
+			get
+			{
+				return this._PRODUCTION_EQUIPMENT;
+			}
+			set
+			{
+				if ((this._PRODUCTION_EQUIPMENT != value))
+				{
+					this._PRODUCTION_EQUIPMENT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPPORT_EQUIPMENT", DbType="NChar(4)")]
+		public string SUPPORT_EQUIPMENT
+		{
+			get
+			{
+				return this._SUPPORT_EQUIPMENT;
+			}
+			set
+			{
+				if ((this._SUPPORT_EQUIPMENT != value))
+				{
+					this._SUPPORT_EQUIPMENT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WORKSHOP_EQUIPMENT", DbType="NChar(4)")]
+		public string WORKSHOP_EQUIPMENT
+		{
+			get
+			{
+				return this._WORKSHOP_EQUIPMENT;
+			}
+			set
+			{
+				if ((this._WORKSHOP_EQUIPMENT != value))
+				{
+					this._WORKSHOP_EQUIPMENT = value;
 				}
 			}
 		}

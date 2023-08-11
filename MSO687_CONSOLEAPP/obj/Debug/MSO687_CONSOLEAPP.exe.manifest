@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MSO687_CONSOLEAPP.exe" size="61448">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MSO687_CONSOLEAPP.exe" size="64008">
       <assemblyIdentity name="MSO687_CONSOLEAPP" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QLlYFYumAu+JuYyA12wB3uUHgHKA53zVvL/WF7fuvnc=</dsig:DigestValue>
+        <dsig:DigestValue>lqMy94QjPrr+vNy9P8m8cuCMv3DRhfyo6OvYTFbj/Eg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
