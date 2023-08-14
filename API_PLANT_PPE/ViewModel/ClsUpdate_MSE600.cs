@@ -45,8 +45,8 @@ namespace API_PLANT_PPE.ViewModel
                 //i_obj_equipment_dto1.districtCode = dataEquipment.DISTRICT_TO;
                 //i_obj_equipment_dto1.equipmentLocation = dataEquipment.LOC_TO;
                 i_obj_equipment_dto1.poNo = "-";
-                i_obj_equipment_dto1.equipmentClassif3 = "SC";
-                //i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
+                //i_obj_equipment_dto1.equipmentClassif3 = "SC";
+                i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
                 
                 i_obj_services.modify(i_obj_context, i_obj_equipment_dto1);
                 //ClsUpdate_MSF600_Result result = updatemse600_ReferenceCOdes(dataEquipment);
@@ -194,7 +194,8 @@ namespace API_PLANT_PPE.ViewModel
                 i_obj_equipment_dto1.districtCode = dataEquipment.DISTRICT_TO;
                 i_obj_equipment_dto1.equipmentLocation = dataEquipment.LOC_TO;
                 i_obj_equipment_dto1.costingFlag = "A";
-                //i_obj_equipment_dto1.equipmentClassif3 = "SC";
+                i_obj_equipment_dto1.poNo = "-";
+                //i_obj_equipment_dto1.equipmentClassif3 = "KP";
                 i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
 
                 i_obj_services.modify(i_obj_context, i_obj_equipment_dto1);
@@ -257,7 +258,7 @@ namespace API_PLANT_PPE.ViewModel
                 if (tglkluar_dstrctasal != "")
                 {
                     //jika distrik 1 = distrik asal, insert tgl keluar 1
-                    if (i_obj_result.replyElements[0].refCode == dataEquipment.DISTRICT_FROM)
+                    if (i_obj_result.replyElements[0].refCode == dataEquipment.DISTRICT_FROM || i_obj_result.replyElements[0].refCode == "")
                     {
                         mod_req.refCode = tglkluar_dstrctasal;
                         mod_req.refNo = i_obj_result.replyElements[4].refNo;

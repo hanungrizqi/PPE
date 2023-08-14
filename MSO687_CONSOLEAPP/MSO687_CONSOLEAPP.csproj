@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\Publish Project\PLANT_PPE\20230809\Console\</PublishUrl>
+    <PublishUrl>D:\Publish Project\PLANT_PPE\20230814\Console\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -69,6 +69,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -78,10 +79,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DB_MNGMT_SRVC.designer.cs">
+    <Compile Include="Models\DB_MANAGEMENT_SERVICES.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DB_MNGMT_SRVC.dbml</DependentUpon>
+      <DependentUpon>DB_MANAGEMENT_SERVICES.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\DB_PLANT_PPE_CONSOLE.designer.cs">
       <AutoGen>True</AutoGen>
@@ -103,13 +104,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Models\DB_MNGMT_SRVC.dbml">
+    <None Include="Models\DB_MANAGEMENT_SERVICES.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DB_MNGMT_SRVC.designer.cs</LastGenOutput>
+      <LastGenOutput>DB_MANAGEMENT_SERVICES.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Models\DB_MNGMT_SRVC.dbml.layout">
-      <DependentUpon>DB_MNGMT_SRVC.dbml</DependentUpon>
+    <None Include="Models\DB_MANAGEMENT_SERVICES.dbml.layout">
+      <DependentUpon>DB_MANAGEMENT_SERVICES.dbml</DependentUpon>
     </None>
     <None Include="Models\DB_PLANT_PPE_CONSOLE.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>

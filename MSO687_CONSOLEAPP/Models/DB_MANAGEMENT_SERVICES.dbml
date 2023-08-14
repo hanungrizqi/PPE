@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_MANAGEMENT_SERVICES_KPT" Class="DB_MNGMT_SRVCDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=kphosq101\shpol;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;User ID=sqlservices" SettingsObjectName="MSO687_CONSOLEAPP.Properties.Settings" SettingsPropertyName="DB_MANAGEMENT_SERVICES_KPTConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_MANAGEMENT_SERVICES_KPT" Class="DB_MANAGEMENT_SERVICESDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=kphosq101\shpol;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;Persist Security Info=True;User ID=sqlservices" SettingsObjectName="MSO687_CONSOLEAPP.Properties.Settings" SettingsPropertyName="DB_MANAGEMENT_SERVICES_KPTConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.TBL_T_UPLOAD_JOB_MASTER" Member="TBL_T_UPLOAD_JOB_MASTERs">
     <Type Name="TBL_T_UPLOAD_JOB_MASTER">
       <Column Name="JOB_ID" Type="System.String" DbType="VarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

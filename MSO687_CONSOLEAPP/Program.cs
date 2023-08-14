@@ -10,6 +10,8 @@ using System.Configuration;
 using EllipseWebServicesClient;
 using System.CodeDom.Compiler;
 using System.Data.Linq;
+using System.Security.Cryptography;
+using System.Data.SqlClient;
 
 namespace MSO687_CONSOLEAPP
 {
@@ -50,7 +52,7 @@ namespace MSO687_CONSOLEAPP
             Console.WriteLine("EXEC-MSO687");
 
             DB_PLANT_PPE_CONSOLEDataContext db = new DB_PLANT_PPE_CONSOLEDataContext();
-            DB_MNGMT_SRVCDataContext dbs = new DB_MNGMT_SRVCDataContext();
+            DB_MANAGEMENT_SERVICESDataContext dbs = new DB_MANAGEMENT_SERVICESDataContext();
             
             DateTime today = DateTime.Today;
             int currentDay = today.Day;
@@ -63,10 +65,11 @@ namespace MSO687_CONSOLEAPP
                 {
                     try
                     {
-                        var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).GroupBy(a => a.SUB_ASSET_NO).Select(g => g.First()).ToList();
+                        //var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).GroupBy(a => a.SUB_ASSET_NO).Select(g => g.First()).ToList();
+                        var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).ToList();
                         foreach (var data in dataList)
                         {
-                        
+
                             ScreenService.ScreenService service = new ScreenService.ScreenService();
                             ScreenService.OperationContext context = new ScreenService.OperationContext();
                             ScreenService.ScreenDTO screen_DTO = new ScreenService.ScreenDTO();
@@ -86,46 +89,41 @@ namespace MSO687_CONSOLEAPP
                             bool conditionMet = false;
                             while (!conditionMet)
                             {
-                                var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
+                                var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.Where(x => x.JOB_ID.Contains(item.JOB_MASTER_ID)).FirstOrDefault();
                                 if (cekmanserv == null)
                                 {
-                                    TBL_T_UPLOAD_JOB_MASTER manserv = new TBL_T_UPLOAD_JOB_MASTER();
-                                    manserv.JOB_ID = item.JOB_MASTER_ID; //"NEWPPE-MSO687-BY-TEAM-KPP-2023";
-                                    manserv.SERVER_ID = "TESTING";
-                                    manserv.SCRIPT_CODE = "NEWPPE_MSO687";
-                                    manserv.ELLIPSE_USERNAME = str_username;
-                                    manserv.ELLIPSE_PASSWORD = str_password;
-                                    manserv.ELLIPSE_POSITION = str_posisi;
-                                    manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
-                                    manserv.POST_DATETIME = DateTime.Now;
-                                    manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
-                                    manserv.JOB_REMARK = "Login Ellipse";
-                                    manserv.DB_SERVER_NAME = "kphosq101\\shpol";
-                                    manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
+                                    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
 
-                                    dbs.TBL_T_UPLOAD_JOB_MASTERs.InsertOnSubmit(manserv);
-                                    dbs.SubmitChanges();
+                                    CONNECT.Open();
+                                    var Query = "INSERT INTO TBL_T_UPLOAD_JOB_MASTER (JOB_ID, SERVER_ID, SCRIPT_CODE, ELLIPSE_USERNAME, ELLIPSE_PASSWORD, ELLIPSE_POSITION, ELLIPSE_DISTRICT, POST_DATETIME, JOB_STATUS, JOB_REMARK, DB_SERVER_NAME, DATABASE_NAME) " +
+                                "VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'TESTING', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', '" + item.DISTRICT_FROM + "', GETDATE(), 1, 'Login Ellipse', 'kphosq101\\shpol', 'DB_PLANT_PPE_NEW_KPT')";
+                                    SqlCommand COMMAND = new SqlCommand(Query, CONNECT);
+                                    COMMAND.ExecuteNonQuery();
+                                    CONNECT.Close();
                                     conditionMet = true;
                                 }
                                 else
                                 {
-                                    cekmanserv.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
-                                    cekmanserv.JOB_STATUS = 1;
-                                    cekmanserv.JOB_REMARK = "Login Ellipse";
-                                    dbs.SubmitChanges();
+                                    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+
+                                    CONNECT.Open();
+                                    var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 1, JOB_REMARK = 'Loggin Ellipse', POST_DATETIME = GETDATE() Where JOB_ID = '" + cekmanserv.JOB_ID.ToString() + "'";
+                                    SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                                    COMMAND.ExecuteNonQuery();
+                                    CONNECT.Close();
                                     conditionMet = true;
                                 }
                             }
 
                             screen_DTO = service.executeScreen(context, "MSO687");
-                            
+
                             while (screen_DTO.mapName != "MSM687A")
                             {
                                 screen_request.screenFields = null;
                                 screen_request.screenKey = "4";
                                 screen_DTO = service.submit(context, screen_request);
                             }
-                            
+
                             List<ScreenNameValueDTO> listInsert = new List<ScreenNameValueDTO>();
                             ScreenNameValueDTO fieldDTO0 = new ScreenNameValueDTO();
                             ScreenNameValueDTO fieldDTO1 = new ScreenNameValueDTO();
@@ -135,7 +133,7 @@ namespace MSO687_CONSOLEAPP
                             ScreenNameValueDTO fieldDTO5 = new ScreenNameValueDTO();
                             ScreenNameValueDTO fieldDTO6 = new ScreenNameValueDTO();
                             ScreenNameValueDTO fieldDTO7 = new ScreenNameValueDTO();
-                            
+
                             fieldDTO0.fieldName = "DSTRCT_CODE_FR1I";
                             fieldDTO0.value = item.DISTRICT_FROM;
                             fieldDTO1.fieldName = "DSTRCT_CODE_TO1I";
@@ -152,7 +150,7 @@ namespace MSO687_CONSOLEAPP
                             fieldDTO6.value = data.SUB_ASSET_NO;
                             fieldDTO7.fieldName = "SUB_ASSET_TO1I";
                             fieldDTO7.value = data.SUB_ASSET_NO;
-                            
+
                             listInsert.Add(fieldDTO0);
                             listInsert.Add(fieldDTO1);
                             listInsert.Add(fieldDTO2);
@@ -161,11 +159,11 @@ namespace MSO687_CONSOLEAPP
                             listInsert.Add(fieldDTO5);
                             listInsert.Add(fieldDTO6);
                             listInsert.Add(fieldDTO7);
-                            
+
                             screen_request.screenFields = listInsert.ToArray();
                             screen_request.screenKey = "1";
                             screen_DTO = service.submit(context, screen_request);
-                            
+
                             listInsert.Remove(fieldDTO0);
                             listInsert.Remove(fieldDTO1);
                             listInsert.Remove(fieldDTO2);
@@ -177,13 +175,13 @@ namespace MSO687_CONSOLEAPP
                             Console.WriteLine("MSM685A Success");
 
                             var assetLocation = db.TBL_R_ASSET_LOCATIONs.Where(a => a.DSTRCT_CODE == item.DISTRICT_TO && a.EQUIPMENT_LOCATION == item.LOC_TO).FirstOrDefault();
-                            
+
                             ScreenNameValueDTO fieldDTO8 = new ScreenNameValueDTO();
                             ScreenNameValueDTO fieldDTO9 = new ScreenNameValueDTO();
-                            
+
                             fieldDTO8.fieldName = "ACCT_PROFILE2I";
                             fieldDTO8.value = data.ACCT_PROFILE;
-                            
+
                             string profitloss = "DEPR_EXP_CODE2I";
                             string values = "";
                             switch (data.ACCT_PROFILE)
@@ -201,53 +199,53 @@ namespace MSO687_CONSOLEAPP
                                     // Default value or action if none of the cases match
                                     break;
                             }
-                            
+
                             fieldDTO9.fieldName = profitloss;
                             fieldDTO9.value = values;
-                            
+
                             listInsert.Add(fieldDTO8);
                             listInsert.Add(fieldDTO9);
-                            
+
                             screen_request.screenFields = listInsert.ToArray();
                             screen_request.screenKey = "1";
                             screen_DTO = service.submit(context, screen_request);
-                            
+
                             while (screen_DTO.mapName != "MSM685C")
                             {
                                 screen_request.screenFields = null;
                                 screen_request.screenKey = "1";
                                 screen_DTO = service.submit(context, screen_request);
                             }
-                            
+
                             listInsert.Remove(fieldDTO8);
                             listInsert.Remove(fieldDTO9);
                             Console.WriteLine("MSM685B Success");
-                            
+
                             screen_request.screenFields = null;
                             screen_request.screenKey = "1";
                             screen_DTO = service.submit(context, screen_request);
-                            
+
                             while (screen_DTO.mapName != "MSM687A")
                             {
                                 screen_request.screenFields = null;
                                 screen_request.screenKey = "1";
                                 screen_DTO = service.submit(context, screen_request);
                             }
-                            
+
                             Console.WriteLine("MSM685C Success");
 
                             ScreenNameValueDTO fieldDTO13 = new ScreenNameValueDTO();
                             ScreenNameValueDTO fieldDTO14 = new ScreenNameValueDTO();
-                            
+
                             DateTime datereceivedsm = (DateTime)item.DATE_RECEIVED_SM;
                             fieldDTO13.fieldName = "XFER_DATE1I";
                             fieldDTO13.value = datereceivedsm.ToString("yyyyMMdd");
                             fieldDTO14.fieldName = "XFER_PERCENT1I";
                             fieldDTO14.value = "100.00";
-                            
+
                             listInsert.Add(fieldDTO13);
                             listInsert.Add(fieldDTO14);
-                            
+
                             screen_request.screenFields = listInsert.ToArray();
                             screen_request.screenKey = "1";
                             screen_DTO = service.submit(context, screen_request);
@@ -262,21 +260,28 @@ namespace MSO687_CONSOLEAPP
                             listInsert.Clear();
 
                         }
-                        
+
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
-                            cek.JOB_STATUS = 4;
-                            cek.JOB_REMARK = "Success Created MSO687 " + item.EQUIP_NO;
-                            dbs.SubmitChanges();
+                            SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+
+                            CONNECT.Open();
+                            var equipNo = item.EQUIP_NO;
+                            var jobRemark = "Success Created MSO687 - " + equipNo;
+                            var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 4, JOB_REMARK = @JobRemark, POST_DATETIME = GETDATE() Where JOB_ID = '" + cek.JOB_ID.ToString() + "'";
+                            SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                            COMMAND.Parameters.AddWithValue("@JobRemark", jobRemark);
+                            COMMAND.ExecuteNonQuery();
+                            CONNECT.Close();
+
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
                         if (cek2 != null)
                         {
                             cek2.FLAG = 1;
-                            db.SubmitChanges();
+                            //db.SubmitChanges();
                         }
                     }
                     catch (Exception ex)
@@ -285,10 +290,17 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
-                            cek.JOB_STATUS = 6;
-                            cek.JOB_REMARK = "Failed Created " + item.EQUIP_NO + " - " + exMessage;
-                            dbs.SubmitChanges();
+                            SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+
+                            CONNECT.Open();
+                            var equipNo = item.EQUIP_NO;
+                            var jobRemark = "Failed Created " + equipNo + " - " + exMessage;
+                            var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 6, JOB_REMARK = @JobRemark, POST_DATETIME = GETDATE() Where JOB_ID = '" + cek.JOB_ID.ToString() + "'";
+                            SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                            COMMAND.Parameters.AddWithValue("@JobRemark", jobRemark);
+                            COMMAND.ExecuteNonQuery();
+                            CONNECT.Close();
+
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
@@ -301,9 +313,38 @@ namespace MSO687_CONSOLEAPP
                         Console.WriteLine("Error occurred: " + exMessage);
                     }
                 }
+                db.SubmitChanges();
             }
             if (currentDay == 15 || currentDay == 16 || currentDay == 17 || currentDay == 18 || currentDay == 19 || currentDay == 20 || currentDay == 21 || currentDay == 22 || currentDay == 23 || currentDay == 24 || currentDay == 25 || currentDay == 26)
             {
+                var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == "NEWPPE-MSO687-BY-TEAM-KPP-2023");
+                if (cek != null)
+                {
+                    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+
+                    CONNECT.Open();
+                    var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 9, JOB_REMARK = 'Nothing to execution on 15 until 26', POST_DATETIME = GETDATE() Where JOB_ID = '" + cek.JOB_ID.ToString() + "'";
+                    SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                    COMMAND.ExecuteNonQuery();
+                    CONNECT.Close();
+                    
+                }
+                else
+                {
+                    string str_username = ConfigurationManager.AppSettings["username"].ToString();
+                    string str_password = ConfigurationManager.AppSettings["password"].ToString();
+                    string str_posisi = ConfigurationManager.AppSettings["pos_id"].ToString();
+                    
+                    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+
+                    CONNECT.Open();
+                    var Query = "INSERT INTO TBL_T_UPLOAD_JOB_MASTER (JOB_ID, SERVER_ID, SCRIPT_CODE, ELLIPSE_USERNAME, ELLIPSE_PASSWORD, ELLIPSE_POSITION, ELLIPSE_DISTRICT, POST_DATETIME, JOB_STATUS, JOB_REMARK, DB_SERVER_NAME, DATABASE_NAME) " +
+                "VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'TESTING', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', 'KPHO', GETDATE(), 9 'Nothing to execution on 15 until 26', 'kphosq101\\shpol', 'DB_PLANT_PPE_NEW_KPT')";
+                    SqlCommand COMMAND = new SqlCommand(Query, CONNECT);
+                    COMMAND.ExecuteNonQuery();
+                    CONNECT.Close();
+                    
+                }
                 Console.WriteLine("Nothing to execution on 15 until 26");
                 return;
             }
@@ -314,7 +355,8 @@ namespace MSO687_CONSOLEAPP
                 {
                     try
                     {
-                        var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).GroupBy(a => a.SUB_ASSET_NO).Select(g => g.First()).ToList();
+                        //var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).GroupBy(a => a.SUB_ASSET_NO).Select(g => g.First()).ToList();
+                        var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).ToList();
                         foreach (var data in dataList)
                         {
 
@@ -337,33 +379,28 @@ namespace MSO687_CONSOLEAPP
                             bool conditionMet = false;
                             while (!conditionMet)
                             {
-                                var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
+                                var cekmanserv = dbs.TBL_T_UPLOAD_JOB_MASTERs.Where(x => x.JOB_ID.Contains(item.JOB_MASTER_ID)).FirstOrDefault();
                                 if (cekmanserv == null)
                                 {
-                                    TBL_T_UPLOAD_JOB_MASTER manserv = new TBL_T_UPLOAD_JOB_MASTER();
-                                    manserv.JOB_ID = item.JOB_MASTER_ID; //"NEWPPE-MSO687-BY-TEAM-KPP-2023";
-                                    manserv.SERVER_ID = "TESTING";
-                                    manserv.SCRIPT_CODE = "NEWPPE_MSO687";
-                                    manserv.ELLIPSE_USERNAME = str_username;
-                                    manserv.ELLIPSE_PASSWORD = str_password;
-                                    manserv.ELLIPSE_POSITION = str_posisi;
-                                    manserv.ELLIPSE_DISTRICT = item.DISTRICT_FROM;
-                                    manserv.POST_DATETIME = DateTime.Now;
-                                    manserv.JOB_STATUS = 1; // 1 = LOGIN, 4 = SUCCESS, 6 = FAILED
-                                    manserv.JOB_REMARK = "Login Ellipse";
-                                    manserv.DB_SERVER_NAME = "kphosq101\\shpol";
-                                    manserv.DATABASE_NAME = "DB_PLANT_PPE_NEW_KPT";
+                                    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
 
-                                    dbs.TBL_T_UPLOAD_JOB_MASTERs.InsertOnSubmit(manserv);
-                                    dbs.SubmitChanges();
+                                    CONNECT.Open();
+                                    var Query = "INSERT INTO TBL_T_UPLOAD_JOB_MASTER (JOB_ID, SERVER_ID, SCRIPT_CODE, ELLIPSE_USERNAME, ELLIPSE_PASSWORD, ELLIPSE_POSITION, ELLIPSE_DISTRICT, POST_DATETIME, JOB_STATUS, JOB_REMARK, DB_SERVER_NAME, DATABASE_NAME) " +
+                                "VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'TESTING', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', '" + item.DISTRICT_FROM + "', GETDATE(), 1, 'Login Ellipse', 'kphosq101\\shpol', 'DB_PLANT_PPE_NEW_KPT')";
+                                    SqlCommand COMMAND = new SqlCommand(Query, CONNECT);
+                                    COMMAND.ExecuteNonQuery();
+                                    CONNECT.Close();
                                     conditionMet = true;
                                 }
                                 else
                                 {
-                                    cekmanserv.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
-                                    cekmanserv.JOB_STATUS = 1;
-                                    cekmanserv.JOB_REMARK = "Login Ellipse";
-                                    dbs.SubmitChanges();
+                                    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+                                    
+                                    CONNECT.Open();
+                                    var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 1, JOB_REMARK = 'Loggin Ellipse', POST_DATETIME = GETDATE() Where JOB_ID = '" + cekmanserv.JOB_ID.ToString() + "'";
+                                    SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                                    COMMAND.ExecuteNonQuery();
+                                    CONNECT.Close();
                                     conditionMet = true;
                                 }
                             }
@@ -517,17 +554,24 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
-                            cek.JOB_STATUS = 4;
-                            cek.JOB_REMARK = "Success Created MSO687 " + item.EQUIP_NO;
-                            dbs.SubmitChanges();
+                            SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+
+                            CONNECT.Open();
+                            var equipNo = item.EQUIP_NO;
+                            var jobRemark = "Success Created MSO687 - " + equipNo;
+                            var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 4, JOB_REMARK = @JobRemark, POST_DATETIME = GETDATE() Where JOB_ID = '" + cek.JOB_ID.ToString() + "'";
+                            SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                            COMMAND.Parameters.AddWithValue("@JobRemark", jobRemark);
+                            COMMAND.ExecuteNonQuery();
+                            CONNECT.Close();
+                            
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
                         if (cek2 != null)
                         {
                             cek2.FLAG = 1;
-                            db.SubmitChanges();
+                            //db.SubmitChanges();
                         }
                     }
                     catch (Exception ex)
@@ -536,10 +580,17 @@ namespace MSO687_CONSOLEAPP
                         var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == item.JOB_MASTER_ID);
                         if (cek != null)
                         {
-                            cek.POST_DATETIME = DateTime.Parse(DateTime.Now.ToString());
-                            cek.JOB_STATUS = 6;
-                            cek.JOB_REMARK = "Failed Created " + item.EQUIP_NO + " - " + exMessage;
-                            dbs.SubmitChanges();
+                            SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
+
+                            CONNECT.Open();
+                            var equipNo = item.EQUIP_NO;
+                            var jobRemark = "Failed Created " + equipNo + " - " + exMessage;
+                            var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 6, JOB_REMARK = @JobRemark, POST_DATETIME = GETDATE() Where JOB_ID = '" + cek.JOB_ID.ToString() + "'";
+                            SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                            COMMAND.Parameters.AddWithValue("@JobRemark", jobRemark);
+                            COMMAND.ExecuteNonQuery();
+                            CONNECT.Close();
+                            
                         }
 
                         var cek2 = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == item.EQUIP_NO);
@@ -552,6 +603,7 @@ namespace MSO687_CONSOLEAPP
                         Console.WriteLine("Error occurred: " + exMessage);
                     }
                 }
+                db.SubmitChanges();
             }
         }
         

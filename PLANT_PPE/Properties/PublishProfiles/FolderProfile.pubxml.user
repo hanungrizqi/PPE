@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230809\WEB</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230814\Web</_PublishTargetUrl>
     <History>True|2023-07-28T07:30:03.1700808Z;False|2023-07-17T13:47:16.6125582+07:00;False|2023-07-17T13:46:27.5839978+07:00;False|2023-07-17T13:44:59.1656268+07:00;False|2023-07-17T13:41:15.6690919+07:00;True|2023-06-06T11:00:29.1914988+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
@@ -169,10 +169,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2019 01:06:16</publishTime>
     </File>
     <File Include="bin/PLANT_PPE.dll">
-      <publishTime>08/09/2023 08:58:45</publishTime>
+      <publishTime>08/14/2023 15:07:22</publishTime>
     </File>
     <File Include="bin/PLANT_PPE.pdb">
-      <publishTime>08/09/2023 08:58:45</publishTime>
+      <publishTime>08/14/2023 15:07:22</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>06/25/2023 04:12:12</publishTime>
@@ -13087,7 +13087,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/14/2023 08:57:41</publishTime>
     </File>
     <File Include="Scripts/Page/ReceivedDetail.js">
-      <publishTime>08/07/2023 11:31:50</publishTime>
+      <publishTime>08/10/2023 10:04:52</publishTime>
     </File>
     <File Include="Scripts/Page/RegisterPPE.js">
       <publishTime>08/04/2023 10:49:56</publishTime>
@@ -13222,7 +13222,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/07/2023 11:02:17</publishTime>
     </File>
     <File Include="Views/Received/DetailPPE_EQP.cshtml">
-      <publishTime>08/07/2023 11:25:54</publishTime>
+      <publishTime>08/09/2023 10:50:30</publishTime>
     </File>
     <File Include="Views/Received/Index.cshtml">
       <publishTime>07/13/2023 16:13:13</publishTime>
@@ -13255,7 +13255,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 12:55:31</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/14/2023 10:53:40</publishTime>
+      <publishTime>08/09/2023 10:51:32</publishTime>
     </File>
     <File Include="Views/Shared/_Sidebar.cshtml">
       <publishTime>05/23/2023 14:15:56</publishTime>
@@ -13273,7 +13273,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 12:55:31</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/09/2023 08:58:46</publishTime>
+      <publishTime>08/14/2023 15:07:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

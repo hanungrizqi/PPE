@@ -54,5 +54,16 @@ namespace MSO687_CONSOLEAPP.Properties {
                 return ((string)(this["DB_MANAGEMENT_SERVICES_KPTConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kphosq101\\shpol;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;Persist Se" +
+            "curity Info=True;User ID=sqlservices;Password=sqlservices1")]
+        public string DB_MANAGEMENT_SERVICES_KPTConnectionString1 {
+            get {
+                return ((string)(this["DB_MANAGEMENT_SERVICES_KPTConnectionString1"]));
+            }
+        }
     }
 }

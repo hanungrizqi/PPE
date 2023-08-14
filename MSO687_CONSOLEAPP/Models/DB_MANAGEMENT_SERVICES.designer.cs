@@ -23,7 +23,7 @@ namespace MSO687_CONSOLEAPP.Models
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DB_MANAGEMENT_SERVICES_KPT")]
-	public partial class DB_MNGMT_SRVCDataContext : System.Data.Linq.DataContext
+	public partial class DB_MANAGEMENT_SERVICESDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -35,31 +35,31 @@ namespace MSO687_CONSOLEAPP.Models
     partial void DeleteTBL_T_UPLOAD_JOB_MASTER(TBL_T_UPLOAD_JOB_MASTER instance);
     #endregion
 		
-		public DB_MNGMT_SRVCDataContext() : 
+		public DB_MANAGEMENT_SERVICESDataContext() : 
 				base(global::MSO687_CONSOLEAPP.Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DB_MNGMT_SRVCDataContext(string connection) : 
+		public DB_MANAGEMENT_SERVICESDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DB_MNGMT_SRVCDataContext(System.Data.IDbConnection connection) : 
+		public DB_MANAGEMENT_SERVICESDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DB_MNGMT_SRVCDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DB_MANAGEMENT_SERVICESDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DB_MNGMT_SRVCDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DB_MANAGEMENT_SERVICESDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
