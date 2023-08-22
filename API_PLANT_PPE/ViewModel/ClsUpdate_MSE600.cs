@@ -258,7 +258,7 @@ namespace API_PLANT_PPE.ViewModel
                 if (tglkluar_dstrctasal != "")
                 {
                     //jika distrik 1 = distrik asal, insert tgl keluar 1
-                    if (i_obj_result.replyElements[0].refCode == dataEquipment.DISTRICT_FROM || i_obj_result.replyElements[0].refCode == "")
+                    if (i_obj_result.replyElements[0].refCode == dataEquipment.DISTRICT_FROM)
                     {
                         mod_req.refCode = tglkluar_dstrctasal;
                         mod_req.refNo = i_obj_result.replyElements[4].refNo;
