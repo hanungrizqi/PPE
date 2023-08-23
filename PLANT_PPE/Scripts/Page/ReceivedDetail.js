@@ -1,10 +1,20 @@
 ﻿$("document").ready(function () {
     getDetail();
-    var dateInputs = document.querySelectorAll("input[type='date']");
+    //var dateInputs = document.querySelectorAll("input[type='date']");
 
-    dateInputs.forEach(function (dateInput) {
-        dateInput.setAttribute("max", new Date().toISOString().split("T")[0]);
-    });
+    //dateInputs.forEach(function (dateInput) {
+    //    dateInput.setAttribute("max", new Date().toISOString().split("T")[0]);
+    //    debugger
+    //});
+    //dateInputs.forEach(function (dateInput) {
+    //    var tdElement = dateInput.closest("td");
+    //    var createdDate = tdElement.getAttribute("data-created-date");
+    //    var formattedCreatedDate = moment(createdDate, "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD");
+
+    //    dateInput.setAttribute("min", formattedCreatedDate);
+    //    dateInput.setAttribute("max", new Date().toISOString().split("T")[0]);
+    //    debugger;
+    //});
 })
 
 var table_eqp = $("#table_eqp").DataTable({
@@ -16,9 +26,7 @@ var table_eqp = $("#table_eqp").DataTable({
 });
 
 function getDetail() {
-    debugger
     var encodedPPENo = encodeURIComponent($("#txt_noPPE").val());
-    debugger
     $.ajax({
         url: $("#web_link").val() + "/api/PPE/Detail_SM?ppe_no=" + encodedPPENo,
         type: "GET",
@@ -76,14 +84,16 @@ function submitApproval(postStatus) {
     });
     console.log(dataEquipment);
     if (emptyFields) {
+        debugger
         Swal.fire(
             'Warning!',
             'Silahkan lengkapi Date Receive atau Berita Acara.',
             'warning'
         );
         return;
+        console.log(dataEquipment.DATE_RECEIVED_SM);
     }
-    
+    debugger
     $.ajax({
         url: $("#web_link").val() + "/api/SM/Approve_SM",
         data: JSON.stringify(dataEquipment),

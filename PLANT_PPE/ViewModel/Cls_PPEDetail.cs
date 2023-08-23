@@ -10,6 +10,6 @@ namespace PLANT_PPE.ViewModel
     public class Cls_PPEDetail
     {
         [JsonProperty("Data")]
-        public IList<VW_T_PPE> tbl { get; set; }
+        public IList<TBL_T_PPE> tbl { get; set; }
     }
 }

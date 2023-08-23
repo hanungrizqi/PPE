@@ -34,7 +34,7 @@ namespace PLANT_PPE.Controllers
                 return RedirectToAction("index", "login");
             }
             string encodedPpe = HttpUtility.UrlEncode(ppe);
-            List<VW_T_PPE> tbl = new List<VW_T_PPE>();
+            List<TBL_T_PPE> tbl = new List<TBL_T_PPE>();
 
             using (var client = new HttpClient())
             {
@@ -55,7 +55,7 @@ namespace PLANT_PPE.Controllers
                     var ApiResponse = Res.Content.ReadAsStringAsync().Result;
                     Cls_PPEDetail data = new Cls_PPEDetail();
                     data = JsonConvert.DeserializeObject<Cls_PPEDetail>(ApiResponse);
-                    tbl = (List<VW_T_PPE>)data.tbl;
+                    tbl = (List<TBL_T_PPE>)data.tbl;
                     ViewBag.dataEquip = tbl;
                     ViewBag.ppe_number = ppe;
                 }

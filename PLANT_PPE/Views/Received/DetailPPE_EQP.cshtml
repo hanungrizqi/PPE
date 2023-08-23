@@ -66,7 +66,7 @@
                             <th>Loc From</th>
                             <th>Loc To</th>
                             <th>Date Received</th>
-                            <th>Berita Acara</th>
+                            <th>BAST / BA Commisioning</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,23 +82,18 @@
                                 <td>@equip.DISTRICT_TO</td>
                                 <td>@equip.LOC_FROM</td>
                                 <td>@equip.LOC_TO</td>
-                                <td>
-                                    <input type="date" class="form-control form-control-sm datereceived" id="txt_DateRecivSM" name="txt_DateRecivSM">
-                                    @*@if (equip.DATE_RECEIVED_SM == null)
-                                    {
-                                        <input type="date" onkeydown="return false" class="form-control form-control-sm " id="txt_DateRecivSM" name="txt_DateRecivSM">
+                                <td data-created-date="@equip.CREATED_DATE">
+                                    @{
+                                        DateTime createdDate = (DateTime)equip.CREATED_DATE;
+                                        string formattedCreatedDate = createdDate.ToString("yyyy-MM-dd");
+                                        //string defaultDate = "yyyy-MM-dd";
                                     }
-                                    else
-                                    {
-                                        <input type="date" class="form-control form-control-sm " id="txt_DateRecivSM" name="txt_DateRecivSM" value="@equip.DATE_RECEIVED_SM.ToString("yyyy-MM-dd")">
-                                    }*@
+                                    @*<input type="date" class="form-control form-control-sm datereceived" id="txt_DateRecivSM" name="txt_DateRecivSM">*@
+                                    @*<input type="date" class="form-control form-control-sm datereceived" id="txt_DateRecivSM" name="txt_DateRecivSM" min="@formattedCreatedDate" max="@DateTime.Now" value="@defaultDate">*@
+                                    <input type="date" class="form-control form-control-sm datereceived" id="txt_DateRecivSM" name="txt_DateRecivSM" min="@equip.CREATED_DATE.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.ToString("yyyy-MM-dd")">
                                 </td>
                                 <td>
                                     <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_BA" multiple>
-                                    @*@if (equip.BERITA_ACARA_SM == null)
-                                    {
-                                        <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_BA" multiple>
-                                    }*@
                                 </td>
                             </tr>
                         }
