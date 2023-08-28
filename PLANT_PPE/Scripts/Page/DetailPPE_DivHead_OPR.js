@@ -46,7 +46,8 @@ function submitApproval(postStatus) {
     dataEQP.UPDATED_BY = $("#hd_nrp").val();
     dataEQP.STATUS = postStatus;
     dataEQP.APPROVAL_ORDER = 8;
-    dataEQP.URL_FORM_DONE = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $("#txt_noPPE").val();
+    //dataEQP.URL_FORM_DONE = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $("#txt_noPPE").val();
+    dataEQP.URL_FORM_DONE = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + $("#txt_noPPE").val();
 
     debugger
     let NomorPPEM = dataEQP.PPE_NO;

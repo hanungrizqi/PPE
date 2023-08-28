@@ -77,7 +77,8 @@ function detailClose() {
 }
 
 function printReport(ppeno) {
-    var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + ppeno;
+    //var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + ppeno;
+    var printUrl = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + ppeno;
     window.open(printUrl, '_blank');
 }
 

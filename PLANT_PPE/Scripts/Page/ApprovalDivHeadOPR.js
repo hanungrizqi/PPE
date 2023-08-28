@@ -124,7 +124,8 @@ function submitApprovalOPR(postStatus) {
             POSISI_PPE: postStatus === "REJECT" ? "Division Head OPR" : "Waiting SM Dept",
             STATUS: postStatus,
             APPROVAL_ORDER: 8,
-            URL_FORM_DONE: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $(this).data('id'),
+            //URL_FORM_DONE: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $(this).data('id'),
+            URL_FORM_DONE: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + $(this).data('id'),
         };
         dataPPE.push(ppe);
         if (!uniquePPE_NO.has(ppe.PPE_NO)) {
