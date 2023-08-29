@@ -86,7 +86,7 @@ namespace MOK_CONS_PPE
 
                 SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
                 CONNECT.Open();
-                if (DataProcess[1].ToString().Trim() == "1") //jika approval_order 1
+                if (DataProcess[1].ToString().Trim() == "1") //jika approval_order 1 | posisi = sect.head
                 {
                     //var ppeNo = DataProcess[5];
                     //var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + ppeNo;
@@ -146,8 +146,26 @@ namespace MOK_CONS_PPE
                             Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
                         }
                     }
+                    // send mail
+                    try
+                    {
+                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                        DBPPE.Open();
+                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantManager", DBPPE);
+                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+                        
+                        //cmdSP.ExecuteNonQuery();
+                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                        DBPPE.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        errormsg = "Error Send Mail : " + ex.ToString();
+                    }
                 } 
-                else if (DataProcess[1].ToString().Trim() == "2") //jika approval_order 2
+                else if (DataProcess[1].ToString().Trim() == "2") //jika approval_order 2 | posisi = plant manager
                 {
                     var ppeNo = DataProcess[5];
                     var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + ppeNo;
@@ -191,8 +209,26 @@ namespace MOK_CONS_PPE
                             Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
                         }
                     }
+                    // send mail
+                    try
+                    {
+                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                        DBPPE.Open();
+                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantDeptHead", DBPPE);
+                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                        //cmdSP.ExecuteNonQuery();
+                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                        DBPPE.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        errormsg = "Error Send Mail : " + ex.ToString();
+                    }
                 }
-                else if (DataProcess[1].ToString().Trim() == "3") //jika approval_order 3
+                else if (DataProcess[1].ToString().Trim() == "3") //jika approval_order 3 | posisi = plant dept head
                 {
                     var ppeNo = DataProcess[5];
                     var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPengirim&PPE_NO=" + ppeNo;
@@ -236,8 +272,26 @@ namespace MOK_CONS_PPE
                             Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
                         }
                     }
+                    // send mail
+                    try
+                    {
+                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                        DBPPE.Open();
+                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PMPengirim", DBPPE);
+                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                        //cmdSP.ExecuteNonQuery();
+                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                        DBPPE.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        errormsg = "Error Send Mail : " + ex.ToString();
+                    }
                 }
-                else if (DataProcess[1].ToString().Trim() == "4") //jika approval_order 4
+                else if (DataProcess[1].ToString().Trim() == "4") //jika approval_order 4 | posisi = pm pengirim
                 {
                     var ppeNo = DataProcess[5];
                     var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + ppeNo;
@@ -281,8 +335,26 @@ namespace MOK_CONS_PPE
                             Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
                         }
                     }
+                    // send mail
+                    try
+                    {
+                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                        DBPPE.Open();
+                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PMPenerima", DBPPE);
+                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                        //cmdSP.ExecuteNonQuery();
+                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                        DBPPE.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        errormsg = "Error Send Mail : " + ex.ToString();
+                    }
                 }
-                else if (DataProcess[1].ToString().Trim() == "5") //jika approval_order 5
+                else if (DataProcess[1].ToString().Trim() == "5") //jika approval_order 5 | posisi = pm penerima
                 {
                     var ppeNo = DataProcess[5];
                     var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + ppeNo;
@@ -326,8 +398,26 @@ namespace MOK_CONS_PPE
                             Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
                         }
                     }
+                    // send mail
+                    try
+                    {
+                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                        DBPPE.Open();
+                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Eng", DBPPE);
+                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                        //cmdSP.ExecuteNonQuery();
+                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                        DBPPE.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        errormsg = "Error Send Mail : " + ex.ToString();
+                    }
                 }
-                else if (DataProcess[1].ToString().Trim() == "6") //jika approval_order 6
+                else if (DataProcess[1].ToString().Trim() == "6") //jika approval_order 6 | posisi divhead eng
                 {
                     var ppeNo = DataProcess[5];
                     var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Opr&PPE_NO=" + ppeNo;
@@ -371,8 +461,26 @@ namespace MOK_CONS_PPE
                             Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
                         }
                     }
+                    // send mail
+                    try
+                    {
+                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                        DBPPE.Open();
+                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Opr", DBPPE);
+                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                        //cmdSP.ExecuteNonQuery();
+                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                        DBPPE.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        errormsg = "Error Send Mail : " + ex.ToString();
+                    }
                 }
-                else if (DataProcess[1].ToString().Trim() == "7") //jika approval_order 7
+                else if (DataProcess[1].ToString().Trim() == "7") //jika approval_order 7 | posisi = divhead opr
                 {
                     var ppeNo = DataProcess[5];
                     var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + ppeNo;
@@ -415,6 +523,24 @@ namespace MOK_CONS_PPE
                         {
                             Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
                         }
+                    }
+                    // send mail
+                    try
+                    {
+                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                        DBPPE.Open();
+                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PPE_Done", DBPPE);
+                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                        //cmdSP.ExecuteNonQuery();
+                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                        DBPPE.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        errormsg = "Error Send Mail : " + ex.ToString();
                     }
                 }
                 CONNECT.Close();

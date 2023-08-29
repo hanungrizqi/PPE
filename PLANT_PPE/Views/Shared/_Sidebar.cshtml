@@ -2,6 +2,7 @@
 @{
     ViewBag.url = Context.Request.Path;
 }
+<input type="text" id="hd_PositionID" value="@Session["PositionID"].ToString()" hidden />
 
 <ul class="nav-main">
     @foreach (var item in Model)
@@ -19,9 +20,21 @@
                         if (sub.ID_Menu == item.ID_Menu)
                         {
                             <li class="nav-main-item">
-                                <a class="nav-main-link" href="@ViewBag.Path@sub.Link_Sub_Menu">
+                                @*<a class="nav-main-link" href="@ViewBag.Path@sub.Link_Sub_Menu">
                                     <span class="nav-main-link-name">@sub.Sub_Menu_Description</span>
-                                </a>
+                                </a>*@
+                                @if (Session["PositionID"].ToString() == "KP1PT03")
+                                {
+                                    <a class="nav-main-link" href="@ViewBag.Path@sub.Link_Sub_Menu">
+                                        <span class="nav-main-link-name">Plant Adm & Dev Manager</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="nav-main-link" href="@ViewBag.Path@sub.Link_Sub_Menu">
+                                        <span class="nav-main-link-name">@sub.Sub_Menu_Description</span>
+                                    </a>
+                                }
                             </li>
                         }
 

@@ -218,15 +218,26 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
-        [Route("Get_ListApprovalPM_PPE")]
-        public IHttpActionResult Get_ListApprovalPM_PPE()
+        [Route("Get_ListApprovalPM_PPE/{posid}")]
+        //[Route("Get_ListApprovalPM_PPE")]
+        public IHttpActionResult Get_ListApprovalPM_PPE( string posid)
         {
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                if (posid == "KP1PT03")
+                {
+                    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                    return Ok(new { Data = data });
+                }
+                else
+                {
+                    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                    return Ok(new { Data = data });
+                }
+                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
-                return Ok(new { Data = data });
+                //return Ok(new { Data = data });
             }
             catch (Exception)
             {
@@ -242,7 +253,7 @@ namespace API_PLANT_PPE.Controllers
             {
                 db.CommandTimeout = 120;
                 //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
-                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED").OrderBy(a => a.PPE_NO).OrderBy(a => a.PPE_NO).ToList();
+                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED" && a.DISTRICT_FROM != "KPHO").OrderBy(a => a.PPE_NO).OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -276,7 +287,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Pengirim" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Pengirim" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }
