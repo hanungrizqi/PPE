@@ -34,7 +34,8 @@ namespace MOK_CONS_PPE
             try
             {
                 DBJOB.Open();
-                Qry = "SELECT TOP 1 id, r_workflow_id, work_id, case when action = 0 then 1 else 0 end as action, task_name, doc_no, note, app_name, performer_login  FROM DCTM_Task_Integrator Where status = 8001 and app_name = 'Persetujuan Pemindahan Equipment'";
+                //Qry = "SELECT TOP 1 id, r_workflow_id, work_id, case when action = 0 then 1 else 0 end as action, task_name, doc_no, note, app_name, performer_login  FROM DCTM_Task_Integrator Where status = 8001 and app_name = 'Persetujuan Pemindahan Equipment'";
+                Qry = "SELECT TOP 1 id, r_workflow_id, work_id, action, task_name, doc_no, note, app_name, performer_login  FROM DCTM_Task_Integrator Where status = 8001 and app_name = 'Persetujuan Pemindahan Equipment'";
                 SqlCommand cmd = new SqlCommand(Qry.ToString(), DBJOB);
                 SqlDataReader readerGetJob = cmd.ExecuteReader();
                 while (readerGetJob.Read())
@@ -84,466 +85,1047 @@ namespace MOK_CONS_PPE
             {
                 Console.WriteLine(DateTime.Now.ToString() + " : Store Procedure Executing..");
 
-                SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                CONNECT.Open();
-                if (DataProcess[1].ToString().Trim() == "1") //jika approval_order 1 | posisi = sect.head
+                if (DataProcess[3].ToString().Trim() == "1") //jika reject
                 {
-                    //var ppeNo = DataProcess[5];
-                    //var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + ppeNo;
+                    SqlConnection CONNECT_RJ = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                    CONNECT_RJ.Open();
 
-                    //var Query = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 3, POSISI_PPE = 'Plant Dept. Head', STATUS = 'PLANT MANAGER APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PLNTDH = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                    var updateQuery = "UPDATE TBL_T_PPE SET STATUS = 'REJECT', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
 
-                    //SqlCommand COMMAND = new SqlCommand(Query, CONNECT);
-                    //COMMAND.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    //COMMAND.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    //COMMAND.Parameters.AddWithValue("@URL", url);
-                    //COMMAND.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    //COMMAND.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+                    SqlCommand rejectCommand = new SqlCommand(updateQuery, CONNECT_RJ);
+                    rejectCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                    rejectCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                    rejectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                    rejectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
 
-                    ////COMMAND.ExecuteNonQuery();
-                    //Int32 rowsAffected = COMMAND.ExecuteNonQuery();
-                    //Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+                    Int32 rowsrejectAffected = rejectCommand.ExecuteNonQuery();
+                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsrejectAffected);
 
-                    var ppeNo = DataProcess[5];
-                    var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantManager&PPE_NO=" + ppeNo;
-
-                    var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 2, POSISI_PPE = 'Plant Manager', STATUS = 'SEC.HEAD APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PLNTMNGR = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-
-                    SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
-                    updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    updateCommand.Parameters.AddWithValue("@URL", url);
-                    updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    Int32 rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
-
-                    // SELECT data from TBL_T_PPE
-                    var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-                    SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
-                    selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    using (SqlDataReader reader = selectCommand.ExecuteReader())
+                    CONNECT_RJ.Close();
+                }
+                else
+                {
+                    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                    CONNECT.Open();
+                    if (DataProcess[1].ToString().Trim() == "1") //jika approval_order 1 | posisi = sect.head
                     {
-                        if (reader.Read())
-                        {
-                            var equipNo = reader["EQUIP_NO"].ToString();
-                            reader.Close();
-                            // Insert data into TBL_H_APPROVAL_PPE
-                            var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Sect. Head', 2, GETDATE(), @UpdatedBy)";
-                            SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
-                            insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
-                            insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
-                            insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
 
-                            Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
-                            Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                        var ppeNo = DataProcess[5];
+                        var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantManager&PPE_NO=" + ppeNo;
+
+                        string selectDistrictQuery = "SELECT DISTRICT_FROM FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlCommand selectDistrictCommand = new SqlCommand(selectDistrictQuery, CONNECT);
+                        selectDistrictCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        selectDistrictCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                        string district = selectDistrictCommand.ExecuteScalar()?.ToString();
+                        if (district != "KPHO")
+                        {
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 2, POSISI_PPE = 'Plant Manager', STATUS = 'SEC.HEAD APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PLNTMNGR = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", url);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Sect. Head', 2, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantManager", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 2, POSISI_PPE = 'Plant Adm & Dev Manager', STATUS = 'SEC.HEAD APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", url);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Sect. Head', 2, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantManager", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
                         }
                     }
-                    // send mail
-                    try
+                    else if (DataProcess[1].ToString().Trim() == "2") //jika approval_order 2 | posisi = plant manager/adm
                     {
-                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                        DBPPE.Open();
-                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantManager", DBPPE);
-                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+                        var ppeNo = DataProcess[5];
+                        var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + ppeNo;
+
+                        string selectDistrictQuery = "SELECT DISTRICT_FROM FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlCommand selectDistrictCommand = new SqlCommand(selectDistrictQuery, CONNECT);
+                        selectDistrictCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        selectDistrictCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                        string district = selectDistrictCommand.ExecuteScalar()?.ToString();
+                        if (district != "KPHO")
+                        {
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 3, POSISI_PPE = 'Plant Dept. Head', STATUS = 'PLANT MANAGER APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PLNTDH = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", url);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Plant Manager', 3, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantDeptHead", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
+                        }
+                        else
+                        {
+                            var urls = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantManager&PPE_NO=" + ppeNo;
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 3, POSISI_PPE = 'Plant Manager', STATUS = 'PLANT ADM & DEV MANAGER APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PLNTMNGR = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", urls);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Plant Adm & Dev Manager', 3, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantManager", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
+                        }
                         
-                        //cmdSP.ExecuteNonQuery();
-                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
-                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
-                        DBPPE.Close();
                     }
-                    catch (Exception ex)
+                    else if (DataProcess[1].ToString().Trim() == "3") //jika approval_order 3 | posisi = plant dept head
                     {
-                        errormsg = "Error Send Mail : " + ex.ToString();
-                    }
-                } 
-                else if (DataProcess[1].ToString().Trim() == "2") //jika approval_order 2 | posisi = plant manager
-                {
-                    var ppeNo = DataProcess[5];
-                    var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + ppeNo;
+                        var ppeNo = DataProcess[5];
+                        var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPengirim&PPE_NO=" + ppeNo;
 
-                    var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 3, POSISI_PPE = 'Plant Dept. Head', STATUS = 'PLANT MANAGER APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PLNTDH = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        string selectDistrictQuery = "SELECT DISTRICT_FROM FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlCommand selectDistrictCommand = new SqlCommand(selectDistrictQuery, CONNECT);
+                        selectDistrictCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        selectDistrictCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
 
-                    SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
-                    updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    updateCommand.Parameters.AddWithValue("@URL", url);
-                    updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    Int32 rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
-
-                    // SELECT data from TBL_T_PPE
-                    var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-                    SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
-                    selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    using (SqlDataReader reader = selectCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
+                        string district = selectDistrictCommand.ExecuteScalar()?.ToString();
+                        if (district != "KPHO")
                         {
-                            var equipNo = reader["EQUIP_NO"].ToString();
-                            reader.Close();
-                            // Insert data into TBL_H_APPROVAL_PPE
-                            var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Plant Manager', 3, GETDATE(), @UpdatedBy)";
-                            SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
-                            insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
-                            insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
-                            insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 4, POSISI_PPE = 'Project Manager Pengirim', STATUS = 'PLANT DEPT. HEAD APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PM_PENGIRIM = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
 
-                            Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
-                            Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", url);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Plant Dept. Head', 4, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PMPengirim", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                            var urls = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + ppeNo;
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 4, POSISI_PPE = 'Project Manager Penerima', STATUS = 'PLANT MANAGER APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PM_PENERIMA = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", urls);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Plant Manager', 4, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PMPenerima", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
                         }
+                        
                     }
-                    // send mail
-                    try
+                    else if (DataProcess[1].ToString().Trim() == "4") //jika approval_order 4 | posisi = pm pengirim
                     {
-                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                        DBPPE.Open();
-                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantDeptHead", DBPPE);
-                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+                        var ppeNo = DataProcess[5];
+                        var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + ppeNo;
 
-                        //cmdSP.ExecuteNonQuery();
-                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
-                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
-                        DBPPE.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        errormsg = "Error Send Mail : " + ex.ToString();
-                    }
-                }
-                else if (DataProcess[1].ToString().Trim() == "3") //jika approval_order 3 | posisi = plant dept head
-                {
-                    var ppeNo = DataProcess[5];
-                    var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPengirim&PPE_NO=" + ppeNo;
+                        string selectDistrictQuery = "SELECT DISTRICT_FROM, DISTRICT_TO FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlCommand selectDistrictCommand = new SqlCommand(selectDistrictQuery, CONNECT);
+                        selectDistrictCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        selectDistrictCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
 
-                    var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 4, POSISI_PPE = 'Project Manager Pengirim', STATUS = 'PLANT DEPT. HEAD APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PM_PENGIRIM = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlDataReader districtReader = selectDistrictCommand.ExecuteReader();
+                        string districtFrom = "";
+                        string districtTo = "";
 
-                    SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
-                    updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    updateCommand.Parameters.AddWithValue("@URL", url);
-                    updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    Int32 rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
-
-                    // SELECT data from TBL_T_PPE
-                    var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-                    SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
-                    selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    using (SqlDataReader reader = selectCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
+                        if (districtReader.Read())
                         {
-                            var equipNo = reader["EQUIP_NO"].ToString();
-                            reader.Close();
-                            // Insert data into TBL_H_APPROVAL_PPE
-                            var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Plant Dept. Head', 4, GETDATE(), @UpdatedBy)";
-                            SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
-                            insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
-                            insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
-                            insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            districtFrom = districtReader["DISTRICT_FROM"].ToString();
+                            districtTo = districtReader["DISTRICT_TO"].ToString();
+                        }
+                        districtReader.Close();
 
-                            Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
-                            Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                        if (districtFrom != "KPHO")
+                        {
+                            //distrik to
+                            if (districtTo != "KPHO") //jika distrik tujuan bukan kpho
+                            {
+                                var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 5, POSISI_PPE = 'Project Manager Penerima', STATUS = 'PM PENGIRIM APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PM_PENERIMA = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                                SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                                updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                                updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                                updateCommand.Parameters.AddWithValue("@URL", url);
+                                updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                                // SELECT data from TBL_T_PPE
+                                var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                                SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                                selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                using (SqlDataReader reader = selectCommand.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        var equipNo = reader["EQUIP_NO"].ToString();
+                                        reader.Close();
+                                        // Insert data into TBL_H_APPROVAL_PPE
+                                        var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Project Manager Pengirim', 5, GETDATE(), @UpdatedBy)";
+                                        SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                        insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                        insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                        insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                        Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                        Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                    }
+                                }
+                                // send mail
+                                try
+                                {
+                                    SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                    DBPPE.Open();
+                                    SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PMPenerima", DBPPE);
+                                    cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                    cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                    //cmdSP.ExecuteNonQuery();
+                                    Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                    DBPPE.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    errormsg = "Error Send Mail : " + ex.ToString();
+                                }
+                            }
+                            else //jika distrik tujuan = kpho
+                            {
+                                var urls = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + ppeNo;
+                                var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 5, POSISI_PPE = 'Division Head ENG', STATUS = 'PM PENGIRIM APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_ENG = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                                SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                                updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                                updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                                updateCommand.Parameters.AddWithValue("@URL", urls);
+                                updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                                // SELECT data from TBL_T_PPE
+                                var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                                SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                                selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                using (SqlDataReader reader = selectCommand.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        var equipNo = reader["EQUIP_NO"].ToString();
+                                        reader.Close();
+                                        // Insert data into TBL_H_APPROVAL_PPE
+                                        var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Project Manager Pengirim', 5, GETDATE(), @UpdatedBy)";
+                                        SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                        insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                        insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                        insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                        Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                        Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                    }
+                                }
+                                // send mail
+                                try
+                                {
+                                    SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                    DBPPE.Open();
+                                    SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Eng", DBPPE);
+                                    cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                    cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                    //cmdSP.ExecuteNonQuery();
+                                    Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                    DBPPE.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    errormsg = "Error Send Mail : " + ex.ToString();
+                                }
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                            var urls = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + ppeNo;
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 5, POSISI_PPE = 'Division Head ENG', STATUS = 'PM PENERIMA APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_ENG = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", urls);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Project Manager Penerima', 5, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Eng", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
                         }
+
                     }
-                    // send mail
-                    try
+                    else if (DataProcess[1].ToString().Trim() == "5") //jika approval_order 5 | posisi = pm penerima
                     {
-                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                        DBPPE.Open();
-                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PMPengirim", DBPPE);
-                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+                        var ppeNo = DataProcess[5];
+                        var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + ppeNo;
 
-                        //cmdSP.ExecuteNonQuery();
-                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
-                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
-                        DBPPE.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        errormsg = "Error Send Mail : " + ex.ToString();
-                    }
-                }
-                else if (DataProcess[1].ToString().Trim() == "4") //jika approval_order 4 | posisi = pm pengirim
-                {
-                    var ppeNo = DataProcess[5];
-                    var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + ppeNo;
+                        string selectDistrictQuery = "SELECT DISTRICT_FROM, DISTRICT_TO FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlCommand selectDistrictCommand = new SqlCommand(selectDistrictQuery, CONNECT);
+                        selectDistrictCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        selectDistrictCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
 
-                    var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 5, POSISI_PPE = 'Project Manager Penerima', STATUS = 'PM PENGIRIM APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_PM_PENERIMA = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlDataReader districtReader = selectDistrictCommand.ExecuteReader();
+                        string districtFrom = "";
+                        string districtTo = "";
 
-                    SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
-                    updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    updateCommand.Parameters.AddWithValue("@URL", url);
-                    updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    Int32 rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
-
-                    // SELECT data from TBL_T_PPE
-                    var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-                    SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
-                    selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    using (SqlDataReader reader = selectCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
+                        if (districtReader.Read())
                         {
-                            var equipNo = reader["EQUIP_NO"].ToString();
-                            reader.Close();
-                            // Insert data into TBL_H_APPROVAL_PPE
-                            var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Project Manager Pengirim', 5, GETDATE(), @UpdatedBy)";
-                            SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
-                            insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
-                            insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
-                            insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            districtFrom = districtReader["DISTRICT_FROM"].ToString();
+                            districtTo = districtReader["DISTRICT_TO"].ToString();
+                        }
+                        districtReader.Close();
 
-                            Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
-                            Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                        if (districtFrom != "KPHO")
+                        {
+                            //distrik to
+                            if (districtTo != "KPHO") //jika disrtik to bukan kpho
+                            {
+                                var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 6, POSISI_PPE = 'Division Head ENG', STATUS = 'PM PENERIMA APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_ENG = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                                SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                                updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                                updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                                updateCommand.Parameters.AddWithValue("@URL", url);
+                                updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                                // SELECT data from TBL_T_PPE
+                                var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                                SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                                selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                using (SqlDataReader reader = selectCommand.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        var equipNo = reader["EQUIP_NO"].ToString();
+                                        reader.Close();
+                                        // Insert data into TBL_H_APPROVAL_PPE
+                                        var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Project Manager Penerima', 6, GETDATE(), @UpdatedBy)";
+                                        SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                        insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                        insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                        insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                        Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                        Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                    }
+                                }
+                                // send mail
+                                try
+                                {
+                                    SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                    DBPPE.Open();
+                                    SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Eng", DBPPE);
+                                    cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                    cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                    //cmdSP.ExecuteNonQuery();
+                                    Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                    DBPPE.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    errormsg = "Error Send Mail : " + ex.ToString();
+                                }
+                            }
+                            else //jika distrik to = kpho
+                            {
+                                var urls = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Opr&PPE_NO=" + ppeNo;
+                                var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 7, POSISI_PPE = 'Division Head OPR', STATUS = 'DIVISION HEAD ENG APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_OPR = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                                SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                                updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                                updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                                updateCommand.Parameters.AddWithValue("@URL", urls);
+                                updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                                // SELECT data from TBL_T_PPE
+                                var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                                SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                                selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                                selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                                using (SqlDataReader reader = selectCommand.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        var equipNo = reader["EQUIP_NO"].ToString();
+                                        reader.Close();
+                                        // Insert data into TBL_H_APPROVAL_PPE
+                                        var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Division Head ENG', 7, GETDATE(), @UpdatedBy)";
+                                        SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                        insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                        insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                        insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                        Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                        Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                    }
+                                }
+                                // send mail
+                                try
+                                {
+                                    SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                    DBPPE.Open();
+                                    SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Opr", DBPPE);
+                                    cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                    cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                    //cmdSP.ExecuteNonQuery();
+                                    Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                    DBPPE.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    errormsg = "Error Send Mail : " + ex.ToString();
+                                }
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                            var urls = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Opr&PPE_NO=" + ppeNo;
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 6, POSISI_PPE = 'Division Head OPR', STATUS = 'DIVISION HEAD ENG APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_OPR = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", urls);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Division Head ENG', 6, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Opr", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
                         }
+                        
                     }
-                    // send mail
-                    try
+                    else if (DataProcess[1].ToString().Trim() == "6") //jika approval_order 6 | posisi divhead eng
                     {
-                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                        DBPPE.Open();
-                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PMPenerima", DBPPE);
-                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+                        var ppeNo = DataProcess[5];
+                        var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Opr&PPE_NO=" + ppeNo;
 
-                        //cmdSP.ExecuteNonQuery();
-                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
-                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
-                        DBPPE.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        errormsg = "Error Send Mail : " + ex.ToString();
-                    }
-                }
-                else if (DataProcess[1].ToString().Trim() == "5") //jika approval_order 5 | posisi = pm penerima
-                {
-                    var ppeNo = DataProcess[5];
-                    var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + ppeNo;
+                        string selectDistrictQuery = "SELECT DISTRICT_FROM FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlCommand selectDistrictCommand = new SqlCommand(selectDistrictQuery, CONNECT);
+                        selectDistrictCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        selectDistrictCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
 
-                    var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 6, POSISI_PPE = 'Division Head ENG', STATUS = 'PM PENERIMA APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_ENG = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-
-                    SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
-                    updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    updateCommand.Parameters.AddWithValue("@URL", url);
-                    updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    Int32 rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
-
-                    // SELECT data from TBL_T_PPE
-                    var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-                    SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
-                    selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    using (SqlDataReader reader = selectCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
+                        string district = selectDistrictCommand.ExecuteScalar()?.ToString();
+                        if (district != "KPHO")
                         {
-                            var equipNo = reader["EQUIP_NO"].ToString();
-                            reader.Close();
-                            // Insert data into TBL_H_APPROVAL_PPE
-                            var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Project Manager Penerima', 6, GETDATE(), @UpdatedBy)";
-                            SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
-                            insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
-                            insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
-                            insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 7, POSISI_PPE = 'Division Head OPR', STATUS = 'DIVISION HEAD ENG APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_OPR = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
 
-                            Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
-                            Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", url);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Division Head ENG', 7, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Opr", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                            var urls = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + ppeNo;
+                            var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 8, POSISI_PPE = 'Waiting SM Dept', STATUS = 'DIVISION HEAD OPR APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DONE = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                            SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                            updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                            updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                            updateCommand.Parameters.AddWithValue("@URL", urls);
+                            updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                            // SELECT data from TBL_T_PPE
+                            var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                            SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                            selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                            selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                            using (SqlDataReader reader = selectCommand.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    var equipNo = reader["EQUIP_NO"].ToString();
+                                    reader.Close();
+                                    // Insert data into TBL_H_APPROVAL_PPE
+                                    var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Division Head OPR', 8, GETDATE(), @UpdatedBy)";
+                                    SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                    insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                    insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                    insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                    Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                    Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                                }
+                            }
+                            // send mail
+                            try
+                            {
+                                SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                                DBPPE.Open();
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PPE_Done", DBPPE);
+                                cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                                //cmdSP.ExecuteNonQuery();
+                                Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                                DBPPE.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                errormsg = "Error Send Mail : " + ex.ToString();
+                            }
+                        }
+                        
+                    }
+                    else if (DataProcess[1].ToString().Trim() == "7") //jika approval_order 7 | posisi = divhead opr
+                    {
+                        var ppeNo = DataProcess[5];
+                        var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + ppeNo;
+
+                        var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 8, POSISI_PPE = 'Waiting SM Dept', STATUS = 'DIVISION HEAD OPR APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DONE = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+
+                        SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
+                        updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+                        updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
+                        updateCommand.Parameters.AddWithValue("@URL", url);
+                        updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                        Int32 rowsAffected = updateCommand.ExecuteNonQuery();
+                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
+
+                        // SELECT data from TBL_T_PPE
+                        var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                        SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                        selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
+                        selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
+
+                        using (SqlDataReader reader = selectCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                var equipNo = reader["EQUIP_NO"].ToString();
+                                reader.Close();
+                                // Insert data into TBL_H_APPROVAL_PPE
+                                var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Division Head OPR', 8, GETDATE(), @UpdatedBy)";
+                                SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
+                                insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
+                                insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
+                                insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
+
+                                Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
+                                Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
+                            }
+                            else
+                            {
+                                Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
+                            }
+                        }
+                        // send mail
+                        try
+                        {
+                            SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                            DBPPE.Open();
+                            SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PPE_Done", DBPPE);
+                            cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
+
+                            //cmdSP.ExecuteNonQuery();
+                            Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
+                            Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
+                            DBPPE.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            errormsg = "Error Send Mail : " + ex.ToString();
                         }
                     }
-                    // send mail
-                    try
-                    {
-                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                        DBPPE.Open();
-                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Eng", DBPPE);
-                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
-
-                        //cmdSP.ExecuteNonQuery();
-                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
-                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
-                        DBPPE.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        errormsg = "Error Send Mail : " + ex.ToString();
-                    }
+                    CONNECT.Close();
                 }
-                else if (DataProcess[1].ToString().Trim() == "6") //jika approval_order 6 | posisi divhead eng
-                {
-                    var ppeNo = DataProcess[5];
-                    var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Opr&PPE_NO=" + ppeNo;
-
-                    var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 7, POSISI_PPE = 'Division Head OPR', STATUS = 'DIVISION HEAD ENG APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DIVHEAD_OPR = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-
-                    SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
-                    updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    updateCommand.Parameters.AddWithValue("@URL", url);
-                    updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    Int32 rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
-
-                    // SELECT data from TBL_T_PPE
-                    var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-                    SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
-                    selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    using (SqlDataReader reader = selectCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            var equipNo = reader["EQUIP_NO"].ToString();
-                            reader.Close();
-                            // Insert data into TBL_H_APPROVAL_PPE
-                            var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Division Head ENG', 7, GETDATE(), @UpdatedBy)";
-                            SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
-                            insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
-                            insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
-                            insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-
-                            Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
-                            Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
-                        }
-                        else
-                        {
-                            Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
-                        }
-                    }
-                    // send mail
-                    try
-                    {
-                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                        DBPPE.Open();
-                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_Divhead_Opr", DBPPE);
-                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
-
-                        //cmdSP.ExecuteNonQuery();
-                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
-                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
-                        DBPPE.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        errormsg = "Error Send Mail : " + ex.ToString();
-                    }
-                }
-                else if (DataProcess[1].ToString().Trim() == "7") //jika approval_order 7 | posisi = divhead opr
-                {
-                    var ppeNo = DataProcess[5];
-                    var url = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + ppeNo;
-
-                    var updateQuery = "UPDATE TBL_T_PPE SET APPROVAL_ORDER = 8, POSISI_PPE = 'Waiting SM Dept', STATUS = 'DIVISION HEAD OPR APPROVED', UPDATED_DATE = GETDATE(), UPDATED_BY = @UpdatedBy, REMARKS = @Remarks, URL_FORM_DONE = @URL WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-
-                    SqlCommand updateCommand = new SqlCommand(updateQuery, CONNECT);
-                    updateCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-                    updateCommand.Parameters.AddWithValue("@Remarks", DataProcess[6]);
-                    updateCommand.Parameters.AddWithValue("@URL", url);
-                    updateCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    updateCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    Int32 rowsAffected = updateCommand.ExecuteNonQuery();
-                    Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", rowsAffected);
-
-                    // SELECT data from TBL_T_PPE
-                    var selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
-                    SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
-                    selectCommand.Parameters.AddWithValue("@PPE_NO", DataProcess[5]);
-                    selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", DataProcess[2]);
-
-                    using (SqlDataReader reader = selectCommand.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            var equipNo = reader["EQUIP_NO"].ToString();
-                            reader.Close();
-                            // Insert data into TBL_H_APPROVAL_PPE
-                            var insertQuery = "INSERT INTO TBL_H_APPROVAL_PPE (Ppe_NO, Equip_No, Posisi_Ppe, Approval_Order, Approved_Date, Approved_By) VALUES (@Ppe_NO, @Equip_No, 'Division Head OPR', 8, GETDATE(), @UpdatedBy)";
-                            SqlCommand insertCommand = new SqlCommand(insertQuery, CONNECT);
-                            insertCommand.Parameters.AddWithValue("@Ppe_NO", DataProcess[5]);
-                            insertCommand.Parameters.AddWithValue("@Equip_No", equipNo);
-                            insertCommand.Parameters.AddWithValue("@UpdatedBy", DataProcess[8]);
-
-                            Int32 insertRowsAffected = insertCommand.ExecuteNonQuery();
-                            Console.WriteLine(DateTime.Now.ToString() + " :Insert RowsAffected: {0}", insertRowsAffected);
-                        }
-                        else
-                        {
-                            Console.WriteLine("No data found for PPE_NO: " + DataProcess[5]);
-                        }
-                    }
-                    // send mail
-                    try
-                    {
-                        SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
-                        DBPPE.Open();
-                        SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PPE_Done", DBPPE);
-                        cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
-
-                        //cmdSP.ExecuteNonQuery();
-                        Int32 sprowsAffected = cmdSP.ExecuteNonQuery();
-                        Console.WriteLine(DateTime.Now.ToString() + " :RowsAffected: {0}", sprowsAffected);
-                        DBPPE.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        errormsg = "Error Send Mail : " + ex.ToString();
-                    }
-                }
-                CONNECT.Close();
+                
             }
             catch (Exception e)
             {

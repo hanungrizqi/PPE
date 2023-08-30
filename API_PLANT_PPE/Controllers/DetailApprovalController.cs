@@ -329,7 +329,8 @@ namespace API_PLANT_PPE.Controllers
                     cek.POSISI_PPE = "Division Head ENG";
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
-                    cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_PM_PENERIMA;
+                    //cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_PM_PENERIMA;
+                    cek.URL_FORM_DIVHEAD_ENG = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + cek.PPE_NO;
                 }
                 else if (cek.DISTRICT_TO != "KPHO")
                 {
