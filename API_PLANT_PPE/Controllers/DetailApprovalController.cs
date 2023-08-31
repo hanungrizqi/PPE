@@ -32,7 +32,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.POSISI_PPE = "Plant Adm & Dev Manager";
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = 2;
-                    cek.URL_FORM_PLNTMNGR = param.URL_FORM_PLNTMNGR;
+                    //cek.URL_FORM_PLNTMNGR = param.URL_FORM_PLNTMNGR;
                 }
                 else if (cek.DISTRICT_FROM != "KPHO")
                 {
@@ -91,6 +91,25 @@ namespace API_PLANT_PPE.Controllers
 
                 db.CommandTimeout = 120;
                 db.cusp_insertNotifEmail_PlantManager(decodedPpenosh);
+
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Sendmail_Plant_Admdev_Manager")]
+        public IHttpActionResult Sendmail_Plant_Admdev_Manager(string ppe)
+        {
+            try
+            {
+                string decodedPpenosh = Uri.UnescapeDataString(ppe);
+
+                db.CommandTimeout = 120;
+                db.cusp_insertNotifEmail_PlantAdmDevManager(decodedPpenosh);
 
                 return Ok(new { Remarks = true });
             }
@@ -174,7 +193,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.POSISI_PPE = "Plant Manager";
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER; //3;
-                    cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
+                    //cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
                 }
                 else if (cek.DISTRICT_FROM != "KPHO")
                 {
@@ -195,7 +214,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.POSISI_PPE = "Project Manager Penerima";
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = 4;
-                    cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_DIVHEAD_ENG;
+                    cek.URL_FORM_PM_PENERIMA = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + cek.PPE_NO;
                 }
                 //update
                 //cek.STATUS = ppe.STATUS;
@@ -652,7 +671,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
-                    cek.APPROVAL_ORDER = 7;
+                    cek.APPROVAL_ORDER = 8;
                     cek.URL_FORM_DONE = ppe.URL_FORM_DONE;
                 }
                 else if (cek.DISTRICT_FROM != "KPHO")

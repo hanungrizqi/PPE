@@ -170,7 +170,15 @@ function submitApproval(postStatus) {
         },
         success: function (data) {
             if (data.Remarks == true) {
-                sendMailPM_Penerima(Array.from(uniquePPE_NO));
+                //sendMailPM_Penerima(Array.from(uniquePPE_NO));
+                $('.row-checkbox:checked').each(function () {
+                    let distrikto = $(this).closest('tr').find('td:eq(5)').text();
+                    if (distrikto === "KPHO") {
+                        sendMailDivhead_Eng(Array.from(uniquePPE_NO));
+                    } else {
+                        sendMailPM_Penerima(Array.from(uniquePPE_NO));
+                    }
+                });
             } if (data.Remarks == false) {
                 Swal.fire(
                     'Error!',
@@ -212,6 +220,47 @@ function sendMailPM_Penerima(uniquePPE_NO) {
     $.ajax({
         //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima",
+        data: JSON.stringify(uniquePPE_NO),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks == true) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Your data has been saved!",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/ProjectManager";
+                    }
+                })
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailDivhead_Eng(uniquePPE_NO) {
+    debugger
+    var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    debugger
+    $.ajax({
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
         type: "POST",

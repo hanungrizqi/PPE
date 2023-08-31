@@ -23,6 +23,7 @@ function getDetail() {
             $("#txt_locFrom").val(dataPPE.LOC_FROM);
             $("#txt_locTo").val(dataPPE.LOC_TO);
             $("#txt_note").val(dataPPE.REMARKS);
+            $("#txtstatuss").val(dataPPE.STATUS);
         }
     });
 }
@@ -37,6 +38,8 @@ function submitApproval(postStatus) {
         );
         return;
     }
+    let distrikfrom = $("#txt_districtFrom").val();
+    let statss = $("#txtstatuss").val();
     debugger
     let dataEQP = new Object();
     dataEQP.PPE_NO = $("#txt_noPPE").val();
@@ -63,8 +66,16 @@ function submitApproval(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
+            //debugger
+            //sendMailPlant_DeptHead(NomorPPEM);
             debugger
-            sendMailPlant_DeptHead(NomorPPEM);
+            if (distrikfrom === "KPHO" && statss !== "PLANT ADM & DEV MANAGER APPROVED") {
+                sendMailPlant_Manager(NomorPPEM);
+            } else if (distrikfrom === "KPHO" && statss === "PLANT ADM & DEV MANAGER APPROVED") {
+                sendMailPM_penerima(NomorPPEM);
+            } else {
+                sendMailPlant_DeptHead(NomorPPEM);
+            }
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -78,6 +89,84 @@ function sendMailPlant_DeptHead(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
+        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
+        //data: JSON.stringify(NomorPPEM),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantManager";
+                    }
+                });
+            } else {
+                Swal.fire(
+                    'Error!',
+                    'Message: ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailPlant_Manager(NomorPPEM) {
+    var encodedPPENo = encodeURIComponent(NomorPPEM.replace(/\//g, '%2F'));
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
+        //data: JSON.stringify(NomorPPEM),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantManager";
+                    }
+                });
+            } else {
+                Swal.fire(
+                    'Error!',
+                    'Message: ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailPM_penerima(NomorPPEM) {
+    var encodedPPENo = encodeURIComponent(NomorPPEM.replace(/\//g, '%2F'));
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/DetailApproval/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
         //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
         //data: JSON.stringify(NomorPPEM),
         dataType: "json",

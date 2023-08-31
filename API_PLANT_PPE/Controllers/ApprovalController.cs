@@ -298,7 +298,7 @@ namespace API_PLANT_PPE.Controllers
                     var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe.PPE_NO && a.EQUIP_NO == ppe.EQUIP_NO);
 
                     old_posisi = cek.POSISI_PPE;
-                    if (cek.DISTRICT_FROM == "KPHO" && cek.STATUS != "PLANT ADM & DEV MANAGER APPROVED")
+                    if (cek.DISTRICT_FROM == "KPHO" && cek.STATUS != "PLANT ADM & DEV MANAGER APPROVED") //posisi plant adm dev manager
                     {
                         cek.STATUS = "PLANT ADM & DEV MANAGER APPROVED";
                         cek.REMARKS = ppe.REMARKS;
@@ -306,7 +306,7 @@ namespace API_PLANT_PPE.Controllers
                         cek.POSISI_PPE = "Plant Manager";
                         cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                         cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER; //3;
-                        cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
+                        //cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
                     }
                     else if (cek.DISTRICT_FROM != "KPHO")
                     {
@@ -327,7 +327,7 @@ namespace API_PLANT_PPE.Controllers
                         cek.POSISI_PPE = "Project Manager Penerima";
                         cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                         cek.APPROVAL_ORDER = 4;
-                        cek.URL_FORM_PM_PENERIMA = ppe.URL_FORM_PM_PENERIMA;
+                        cek.URL_FORM_PM_PENERIMA = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + cek.PPE_NO;
                     }
                     //update
                     //cek.STATUS = ppe.STATUS;
@@ -510,7 +510,7 @@ namespace API_PLANT_PPE.Controllers
                         cek.POSISI_PPE = "Plant Adm & Dev Manager";
                         cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                         cek.APPROVAL_ORDER = 2;
-                        cek.URL_FORM_PLNTMNGR = ppe.URL_FORM_PLNTMNGR;
+                        //cek.URL_FORM_PLNTMNGR = ppe.URL_FORM_PLNTMNGR;
                     }
                     else if (cek.DISTRICT_FROM != "KPHO")
                     {

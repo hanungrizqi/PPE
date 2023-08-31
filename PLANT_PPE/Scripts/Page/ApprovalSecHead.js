@@ -173,10 +173,12 @@ function submitApproval(postStatus) {
     $('.row-checkbox:checked').each(function () {
         debugger
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
         let ppe = {
             PPE_NO: $(this).data('id'),
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
+            DISTRICT_FROM: distrikfrom,
             EQUIP_NO: equipNo,
             POSISI_PPE: postStatus === "REJECT" ? "Sect. Head" : "Plant Manager",
             STATUS: postStatus,
@@ -202,7 +204,16 @@ function submitApproval(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
-            sendMailPlant_Manager(Array.from(uniquePPE_NO));
+            //sendMailPlant_Manager(Array.from(uniquePPE_NO));
+            $('.row-checkbox:checked').each(function () {
+                let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
+
+                if (distrikfrom === "KPHO") {
+                    sendMailPlant_AdmDev_Manager(Array.from(uniquePPE_NO));
+                } else {
+                    sendMailPlant_Manager(Array.from(uniquePPE_NO));
+                }
+            });
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -219,6 +230,47 @@ function sendMailPlant_Manager(uniquePPE_NO) {
     $.ajax({
         //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager",
+        data: JSON.stringify(uniquePPE_NO),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/SectionHead";
+                    }
+                });
+            } else {
+                Swal.fire(
+                    'Error!',
+                    'Message: ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailPlant_AdmDev_Manager(uniquePPE_NO) {
+    debugger
+    //var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    var encodedPPENo = uniquePPE_NO.map(ppeNo => encodeURIComponent(ppeNo));
+    debugger
+    $.ajax({
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Admdev_Manager",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
         type: "POST",

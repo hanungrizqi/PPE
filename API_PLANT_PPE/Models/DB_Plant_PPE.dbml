@@ -651,4 +651,11 @@
       <Column Name="UPLOAD_FORM_CAAB" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.cusp_insertNotifEmail_PlantAdmDevManager" Method="cusp_insertNotifEmail_PlantAdmDevManager">
+    <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="cusp_insertNotifEmail_PlantAdmDevManagerResult">
+      <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

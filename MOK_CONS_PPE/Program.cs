@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Configuration;
 using System.Runtime.ConstrainedExecution;
+using MOK_CONS_PPE.EquipmentService;
+using EllipseWebServicesClient;
 
 namespace MOK_CONS_PPE
 {
@@ -225,7 +227,7 @@ namespace MOK_CONS_PPE
                             {
                                 SqlConnection DBPPE = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
                                 DBPPE.Open();
-                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantManager", DBPPE);
+                                SqlCommand cmdSP = new SqlCommand("cusp_insertNotifEmail_PlantAdmDevManager", DBPPE);
                                 cmdSP.CommandType = System.Data.CommandType.StoredProcedure;
                                 cmdSP.Parameters.Add("@PPE_NO", System.Data.SqlDbType.VarChar, 20).Value = DataProcess[5].ToString();
 
@@ -1057,6 +1059,11 @@ namespace MOK_CONS_PPE
                             {
                                 errormsg = "Error Send Mail : " + ex.ToString();
                             }
+
+                            //executeEllipse();
+                            string ppeNos = DataProcess[5];
+                            string idPpeSubstrings = DataProcess[2];
+                            executeEllipse(ppeNos, idPpeSubstrings);
                         }
                         
                     }
@@ -1122,6 +1129,9 @@ namespace MOK_CONS_PPE
                         {
                             errormsg = "Error Send Mail : " + ex.ToString();
                         }
+                        string ppeNos = DataProcess[5];
+                        string idPpeSubstrings = DataProcess[2];
+                        executeEllipse(ppeNos, idPpeSubstrings);
                     }
                     CONNECT.Close();
                 }
@@ -1167,6 +1177,68 @@ namespace MOK_CONS_PPE
             #endregion
 
             sw.Close();
+        }
+        //static void executeEllipse()
+        static void executeEllipse(string ppeNo, string idPpeSubstring)
+        {
+            try
+            {
+                SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPT);
+                CONNECT.Open();
+                string selectQuery = "SELECT * FROM TBL_T_PPE WHERE PPE_NO = @PPE_NO AND SUBSTRING(CONVERT(VARCHAR(36), ID_PPE), 1, 16) = @ID_PPE_SUBSTRING";
+                SqlCommand selectCommand = new SqlCommand(selectQuery, CONNECT);
+                selectCommand.Parameters.AddWithValue("@PPE_NO", ppeNo);
+                selectCommand.Parameters.AddWithValue("@ID_PPE_SUBSTRING", idPpeSubstring);
+
+                using (SqlDataReader reader = selectCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        // Membaca kolom-kolom yang diperlukan
+                        string equipNo = reader["EQUIP_NO"].ToString();
+                        string districtTo = reader["DISTRICT_TO"].ToString();
+                        string districtfrom = reader["DISTRICT_FROM"].ToString();
+                        // ... membaca kolom lainnya
+
+                        EquipmentService.EquipmentService i_obj_services = new EquipmentService.EquipmentService();
+
+                        EquipmentService.OperationContext i_obj_context = new EquipmentService.OperationContext();
+                        EquipmentServiceModifyRequestDTO i_obj_equipment_dto1 = new EquipmentServiceModifyRequestDTO();
+
+                        EquipmentServiceReadRequestDTO i_obj_equipment_request = new EquipmentServiceReadRequestDTO();
+                        EquipmentServiceReadReplyDTO i_obj_equipment_result = new EquipmentServiceReadReplyDTO();
+                        i_obj_equipment_request.equipmentNo = equipNo;
+                        i_obj_equipment_request.equipmentRef = equipNo;
+
+                        string str_username = ConfigurationManager.AppSettings["username"].ToString();
+                        string str_password = ConfigurationManager.AppSettings["password"].ToString();
+                        string str_posisi = ConfigurationManager.AppSettings["pos_id"].ToString();
+                        ClientConversation.authenticate(str_username, str_password);
+
+                        i_obj_context.district = districtfrom;
+                        i_obj_context.position = str_posisi;
+
+                        i_obj_equipment_result = i_obj_services.read(i_obj_context, i_obj_equipment_request);
+
+                        i_obj_equipment_dto1.equipmentNo = equipNo;
+                        i_obj_equipment_dto1.costingFlag = "W";
+                        i_obj_equipment_dto1.poNo = "-";
+                        i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
+                        i_obj_services.modify(i_obj_context, i_obj_equipment_dto1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No data found for PPE_NO: " + ppeNo);
+                    }
+                }
+
+                CONNECT.Close();
+            }
+            catch (Exception ex)
+            {
+                var exMessage = ex.Message;
+                Console.WriteLine(DateTime.Now.ToString() + exMessage);
+            }
         }
     }
 }

@@ -160,6 +160,7 @@ function submitApproval(postStatus) {
     $('.row-checkbox:checked').each(function () {
         debugger
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
         let ppe = {
             PPE_NO: $(this).data('id'),
             UPDATED_BY: $("#hd_nrp").val(),
@@ -189,7 +190,18 @@ function submitApproval(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
-            sendMailPlant_DeptHead(Array.from(uniquePPE_NO));
+            /*sendMailPlant_DeptHead(Array.from(uniquePPE_NO));*/
+            $('.row-checkbox:checked').each(function () {
+                let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
+                let statss = $(this).closest('tr').find('td:eq(7)').text();
+                if (distrikfrom === "KPHO" && statss !== "PLANT ADM & DEV MANAGER APPROVED") {
+                    sendMailPlant_Manager(Array.from(uniquePPE_NO));
+                } else if (distrikfrom === "KPHO" && statss === "PLANT ADM & DEV MANAGER APPROVED") {
+                    sendMailPM_Penerima(Array.from(uniquePPE_NO));
+                } else {
+                    sendMailPlant_DeptHead(Array.from(uniquePPE_NO));
+                }
+            });
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -205,6 +217,88 @@ function sendMailPlant_DeptHead(uniquePPE_NO) {
     $.ajax({
         //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead",
+        data: JSON.stringify(uniquePPE_NO),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks == true) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Your data has been saved!",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantManager";
+                    }
+                })
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailPlant_Manager(uniquePPE_NO) {
+    debugger
+    //var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    var encodedPPENo = uniquePPE_NO.map(ppeNo => encodeURIComponent(ppeNo));
+    debugger
+    $.ajax({
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager",
+        data: JSON.stringify(uniquePPE_NO),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantManager";
+                    }
+                });
+            } else {
+                Swal.fire(
+                    'Error!',
+                    'Message: ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailPM_Penerima(uniquePPE_NO) {
+    debugger
+    var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    debugger
+    $.ajax({
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
         type: "POST",

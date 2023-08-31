@@ -463,6 +463,13 @@ namespace API_PLANT_PPE.Models
 		{
 			return this.CreateMethodCallQuery<cufn_getHistoryPPEResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), equip_no);
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_insertNotifEmail_PlantAdmDevManager")]
+		public ISingleResult<cusp_insertNotifEmail_PlantAdmDevManagerResult> cusp_insertNotifEmail_PlantAdmDevManager([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PPE_NO", DbType="VarChar(20)")] string pPE_NO)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pPE_NO);
+			return ((ISingleResult<cusp_insertNotifEmail_PlantAdmDevManagerResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_AKSES")]
@@ -9973,6 +9980,50 @@ namespace API_PLANT_PPE.Models
 				if ((this._UPLOAD_FORM_CAAB != value))
 				{
 					this._UPLOAD_FORM_CAAB = value;
+				}
+			}
+		}
+	}
+	
+	public partial class cusp_insertNotifEmail_PlantAdmDevManagerResult
+	{
+		
+		private string _TO_LIST;
+		
+		private string _BODY;
+		
+		public cusp_insertNotifEmail_PlantAdmDevManagerResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TO_LIST", DbType="VarChar(MAX)")]
+		public string TO_LIST
+		{
+			get
+			{
+				return this._TO_LIST;
+			}
+			set
+			{
+				if ((this._TO_LIST != value))
+				{
+					this._TO_LIST = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BODY", DbType="VarChar(MAX)")]
+		public string BODY
+		{
+			get
+			{
+				return this._BODY;
+			}
+			set
+			{
+				if ((this._BODY != value))
+				{
+					this._BODY = value;
 				}
 			}
 		}

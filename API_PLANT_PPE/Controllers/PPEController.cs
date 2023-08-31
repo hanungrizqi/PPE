@@ -561,6 +561,33 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpPost]
+        [Route("Sendmail_Plant_Admdev_Manager")]
+        public IHttpActionResult Sendmail_Plant_Admdev_Manager(string[] param)
+        {
+            try
+            {
+                foreach (var ppe in param)
+                {
+                    var cek = db.TBL_T_PPEs.FirstOrDefault(a => a.PPE_NO == ppe);
+
+                    if (cek.PPE_NO != null)
+                    {
+
+                        string decodedPpenosh = Uri.UnescapeDataString(ppe);
+                        db.cusp_insertNotifEmail_PlantAdmDevManager(decodedPpenosh);
+                    }
+                }
+                return Ok(new { Remarks = true });
+
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [HttpPost]
         [Route("Sendmail_Plant_DeptHead")]
         public IHttpActionResult Sendmail_Plant_DeptHead(string[] param)
         {
