@@ -194,6 +194,23 @@ namespace API_PLANT_PPE.Controllers
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER; //3;
                     //cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
+
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approval_Order = ppe.APPROVAL_ORDER;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        }
+                    }
                 }
                 else if (cek.DISTRICT_FROM != "KPHO")
                 {
@@ -215,6 +232,23 @@ namespace API_PLANT_PPE.Controllers
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = 4;
                     cek.URL_FORM_PM_PENERIMA = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + cek.PPE_NO;
+
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approval_Order = 4;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        }
+                    }
                 }
                 //update
                 //cek.STATUS = ppe.STATUS;
@@ -226,22 +260,22 @@ namespace API_PLANT_PPE.Controllers
                 //cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
 
                 //history ppe
-                TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+                //TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
 
-                if (cek.PPE_NO != null && cek.POSISI_PPE != "")
-                {
-                    his.Ppe_NO = ppe.PPE_NO;
-                    his.Equip_No = ppe.EQUIP_NO;
-                    his.Posisi_Ppe = old_posisi;
-                    his.Approval_Order = ppe.APPROVAL_ORDER;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
-                    his.Approved_By = ppe.UPDATED_BY;
+                //if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                //{
+                //    his.Ppe_NO = ppe.PPE_NO;
+                //    his.Equip_No = ppe.EQUIP_NO;
+                //    his.Posisi_Ppe = old_posisi;
+                //    his.Approval_Order = ppe.APPROVAL_ORDER;
+                //    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                //    his.Approved_By = ppe.UPDATED_BY;
 
-                    if (ppe.STATUS != "REJECT")
-                    {
-                        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                    }
-                }
+                //    if (ppe.STATUS != "REJECT")
+                //    {
+                //        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                //    }
+                //}
 
                 db.SubmitChanges();
 
@@ -495,6 +529,23 @@ namespace API_PLANT_PPE.Controllers
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = 5;
                     cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_DIVHEAD_ENG;
+
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approval_Order = 5;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        }
+                    }
                 }
                 else if (cek.DISTRICT_FROM != "KPHO")
                 {
@@ -506,6 +557,23 @@ namespace API_PLANT_PPE.Controllers
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_DIVHEAD_ENG;
+
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approval_Order = ppe.APPROVAL_ORDER;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        }
+                    }
                 }
                 //update
                 //cek.STATUS = ppe.STATUS;
@@ -517,22 +585,22 @@ namespace API_PLANT_PPE.Controllers
                 //cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_DIVHEAD_ENG;
 
                 //history ppe
-                TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+                //TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
 
-                if (cek.PPE_NO != null && cek.POSISI_PPE != "")
-                {
-                    his.Ppe_NO = ppe.PPE_NO;
-                    his.Equip_No = ppe.EQUIP_NO;
-                    his.Posisi_Ppe = old_posisi;
-                    his.Approval_Order = ppe.APPROVAL_ORDER;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
-                    his.Approved_By = ppe.UPDATED_BY;
+                //if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                //{
+                //    his.Ppe_NO = ppe.PPE_NO;
+                //    his.Equip_No = ppe.EQUIP_NO;
+                //    his.Posisi_Ppe = old_posisi;
+                //    his.Approval_Order = ppe.APPROVAL_ORDER;
+                //    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                //    his.Approved_By = ppe.UPDATED_BY;
 
-                    if (ppe.STATUS != "REJECT")
-                    {
-                        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                    }
-                }
+                //    if (ppe.STATUS != "REJECT")
+                //    {
+                //        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                //    }
+                //}
 
                 db.SubmitChanges();
 
@@ -584,6 +652,23 @@ namespace API_PLANT_PPE.Controllers
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = 6;
                     cek.URL_FORM_DIVHEAD_OPR = ppe.URL_FORM_DIVHEAD_OPR;
+
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approval_Order = 6;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        }
+                    }
                 }
                 else if (cek.DISTRICT_FROM != "KPHO")
                 {
@@ -595,6 +680,23 @@ namespace API_PLANT_PPE.Controllers
                     cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.URL_FORM_DIVHEAD_OPR = ppe.URL_FORM_DIVHEAD_OPR;
+
+                    TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                    if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                    {
+                        his.Ppe_NO = ppe.PPE_NO;
+                        his.Equip_No = ppe.EQUIP_NO;
+                        his.Posisi_Ppe = old_posisi;
+                        his.Approval_Order = ppe.APPROVAL_ORDER;
+                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_By = ppe.UPDATED_BY;
+
+                        if (ppe.STATUS != "REJECT")
+                        {
+                            db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                        }
+                    }
                 }
                 //update
                 //cek.STATUS = ppe.STATUS;
@@ -606,22 +708,22 @@ namespace API_PLANT_PPE.Controllers
                 //cek.URL_FORM_DIVHEAD_OPR = ppe.URL_FORM_DIVHEAD_OPR;
 
                 //history ppe
-                TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+                //TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
 
-                if (cek.PPE_NO != null && cek.POSISI_PPE != "")
-                {
-                    his.Ppe_NO = ppe.PPE_NO;
-                    his.Equip_No = ppe.EQUIP_NO;
-                    his.Posisi_Ppe = old_posisi;
-                    his.Approval_Order = ppe.APPROVAL_ORDER;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
-                    his.Approved_By = ppe.UPDATED_BY;
+                //if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                //{
+                //    his.Ppe_NO = ppe.PPE_NO;
+                //    his.Equip_No = ppe.EQUIP_NO;
+                //    his.Posisi_Ppe = old_posisi;
+                //    his.Approval_Order = ppe.APPROVAL_ORDER;
+                //    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                //    his.Approved_By = ppe.UPDATED_BY;
 
-                    if (ppe.STATUS != "REJECT")
-                    {
-                        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
-                    }
-                }
+                //    if (ppe.STATUS != "REJECT")
+                //    {
+                //        db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                //    }
+                //}
 
                 db.SubmitChanges();
 
