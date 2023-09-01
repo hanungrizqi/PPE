@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Runtime.ConstrainedExecution;
 using MOK_CONS_PPE.EquipmentService;
 using EllipseWebServicesClient;
+using System.Data;
 
 namespace MOK_CONS_PPE
 {

@@ -8,3 +8,7 @@ D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.exe
 D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.pdb
 D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\bin\Debug\EllipseWebServicesClient.dll
 D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.csproj.CopyComplete
+D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\bin\Debug\MOK_CONS_PPE.exe.manifest
+D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\bin\Debug\MOK_CONS_PPE.application
+D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.exe.manifest
+D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.application

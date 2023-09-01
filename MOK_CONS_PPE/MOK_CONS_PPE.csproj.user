@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>D:\Publish Project\PLANT_PPE\20230901\MSO_CONS_PPE\|D:\Publish Project\PLANT_PPE\20230814\Console\|D:\Publish Project\PLANT_PPE\20230809\Console\|D:\Publish Project\PLANT_PPE\20230807\Console\|D:\Publish Project\PLANT_PPE\20230801\Console_V2\</PublishUrlHistory>
+    <PublishUrlHistory>D:\Publish Project\PLANT_PPE\20230901\MOK_CONS_PPE\|publish\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
     <UpdateUrlHistory />
@@ -9,8 +9,5 @@
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
-  </PropertyGroup>
-  <PropertyGroup>
-    <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
 </Project>
