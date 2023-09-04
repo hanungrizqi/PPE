@@ -1179,6 +1179,7 @@ namespace MOK_CONS_PPE
 
             sw.Close();
         }
+        #region Ellipse mse600
         //static void executeEllipse()
         static void executeEllipse(string ppeNo, string idPpeSubstring)
         {
@@ -1241,5 +1242,6 @@ namespace MOK_CONS_PPE
                 Console.WriteLine(DateTime.Now.ToString() + exMessage);
             }
         }
+        #endregion
     }
 }
