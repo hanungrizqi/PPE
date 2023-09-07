@@ -1223,8 +1223,15 @@ namespace MOK_CONS_PPE
                         i_obj_equipment_result = i_obj_services.read(i_obj_context, i_obj_equipment_request);
 
                         i_obj_equipment_dto1.equipmentNo = equipNo;
-                        i_obj_equipment_dto1.costingFlag = "W";
-                        i_obj_equipment_dto1.poNo = "-";
+                        i_obj_equipment_dto1.equipmentStatus = "MT";
+                        if (i_obj_equipment_result.poNo != null)
+                        {
+                            i_obj_equipment_dto1.poNo = i_obj_equipment_result.poNo;
+                        }
+                        else
+                        {
+                            i_obj_equipment_dto1.poNo = "-";
+                        }
                         i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
                         i_obj_services.modify(i_obj_context, i_obj_equipment_dto1);
                     }
