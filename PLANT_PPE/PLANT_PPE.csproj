@@ -4431,6 +4431,7 @@
     <Content Include="Scripts\Page\SettingAccountProfile.js" />
     <Content Include="Scripts\Page\SettingAgreement.js" />
     <Content Include="Scripts\Page\MappingApproval.js" />
+    <Content Include="Scripts\Page\SettingDistrictLocation.js" />
     <Content Include="Scripts\Page\SettingMenu.js" />
     <Content Include="Scripts\Page\SettingDistrict.js" />
     <Content Include="Scripts\Page\SettingUserApprove.js" />
@@ -4504,6 +4505,7 @@
     <Content Include="Views\Approval\DetailPPE_ProjectManager_Penerima.cshtml" />
     <Content Include="Views\Approval\DetailPPE_DivHead.cshtml" />
     <Content Include="Views\Approval\DetailPPE_DivHead_OPR.cshtml" />
+    <Content Include="Views\Setting\DistrictLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -238,7 +238,8 @@ namespace MSO687_CONSOLEAPP
                             ScreenNameValueDTO fieldDTO14 = new ScreenNameValueDTO();
 
                             DateTime datereceivedsm = (DateTime)item.DATE_RECEIVED_SM;
-                            datereceivedsm = new DateTime(2022, datereceivedsm.Month, datereceivedsm.Day);
+                            //datereceivedsm = new DateTime(2022, datereceivedsm.Month, datereceivedsm.Day);
+                            datereceivedsm = new DateTime(datereceivedsm.Year, datereceivedsm.Month, datereceivedsm.Day);
 
                             fieldDTO13.fieldName = "XFER_DATE1I";
                             fieldDTO13.value = datereceivedsm.ToString("yyyyMMdd");
@@ -330,42 +331,11 @@ namespace MSO687_CONSOLEAPP
             }
             if (currentDay == 15 || currentDay == 16 || currentDay == 17 || currentDay == 18 || currentDay == 19 || currentDay == 20 || currentDay == 21 || currentDay == 22 || currentDay == 23 || currentDay == 24 || currentDay == 25 || currentDay == 26)
             {
-                //var cek = dbs.TBL_T_UPLOAD_JOB_MASTERs.FirstOrDefault(a => a.JOB_ID == "NEWPPE-MSO687-BY-TEAM-KPP-2023");
-                //if (cek != null)
-                //{
-                //    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
-
-                //    CONNECT.Open();
-                //    var Query = "Update TBL_T_UPLOAD_JOB_MASTER Set JOB_STATUS = 9, JOB_REMARK = 'Nothing to execution on 15 until 26', POST_DATETIME = GETDATE() Where JOB_ID = '" + cek.JOB_ID.ToString() + "'";
-                //    SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
-                //    COMMAND.ExecuteNonQuery();
-                //    CONNECT.Close();
-
-                //}
-                //else
-                //{
-                //    string str_username = ConfigurationManager.AppSettings["username"].ToString();
-                //    string str_password = ConfigurationManager.AppSettings["password"].ToString();
-                //    string str_posisi = ConfigurationManager.AppSettings["pos_id"].ToString();
-
-                //    SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_MANAGEMENT_SERVICES_KPTConnectionString);
-
-                //    CONNECT.Open();
-                //    var Query = "INSERT INTO TBL_T_UPLOAD_JOB_MASTER (JOB_ID, SERVER_ID, SCRIPT_CODE, ELLIPSE_USERNAME, ELLIPSE_PASSWORD, ELLIPSE_POSITION, ELLIPSE_DISTRICT, POST_DATETIME, JOB_STATUS, JOB_REMARK, DB_SERVER_NAME, DATABASE_NAME) " +
-                //"VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'TESTING', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', 'KPHO', GETDATE(), 9 'Nothing to execution on 15 until 26', 'kphosq101\\shpol', 'DB_PLANT_PPE_NEW_KPT')";
-                //    SqlCommand COMMAND = new SqlCommand(Query, CONNECT);
-                //    COMMAND.ExecuteNonQuery();
-                //    CONNECT.Close();
-
-                //}
-                //Console.WriteLine("Nothing to execution on 15 until 26");
-                //return;
                 var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.ToList();
                 foreach (var item in dataEquipment)
                 {
                     try
                     {
-                        //var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).GroupBy(a => a.SUB_ASSET_NO).Select(g => g.First()).ToList();
                         var dataList = db.VW_R_SUB_ASSET_BALANCE_SHEETs.Where(a => a.EQUIP_NO == item.EQUIP_NO).ToList();
                         foreach (var data in dataList)
                         {
@@ -538,7 +508,8 @@ namespace MSO687_CONSOLEAPP
                             ScreenNameValueDTO fieldDTO14 = new ScreenNameValueDTO();
 
                             DateTime datereceivedsm = (DateTime)item.DATE_RECEIVED_SM;
-                            datereceivedsm = new DateTime(2022, datereceivedsm.Month, datereceivedsm.Day);
+                            //datereceivedsm = new DateTime(2022, datereceivedsm.Month, datereceivedsm.Day);
+                            datereceivedsm = new DateTime(datereceivedsm.Year, datereceivedsm.Month, datereceivedsm.Day);
 
                             fieldDTO13.fieldName = "XFER_DATE1I";
                             fieldDTO13.value = datereceivedsm.ToString("yyyyMMdd");
@@ -808,7 +779,8 @@ namespace MSO687_CONSOLEAPP
                             ScreenNameValueDTO fieldDTO14 = new ScreenNameValueDTO();
 
                             DateTime datereceivedsm = (DateTime)item.DATE_RECEIVED_SM;
-                            datereceivedsm = new DateTime(2022, datereceivedsm.Month, datereceivedsm.Day);
+                            //datereceivedsm = new DateTime(2022, datereceivedsm.Month, datereceivedsm.Day);
+                            datereceivedsm = new DateTime(datereceivedsm.Year, datereceivedsm.Month, datereceivedsm.Day);
 
                             fieldDTO13.fieldName = "XFER_DATE1I";
                             fieldDTO13.value = datereceivedsm.ToString("yyyyMMdd");

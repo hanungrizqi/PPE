@@ -230,4 +230,11 @@
       <Column Name="FLAG" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TBL_M_DISTRICT" Member="TBL_M_DISTRICTs">
+    <Type Name="TBL_M_DISTRICT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TABLE_CODE" Type="System.String" DbType="Char(18)" CanBeNull="true" />
+      <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

@@ -45,9 +45,6 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_M_AGREEMENT(TBL_M_AGREEMENT instance);
     partial void UpdateTBL_M_AGREEMENT(TBL_M_AGREEMENT instance);
     partial void DeleteTBL_M_AGREEMENT(TBL_M_AGREEMENT instance);
-    partial void InsertTBL_M_DISTRICT(TBL_M_DISTRICT instance);
-    partial void UpdateTBL_M_DISTRICT(TBL_M_DISTRICT instance);
-    partial void DeleteTBL_M_DISTRICT(TBL_M_DISTRICT instance);
     partial void InsertTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
     partial void UpdateTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
     partial void DeleteTBL_M_MAPPING_APPROVAL(TBL_M_MAPPING_APPROVAL instance);
@@ -69,6 +66,9 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_T_PPE(TBL_T_PPE instance);
     partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
     partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
+    partial void InsertTBL_M_DISTRICT(TBL_M_DISTRICT instance);
+    partial void UpdateTBL_M_DISTRICT(TBL_M_DISTRICT instance);
+    partial void DeleteTBL_M_DISTRICT(TBL_M_DISTRICT instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -237,14 +237,6 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<TBL_M_DISTRICT> TBL_M_DISTRICTs
-		{
-			get
-			{
-				return this.GetTable<TBL_M_DISTRICT>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TBL_M_MAPPING_APPROVAL> TBL_M_MAPPING_APPROVALs
 		{
 			get
@@ -386,6 +378,14 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<TBL_T_PPE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_M_DISTRICT> TBL_M_DISTRICTs
+		{
+			get
+			{
+				return this.GetTable<TBL_M_DISTRICT>();
 			}
 		}
 		
@@ -3820,116 +3820,6 @@ namespace API_PLANT_PPE.Models
 				{
 					this._DSTRCT_NAME = value;
 				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_DISTRICT")]
-	public partial class TBL_M_DISTRICT : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _DSTRCT_CODE;
-		
-		private string _LOCATION;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnDSTRCT_CODEChanging(string value);
-    partial void OnDSTRCT_CODEChanged();
-    partial void OnLOCATIONChanging(string value);
-    partial void OnLOCATIONChanged();
-    #endregion
-		
-		public TBL_M_DISTRICT()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(100)")]
-		public string DSTRCT_CODE
-		{
-			get
-			{
-				return this._DSTRCT_CODE;
-			}
-			set
-			{
-				if ((this._DSTRCT_CODE != value))
-				{
-					this.OnDSTRCT_CODEChanging(value);
-					this.SendPropertyChanging();
-					this._DSTRCT_CODE = value;
-					this.SendPropertyChanged("DSTRCT_CODE");
-					this.OnDSTRCT_CODEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOCATION", DbType="VarChar(100)")]
-		public string LOCATION
-		{
-			get
-			{
-				return this._LOCATION;
-			}
-			set
-			{
-				if ((this._LOCATION != value))
-				{
-					this.OnLOCATIONChanging(value);
-					this.SendPropertyChanging();
-					this._LOCATION = value;
-					this.SendPropertyChanged("LOCATION");
-					this.OnLOCATIONChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -9206,6 +9096,116 @@ namespace API_PLANT_PPE.Models
 					this._FLAG = value;
 					this.SendPropertyChanged("FLAG");
 					this.OnFLAGChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_DISTRICT")]
+	public partial class TBL_M_DISTRICT : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _TABLE_CODE;
+		
+		private string _TABLE_DESC;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnTABLE_CODEChanging(string value);
+    partial void OnTABLE_CODEChanged();
+    partial void OnTABLE_DESCChanging(string value);
+    partial void OnTABLE_DESCChanged();
+    #endregion
+		
+		public TBL_M_DISTRICT()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_CODE", DbType="Char(18)")]
+		public string TABLE_CODE
+		{
+			get
+			{
+				return this._TABLE_CODE;
+			}
+			set
+			{
+				if ((this._TABLE_CODE != value))
+				{
+					this.OnTABLE_CODEChanging(value);
+					this.SendPropertyChanging();
+					this._TABLE_CODE = value;
+					this.SendPropertyChanged("TABLE_CODE");
+					this.OnTABLE_CODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_DESC", DbType="Char(50)")]
+		public string TABLE_DESC
+		{
+			get
+			{
+				return this._TABLE_DESC;
+			}
+			set
+			{
+				if ((this._TABLE_DESC != value))
+				{
+					this.OnTABLE_DESCChanging(value);
+					this.SendPropertyChanging();
+					this._TABLE_DESC = value;
+					this.SendPropertyChanged("TABLE_DESC");
+					this.OnTABLE_DESCChanged();
 				}
 			}
 		}

@@ -196,25 +196,25 @@ namespace API_PLANT_PPE.Controllers
         //END Setting Agreement
 
         //Setting District
-        [HttpPost]
-        [Route("Create_District")]
-        public IHttpActionResult Create_District(TBL_M_DISTRICT param)
-        {
-            try
-            {
-                TBL_M_DISTRICT tbl = new TBL_M_DISTRICT();
-                tbl.DSTRCT_CODE = param.DSTRCT_CODE;
-                tbl.LOCATION = param.LOCATION;
+        //[HttpPost]
+        //[Route("Create_District")]
+        //public IHttpActionResult Create_District(TBL_M_DISTRICT param)
+        //{
+        //    try
+        //    {
+        //        TBL_M_DISTRICT tbl = new TBL_M_DISTRICT();
+        //        tbl.DSTRCT_CODE = param.DSTRCT_CODE;
+        //        tbl.LOCATION = param.LOCATION;
 
-                db.TBL_M_DISTRICTs.InsertOnSubmit(tbl);
-                db.SubmitChanges();
-                return Json(new { Remarks = true });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Remarks = false, Message = ex });
-            }
-        }
+        //        db.TBL_M_DISTRICTs.InsertOnSubmit(tbl);
+        //        db.SubmitChanges();
+        //        return Json(new { Remarks = true });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { Remarks = false, Message = ex });
+        //    }
+        //}
 
         [HttpGet]
         [Route("Get_AccountProfile")]
@@ -458,5 +458,59 @@ namespace API_PLANT_PPE.Controllers
             return Ok(new { Data = data });
         }
 
+        [HttpGet]
+        [Route("Get_District_Location")]
+        public IHttpActionResult Get_District_Location()
+        {
+            try
+            {
+                var data = db.TBL_M_DISTRICTs.OrderBy(a => a.TABLE_DESC).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("Delete_Dist")]
+        public IHttpActionResult Delete_Dist(int id)
+        {
+            try
+            {
+                var data = db.TBL_M_DISTRICTs.Where(a => a.ID == id).FirstOrDefault();
+
+                db.TBL_M_DISTRICTs.DeleteOnSubmit(data);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+
+        }
+
+        [HttpPost]
+        [Route("Create_Dist")]
+        public IHttpActionResult Create_Dist(TBL_M_DISTRICT param)
+        {
+            try
+            {
+                TBL_M_DISTRICT tbl = new TBL_M_DISTRICT();
+                tbl.TABLE_CODE = param.TABLE_CODE;
+                tbl.TABLE_DESC = param.TABLE_DESC;
+
+                db.TBL_M_DISTRICTs.InsertOnSubmit(tbl);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
     }
 }

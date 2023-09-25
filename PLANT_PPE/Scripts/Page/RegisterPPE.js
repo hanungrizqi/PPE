@@ -75,7 +75,7 @@ function getLoc() {
             $('#txt_locFrom').empty();
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.EQUIP_LOCATION + '">' + val.EQUIP_LOCATION + '</option>';
+                text += '<option value="' + val.TABLE_CODE + '">' + val.TABLE_CODE + '</option>';
             });
             $("#txt_locFrom").append(text);
         }
@@ -113,7 +113,7 @@ function getLocTO() {
             $('#txt_locTo').empty();
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.EQUIP_LOCATION + '">' + val.EQUIP_LOCATION + '</option>';
+                text += '<option value="' + val.TABLE_CODE + '">' + val.TABLE_CODE + '</option>';
             });
             $("#txt_locTo").append(text);
         }

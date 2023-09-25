@@ -81,5 +81,15 @@ namespace PLANT_PPE.Controllers
             ViewBag.loc = db.VW_LOCATIONs.ToList();*/
             return View();
         }
+
+        public ActionResult DistrictLocation()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            ViewBag.Emp = db.TBL_R_MASTER_KARYAWAN_ALLs.ToList();
+            return View();
+        }
     }
 }

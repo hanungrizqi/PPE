@@ -41,7 +41,6 @@ namespace API_PLANT_PPE.ViewModel
 
                 //edit 10/08/2023 ubah costing flag menjadi not allowed
                 i_obj_equipment_dto1.equipmentNo = dataEquipment.EQUIP_NO;
-                //i_obj_equipment_dto1.costingFlag = "W";
                 i_obj_equipment_dto1.equipmentStatus = "MT";
                 if (i_obj_equipment_result.poNo != null)
                 {
@@ -54,8 +53,6 @@ namespace API_PLANT_PPE.ViewModel
                 i_obj_equipment_dto1.equipmentClassif3 = i_obj_equipment_result.equipmentClassif3;
                 
                 i_obj_services.modify(i_obj_context, i_obj_equipment_dto1);
-                //ClsUpdate_MSF600_Result result = updatemse600_ReferenceCOdes(dataEquipment);
-                //return result;
 
                 cls.Remarks = true;
                 cls.Message = "Update Equipment MSF600 Berhasil";
@@ -97,7 +94,6 @@ namespace API_PLANT_PPE.ViewModel
                 i_obj_equipment_dto1.equipmentNo = dataEquipment.EQUIP_NO;
                 i_obj_equipment_dto1.districtCode = dataEquipment.DISTRICT_TO;
                 i_obj_equipment_dto1.equipmentLocation = dataEquipment.LOC_TO;
-                //i_obj_equipment_dto1.costingFlag = "A";
                 i_obj_equipment_dto1.equipmentStatus = "AV";
                 if (i_obj_equipment_result.poNo != null)
                 {
@@ -113,9 +109,6 @@ namespace API_PLANT_PPE.ViewModel
                 ClsUpdate_MSF600_Result result = SM_ReferenceCodes(dataEquipment);
                 return result;
 
-                //cls.Remarks = true;
-                //cls.Message = "Update Equipment MSF600 Berhasil";
-                //return (cls);
             }
             catch (Exception ex)
             {

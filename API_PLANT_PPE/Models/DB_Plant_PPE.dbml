@@ -231,13 +231,6 @@
       <Column Name="DSTRCT_NAME" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TBL_M_DISTRICT" Member="TBL_M_DISTRICTs">
-    <Type Name="TBL_M_DISTRICT">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="LOCATION" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.TBL_M_MAPPING_APPROVAL" Member="TBL_M_MAPPING_APPROVALs">
     <Type Name="TBL_M_MAPPING_APPROVAL">
       <Column Name="APPROVAL_NO" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -558,6 +551,13 @@
       <Column Name="DATE_RECEIVED_SM" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="BERITA_ACARA_SM" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="FLAG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_M_DISTRICT" Member="TBL_M_DISTRICTs">
+    <Type Name="TBL_M_DISTRICT">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TABLE_CODE" Type="System.String" DbType="Char(18)" CanBeNull="true" />
+      <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">

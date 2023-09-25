@@ -92,5 +92,11 @@
         <elementListCompartment Id="aff677b9-6496-4cc0-8048-4392f13cc76c" absoluteBounds="2.64, 0.96, 1.9700000000000002, 6.979939778645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="2e687902-0628-48ef-a71a-322e1c5f0db4" isExpanded="false" absoluteBounds="2.625, 1, 2, 0.45">
+      <DataClassMoniker Name="/DB_PLANT_PPEDataContext/TBL_M_DISTRICT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="331559e3-5c49-4194-b1d1-e06d28cf721c" absoluteBounds="2.64, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

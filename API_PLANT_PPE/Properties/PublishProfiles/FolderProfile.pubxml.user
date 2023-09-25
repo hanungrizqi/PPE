@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230904\restAPI</_PublishTargetUrl>
-    <History>True|2023-09-04T04:09:18.2812827Z;True|2023-08-16T09:09:19.8182108+07:00;True|2023-08-14T15:06:43.9542610+07:00;True|2023-08-09T08:58:19.4767664+07:00;True|2023-08-07T14:51:12.9341636+07:00;True|2023-08-07T13:33:22.9903054+07:00;True|2023-08-04T13:52:52.5056803+07:00;True|2023-08-01T09:09:59.1853742+07:00;True|2023-07-28T14:29:18.9481278+07:00;True|2023-07-17T13:53:31.1090919+07:00;True|2023-07-17T13:37:02.3139276+07:00;True|2023-06-28T14:35:07.9960337+07:00;True|2023-06-28T10:14:07.2543212+07:00;True|2023-06-21T11:42:32.8182655+07:00;True|2023-06-09T10:13:26.9243086+07:00;True|2023-06-06T10:59:13.0331636+07:00;</History>
+    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20230908\restAPI</_PublishTargetUrl>
+    <History>True|2023-09-08T02:12:38.1160232Z;True|2023-09-04T11:09:18.2812827+07:00;True|2023-08-16T09:09:19.8182108+07:00;True|2023-08-14T15:06:43.9542610+07:00;True|2023-08-09T08:58:19.4767664+07:00;True|2023-08-07T14:51:12.9341636+07:00;True|2023-08-07T13:33:22.9903054+07:00;True|2023-08-04T13:52:52.5056803+07:00;True|2023-08-01T09:09:59.1853742+07:00;True|2023-07-28T14:29:18.9481278+07:00;True|2023-07-17T13:53:31.1090919+07:00;True|2023-07-17T13:37:02.3139276+07:00;True|2023-06-28T14:35:07.9960337+07:00;True|2023-06-28T10:14:07.2543212+07:00;True|2023-06-21T11:42:32.8182655+07:00;True|2023-06-09T10:13:26.9243086+07:00;True|2023-06-06T10:59:13.0331636+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -79,13 +79,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/API_PLANT_PPE.dll">
-      <publishTime>09/04/2023 11:09:07</publishTime>
+      <publishTime>09/08/2023 09:12:26</publishTime>
     </File>
     <File Include="bin/API_PLANT_PPE.pdb">
-      <publishTime>09/04/2023 11:09:07</publishTime>
+      <publishTime>09/08/2023 09:12:26</publishTime>
     </File>
     <File Include="bin/API_PLANT_PPE.XmlSerializers.dll">
-      <publishTime>09/04/2023 11:09:13</publishTime>
+      <publishTime>09/08/2023 09:12:32</publishTime>
     </File>
     <File Include="bin/de/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>06/25/2023 04:12:12</publishTime>
