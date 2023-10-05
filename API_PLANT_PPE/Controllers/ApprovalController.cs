@@ -403,6 +403,23 @@ namespace API_PLANT_PPE.Controllers
                         cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
                         cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                         cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
+
+                        if (cek.PPE_NO != null && cek.POSISI_PPE != "")
+                        {
+                            TBL_H_APPROVAL_PPE his = new TBL_H_APPROVAL_PPE();
+
+                            his.Ppe_NO = ppe.PPE_NO;
+                            his.Equip_No = ppe.EQUIP_NO;
+                            his.Posisi_Ppe = old_posisi;
+                            his.Approval_Order = ppe.APPROVAL_ORDER;
+                            his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                            his.Approved_By = ppe.UPDATED_BY;
+
+                            if (ppe.STATUS != "REJECT")
+                            {
+                                db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);
+                            }
+                        }
                     }
                     else if (cek.DISTRICT_FROM == "KPHO" && cek.STATUS == "PLANT ADM & DEV MANAGER APPROVED")
                     {
