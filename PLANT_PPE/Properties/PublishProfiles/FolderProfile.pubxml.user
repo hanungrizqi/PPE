@@ -4,7 +4,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20231005\Web</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Publish Project\PLANT_PPE\20231030\web</_PublishTargetUrl>
     <History>True|2023-07-28T07:30:03.1700808Z;False|2023-07-17T13:47:16.6125582+07:00;False|2023-07-17T13:46:27.5839978+07:00;False|2023-07-17T13:44:59.1656268+07:00;False|2023-07-17T13:41:15.6690919+07:00;True|2023-06-06T11:00:29.1914988+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
@@ -169,10 +169,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/22/2019 01:06:16</publishTime>
     </File>
     <File Include="bin/PLANT_PPE.dll">
-      <publishTime>10/05/2023 10:12:48</publishTime>
+      <publishTime>10/30/2023 08:43:34</publishTime>
     </File>
     <File Include="bin/PLANT_PPE.pdb">
-      <publishTime>10/05/2023 10:12:48</publishTime>
+      <publishTime>10/30/2023 08:43:34</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.ReportViewer.Common.resources.dll">
       <publishTime>06/25/2023 04:12:12</publishTime>
@@ -13279,7 +13279,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/23/2023 12:55:31</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/05/2023 10:12:49</publishTime>
+      <publishTime>10/30/2023 08:43:35</publishTime>
     </File>
   </ItemGroup>
 </Project>

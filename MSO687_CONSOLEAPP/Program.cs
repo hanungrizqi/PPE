@@ -24,28 +24,6 @@ namespace MSO687_CONSOLEAPP
             //Console.ReadLine(); // Keep the console application running
         }
 
-        //static void ScheduleExecute()
-        //{
-        //    // Get the current time
-        //    DateTime currentTime = DateTime.Now;
-
-        //    // Set the desired execution time to 14:50 today
-        //    DateTime scheduledTime = new DateTime(currentTime.Year, currentTime.Month, currentTime.Day, 06, 01, 0);
-
-        //    // If the scheduled time has already passed today, schedule it for tomorrow
-        //    if (currentTime > scheduledTime)
-        //    {
-        //        scheduledTime = scheduledTime.AddDays(1);
-        //    }
-
-        //    // Calculate the time remaining until the scheduled time
-        //    TimeSpan timeUntilScheduledTime = scheduledTime - currentTime;
-
-        //    // Create a Timer to execute the Execute method at the scheduled time
-        //    Timer timer = new Timer(Execute, null, timeUntilScheduledTime, Timeout.InfiniteTimeSpan);
-        //}
-
-        //private static void Execute(object state)
         static void Execute()
         {
 
@@ -329,7 +307,7 @@ namespace MSO687_CONSOLEAPP
                 }
                 //db.SubmitChanges();
             }
-            if (currentDay == 15 || currentDay == 16 || currentDay == 17 || currentDay == 18 || currentDay == 19 || currentDay == 20 || currentDay == 21 || currentDay == 22 || currentDay == 23 || currentDay == 24 || currentDay == 25 || currentDay == 26)
+            if (currentDay == 16 || currentDay == 17 || currentDay == 18 || currentDay == 19 || currentDay == 20 || currentDay == 21 || currentDay == 22 || currentDay == 23 || currentDay == 24 || currentDay == 25)
             {
                 var dataEquipment = db.VW_T_MSF687_TRASNFER_ASSETs.ToList();
                 foreach (var item in dataEquipment)
