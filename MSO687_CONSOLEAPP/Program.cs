@@ -306,7 +306,7 @@ namespace MSO687_CONSOLEAPP
                 }
                 //db.SubmitChanges();
             }
-            if (currentDay >= 16 && currentDay <= 25)
+            else if (currentDay >= 16 && currentDay <= 25)
             {
                 //do nothing cause data will execute on 26
 
