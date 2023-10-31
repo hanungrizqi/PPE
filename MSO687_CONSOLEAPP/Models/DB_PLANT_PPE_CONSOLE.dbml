@@ -139,6 +139,7 @@
   </Table>
   <Table Name="dbo.TBL_R_ASSET_LOCATION" Member="TBL_R_ASSET_LOCATIONs">
     <Type Name="TBL_R_ASSET_LOCATION">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DSTRCT_CODE" Type="System.String" DbType="NChar(4)" CanBeNull="true" />
       <Column Name="EQUIPMENT_LOCATION" Type="System.String" DbType="NChar(2)" CanBeNull="true" />
       <Column Name="EQUIPMENT_DESC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />

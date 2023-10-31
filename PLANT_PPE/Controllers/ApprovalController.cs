@@ -85,6 +85,16 @@ namespace PLANT_PPE.Controllers
             }
             return View();
         }
+
+        public ActionResult PlantADMDevManager()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
+
         public ActionResult PlantDeptHead()
         {
             if (Session["nrp"] == null)

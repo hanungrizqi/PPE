@@ -91,5 +91,14 @@ namespace PLANT_PPE.Controllers
             ViewBag.Emp = db.TBL_R_MASTER_KARYAWAN_ALLs.ToList();
             return View();
         }
+
+        public ActionResult AccProfile()
+        {
+            if (Session["nrp"] == null)
+            {
+                return RedirectToAction("index", "login");
+            }
+            return View();
+        }
     }
 }

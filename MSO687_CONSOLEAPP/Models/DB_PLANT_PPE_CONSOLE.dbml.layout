@@ -32,10 +32,10 @@
         <elementListCompartment Id="82e65557-44d1-4d04-8b82-86f2fed2bca7" absoluteBounds="4.765, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3ccee1bb-84c8-4bd5-8f45-56a8bfde4cff" isExpanded="false" absoluteBounds="0.5, 1, 2, 0.45">
+    <classShape Id="50147214-d275-4e58-a4fc-09c5f99142d7" isExpanded="false" absoluteBounds="0.5, 1, 2, 0.45">
       <DataClassMoniker Name="/DB_PLANT_PPE_CONSOLEDataContext/TBL_R_ASSET_LOCATION" />
       <nestedChildShapes>
-        <elementListCompartment Id="0d3816c3-3e57-481a-8249-e4d79498313c" absoluteBounds="0.51500000000000012, 1.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9c2efed0-e762-49b3-aeca-cbe3acb13063" absoluteBounds="0.51499999999999968, 1.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

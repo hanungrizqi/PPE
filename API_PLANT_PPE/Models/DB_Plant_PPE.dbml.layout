@@ -218,5 +218,17 @@
         <elementListCompartment Id="e8351fbe-66df-4626-925d-97f4bc5df148" absoluteBounds="0.51500000000000012, 3.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="c9e8f3ef-c4d7-40e6-8871-97a2c06f008d" isExpanded="false" absoluteBounds="6.875, 5, 2, 0.45">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/VW_LOCATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="77f11042-d1c4-4c53-8c03-b52cbedc5e9f" absoluteBounds="6.89, 5.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7ab85358-65f4-4a90-93a9-f157cc5778b1" isExpanded="false" absoluteBounds="2.625, 3.5, 2, 0.45">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/TBL_R_ASSET_LOCATION" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d9e201f-81aa-4c6b-b3b6-9636abf6f026" absoluteBounds="2.64, 3.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

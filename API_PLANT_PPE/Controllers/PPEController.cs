@@ -225,19 +225,35 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                if (posid == "KP1PT03")
-                {
-                    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
-                    return Ok(new { Data = data });
-                }
-                else
-                {
-                    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
-                    return Ok(new { Data = data });
-                }
-                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                //if (posid == "KP1PT03")
+                //{
+                //    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                //    return Ok(new { Data = data });
+                //}
+                //else
+                //{
+                //    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                //    return Ok(new { Data = data });
+                //}
 
-                //return Ok(new { Data = data });
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                return Ok(new { Data = data });
+
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_ListApprovalPMADMDev_PPE")]
+        public IHttpActionResult Get_ListApprovalPMADMDev_PPE()
+        {
+            try
+            {
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                return Ok(new { Data = data });
             }
             catch (Exception)
             {

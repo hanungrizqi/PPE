@@ -69,6 +69,9 @@ namespace API_PLANT_PPE.Models
     partial void InsertTBL_M_DISTRICT(TBL_M_DISTRICT instance);
     partial void UpdateTBL_M_DISTRICT(TBL_M_DISTRICT instance);
     partial void DeleteTBL_M_DISTRICT(TBL_M_DISTRICT instance);
+    partial void InsertTBL_R_ASSET_LOCATION(TBL_R_ASSET_LOCATION instance);
+    partial void UpdateTBL_R_ASSET_LOCATION(TBL_R_ASSET_LOCATION instance);
+    partial void DeleteTBL_R_ASSET_LOCATION(TBL_R_ASSET_LOCATION instance);
     #endregion
 		
 		public DB_Plant_PPEDataContext() : 
@@ -386,6 +389,22 @@ namespace API_PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<TBL_M_DISTRICT>();
+			}
+		}
+		
+		public System.Data.Linq.Table<VW_LOCATION> VW_LOCATIONs
+		{
+			get
+			{
+				return this.GetTable<VW_LOCATION>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_R_ASSET_LOCATION> TBL_R_ASSET_LOCATIONs
+		{
+			get
+			{
+				return this.GetTable<TBL_R_ASSET_LOCATION>();
 			}
 		}
 		
@@ -9206,6 +9225,281 @@ namespace API_PLANT_PPE.Models
 					this._TABLE_DESC = value;
 					this.SendPropertyChanged("TABLE_DESC");
 					this.OnTABLE_DESCChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_LOCATION")]
+	public partial class VW_LOCATION
+	{
+		
+		private string _TABLE_CODE;
+		
+		private string _TABLE_DESC;
+		
+		public VW_LOCATION()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_CODE", DbType="Char(18) NOT NULL", CanBeNull=false)]
+		public string TABLE_CODE
+		{
+			get
+			{
+				return this._TABLE_CODE;
+			}
+			set
+			{
+				if ((this._TABLE_CODE != value))
+				{
+					this._TABLE_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_DESC", DbType="Char(50) NOT NULL", CanBeNull=false)]
+		public string TABLE_DESC
+		{
+			get
+			{
+				return this._TABLE_DESC;
+			}
+			set
+			{
+				if ((this._TABLE_DESC != value))
+				{
+					this._TABLE_DESC = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_R_ASSET_LOCATION")]
+	public partial class TBL_R_ASSET_LOCATION : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _EQUIPMENT_LOCATION;
+		
+		private string _EQUIPMENT_DESC;
+		
+		private string _ACTIVE_FLAG;
+		
+		private string _PRODUCTION_EQUIPMENT;
+		
+		private string _SUPPORT_EQUIPMENT;
+		
+		private string _WORKSHOP_EQUIPMENT;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnDSTRCT_CODEChanging(string value);
+    partial void OnDSTRCT_CODEChanged();
+    partial void OnEQUIPMENT_LOCATIONChanging(string value);
+    partial void OnEQUIPMENT_LOCATIONChanged();
+    partial void OnEQUIPMENT_DESCChanging(string value);
+    partial void OnEQUIPMENT_DESCChanged();
+    partial void OnACTIVE_FLAGChanging(string value);
+    partial void OnACTIVE_FLAGChanged();
+    partial void OnPRODUCTION_EQUIPMENTChanging(string value);
+    partial void OnPRODUCTION_EQUIPMENTChanged();
+    partial void OnSUPPORT_EQUIPMENTChanging(string value);
+    partial void OnSUPPORT_EQUIPMENTChanged();
+    partial void OnWORKSHOP_EQUIPMENTChanging(string value);
+    partial void OnWORKSHOP_EQUIPMENTChanged();
+    #endregion
+		
+		public TBL_R_ASSET_LOCATION()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="NChar(4)")]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this.OnDSTRCT_CODEChanging(value);
+					this.SendPropertyChanging();
+					this._DSTRCT_CODE = value;
+					this.SendPropertyChanged("DSTRCT_CODE");
+					this.OnDSTRCT_CODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_LOCATION", DbType="NChar(2)")]
+		public string EQUIPMENT_LOCATION
+		{
+			get
+			{
+				return this._EQUIPMENT_LOCATION;
+			}
+			set
+			{
+				if ((this._EQUIPMENT_LOCATION != value))
+				{
+					this.OnEQUIPMENT_LOCATIONChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIPMENT_LOCATION = value;
+					this.SendPropertyChanged("EQUIPMENT_LOCATION");
+					this.OnEQUIPMENT_LOCATIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EQUIPMENT_DESC", DbType="VarChar(50)")]
+		public string EQUIPMENT_DESC
+		{
+			get
+			{
+				return this._EQUIPMENT_DESC;
+			}
+			set
+			{
+				if ((this._EQUIPMENT_DESC != value))
+				{
+					this.OnEQUIPMENT_DESCChanging(value);
+					this.SendPropertyChanging();
+					this._EQUIPMENT_DESC = value;
+					this.SendPropertyChanged("EQUIPMENT_DESC");
+					this.OnEQUIPMENT_DESCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACTIVE_FLAG", DbType="Char(10)")]
+		public string ACTIVE_FLAG
+		{
+			get
+			{
+				return this._ACTIVE_FLAG;
+			}
+			set
+			{
+				if ((this._ACTIVE_FLAG != value))
+				{
+					this.OnACTIVE_FLAGChanging(value);
+					this.SendPropertyChanging();
+					this._ACTIVE_FLAG = value;
+					this.SendPropertyChanged("ACTIVE_FLAG");
+					this.OnACTIVE_FLAGChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCTION_EQUIPMENT", DbType="NChar(4)")]
+		public string PRODUCTION_EQUIPMENT
+		{
+			get
+			{
+				return this._PRODUCTION_EQUIPMENT;
+			}
+			set
+			{
+				if ((this._PRODUCTION_EQUIPMENT != value))
+				{
+					this.OnPRODUCTION_EQUIPMENTChanging(value);
+					this.SendPropertyChanging();
+					this._PRODUCTION_EQUIPMENT = value;
+					this.SendPropertyChanged("PRODUCTION_EQUIPMENT");
+					this.OnPRODUCTION_EQUIPMENTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUPPORT_EQUIPMENT", DbType="NChar(4)")]
+		public string SUPPORT_EQUIPMENT
+		{
+			get
+			{
+				return this._SUPPORT_EQUIPMENT;
+			}
+			set
+			{
+				if ((this._SUPPORT_EQUIPMENT != value))
+				{
+					this.OnSUPPORT_EQUIPMENTChanging(value);
+					this.SendPropertyChanging();
+					this._SUPPORT_EQUIPMENT = value;
+					this.SendPropertyChanged("SUPPORT_EQUIPMENT");
+					this.OnSUPPORT_EQUIPMENTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WORKSHOP_EQUIPMENT", DbType="NChar(4)")]
+		public string WORKSHOP_EQUIPMENT
+		{
+			get
+			{
+				return this._WORKSHOP_EQUIPMENT;
+			}
+			set
+			{
+				if ((this._WORKSHOP_EQUIPMENT != value))
+				{
+					this.OnWORKSHOP_EQUIPMENTChanging(value);
+					this.SendPropertyChanging();
+					this._WORKSHOP_EQUIPMENT = value;
+					this.SendPropertyChanged("WORKSHOP_EQUIPMENT");
+					this.OnWORKSHOP_EQUIPMENTChanged();
 				}
 			}
 		}
