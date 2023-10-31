@@ -57,7 +57,7 @@ namespace MOK_CONS_PPE.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpd.kppmining.net/ews/services/EquipmentService")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpt.kppmining.net/ews/services/EquipmentService")]
         public string MOK_CONS_PPE_EquipmentService_EquipmentService {
             get {
                 return ((string)(this["MOK_CONS_PPE_EquipmentService_EquipmentService"]));

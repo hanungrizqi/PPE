@@ -22,7 +22,7 @@
       <Value Profile="(Default)">Data Source=kphosq101\shpol;Initial Catalog=DB_PLANT_PPE_NEW_KPT;Persist Security Info=True;User ID=sqlservices;Password=sqlservices1</Value>
     </Setting>
     <Setting Name="MOK_CONS_PPE_EquipmentService_EquipmentService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://ews-kpd.kppmining.net/ews/services/EquipmentService</Value>
+      <Value Profile="(Default)">https://ews-kpt.kppmining.net/ews/services/EquipmentService</Value>
     </Setting>
   </Settings>
 </SettingsFile>
