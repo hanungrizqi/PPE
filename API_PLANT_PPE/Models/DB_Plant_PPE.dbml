@@ -89,16 +89,6 @@
       <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.VW_User" Member="VW_Users">
-    <Type Name="VW_User">
-      <Column Name="ID_Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
-      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="RoleName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.VW_M_JOBSITE" Member="VW_M_JOBSITEs">
     <Type Name="VW_M_JOBSITE">
       <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -561,6 +551,35 @@
       <Column Name="LOCATION_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LOCATION_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_User" Member="VW_Users">
+    <Type Name="VW_User">
+      <Column Name="ID_Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="POSITION_ID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_R_ASSET_LOCATION" Member="TBL_R_ASSET_LOCATIONs">
+    <Type Name="TBL_R_ASSET_LOCATION">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="NChar(4)" CanBeNull="true" />
+      <Column Name="EQUIPMENT_LOCATION" Type="System.String" DbType="NChar(2)" CanBeNull="true" />
+      <Column Name="EQUIPMENT_DESC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ACTIVE_FLAG" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="PRODUCTION_EQUIPMENT" Type="System.String" DbType="NChar(4)" CanBeNull="true" />
+      <Column Name="SUPPORT_EQUIPMENT" Type="System.String" DbType="NChar(4)" CanBeNull="true" />
+      <Column Name="WORKSHOP_EQUIPMENT" Type="System.String" DbType="NChar(4)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_LOCATION" Member="VW_LOCATIONs">
+    <Type Name="VW_LOCATION">
+      <Column Name="TABLE_CODE" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
