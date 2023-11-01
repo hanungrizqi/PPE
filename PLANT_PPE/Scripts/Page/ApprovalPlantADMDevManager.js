@@ -1,9 +1,8 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
-
-var table = $("#tbl_ppe_penerima").DataTable({
+var table = $("#tbl_ppe").DataTable({
     ajax: {
-        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima?posid=" + $("#hd_PositionID").val(),
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima",
+        url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPMADMDev_PPE",
+        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE",
         dataSrc: "Data",
     },
 
@@ -43,13 +42,13 @@ var table = $("#tbl_ppe_penerima").DataTable({
             targets: 'no-sort', orderable: false,
             render: function (data, type, row) {
                 action = `<div class="btn-group">`
-                action += `<a href="/Approval/DetailPPE_ProjectManager_Penerima?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
+                action += `<a href="/Approval/DetailPPE_PM?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
                 return action;
             }
         }
     ],
     initComplete: function () {
-        var headerCheckbox = document.getElementById('checkAll2');
+        var headerCheckbox = document.getElementById('checkAll');
         var rowCheckboxes = document.getElementsByClassName('row-checkbox');
         headerCheckbox.addEventListener('change', function () {
             var isChecked = headerCheckbox.checked;
@@ -62,7 +61,7 @@ var table = $("#tbl_ppe_penerima").DataTable({
             .every(function () {
                 var column = this;
                 var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"><option value="">-- PPE NUMBER --</option></select>')
-                    .appendTo($("#tbl_ppe_penerima_filter.dataTables_filter"))
+                    .appendTo($("#tbl_ppe_filter.dataTables_filter"))
                     .on('change', function () {
                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
                         column.search(val ? '^' + val + '$' : '', true, false).draw();
@@ -78,60 +77,20 @@ var table = $("#tbl_ppe_penerima").DataTable({
     },
 });
 
-$("document").ready(function () {
-    $('#modal-terms').on('show.bs.modal', function () {
-        getContent();
-    });
-    $('#modal-terms').on('hidden.bs.modal', function () {
-        var agreeCheckbox = document.getElementById('val-terms');
-        agreeCheckbox.checked = true; 
-    });
-
-    $('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
-        var agreeCheckbox = document.getElementById('val-terms');
-        agreeCheckbox.disabled = false; 
-    });
-})
-
 table.on('draw', function () {
-    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe_penerima tbody .row-checkbox:checked');
+    var visibleCheckboxes = document.querySelectorAll('#tbl_ppe tbody .row-checkbox:checked');
 
     visibleCheckboxes.forEach(function (checkbox) {
         checkbox.checked = false;
     });
 });
 
-function getContent() {
-    $.ajax({
-        url: $("#web_link").val() + "/api/Setting/Get_Agreement", //URI
-        dataType: "json",
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            var content = data.Data;
-            $("#agreementss").html(content);
-
-        },
-        error: function (xhr) {
-            alert(xhr.responseText);
-        }
-    });
-}
-
-function submitApprovalPenerima(postStatus) {
+function submitApproval(postStatus) {
     debugger
-    var agreeCheckbox = document.getElementById('val-terms');
     if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
         Swal.fire(
             'Warning',
             'Mohon sertakan Remarks Approval!',
-            'warning'
-        );
-        return;
-    } else if (!agreeCheckbox.checked) {
-        Swal.fire(
-            'Warning!',
-            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
             'warning'
         );
         return;
@@ -157,15 +116,16 @@ function submitApprovalPenerima(postStatus) {
     $('.row-checkbox:checked').each(function () {
         debugger
         let equipNo = $(this).closest('tr').find('td:eq(3)').text();
+        let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
         let ppe = {
             PPE_NO: $(this).data('id'),
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Project Manager Penerima" : "Division Head ENG",
+            POSISI_PPE: postStatus === "REJECT" ? "Plant Manager" : "Plant Dept. Head",
             STATUS: postStatus,
-            APPROVAL_ORDER: 6,
-            URL_FORM_DIVHEAD_ENG: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + $(this).data('id'),
+            APPROVAL_ORDER: postStatus === "REJECT" ? 3 : 3,
+            URL_FORM_PLNTDH: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PlantDeptHead&PPE_NO=" + $(this).data('id'),
         };
         dataPPE.push(ppe);
         if (!uniquePPE_NO.has(ppe.PPE_NO)) {
@@ -173,9 +133,11 @@ function submitApprovalPenerima(postStatus) {
             uniquePPE_NO.add(ppe.PPE_NO);
         }
     });
+    console.log(uniquePPE_NO);
+    console.log(dataPPE);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/Approval/Approve_PPE_PMPenerima",
+        url: $("#web_link").val() + "/api/Approval/Approve_PPE_PlantManager",
         data: JSON.stringify(dataPPE),
         dataType: "json",
         type: "POST",
@@ -184,17 +146,18 @@ function submitApprovalPenerima(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
-            if (data.Remarks == true) {
-                sendMailDivhead_Eng(Array.from(uniquePPE_NO));
-            } if (data.Remarks == false) {
-                Swal.fire(
-                    'Error!',
-                    'Message : ' + data.Message,
-                    'error'
-                );
-                $("#overlay").hide();
-            }
-
+            /*sendMailPlant_DeptHead(Array.from(uniquePPE_NO));*/
+            $('.row-checkbox:checked').each(function () {
+                let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
+                let statss = $(this).closest('tr').find('td:eq(7)').text();
+                if (distrikfrom === "KPHO" && statss !== "PLANT ADM & DEV MANAGER APPROVED") {
+                    sendMailPlant_Manager(Array.from(uniquePPE_NO));
+                } else if (distrikfrom === "KPHO" && statss === "PLANT ADM & DEV MANAGER APPROVED") {
+                    sendMailPM_Penerima(Array.from(uniquePPE_NO));
+                } else {
+                    sendMailPlant_DeptHead(Array.from(uniquePPE_NO));
+                }
+            });
         },
         error: function (xhr) {
             alert(xhr.responseText);
@@ -203,13 +166,13 @@ function submitApprovalPenerima(postStatus) {
     });
 }
 
-function sendMailDivhead_Eng(uniquePPE_NO) {
+function sendMailPlant_DeptHead(uniquePPE_NO) {
     debugger
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng?ppe=" + encodedPPENo,
-        url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng",
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
         type: "POST",
@@ -226,7 +189,89 @@ function sendMailDivhead_Eng(uniquePPE_NO) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/ProjectManagerPenerima";
+                        window.location.href = "/Approval/PlantADMDevManager";
+                    }
+                })
+            } if (data.Remarks == false) {
+                Swal.fire(
+                    'Error!',
+                    'Message : ' + data.Message,
+                    'error'
+                );
+                $("#overlay").hide();
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailPlant_Manager(uniquePPE_NO) {
+    debugger
+    //var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    var encodedPPENo = uniquePPE_NO.map(ppeNo => encodeURIComponent(ppeNo));
+    debugger
+    $.ajax({
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager",
+        data: JSON.stringify(uniquePPE_NO),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Data has been Saved.",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantADMDevManager";
+                    }
+                });
+            } else {
+                Swal.fire(
+                    'Error!',
+                    'Message: ' + data.Message,
+                    'error'
+                );
+            }
+        },
+        error: function (xhr) {
+            alert(xhr.responseText);
+        }
+    });
+}
+
+function sendMailPM_Penerima(uniquePPE_NO) {
+    debugger
+    var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
+    debugger
+    $.ajax({
+        //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
+        url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima",
+        data: JSON.stringify(uniquePPE_NO),
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            if (data.Remarks == true) {
+                Swal.fire({
+                    title: 'Saved',
+                    text: "Your data has been saved!",
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Approval/PlantADMDevManager";
                     }
                 })
             } if (data.Remarks == false) {
@@ -246,18 +291,10 @@ function sendMailDivhead_Eng(uniquePPE_NO) {
 
 function rejectApproval(postStatus) {
     debugger
-    var agreeCheckbox = document.getElementById('val-terms');
     if ($("#txt_remark").val() == "" || $("#txt_remark").val() == null) {
         Swal.fire(
             'Warning',
             'Mohon sertakan Remarks Approval!',
-            'warning'
-        );
-        return;
-    } else if (!agreeCheckbox.checked) {
-        Swal.fire(
-            'Warning!',
-            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
             'warning'
         );
         return;
@@ -288,9 +325,9 @@ function rejectApproval(postStatus) {
             UPDATED_BY: $("#hd_nrp").val(),
             REMARKS: $("#txt_remark").val(),
             EQUIP_NO: equipNo,
-            POSISI_PPE: postStatus === "REJECT" ? "Project Manager Penerima" : "Division Head ENG",
+            POSISI_PPE: postStatus === "REJECT" ? "Plant Manager" : "Plant Dept. Head",
             STATUS: postStatus,
-            APPROVAL_ORDER: 6,
+            APPROVAL_ORDER: postStatus === "REJECT" ? 3 : 3,
         };
         dataPPE.push(ppe);
         if (!uniquePPE_NO.has(ppe.PPE_NO)) {
@@ -298,9 +335,11 @@ function rejectApproval(postStatus) {
             uniquePPE_NO.add(ppe.PPE_NO);
         }
     });
+    console.log(uniquePPE_NO);
+    console.log(dataPPE);
 
     $.ajax({
-        url: $("#web_link").val() + "/api/Approval/Reject_Approval",
+        url: $("#web_link").val() + "/api/Approval/Reject_PPE_PlantManager",
         data: JSON.stringify(dataPPE),
         dataType: "json",
         type: "POST",
@@ -320,7 +359,7 @@ function rejectApproval(postStatus) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/ProjectManagerPenerima";
+                        window.location.href = "/Approval/PlantADMDevManager";
                     }
                 })
             } if (data.Remarks == false) {
@@ -331,7 +370,6 @@ function rejectApproval(postStatus) {
                 );
                 $("#overlay").hide();
             }
-
         },
         error: function (xhr) {
             alert(xhr.responseText);

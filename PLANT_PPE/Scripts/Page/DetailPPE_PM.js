@@ -145,7 +145,7 @@ function sendMailPlant_Manager(NomorPPEM) {
                     allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "/Approval/PlantManager";
+                        window.location.href = "/Approval/PlantADMDevManager";
                     }
                 });
             } else {

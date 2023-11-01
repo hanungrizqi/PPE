@@ -225,19 +225,35 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                if (posid == "KP1PT03")
-                {
-                    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
-                    return Ok(new { Data = data });
-                }
-                else
-                {
-                    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
-                    return Ok(new { Data = data });
-                }
-                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                //if (posid == "KP1PT03")
+                //{
+                //    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                //    return Ok(new { Data = data });
+                //}
+                //else
+                //{
+                //    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                //    return Ok(new { Data = data });
+                //}
 
-                //return Ok(new { Data = data });
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                return Ok(new { Data = data });
+
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("Get_ListApprovalPMADMDev_PPE")]
+        public IHttpActionResult Get_ListApprovalPMADMDev_PPE()
+        {
+            try
+            {
+                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                return Ok(new { Data = data });
             }
             catch (Exception)
             {
@@ -247,15 +263,25 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpGet]
         [Route("Get_ListApprovalPDH_PPE")]
-        public IHttpActionResult Get_ListApprovalPDH_PPE()
+        public IHttpActionResult Get_ListApprovalPDH_PPE(string posid)
         {
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Dept. Head" && a.STATUS != "REJECT").ToList();
-                var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED" && a.DISTRICT_FROM != "KPHO").OrderBy(a => a.PPE_NO).OrderBy(a => a.PPE_NO).ToList();
+                var checkPosition = db.VW_Users.Where(a => a.POSITION_ID == posid).FirstOrDefault();
+                if (checkPosition.ID_Role == 1)
+                {
+                    var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED" && a.DISTRICT_FROM != "KPHO").OrderBy(a => a.PPE_NO).OrderBy(a => a.PPE_NO).ToList();
 
-                return Ok(new { Data = data });
+                    return Ok(new { Data = data });
+                }
+                else
+                {
+                    var data = db.cufn_getPPE_NO().Where(a => a.STATUS == "PLANT MANAGER APPROVED" && a.DISTRICT_FROM != "KPHO" && a.DISTRICT_FROM == checkPosition.DSTRCT_CODE).OrderBy(a => a.PPE_NO).OrderBy(a => a.PPE_NO).ToList();
+
+                    return Ok(new { Data = data });
+                }
+                
             }
             catch (Exception)
             {
@@ -282,14 +308,25 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpGet]
         [Route("Get_ListApprovalPM_Pengirim")]
-        public IHttpActionResult Get_ListApprovalPM_Pengirim()
+        public IHttpActionResult Get_ListApprovalPM_Pengirim(string posid)
         {
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Pengirim" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                var checkPosition = db.VW_Users.Where(a => a.POSITION_ID == posid).FirstOrDefault();
+                if (checkPosition.ID_Role == 1)
+                {
+                    var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Pengirim" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
-                return Ok(new { Data = data });
+                    return Ok(new { Data = data });
+                }
+                else
+                {
+                    var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Pengirim" && a.STATUS != "REJECT" && a.DISTRICT_FROM == checkPosition.DSTRCT_CODE).OrderBy(a => a.PPE_NO).ToList();
+
+                    return Ok(new { Data = data });
+                }
+                
             }
             catch (Exception)
             {
@@ -299,14 +336,25 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpGet]
         [Route("Get_ListApprovalPM_Penerima")]
-        public IHttpActionResult Get_ListApprovalPM_Penerima()
+        public IHttpActionResult Get_ListApprovalPM_Penerima(string posid)
         {
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Penerima" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                var checkPosition = db.VW_Users.Where(a => a.POSITION_ID == posid).FirstOrDefault();
+                if (checkPosition.ID_Role == 1)
+                {
+                    var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Penerima" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
-                return Ok(new { Data = data });
+                    return Ok(new { Data = data });
+                }
+                else
+                {
+                    var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager Penerima" && a.STATUS != "REJECT" && a.DISTRICT_TO == checkPosition.DSTRCT_CODE).OrderBy(a => a.PPE_NO).ToList();
+
+                    return Ok(new { Data = data });
+                }
+
             }
             catch (Exception)
             {
@@ -340,7 +388,7 @@ namespace API_PLANT_PPE.Controllers
             {
                 db.CommandTimeout = 120;
                 //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
             }

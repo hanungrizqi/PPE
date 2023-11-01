@@ -223,27 +223,6 @@ namespace API_PLANT_PPE.Controllers
         }
         //END Setting Agreement
 
-        //Setting District
-        //[HttpPost]
-        //[Route("Create_District")]
-        //public IHttpActionResult Create_District(TBL_M_DISTRICT param)
-        //{
-        //    try
-        //    {
-        //        TBL_M_DISTRICT tbl = new TBL_M_DISTRICT();
-        //        tbl.DSTRCT_CODE = param.DSTRCT_CODE;
-        //        tbl.LOCATION = param.LOCATION;
-
-        //        db.TBL_M_DISTRICTs.InsertOnSubmit(tbl);
-        //        db.SubmitChanges();
-        //        return Json(new { Remarks = true });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { Remarks = false, Message = ex });
-        //    }
-        //}
-
         [HttpGet]
         [Route("Get_AccountProfile")]
         public IHttpActionResult Get_AccountProfile()
@@ -522,22 +501,6 @@ namespace API_PLANT_PPE.Controllers
                 return Json(new { Remarks = false, Message = ex });
             }
         }
-        /*[HttpPost]
-        [Route("Delete_MappingApproval")]
-        public IHttpActionResult Delete_MappingApproval(int id)
-        {
-            try
-            {
-                var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).FirstOrDefault();
-                db.TBL_M_MAPPING_APPROVALs.DeleteOnSubmit(data);
-                db.SubmitChanges();
-                return Ok(new { Remarks = true });
-            }
-            catch (Exception e)
-            {
-                return Ok(new { Remarks = false, Message = e });
-            }
-        }*/
 
         [HttpGet]
         [Route("Get_MappingbyId")]
@@ -599,6 +562,105 @@ namespace API_PLANT_PPE.Controllers
             catch (Exception ex)
             {
                 return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpGet]
+        [Route("Acc_profile")]
+        public IHttpActionResult Acc_profile()
+        {
+            try
+            {
+                var data = db.TBL_R_ASSET_LOCATIONs.OrderBy(a => a.DSTRCT_CODE).ToList();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpGet]
+        [Route("equipmentDesc")]
+        public IHttpActionResult equipmentDesc(string loc)
+        {
+            try
+            {
+                var data = db.VW_LOCATIONs.Where(a => a.TABLE_CODE == loc).FirstOrDefault();
+
+                return Ok(new { Data = data });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpPost]
+        [Route("Create_Equiplocation")]
+        public IHttpActionResult Create_Equiplocation(TBL_R_ASSET_LOCATION param)
+        {
+            try
+            {
+                TBL_R_ASSET_LOCATION tbl = new TBL_R_ASSET_LOCATION();
+                tbl.DSTRCT_CODE = param.DSTRCT_CODE;
+                tbl.EQUIPMENT_LOCATION = param.EQUIPMENT_LOCATION;
+                tbl.EQUIPMENT_DESC = param.EQUIPMENT_DESC;
+                tbl.ACTIVE_FLAG = param.ACTIVE_FLAG;
+                tbl.PRODUCTION_EQUIPMENT = param.PRODUCTION_EQUIPMENT;
+                tbl.SUPPORT_EQUIPMENT = param.SUPPORT_EQUIPMENT;
+                tbl.WORKSHOP_EQUIPMENT = param.WORKSHOP_EQUIPMENT;
+
+                db.TBL_R_ASSET_LOCATIONs.InsertOnSubmit(tbl);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpPost]
+        [Route("Delete_Equiplocation")]
+        public IHttpActionResult Delete_Equiplocation(int id)
+        {
+            try
+            {
+                var data = db.TBL_R_ASSET_LOCATIONs.Where(a => a.ID == id).FirstOrDefault();
+
+                db.TBL_R_ASSET_LOCATIONs.DeleteOnSubmit(data);
+                db.SubmitChanges();
+                return Json(new { Remarks = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Remarks = false, Message = ex });
+            }
+        }
+
+        [HttpPost]
+        [Route("Update_Equiplocation")]
+        public IHttpActionResult Update_Equiplocation(TBL_R_ASSET_LOCATION param)
+        {
+            try
+            {
+                var data = db.TBL_R_ASSET_LOCATIONs.Where(a => a.ID == param.ID).FirstOrDefault();
+                data.DSTRCT_CODE = param.DSTRCT_CODE;
+                data.EQUIPMENT_LOCATION = param.EQUIPMENT_LOCATION;
+                data.EQUIPMENT_DESC = param.EQUIPMENT_DESC;
+                data.ACTIVE_FLAG = param.ACTIVE_FLAG;
+                data.PRODUCTION_EQUIPMENT = param.PRODUCTION_EQUIPMENT;
+                data.SUPPORT_EQUIPMENT = param.SUPPORT_EQUIPMENT;
+                data.WORKSHOP_EQUIPMENT = param.WORKSHOP_EQUIPMENT;
+
+                db.SubmitChanges();
+                return Ok(new { Remarks = true });
+            }
+            catch (Exception e)
+            {
+                return Ok(new { Remarks = false, Message = e });
             }
         }
     }

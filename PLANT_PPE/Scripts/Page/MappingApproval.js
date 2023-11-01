@@ -555,7 +555,7 @@ function CobaCari() {
         dataSrc: "Data",
     },
     "columnDefs": [
-        { "className": "dt-center", "targets": [0, 1,2,3,4,5,6,7,8] }
+        { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
     ],
     scrollX: true,
     columns: [

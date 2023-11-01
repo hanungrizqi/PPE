@@ -4021,6 +4021,9 @@
     <Content Include="Content\assets\media\favicons\favicon-192x192.png" />
     <Content Include="Content\assets\media\favicons\favicon.png" />
     <Content Include="Content\assets\media\photos\bg_hero_landing.jpg" />
+    <Content Include="Content\assets\media\photos\Logo KPP %281%29.png" />
+    <Content Include="Content\assets\media\photos\Logo KPP.png" />
+    <Content Include="Content\assets\media\photos\main excell.png" />
     <Content Include="Content\assets\media\photos\photo1%402x.jpg" />
     <Content Include="Content\assets\media\photos\photo1.jpg" />
     <Content Include="Content\assets\media\photos\photo10%402x.jpg" />
@@ -4411,6 +4414,7 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\Page\ApprovalDivHead.js" />
     <Content Include="Scripts\Page\ApprovalDivHeadOPR.js" />
+    <Content Include="Scripts\Page\ApprovalPlantADMDevManager.js" />
     <Content Include="Scripts\Page\ApprovalPlantDeptHead.js" />
     <Content Include="Scripts\Page\ApprovalPlantDeptHead_Detail.js" />
     <Content Include="Scripts\Page\ApprovalPlantManager.js" />
@@ -4429,6 +4433,7 @@
     <Content Include="Scripts\Page\Review.js" />
     <Content Include="Scripts\Page\RegisterPPE.js" />
     <Content Include="Scripts\Page\SettingAccountProfile.js" />
+    <Content Include="Scripts\Page\SettingAccProfile.js" />
     <Content Include="Scripts\Page\SettingAgreement.js" />
     <Content Include="Scripts\Page\MappingApproval.js" />
     <Content Include="Scripts\Page\SettingDistrictLocation.js" />
@@ -4506,6 +4511,8 @@
     <Content Include="Views\Approval\DetailPPE_DivHead.cshtml" />
     <Content Include="Views\Approval\DetailPPE_DivHead_OPR.cshtml" />
     <Content Include="Views\Setting\DistrictLocation.cshtml" />
+    <Content Include="Views\Setting\AccProfile.cshtml" />
+    <Content Include="Views\Approval\PlantADMDevManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
