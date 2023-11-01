@@ -9,6 +9,9 @@ $("document").ready(function () {
     getapprv_to();
     getCurrPosition();
     getNextPosition();
+    getCurrPositionFilter();
+    getNextPositionFilter();
+    CobaCari();
 })
 
 
@@ -19,11 +22,12 @@ function getapprv_from() {
         type: "GET",
         cache: false,
         success: function (result) {
-            $('#apprv_from').empty();
+           // $('#apprv_from').empty();
             text = '<option>PILIH</option>';
             $.each(result.Data, function (key, val) {
                 text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
             });
+            text += '<option value="ALL">ALL</option>'; 
             $("#apprv_from").append(text);
 
         }
@@ -37,11 +41,12 @@ function getapprv_to() {
         type: "GET",
         cache: false,
         success: function (result) {
-            $('#apprv_to').empty();
+           // $('#apprv_to').empty();
             text = '<option>PILIH</option>';
             $.each(result.Data, function (key, val) {
                 text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
             });
+            text += '<option value="ALL">ALL</option>'; 
             $("#apprv_to").append(text);
 
         }
@@ -56,7 +61,7 @@ function getloc_from() {
 
     var district = $("#apprv_from").val();
 
-    $.ajax({
+    /*$.ajax({
         url: $("#web_link").val() + "/api/Setting/Get_DistrictLocation?dstrct=" + district, //URI,
         type: "GET",
         cache: false,
@@ -70,6 +75,20 @@ function getloc_from() {
 
         }
 
+    });*/
+
+    $.ajax({
+        url: $("#web_link").val() + "/api/Master/getLoc/" + district, //URI,
+        type: "GET",
+        cache: false,
+        success: function (result) {
+            $('#loc_from').empty();
+            text = '<option></option>';
+            $.each(result.Data, function (key, val) {
+                text += '<option value="' + val.TABLE_CODE + '">' + val.TABLE_CODE + '</option>';
+            });
+            $("#loc_from").append(text);
+        }
     });
 }
 
@@ -77,7 +96,7 @@ function getloc_to() {
 
     var district = $("#apprv_to").val();
 
-    $.ajax({
+   /* $.ajax({
         url: $("#web_link").val() + "/api/Setting/Get_DistrictLocation?dstrct=" + district, //URI,
         type: "GET",
         cache: false,
@@ -91,6 +110,58 @@ function getloc_to() {
 
         }
 
+    });*/
+
+
+
+    $.ajax({
+        url: $("#web_link").val() + "/api/Master/getLoc/" + district, //URI,
+        type: "GET",
+        cache: false,
+        success: function (result) {
+            $('#loc_to').empty();
+            text = '<option></option>';
+            $.each(result.Data, function (key, val) {
+                text += '<option value="' + val.TABLE_CODE + '">' + val.TABLE_CODE + '</option>';
+            });
+            $("#loc_to").append(text);
+        }
+    });
+}
+
+function getCurrPositionFilter() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Position",
+        type: "GET",
+        cache: false,
+        success: function (result) {
+            //$('#currentfilter').empty();
+            text = ' ';
+            $.each(result.Data, function (key, val) {
+                text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_FULL + '</option>';
+            });
+            $("#currentfilter").append(text);
+
+        }
+
+    });
+}
+
+function getNextPositionFilter() {
+    $.ajax({
+        url: $("#web_link").val() + "/api/Setting/Get_Position",
+        type: "GET",
+        cache: false,
+        success: function (result) {
+            //$('#next_position').empty();
+            text = ' ';
+            $.each(result.Data, function (key, val) {
+                text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_FULL + '</option>';
+            });
+            $("#nextfilter").append(text);
+
+        }
+
     });
 }
 
@@ -100,7 +171,7 @@ function getCurrPosition() {
         type: "GET",
         cache: false,
         success: function (result) {
-            $('#curr_position').empty();
+           // $('#curr_position').empty();
             text = '<option>PILIH</option>';
             $.each(result.Data, function (key, val) {
                 text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_FULL + '</option>';
@@ -118,7 +189,7 @@ function getNextPosition() {
         type: "GET",
         cache: false,
         success: function (result) {
-            $('#next_position').empty();
+           // $('#next_position').empty();
             text = '<option>PILIH</option>';
             $.each(result.Data, function (key, val) {
                 text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_FULL + '</option>';
@@ -180,7 +251,7 @@ function insertMapApproval() {
 
 function updateMapApproval() {
     let obj = new Object();
-    obj.APPROVAL_NO = $('#apprv_no').val();
+    obj.ID = $('#apprv_no').val();
     obj.APPROVAL_ACTION = $('#txt_action').val();
     obj.APPROVAL_ORDER = $('#apprv_order').val();
     obj.APPROVAL_FROM = $('#apprv_from').val();
@@ -226,11 +297,39 @@ function updateMapApproval() {
         }
     })
 }
-function showInsert(){
+function showInsert() {
+
+    cancelModal();
+
+    var text = `<option>PILIH</option>
+                                    <option value="0">REJECT</option>
+                                    <option value="1">APPROVE</option>`
+    $('#txt_action').append(text);
+    getapprv_from();
+    getapprv_to();
+    getCurrPosition();
+    getNextPosition();
     $('#buttonUpdate').hide();
     $('#buttonInsert').show();
 }
+
+function cancelModal() {
+    $('#apprv_no').empty();
+    $('#txt_action').empty();
+    $('#apprv_order').val('');
+    $('#apprv_from').empty();
+    $('#apprv_to').empty();
+    $('#curr_position').empty();
+    $('#next_position').empty();
+    $('#apprv_status').val('');
+    $('#curr_status').val('');
+    $('#loc_from').empty();
+    $('#loc_to').empty();
+}
+
 function editMapApproval(approveNo) {
+    cancelModal();
+    console.log(approveNo);
     $('#buttonUpdate').show();
     $('#buttonInsert').hide();
     var text1;
@@ -244,6 +343,11 @@ function editMapApproval(approveNo) {
     var text9;
     var text10;
     var text11;
+    getapprv_from();
+    getapprv_to();
+    getCurrPosition();
+    getNextPosition();
+    
     $.ajax({
         url: $("#web_link").val() + "/api/Setting/Get_MappingbyId", //URI,
         type: "GET",
@@ -268,7 +372,7 @@ function editMapApproval(approveNo) {
                 text8 = val.NEXT_POSITION_ID ; 
                 text9 = val.APPROVAL_STATUS;
                 text10 = val.CURRENT_STATUS;
-                text11 = val.APPROVAL_NO;
+                text11 = val.ID;
             });
             $('#apprv_no').val(text11);
             $('#txt_action').append(text1);
@@ -309,8 +413,8 @@ function editMapApproval(approveNo) {
                     $("#next_position").append(text);
                 }
             });
-            getloc_from();
-            getloc_to();
+            /*getloc_from();
+            getloc_to();*/
         }
         
     });
@@ -358,8 +462,94 @@ function deleteMapApproval(apprvNumber) {
     });
 }
 
+//String ACTION, String ORDER, String FROM, String TO, String CURPOSITION, String NEXTPOSITION, String APPRVSTATUS, String CURSTATUS, String LOCFROM, String LOCTO
+var table;
+function getFilter(apprv_action, order, from, to, curPosition, nextPosition, apprvStatus, curStatus, locFrom, locTo) {
+//function getFilter() {
+    $('#tbl_mappingApproval').DataTable().destroy();
 
-var table = $("#tbl_mappingApproval").DataTable({
+     table = $("#tbl_mappingApproval").DataTable({
+        ajax: {
+            url: $("#web_link").val() + "/api/Setting/Get_MappingApprovalByFilter",
+            type: "GET",
+            data: {
+                ACTION: apprv_action,
+                ORDER: order,
+                FROM: from,
+                TO: to,
+                CURPOSITION: curPosition,
+                NEXTPOSITION: nextPosition,
+                APPRVSTATUS: apprvStatus,
+                CURSTATUS: curStatus,
+                LOCFROM: locFrom,
+                LOCTO: locTo
+            },
+            dataSrc: "Data",
+            
+        },
+        "columnDefs": [
+            { "className": "dt-center", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8] }
+        ],
+        scrollX: true,
+        columns: [
+            {
+                render: function (data, type, row) {
+                    var text;
+                    if (row.APPROVAL_ACTION == 1) {
+                        text = '<p>Approved</p>'
+                    } else {
+                        text = '<p>Rejected</p>'
+                    }
+                    return text;
+                }
+            },
+            { data: 'APPROVAL_ORDER' },
+            { data: 'APPROVAL_FROM' },
+            { data: 'APPROVAL_TO' },
+            { data: 'LOCATION_FROM' },
+            { data: 'LOCATION_TO' },
+            { data: 'CURR_POSITION_ID' },
+            { data: 'NEXT_POSITION_ID' },
+            { data: 'APPROVAL_STATUS' },
+            { data: 'CURRENT_STATUS' },
+            {
+                data: 'ID',
+                render: function (data, type, row) {
+                    action = `<div class="btn-group">`
+                    action += `<button onClick="editMapApproval('${data}')" type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal-insert">Edit</button>
+                           <button type="button" onclick="deleteMapApproval('${data}')" class="btn btn-sm btn-danger" title="Delete">Del</button> `
+
+                    action += `</div>`
+                    return action;
+                }
+            }
+
+        ],
+
+    });
+}
+
+
+function CobaCari() {
+    var action = $('#actionfilter').val(); 
+    var order = $('#orderfilter').val(); 
+    var curFilter = $('#currentfilter').val(); 
+    var nextFilter = $('#nextfilter').val(); 
+    var fromFilter = $('#fromgilter').val(); 
+    var toFilter = $('#tofilter').val(); 
+    var locFrom = $('#locFromfilter').val(); 
+    var locTo = $('#locTofilter').val(); 
+    var aprvStat = $('#apprvStatusfilter').val(); 
+    var Stat = $('#statusfilter').val(); 
+    console.log(Stat);
+
+    
+
+    getFilter(action, order, fromFilter, toFilter, curFilter, nextFilter, Stat, aprvStat, locFrom, locTo) 
+    
+}
+
+/*var table = $("#tbl_mappingApproval").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/Setting/Get_MappingApproval",
         dataSrc: "Data",
@@ -401,4 +591,4 @@ var table = $("#tbl_mappingApproval").DataTable({
         
     ],
 
-});
+});*/

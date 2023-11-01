@@ -20,7 +20,68 @@
         </div>
     </div>
     <div class="block-content block-content-full">
-        <div>
+        <div class="col">
+            <div class="row mb-2">
+                <div class="col-lg-1">
+                    <h3 class="block-title">Filter :</h3>
+                </div>
+
+                <div class="col">
+                    <select class="js-select2 form-select" id="nrpfilter" name="nrpfilter" style="width:100%" onchange="showTable()">
+                        <option value="" selected>NRP</option>
+                    </select>
+                </div>
+
+                <div class="col ">
+                    <select class="js-select2 form-select" id="positionfilter" name="positionfilter" style="width: 100% " onchange="showTable()">
+                        <option value="" selected>Position ID</option>
+                        
+
+                    </select>
+                </div>
+
+                <div class="col">
+                    <select class="js-select2 form-select" id="dstrctfilter" name="dstrctfilter" style="width: 100% " onchange="showTable()">
+                        <option value="" selected>District</option>
+                    </select>
+                </div>
+
+
+
+
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-1">
+                    
+                </div>
+
+                <div class="col">
+                    <select class="js-select2 form-select" id="namefilter" name="namefilter" style="width:100%" onchange="showTable()">
+                        <option value="" selected>Name</option>
+                       
+                    </select>
+                </div>
+
+                <div class="col ">
+                    <select class="js-select2 form-select" id="approvalfilter" name="approvalfilter" style="width: 100% " onchange="showTable()">
+                        <option value="" selected>Approval Menu</option>
+                        
+
+                    </select>
+                </div>
+
+                
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+        @*<div>
             <p>Filter :</p>
         </div>
         <div id="my-searches" style="width: 100%">
@@ -52,7 +113,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_userApprove">
             <thead class="text-center">
                 <tr>
