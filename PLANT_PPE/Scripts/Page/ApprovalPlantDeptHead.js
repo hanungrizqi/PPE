@@ -31,7 +31,7 @@ var table = $("#tbl_ppe").DataTable({
         { data: 'DISTRICT_FROM' },
         { data: 'DISTRICT_TO' },
         {
-            data: 'CREATED_DATE',
+            data: 'DATE',
             render: function (data, type, row) {
                 const tanggal = moment(data).format("YYYY-MM-DD");
                 return tanggal;

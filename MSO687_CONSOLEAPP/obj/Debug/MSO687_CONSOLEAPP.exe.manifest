@@ -54,24 +54,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MSO687_CONSOLEAPP.exe" size="70152">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MSO687_CONSOLEAPP.exe" size="68104">
       <assemblyIdentity name="MSO687_CONSOLEAPP" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>42F2I5dd/rEnyvkf1tD2Kq5LbrAy2q7820WzfcVM3FU=</dsig:DigestValue>
+        <dsig:DigestValue>X6L2LCAS+PAOPLJwg4GhbqxMJfduL5hRpyGCGnWX960=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="MSO687_CONSOLEAPP.exe.config" size="3209">
+  <file name="MSO687_CONSOLEAPP.exe.config" size="3262">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>rf8//mWf7Fje06HzQm+R9LKrSQEot4DJk/wOYP6BQ4o=</dsig:DigestValue>
+      <dsig:DigestValue>bf4QJEXNwpszbH+AS4T1A+Zwmg9UHfPJdy+9jdaPsXM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

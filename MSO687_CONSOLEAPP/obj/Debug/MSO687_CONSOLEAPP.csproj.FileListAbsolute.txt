@@ -12,3 +12,17 @@ D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAP
 D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.CopyComplete
 D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.exe
 D:\Backup Project\new_ppe\PLANT_PPE\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.pdb
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.exe.config
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.exe.manifest
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.application
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.exe
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.pdb
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\EllipseWebServicesClient.dll
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.AssemblyReference.cache
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.SuggestedBindingRedirects.cache
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.CoreCompileInputs.cache
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.exe.manifest
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.application
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.CopyComplete
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.exe
+D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.pdb

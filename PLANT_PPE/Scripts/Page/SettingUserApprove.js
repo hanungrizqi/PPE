@@ -30,6 +30,13 @@ function showTable() {
     var name = $('#namefilter').val();
     var menu = $('#approvalfilter').val();
 
+    // Clear the existing options in the dropdown except the default one
+    $('#approvalfilter option:not(:first)').remove();
+    $('#dstrctfilter option:not(:first)').remove();
+    $('#positionfilter option:not(:first)').remove();
+    $('#namefilter option:not(:first)').remove();
+    $('#nrpfilter option:not(:first)').remove();
+
     $("#tbl_userApprove").DataTable().destroy();
 
     var table = $("#tbl_userApprove").DataTable({
@@ -84,19 +91,35 @@ function showTable() {
                 dstrct = this.api().column(3).data()[i];
                 menu = this.api().column(4).data()[i];
                 if (nrp) {
-                    $('#nrpfilter').append('<option value="' + nrp + '">' + nrp + '</option>');
+                    //$('#nrpfilter').append('<option value="' + nrp + '">' + nrp + '</option>');
+                    if ($('#nrpfilter option[value="' + nrp + '"]').length == 0) {
+                        $('#nrpfilter').append('<option value="' + nrp + '">' + nrp + '</option>');
+                    }
                 } 
                 if (name) {
-                    $('#namefilter').append('<option value="' + name + '">' + name + '</option>');
+                    //$('#namefilter').append('<option value="' + name + '">' + name + '</option>');
+                    if ($('#namefilter option[value="' + name + '"]').length == 0) {
+                        $('#namefilter').append('<option value="' + name + '">' + name + '</option>');
+                    }
                 }
                 if (position) {
-                    $('#positionfilter').append('<option value="' + position + '">' + position + '</option>');
+                    //$('#positionfilter').append('<option value="' + position + '">' + position + '</option>');
+                    if ($('#positionfilter option[value="' + position + '"]').length == 0) {
+                        $('#positionfilter').append('<option value="' + position + '">' + position + '</option>');
+                    }
                 }
                 if (dstrct) {
-                    $('#dstrctfilter').append('<option value="' + dstrct + '">' + dstrct + '</option>');
+                    //$('#dstrctfilter').append('<option value="' + dstrct + '">' + dstrct + '</option>');
+                    if ($('#dstrctfilter option[value="' + dstrct + '"]').length == 0) {
+                        $('#dstrctfilter').append('<option value="' + dstrct + '">' + dstrct + '</option>');
+                    }
                 }
                 if (menu) {
-                    $('#approvalfilter').append('<option value="' + menu + '">' + menu + '</option>');
+                    //$('#approvalfilter').append('<option value="' + menu + '">' + menu + '</option>');
+                    // Check if the option with this value already exists in the "Approval Menu" dropdown
+                    if ($('#approvalfilter option[value="' + menu + '"]').length == 0) {
+                        $('#approvalfilter').append('<option value="' + menu + '">' + menu + '</option>');
+                    }
                 }
             }
                 

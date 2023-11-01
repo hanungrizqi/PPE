@@ -37,6 +37,7 @@ function getDetail() {
             $("#txt_date").val(moment(dataPPE.DATE).format("YYYY-MM-DD"));
             $("#txt_districtFrom").val(dataPPE.DISTRICT_FROM);
             $("#txt_districtTo").val(dataPPE.DISTRICT_TO);
+            $("#txt_note").val(dataPPE.REMARKS);
         }
     });
 }

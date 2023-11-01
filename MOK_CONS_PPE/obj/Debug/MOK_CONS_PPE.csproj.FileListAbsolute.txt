@@ -12,3 +12,17 @@ D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.applicat
 D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.csproj.CopyComplete
 D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.exe
 D:\Backup Project\new_ppe\PLANT_PPE\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.pdb
+D:\ppe\new_ppe\MOK_CONS_PPE\bin\Debug\MOK_CONS_PPE.exe.config
+D:\ppe\new_ppe\MOK_CONS_PPE\bin\Debug\MOK_CONS_PPE.exe.manifest
+D:\ppe\new_ppe\MOK_CONS_PPE\bin\Debug\MOK_CONS_PPE.application
+D:\ppe\new_ppe\MOK_CONS_PPE\bin\Debug\MOK_CONS_PPE.exe
+D:\ppe\new_ppe\MOK_CONS_PPE\bin\Debug\MOK_CONS_PPE.pdb
+D:\ppe\new_ppe\MOK_CONS_PPE\bin\Debug\EllipseWebServicesClient.dll
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.csproj.AssemblyReference.cache
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.csproj.SuggestedBindingRedirects.cache
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.csproj.CoreCompileInputs.cache
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.exe.manifest
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.application
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.csproj.CopyComplete
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.exe
+D:\ppe\new_ppe\MOK_CONS_PPE\obj\Debug\MOK_CONS_PPE.pdb

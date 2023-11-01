@@ -36,16 +36,6 @@ namespace MSO687_CONSOLEAPP.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpd.kppmining.net/ews/services/ScreenService")]
-        public string MSO687_CONSOLEAPP_ScreenService_ScreenService {
-            get {
-                return ((string)(this["MSO687_CONSOLEAPP_ScreenService_ScreenService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kphosq101\\shpol;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;User ID=sq" +
             "lservices;Password=sqlservices1")]
@@ -63,6 +53,16 @@ namespace MSO687_CONSOLEAPP.Properties {
         public string DB_MANAGEMENT_SERVICES_KPTConnectionString1 {
             get {
                 return ((string)(this["DB_MANAGEMENT_SERVICES_KPTConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpt.kppmining.net/ews/services/ScreenService")]
+        public string MSO687_CONSOLEAPP_ScreenService_ScreenService {
+            get {
+                return ((string)(this["MSO687_CONSOLEAPP_ScreenService_ScreenService"]));
             }
         }
     }
