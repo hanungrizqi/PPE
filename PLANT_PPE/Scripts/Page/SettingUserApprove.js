@@ -23,9 +23,25 @@ $("#txt_nrp").on("change", function () {
 })
 
 function showTable() {
+
+    var nrp = $('#nrpfilter').val();
+    var position = $('#positionfilter').val();
+    var distrik = $('#dstrctfilter').val();
+    var name = $('#namefilter').val();
+    var menu = $('#approvalfilter').val();
+
+    $("#tbl_userApprove").DataTable().destroy();
+
     var table = $("#tbl_userApprove").DataTable({
         ajax: {
-            url: $("#web_link").val() + "/api/Setting/Get_UserApproveSetting",
+            url: $("#web_link").val() + "/api/Setting/Get_UserApproveSettingFilter",
+            data: {
+                NRP: nrp,
+                POSITION: position,
+                DSTRCT: distrik,
+                NAME: name,
+                MENU: menu
+            },
             dataSrc: "Data",
         },
         "columnDefs": [
@@ -51,10 +67,50 @@ function showTable() {
             }
         ],
         initComplete: function () {
-            var api = this.api();
+            //var api = this.api();
+
+            var nrp ;
+            var name ;
+            var position;
+            var dstrct ;
+            var menu ;
+           
+            var panjang = this.api().column(0).data().length;
+
+            for (let i = 0; i < panjang; i++) {
+                nrp = this.api().column(0).data()[i];
+                name = this.api().column(1).data()[i];
+                position = this.api().column(2).data()[i];
+                dstrct = this.api().column(3).data()[i];
+                menu = this.api().column(4).data()[i];
+                if (nrp) {
+                    $('#nrpfilter').append('<option value="' + nrp + '">' + nrp + '</option>');
+                } 
+                if (name) {
+                    $('#namefilter').append('<option value="' + name + '">' + name + '</option>');
+                }
+                if (position) {
+                    $('#positionfilter').append('<option value="' + position + '">' + position + '</option>');
+                }
+                if (dstrct) {
+                    $('#dstrctfilter').append('<option value="' + dstrct + '">' + dstrct + '</option>');
+                }
+                if (menu) {
+                    $('#approvalfilter').append('<option value="' + menu + '">' + menu + '</option>');
+                }
+            }
+                
+
+            console.log(panjang);
+            var positionID = this.api().column(0).data()[0];
+            //this.api().column(0).order('asc').draw();
+            
+               
+           
+            
 
             // For each column
-            api
+            /*api
                 .columns([0, 1, 2, 3, 4])
                 .eq(0)
                 .each(function (colIdx) {
@@ -97,7 +153,7 @@ function showTable() {
                                 .focus()[0]
                                 .setSelectionRange(cursorPosition, cursorPosition);
                         });
-                });
+                });*/
         }
     });
 }

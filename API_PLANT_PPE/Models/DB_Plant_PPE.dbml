@@ -307,18 +307,6 @@
       <Column Name="DESCRIPTION" Type="System.String" DbType="Char(40) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.TBL_M_MAPPING_APPROVALSS" Member="TBL_M_MAPPING_APPROVALSSes">
-    <Type Name="TBL_M_MAPPING_APPROVALSS">
-      <Column Name="APPROVAL_ACTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="APPROVAL_FROM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="APPROVAL_TO" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="APPROVAL_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.VW_T_SECHEAD" Member="VW_T_SECHEADs">
     <Type Name="VW_T_SECHEAD">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -550,10 +538,30 @@
       <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.VW_LOCATION" Member="VW_LOCATIONs">
-    <Type Name="VW_LOCATION">
-      <Column Name="TABLE_CODE" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
-      <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.TBL_M_MAPPING_APPROVALSS" Member="TBL_M_MAPPING_APPROVALSSes">
+    <Type Name="TBL_M_MAPPING_APPROVALSS">
+      <Column Name="APPROVAL_ACTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_FROM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="APPROVAL_TO" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="APPROVAL_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOCATION_FROM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOCATION_TO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VW_User" Member="VW_Users">
+    <Type Name="VW_User">
+      <Column Name="ID_Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="POSITION_ID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.TBL_R_ASSET_LOCATION" Member="TBL_R_ASSET_LOCATIONs">
@@ -568,15 +576,10 @@
       <Column Name="WORKSHOP_EQUIPMENT" Type="System.String" DbType="NChar(4)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.VW_User" Member="VW_Users">
-    <Type Name="VW_User">
-      <Column Name="ID_Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="VarChar(61)" CanBeNull="true" />
-      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="RoleName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="POSITION_ID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+  <Table Name="dbo.VW_LOCATION" Member="VW_LOCATIONs">
+    <Type Name="VW_LOCATION">
+      <Column Name="TABLE_CODE" Type="System.String" DbType="Char(18) NOT NULL" CanBeNull="false" />
+      <Column Name="TABLE_DESC" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
@@ -675,6 +678,46 @@
     <ElementType Name="cusp_insertNotifEmail_PlantAdmDevManagerResult">
       <Column Name="TO_LIST" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="BODY" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_getMappingApproval" Method="cusp_getMappingApproval">
+    <Parameter Name="Apprv_Action" Parameter="apprv_Action" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Apprv_Order" Parameter="apprv_Order" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="From_District" Parameter="from_District" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="To_District" Parameter="to_District" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Current_Position" Parameter="current_Position" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Next_Position" Parameter="next_Position" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="status" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="Apprv_status" Parameter="apprv_status" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="From_Location" Parameter="from_Location" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="To_Location" Parameter="to_Location" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="cusp_getMappingApprovalResult">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="APPROVAL_ACTION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_ORDER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="APPROVAL_FROM" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="APPROVAL_TO" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="CURR_POSITION_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NEXT_POSITION_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="APPROVAL_STATUS" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CURRENT_STATUS" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LOCATION_FROM" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LOCATION_TO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.cusp_userApproval" Method="cusp_userApproval">
+    <Parameter Name="NRP" Parameter="nRP" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Position_Id" Parameter="position_Id" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="District" Parameter="district" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="Menu_Approve" Parameter="menu_Approve" Type="System.String" DbType="VarChar(200)" />
+    <ElementType Name="cusp_userApprovalResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Position_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Employee_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="sub_menu" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dstrct_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

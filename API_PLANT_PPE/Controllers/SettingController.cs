@@ -75,6 +75,34 @@ namespace API_PLANT_PPE.Controllers
             return Ok(new { Data = data });
         }
 
+        [HttpGet]
+        [Route("Get_UserApproveSettingFilter")]
+        public IHttpActionResult Get_UserApproveSettingFilter(String NRP, String POSITION, String DSTRCT, String NAME, String MENU)
+        {
+            if (NRP == null)
+            {
+                NRP = "";
+            }
+            if(POSITION == null)
+            {
+                POSITION = "";
+            }
+            if (DSTRCT == null)
+            {
+                DSTRCT = "";
+            }
+            if(NAME == null)
+            {
+                NAME = "";
+            }
+            if(MENU == null)
+            {
+                MENU = "";
+            }
+            var data = db.cusp_userApproval(NRP, POSITION, DSTRCT, NAME, MENU).ToList();
+            return Ok(new { Data = data });
+        }
+
         [HttpPost]
         [Route("Delete_User")]
         public IHttpActionResult Delete_User(int role, string nrp)
@@ -298,6 +326,66 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
+        [Route("Get_MappingApprovalByFilter")]
+        public IHttpActionResult Get_MappingApprovalByFilter(String ACTION, String ORDER, String FROM, String TO, String CURPOSITION, String NEXTPOSITION, String APPRVSTATUS, String CURSTATUS, String LOCFROM, String LOCTO)
+        {
+            if (ACTION == null)
+            {
+                ACTION = "";
+            }
+            if (ORDER == null)
+            {
+                ORDER = "";
+            }
+            if (FROM == null)
+            {
+                FROM = "";
+            }
+            if (TO == null)
+            {
+                TO = "";
+            }
+            if (CURPOSITION == null)
+            {
+                CURPOSITION = "";
+            }
+
+            if (NEXTPOSITION == null)
+            {
+                NEXTPOSITION = "";
+            }
+            if (APPRVSTATUS == null)
+            {
+                APPRVSTATUS = "";
+            }
+            if (CURSTATUS == null)
+            {
+                CURSTATUS = "";
+            }
+            if (LOCFROM == null)
+            {
+                LOCFROM = "";
+            }
+            if (LOCTO == null)
+            {
+                LOCTO = "";
+            }
+
+            /*ACTION = "";
+            ORDER = "";
+            FROM = "";
+            TO = "";
+            CURPOSITION = "";
+            NEXTPOSITION = "";
+            APPRVSTATUS = "";
+            CURSTATUS = "";
+            LOCFROM = "";
+            LOCTO = "";*/
+            var data = db.cusp_getMappingApproval(ACTION, ORDER, FROM, TO, CURPOSITION, NEXTPOSITION, APPRVSTATUS, CURSTATUS, LOCFROM, LOCTO).ToList();
+            return Ok(new { Data = data });
+        }
+
+        [HttpGet]
         [Route("Get_DistrictLocation")]
         public IHttpActionResult Get_DistrictLocation(String dstrct)
         {
@@ -332,13 +420,14 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Create_MappingApproval")]
-        public IHttpActionResult Create_MappingApproval(TBL_M_MAPPING_APPROVAL param)
+        public IHttpActionResult Create_MappingApproval(TBL_M_MAPPING_APPROVALSS param)
         {
             try
             {
-               // var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).ToList();
-               
-                TBL_M_MAPPING_APPROVAL  tbl = new TBL_M_MAPPING_APPROVAL();
+                // var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).ToList();
+
+                TBL_M_MAPPING_APPROVALSS tbl = new TBL_M_MAPPING_APPROVALSS();
+                tbl.ID = param.ID;
                 tbl.APPROVAL_ACTION = param.APPROVAL_ACTION;
                 tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
                 tbl.APPROVAL_FROM = param.APPROVAL_FROM;
@@ -350,7 +439,7 @@ namespace API_PLANT_PPE.Controllers
                 tbl.CURRENT_STATUS = param.CURRENT_STATUS;
                 tbl.APPROVAL_STATUS = param.APPROVAL_STATUS;
                 
-                db.TBL_M_MAPPING_APPROVALs.InsertOnSubmit(tbl);
+                db.TBL_M_MAPPING_APPROVALSSes.InsertOnSubmit(tbl);
                 db.SubmitChanges();
                 return Json(new { Remarks = true });
             }
@@ -362,14 +451,14 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Update_MappingApproval")]
-        public IHttpActionResult Update_MappingApproval(TBL_M_MAPPING_APPROVAL param)
+        public IHttpActionResult Update_MappingApproval(TBL_M_MAPPING_APPROVALSS param)
         {
             try
             {
-                 var tbl = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == param.APPROVAL_NO).FirstOrDefault();
+                 var tbl = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.ID == param.ID).FirstOrDefault();
 
                 
-                tbl.APPROVAL_NO = param.APPROVAL_NO;
+                tbl.ID = param.ID;
                 tbl.APPROVAL_ACTION = param.APPROVAL_ACTION;
                 tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
                 tbl.APPROVAL_FROM = param.APPROVAL_FROM;
@@ -401,8 +490,8 @@ namespace API_PLANT_PPE.Controllers
             {
                 // var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).ToList();
 
-                var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).FirstOrDefault();
-                db.TBL_M_MAPPING_APPROVALs.DeleteOnSubmit(data);
+                var data = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.ID == id).FirstOrDefault();
+                db.TBL_M_MAPPING_APPROVALSSes.DeleteOnSubmit(data);
                 db.SubmitChanges();
                 
                 return Json(new { Remarks = true });
@@ -417,7 +506,7 @@ namespace API_PLANT_PPE.Controllers
         [Route("Get_MappingbyId")]
         public IHttpActionResult Get_MappingbyId(int ApproveNum)
         {
-            var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == ApproveNum).ToList();
+            var data = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.ID == ApproveNum).ToList();
             return Ok(new { Data = data });
         }
 
