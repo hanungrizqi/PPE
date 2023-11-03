@@ -16,19 +16,33 @@ $("document").ready(function () {
     var formattedDate = today.toISOString().split("T")[0];
     txtDateInput.value = formattedDate;
     txtDateInput.setAttribute("max", formattedDate);
-    getDistrict();
-    getDistrictTO();
+    //getDistrict();
+    //getDistrictTO();
+    getDistrict(function () {
+        getDistrictTO();
+    });
     $('#modal-terms').on('show.bs.modal', function () {
         getContent();
     });
-    $('#modal-terms').on('hidden.bs.modal', function () {
-        var agreeCheckbox = document.getElementById('val-terms');
-        agreeCheckbox.checked = true; //kalo diklik accept, cek box jadi aktif
+    //$('#modal-terms').on('hidden.bs.modal', function () {
+    //    var agreeCheckbox = document.getElementById('val-terms');
+    //    agreeCheckbox.checked = true; //kalo diklik accept, cek box jadi aktif
+    //});
+
+    //$('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
+    //    var agreeCheckbox = document.getElementById('val-terms');
+    //    agreeCheckbox.disabled = false; //kalo baca modal, cek box aktip
+    //});
+
+    $('#closeModalButton').click(function () {
+        $('#modal-terms').modal('hide');
     });
 
-    $('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
+    $('#acceptButton').click(function () {
         var agreeCheckbox = document.getElementById('val-terms');
-        agreeCheckbox.disabled = false; //kalo baca modal, cek box aktip
+        agreeCheckbox.checked = true;
+        agreeCheckbox.disabled = false;
+        $('#modal-terms').modal('hide');
     });
 })
 
@@ -44,7 +58,8 @@ $("#txt_eqNumber").on("change", function () {
 })
 
 var selectedDistrict;
-function getDistrict() {
+function getDistrict(callback) {
+    debugger
     $.ajax({
         url: $("#web_link").val() + "/api/Master/getDistrict", //URI,
         type: "GET",
@@ -60,6 +75,9 @@ function getDistrict() {
                 selectedDistrict = $(this).val();
                 getLoc();
                 getEqNumber();
+                if (typeof callback === "function") {
+                    callback();
+                }
             });
             
         }
@@ -67,6 +85,7 @@ function getDistrict() {
 }
 
 function getLoc() {
+    debugger
     $.ajax({
         url: $("#web_link").val() + "/api/Master/getLoc/" + selectedDistrict, //URI,
         type: "GET",
@@ -84,15 +103,22 @@ function getLoc() {
 
 var selectedDistrictTO;
 function getDistrictTO() {
+    debugger
     $.ajax({
         url: $("#web_link").val() + "/api/Master/getDistrict", //URI,
         type: "GET",
         cache: false,
         success: function (result) {
+            debugger
             $('#txt_districtTo').empty();
             text = '<option></option>';
+            //$.each(result.Data, function (key, val) {
+            //    text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
+            //});
             $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
+                if (val.DSTRCT_CODE !== selectedDistrict) {
+                    text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
+                }
             });
             $("#txt_districtTo").append(text);
             $("#txt_districtTo").change(function () {
@@ -121,6 +147,7 @@ function getLocTO() {
 }
 
 function getEqNumber() {
+    debugger
     $.ajax({
         url: $("#web_link").val() + "/api/Master/Get_EqNumber/" + selectedDistrict + "/" + $("#hd_nrp").val(), //URI,
         type: "GET",
@@ -322,7 +349,9 @@ function savePPEtoTable() {
         });
     }
     $("#txt_districtTo").prop("disabled", true);
-    //$("#txt_locTo").prop("disabled", true);
+    $("#txt_locTo").prop("disabled", true);
+    $("#txt_districtFrom").prop("disabled", true);
+    $("#txt_locFrom").prop("disabled", true);
 };
 
 function formatDate(date) {
@@ -335,10 +364,25 @@ function formatDate(date) {
 
 function savePPE(postStatus) {
     debugger
+    var agreeCheckbox = document.getElementById('val-terms');
     if (!savePPEtoTableClicked) {
         Swal.fire(
             'Warning!',
             'Tidak bisa Submit sebelum Save.',
+            'warning'
+        );
+        return;
+    } else if (!agreeCheckbox.checked) {
+        Swal.fire(
+            'Warning!',
+            'Anda harus menyetujui Syarat & Ketentuan sebelum melanjutkan.',
+            'warning'
+        );
+        return;
+    } else if ($("#table_equipment tbody tr").length === 0) {
+        Swal.fire(
+            'Warning!',
+            'Equipments table kosong',
             'warning'
         );
         return;
