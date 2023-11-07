@@ -515,7 +515,7 @@ namespace API_PLANT_PPE.Controllers
                 if (cek != null)
                 {
 
-                    if (cek.EQUIP_NO == param.EQUIP_NO && cek.STATUS != "REJECT")
+                    if (cek.EQUIP_NO == param.EQUIP_NO && cek.STATUS != "REJECT" && cek.POSISI_PPE != "DONE")
                     {
                         var noppe = cek.PPE_NO;
                         var eqpno = cek.EQUIP_NO;
@@ -525,7 +525,11 @@ namespace API_PLANT_PPE.Controllers
                         var message = string.Format("Equipment {0} Sedang ada pemindahan di No. PPE : {1}, Dengan Status {2}, dan Posisi PPE : {3}", eqpno, noppe, stts, posppe);
                         return Ok(new { Remarkss = true, Datas = cek, ppe = noppe, eq = eqpno, st = stts, Messages = message });
                     }
-                    if (cek.EQUIP_NO == param.EQUIP_NO && cek.STATUS == "REJECT")
+                    else if (cek.EQUIP_NO == param.EQUIP_NO && cek.STATUS != "REJECT" && cek.POSISI_PPE == "DONE")
+                    {
+                        return Ok(new { Remarkss = false });
+                    }
+                    else if (cek.EQUIP_NO == param.EQUIP_NO && cek.STATUS == "REJECT")
                     {
                         return Ok(new { Remarkss = false });
                     }

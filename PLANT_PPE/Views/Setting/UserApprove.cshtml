@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "User Approve";
+    ViewBag.Title = "Mapping Approval";
     ViewBag.JS = "/Scripts/Page/SettingUserApprove.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,120 +9,26 @@
 <div class="block block-rounded">
     <div class="block-header block-header-default">
         <h3 class="block-title">
-            Table User Approve <small>Set User's Approve Group</small>
+            Table Data <small>Set User Approve</small>
         </h3>
         <div class="block-options">
             <div class="block-options-item">
                 <button type="button" class="btn btn-success py-2 mb-0" data-bs-toggle="modal" data-bs-target="#modal-insert">
-                    <i class="fa fa-add opacity-50 me-1"></i> Add User Approve
+                    <i class="fa fa-add opacity-50 me-1"></i> Add
                 </button>
             </div>
         </div>
     </div>
     <div class="block-content block-content-full">
-        <div class="col">
-            <div class="row mb-2">
-                <div class="col-lg-1">
-                    <h3 class="block-title">Filter :</h3>
-                </div>
-
-                <div class="col">
-                    <select class="js-select2 form-select" id="nrpfilter" name="nrpfilter" style="width:100%" onchange="showTable()">
-                        <option value="" selected>NRP</option>
-                    </select>
-                </div>
-
-                <div class="col ">
-                    <select class="js-select2 form-select" id="positionfilter" name="positionfilter" style="width: 100% " onchange="showTable()">
-                        <option value="" selected>Position ID</option>
-                        
-
-                    </select>
-                </div>
-
-                <div class="col">
-                    <select class="js-select2 form-select" id="dstrctfilter" name="dstrctfilter" style="width: 100% " onchange="showTable()">
-                        <option value="" selected>District</option>
-                    </select>
-                </div>
-
-
-
-
-            </div>
-            <div class="row mb-2">
-                <div class="col-lg-1">
-                    
-                </div>
-
-                <div class="col">
-                    <select class="js-select2 form-select" id="namefilter" name="namefilter" style="width:100%" onchange="showTable()">
-                        <option value="" selected>Name</option>
-                       
-                    </select>
-                </div>
-
-                <div class="col ">
-                    <select class="js-select2 form-select" id="approvalfilter" name="approvalfilter" style="width: 100% " onchange="showTable()">
-                        <option value="" selected>Approval Menu</option>
-                        
-
-                    </select>
-                </div>
-
-                
-
-
-
-
-            </div>
-
-
-
-
-        </div>
-        @*<div>
-            <p>Filter :</p>
-        </div>
-        <div id="my-searches" style="width: 100%">
-            <div class="row">
-                <div class="col-4">
-                    <div class="filters">
-                        <h1>NRP</h1>
-                        <input type="text" />
-                    </div>
-                    <div class="filters">
-                        <h1>NAME</h1>
-                        <input type="text" />
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="filters">
-                        <h1>POSITION ID</h1>
-                        <input type="text" />
-                    </div>
-                    <div class="filters">
-                        <h1>DISTRIK</h1>
-                        <input type="text" />
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="filters">
-                        <h1>MENU</h1>
-                        <input type="text" />
-                    </div>
-                </div>
-            </div>
-        </div>*@
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_userApprove">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_usrapprv">
             <thead class="text-center">
                 <tr>
-                    <th>NRP</th>
-                    <th>NAME</th>
                     <th>POSITION ID</th>
-                    <th>DISTRIK</th>
-                    <th>Menu Approve</th>
-                    <th>Action</th>
+                    <th>EMPLOYEE ID</th>
+                    <th>NAME</th>
+                    <th>SUB MENU</th>
+                    <th>DISTRICT</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
@@ -186,6 +92,85 @@
                         Cancel
                     </button>
                     <button type="button" class="btn btn-alt-primary" onclick="insertUserApprove()">
+                        Insert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal_update" tabindex="-1" aria-labelledby="modal-normal" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Edit data</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <input type="text" name="txt_id" id="txt_id" hidden />
+                        <label class="form-label" for="approval_action_update">APPROVAL ACTION</label>
+                        <select class="js-select2 form-select" id="approval_action_update" name="approval_action_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_order_update">APPROVAL ORDER</label>
+                        <input type="text" class="form-control" id="approval_order_update" name="approval_order_update">
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_from_update">APPROVAL FROM</label>
+                        <select class="js-select2 form-select" id="approval_from_update" name="approval_from_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_to_update">APPROVAL TO</label>
+                        <select class="js-select2 form-select" id="approval_to_update" name="approval_to_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="curr_pos_id_update">CURRENT POSITION ID</label>
+                        <select class="js-select2 form-select" id="curr_pos_id_update" name="curr_pos_id_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="next_pos_id_update">NEXT POSITION ID</label>
+                        <select class="js-select2 form-select" id="next_pos_id_update" name="next_pos_id_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_status_update">APPROVAL STATUS</label>
+                        <input type="text" class="form-control" id="approval_status_update" name="approval_status_update">
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="current_status_update">CURRENT STATUS</label>
+                        <input type="text" class="form-control" id="current_status_update" name="current_status_update">
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm text-end border-top">
+                    <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-alt-primary" onclick="updateAccountDL()">
                         Insert
                     </button>
                 </div>

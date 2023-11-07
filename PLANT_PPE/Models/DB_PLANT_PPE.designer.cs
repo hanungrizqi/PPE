@@ -42,12 +42,12 @@ namespace PLANT_PPE.Models
     partial void InsertTBL_M_USER(TBL_M_USER instance);
     partial void UpdateTBL_M_USER(TBL_M_USER instance);
     partial void DeleteTBL_M_USER(TBL_M_USER instance);
-    partial void InsertTBL_T_PPE(TBL_T_PPE instance);
-    partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
-    partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
     partial void InsertTBL_M_DISTRICT(TBL_M_DISTRICT instance);
     partial void UpdateTBL_M_DISTRICT(TBL_M_DISTRICT instance);
     partial void DeleteTBL_M_DISTRICT(TBL_M_DISTRICT instance);
+    partial void InsertTBL_T_PPE(TBL_T_PPE instance);
+    partial void UpdateTBL_T_PPE(TBL_T_PPE instance);
+    partial void DeleteTBL_T_PPE(TBL_T_PPE instance);
     #endregion
 		
 		public DB_PLANT_PPEDataContext() : 
@@ -184,14 +184,6 @@ namespace PLANT_PPE.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<TBL_T_PPE> TBL_T_PPEs
-		{
-			get
-			{
-				return this.GetTable<TBL_T_PPE>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TBL_M_DISTRICT> TBL_M_DISTRICTs
 		{
 			get
@@ -205,6 +197,14 @@ namespace PLANT_PPE.Models
 			get
 			{
 				return this.GetTable<VW_User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TBL_T_PPE> TBL_T_PPEs
+		{
+			get
+			{
+				return this.GetTable<TBL_T_PPE>();
 			}
 		}
 	}
@@ -2848,6 +2848,251 @@ namespace PLANT_PPE.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_DISTRICT")]
+	public partial class TBL_M_DISTRICT : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _TABLE_CODE;
+		
+		private string _TABLE_DESC;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnTABLE_CODEChanging(string value);
+    partial void OnTABLE_CODEChanged();
+    partial void OnTABLE_DESCChanging(string value);
+    partial void OnTABLE_DESCChanged();
+    #endregion
+		
+		public TBL_M_DISTRICT()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_CODE", DbType="Char(18)")]
+		public string TABLE_CODE
+		{
+			get
+			{
+				return this._TABLE_CODE;
+			}
+			set
+			{
+				if ((this._TABLE_CODE != value))
+				{
+					this.OnTABLE_CODEChanging(value);
+					this.SendPropertyChanging();
+					this._TABLE_CODE = value;
+					this.SendPropertyChanged("TABLE_CODE");
+					this.OnTABLE_CODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_DESC", DbType="Char(50)")]
+		public string TABLE_DESC
+		{
+			get
+			{
+				return this._TABLE_DESC;
+			}
+			set
+			{
+				if ((this._TABLE_DESC != value))
+				{
+					this.OnTABLE_DESCChanging(value);
+					this.SendPropertyChanging();
+					this._TABLE_DESC = value;
+					this.SendPropertyChanged("TABLE_DESC");
+					this.OnTABLE_DESCChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_User")]
+	public partial class VW_User
+	{
+		
+		private int _ID_Role;
+		
+		private string _Username;
+		
+		private string _NAME;
+		
+		private string _EMAIL;
+		
+		private string _DSTRCT_CODE;
+		
+		private string _RoleName;
+		
+		private string _POSITION_ID;
+		
+		public VW_User()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Role", DbType="Int NOT NULL")]
+		public int ID_Role
+		{
+			get
+			{
+				return this._ID_Role;
+			}
+			set
+			{
+				if ((this._ID_Role != value))
+				{
+					this._ID_Role = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this._Username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="VarChar(61)")]
+		public string NAME
+		{
+			get
+			{
+				return this._NAME;
+			}
+			set
+			{
+				if ((this._NAME != value))
+				{
+					this._NAME = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(100)")]
+		public string EMAIL
+		{
+			get
+			{
+				return this._EMAIL;
+			}
+			set
+			{
+				if ((this._EMAIL != value))
+				{
+					this._EMAIL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(50)")]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(150)")]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this._RoleName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSITION_ID", DbType="Char(10)")]
+		public string POSITION_ID
+		{
+			get
+			{
+				return this._POSITION_ID;
+			}
+			set
+			{
+				if ((this._POSITION_ID != value))
+				{
+					this._POSITION_ID = value;
+				}
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_T_PPE")]
 	public partial class TBL_T_PPE : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2924,6 +3169,8 @@ namespace PLANT_PPE.Models
 		
 		private System.Nullable<int> _FLAG;
 		
+		private string _FLAG_REMARKS;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2998,6 +3245,8 @@ namespace PLANT_PPE.Models
     partial void OnBERITA_ACARA_SMChanged();
     partial void OnFLAGChanging(System.Nullable<int> value);
     partial void OnFLAGChanged();
+    partial void OnFLAG_REMARKSChanging(string value);
+    partial void OnFLAG_REMARKSChanged();
     #endregion
 		
 		public TBL_T_PPE()
@@ -3705,112 +3954,22 @@ namespace PLANT_PPE.Models
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TBL_M_DISTRICT")]
-	public partial class TBL_M_DISTRICT : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _TABLE_CODE;
-		
-		private string _TABLE_DESC;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnTABLE_CODEChanging(string value);
-    partial void OnTABLE_CODEChanged();
-    partial void OnTABLE_DESCChanging(string value);
-    partial void OnTABLE_DESCChanged();
-    #endregion
-		
-		public TBL_M_DISTRICT()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLAG_REMARKS", DbType="VarChar(MAX)")]
+		public string FLAG_REMARKS
 		{
 			get
 			{
-				return this._ID;
+				return this._FLAG_REMARKS;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._FLAG_REMARKS != value))
 				{
-					this.OnIDChanging(value);
+					this.OnFLAG_REMARKSChanging(value);
 					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_CODE", DbType="Char(18)")]
-		public string TABLE_CODE
-		{
-			get
-			{
-				return this._TABLE_CODE;
-			}
-			set
-			{
-				if ((this._TABLE_CODE != value))
-				{
-					this.OnTABLE_CODEChanging(value);
-					this.SendPropertyChanging();
-					this._TABLE_CODE = value;
-					this.SendPropertyChanged("TABLE_CODE");
-					this.OnTABLE_CODEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TABLE_DESC", DbType="Char(50)")]
-		public string TABLE_DESC
-		{
-			get
-			{
-				return this._TABLE_DESC;
-			}
-			set
-			{
-				if ((this._TABLE_DESC != value))
-				{
-					this.OnTABLE_DESCChanging(value);
-					this.SendPropertyChanging();
-					this._TABLE_DESC = value;
-					this.SendPropertyChanged("TABLE_DESC");
-					this.OnTABLE_DESCChanged();
+					this._FLAG_REMARKS = value;
+					this.SendPropertyChanged("FLAG_REMARKS");
+					this.OnFLAG_REMARKSChanged();
 				}
 			}
 		}
@@ -3832,141 +3991,6 @@ namespace PLANT_PPE.Models
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_User")]
-	public partial class VW_User
-	{
-		
-		private int _ID_Role;
-		
-		private string _Username;
-		
-		private string _NAME;
-		
-		private string _EMAIL;
-		
-		private string _DSTRCT_CODE;
-		
-		private string _RoleName;
-		
-		private string _POSITION_ID;
-		
-		public VW_User()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Role", DbType="Int NOT NULL")]
-		public int ID_Role
-		{
-			get
-			{
-				return this._ID_Role;
-			}
-			set
-			{
-				if ((this._ID_Role != value))
-				{
-					this._ID_Role = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this._Username = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="VarChar(61)")]
-		public string NAME
-		{
-			get
-			{
-				return this._NAME;
-			}
-			set
-			{
-				if ((this._NAME != value))
-				{
-					this._NAME = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMAIL", DbType="VarChar(100)")]
-		public string EMAIL
-		{
-			get
-			{
-				return this._EMAIL;
-			}
-			set
-			{
-				if ((this._EMAIL != value))
-				{
-					this._EMAIL = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(50)")]
-		public string DSTRCT_CODE
-		{
-			get
-			{
-				return this._DSTRCT_CODE;
-			}
-			set
-			{
-				if ((this._DSTRCT_CODE != value))
-				{
-					this._DSTRCT_CODE = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(150)")]
-		public string RoleName
-		{
-			get
-			{
-				return this._RoleName;
-			}
-			set
-			{
-				if ((this._RoleName != value))
-				{
-					this._RoleName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_POSITION_ID", DbType="Char(10)")]
-		public string POSITION_ID
-		{
-			get
-			{
-				return this._POSITION_ID;
-			}
-			set
-			{
-				if ((this._POSITION_ID != value))
-				{
-					this._POSITION_ID = value;
-				}
 			}
 		}
 	}

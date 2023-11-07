@@ -321,7 +321,7 @@ namespace API_PLANT_PPE.Controllers
         [Route("Get_MappingApproval")]
         public IHttpActionResult Get_MappingApproval()
         {
-            var data = db.TBL_M_MAPPING_APPROVALs.ToList();
+            var data = db.TBL_M_MAPPING_APPROVALSSes.ToList();
             return Ok(new { Data = data });
         }
 
@@ -371,16 +371,6 @@ namespace API_PLANT_PPE.Controllers
                 LOCTO = "";
             }
 
-            /*ACTION = "";
-            ORDER = "";
-            FROM = "";
-            TO = "";
-            CURPOSITION = "";
-            NEXTPOSITION = "";
-            APPRVSTATUS = "";
-            CURSTATUS = "";
-            LOCFROM = "";
-            LOCTO = "";*/
             var data = db.cusp_getMappingApproval(ACTION, ORDER, FROM, TO, CURPOSITION, NEXTPOSITION, APPRVSTATUS, CURSTATUS, LOCFROM, LOCTO).ToList();
             return Ok(new { Data = data });
         }
@@ -427,17 +417,14 @@ namespace API_PLANT_PPE.Controllers
                 // var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).ToList();
 
                 TBL_M_MAPPING_APPROVALSS tbl = new TBL_M_MAPPING_APPROVALSS();
-                tbl.ID = param.ID;
                 tbl.APPROVAL_ACTION = param.APPROVAL_ACTION;
                 tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
                 tbl.APPROVAL_FROM = param.APPROVAL_FROM;
                 tbl.APPROVAL_TO = param.APPROVAL_TO;
-                tbl.LOCATION_FROM= param.LOCATION_FROM;
-                tbl.LOCATION_TO = param.LOCATION_TO;
                 tbl.CURR_POSITION_ID = param.CURR_POSITION_ID;
                 tbl.NEXT_POSITION_ID = param.NEXT_POSITION_ID;
-                tbl.CURRENT_STATUS = param.CURRENT_STATUS;
                 tbl.APPROVAL_STATUS = param.APPROVAL_STATUS;
+                tbl.CURRENT_STATUS = param.CURRENT_STATUS;
                 
                 db.TBL_M_MAPPING_APPROVALSSes.InsertOnSubmit(tbl);
                 db.SubmitChanges();
@@ -455,22 +442,17 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                 var tbl = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.ID == param.ID).FirstOrDefault();
-
+                var tbl = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.ID == param.ID).FirstOrDefault();
                 
-                tbl.ID = param.ID;
                 tbl.APPROVAL_ACTION = param.APPROVAL_ACTION;
                 tbl.APPROVAL_ORDER = param.APPROVAL_ORDER;
                 tbl.APPROVAL_FROM = param.APPROVAL_FROM;
                 tbl.APPROVAL_TO = param.APPROVAL_TO;
-                tbl.LOCATION_FROM = param.LOCATION_FROM;
-                tbl.LOCATION_TO = param.LOCATION_TO;
                 tbl.CURR_POSITION_ID = param.CURR_POSITION_ID;
                 tbl.NEXT_POSITION_ID = param.NEXT_POSITION_ID;
-                tbl.CURRENT_STATUS = param.CURRENT_STATUS;
                 tbl.APPROVAL_STATUS = param.APPROVAL_STATUS;
+                tbl.CURRENT_STATUS = param.CURRENT_STATUS;
 
-                //db.TBL_M_MAPPING_APPROVALs.InsertOnSubmit;
                 db.SubmitChanges();
                 return Json(new { Remarks = true });
             }

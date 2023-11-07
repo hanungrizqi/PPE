@@ -4432,13 +4432,11 @@
     <Content Include="Scripts\Page\Received.js" />
     <Content Include="Scripts\Page\Review.js" />
     <Content Include="Scripts\Page\RegisterPPE.js" />
-    <Content Include="Scripts\Page\SettingAccountProfile.js" />
     <Content Include="Scripts\Page\SettingAccProfile.js" />
     <Content Include="Scripts\Page\SettingAgreement.js" />
-    <Content Include="Scripts\Page\MappingApproval.js" />
     <Content Include="Scripts\Page\SettingDistrictLocation.js" />
+    <Content Include="Scripts\Page\SettingMappingApproval.js" />
     <Content Include="Scripts\Page\SettingMenu.js" />
-    <Content Include="Scripts\Page\SettingDistrict.js" />
     <Content Include="Scripts\Page\SettingUserApprove.js" />
     <Content Include="Scripts\Page\SettingUser.js" />
     <Content Include="Scripts\Page\SMApproval.js" />
@@ -4487,7 +4485,6 @@
     <Content Include="Views\PPE\Register.cshtml" />
     <Content Include="Views\Approval\SectionHead.cshtml" />
     <Content Include="Views\Approval\DetailPPE.cshtml" />
-    <Content Include="Views\Setting\District.cshtml" />
     <Content Include="Views\Setting\MappingApproval.cshtml" />
     <Content Include="Views\Approval\PlantManager.cshtml" />
     <Content Include="Views\Approval\PlantDeptHead.cshtml" />
@@ -4503,7 +4500,6 @@
     <Content Include="Views\SM\Approve.cshtml" />
     <Content Include="Views\Received\DetailPPE_EQP.cshtml" />
     <Content Include="Views\Setting\UserApprove.cshtml" />
-    <Content Include="Views\Setting\AccountProfile.cshtml" />
     <Content Include="Views\Approval\Detail_DeptHead.cshtml" />
     <Content Include="Views\Approval\DetailPPE_PM.cshtml" />
     <Content Include="Views\Approval\DetailPPE_ProjectManager.cshtml" />

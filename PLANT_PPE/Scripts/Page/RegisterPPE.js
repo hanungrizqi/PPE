@@ -349,9 +349,9 @@ function savePPEtoTable() {
         });
     }
     $("#txt_districtTo").prop("disabled", true);
-    $("#txt_locTo").prop("disabled", true);
+    //$("#txt_locTo").prop("disabled", true);
     $("#txt_districtFrom").prop("disabled", true);
-    $("#txt_locFrom").prop("disabled", true);
+    //$("#txt_locFrom").prop("disabled", true);
 };
 
 function formatDate(date) {

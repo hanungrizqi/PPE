@@ -263,7 +263,8 @@ namespace MSO687_CONSOLEAPP
                             SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPTConnectionString);
 
                             CONNECT.Open();
-                            var Query = "Update TBL_T_PPE Set FLAG = 1 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            //var Query = "Update TBL_T_PPE Set FLAG = 1 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            var Query = "Update TBL_T_PPE Set FLAG = 1, FLAG_REMARKS = 'Success' Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
                             SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
                             COMMAND.ExecuteNonQuery();
                             CONNECT.Close();
@@ -295,8 +296,11 @@ namespace MSO687_CONSOLEAPP
                             SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPTConnectionString);
 
                             CONNECT.Open();
-                            var Query = "Update TBL_T_PPE Set FLAG = 2 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            var exs = "Failed : " + exMessage;
+                            //var Query = "Update TBL_T_PPE Set FLAG = 2 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            var Query = "Update TBL_T_PPE Set FLAG = 2, FLAG_REMARKS = @exs Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
                             SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
+                            COMMAND.Parameters.AddWithValue("@exs", exs);
                             COMMAND.ExecuteNonQuery();
                             CONNECT.Close();
                         }
@@ -807,8 +811,8 @@ namespace MSO687_CONSOLEAPP
                             SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPTConnectionString);
 
                             CONNECT.Open();
-                            var Query = "Update TBL_T_PPE Set FLAG = 1 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
-                            //var Query = "Update TBL_T_PPE Set FLAG = 1, FLAG_REMARKS = 'Success' Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            //var Query = "Update TBL_T_PPE Set FLAG = 1 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            var Query = "Update TBL_T_PPE Set FLAG = 1, FLAG_REMARKS = 'Success' Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
                             SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
                             COMMAND.ExecuteNonQuery();
                             CONNECT.Close();
@@ -840,11 +844,11 @@ namespace MSO687_CONSOLEAPP
                             SqlConnection CONNECT = new SqlConnection(Properties.Settings.Default.DB_PLANT_PPE_NEW_KPTConnectionString);
 
                             CONNECT.Open();
-                            //var exs = "Failed Created : " + exMessage;
-                            var Query = "Update TBL_T_PPE Set FLAG = 2 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
-                            //var Query = "Update TBL_T_PPE Set FLAG = 2, FLAG_REMARKS = @exs Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            var exs = "Failed : " + exMessage;
+                            //var Query = "Update TBL_T_PPE Set FLAG = 2 Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
+                            var Query = "Update TBL_T_PPE Set FLAG = 2, FLAG_REMARKS = @exs Where EQUIP_NO = '" + item.EQUIP_NO.ToString() + "' AND PPE_NO = '" + item.PPE_NO.ToString() + "'";
                             SqlCommand COMMAND = new SqlCommand(Query.ToString(), CONNECT);
-                            //COMMAND.Parameters.AddWithValue("@exs", exs);
+                            COMMAND.Parameters.AddWithValue("@exs", exs);
                             COMMAND.ExecuteNonQuery();
                             CONNECT.Close();
                         }

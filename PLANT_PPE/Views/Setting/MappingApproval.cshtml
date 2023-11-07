@@ -1,334 +1,51 @@
 ﻿
 @{
     ViewBag.Title = "Mapping Approval";
-    ViewBag.JS = "/Scripts/Page/MappingApproval.js";
+    ViewBag.JS = "/Scripts/Page/SettingMappingApproval.js";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="content-heading">Setting Mapping Approval</h2>
-
-
-
 <div class="block block-rounded">
     <div class="block-header block-header-default">
         <h3 class="block-title">
-            Table Mapping Approval <small>Set Mapping Approval Group</small>
+            Table Data <small>Set Account Profile</small>
         </h3>
         <div class="block-options">
             <div class="block-options-item">
-                <button type="button" class="btn btn-success py-2 mb-0" data-bs-toggle="modal" data-bs-target="#modal-insert" onclick="showInsert();">
-                    <i class="fa fa-add opacity-50 me-1"></i> Add Mapping Approval
+                <button type="button" class="btn btn-success py-2 mb-0" data-bs-toggle="modal" data-bs-target="#modal-insert">
+                    <i class="fa fa-add opacity-50 me-1"></i> Add
                 </button>
             </div>
         </div>
     </div>
     <div class="block-content block-content-full">
-        <div class="row">
-            <div class="col mb-3">
-                <div class="row mb-2">
-                    <div class="col-lg-1">
-                        <h3 class="block-title">Filter :</h3>
-                    </div>
-
-                    <div class="col">
-                        <select class="js-select2 form-select" id="actionfilter" name="apprv_action" style="width:100%">
-                            <option value="" selected>Approval Action</option>
-                            <option value="1">Approve</option>
-                            <option value="0">Reject</option>
-                        </select>
-                    </div>
-
-                    <div class="col ">
-                        <select class="js-select2 form-select" id="orderfilter" name="orderfilter" style="width: 100% ">
-                            <option value="" selected>Approval Order</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-
-                        </select>
-                    </div>
-
-                    <div class="col">
-                        <select class="js-select2 form-select" id="currentfilter" name="currentfilter" style="width: 100% ">
-                            <option value="" selected>Current Position</option>
-                        </select>
-                    </div>
-
-                    <div class="col ">
-                        <select class="js-select2 form-select" id="nextfilter" name="nextfilter" style="width: 100% " onchange="CobaCari()">
-                            <option value="" selected>Next Position</option>
-                        </select>
-                    </div>
-
-
-
-
-
-
-
-
-                </div>
-                <div class="row mb-2">
-                    <div class="col-lg-1">
-
-                    </div>
-                    <div class="col">
-                        @* <select class="js-select2 form-select" id="fromgilter" name="fromgilter" style="width:100%">
-                        <option value="" selected>From</option>
-                    </select>*@
-
-                        <input id="fromgilter" class="form-control" type="text" placeholder="District From" aria-label="default input example" value="" style="width:100%">
-                    </div>
-
-                    <div class="col">
-                        @* <select class="js-select2 form-select" id="tofilter" name="tofilter" style="width:100%">
-                        <option value="" selected>To</option>
-                    </select>*@
-                        <input id="tofilter" class="form-control" type="text" placeholder="District To" aria-label="default input example" value="" style="width:100%">
-
-                    </div>
-
-                    <div class="col ">
-                        @* <select class="js-select2 form-select" id="locFromfilter" name="locFromfilter" style="width:100%">
-                        <option value="" selected>Loc. From</option>
-                    </select>*@
-
-                        <input id="locFromfilter" class="form-control" type="text" placeholder="Location From" aria-label="default input example" value="" style="width:100%">
-                    </div>
-
-                    <div class="col ">
-                        @*<select class="js-select2 form-select" id="locTofilter" name="locTofilter" style="width:100%">
-                        <option value="" selected>Loc. To</option>
-                    </select>*@
-
-                        <input id="locTofilter" class="form-control" type="text" placeholder="Location To" aria-label="default input example" value="" style="width:100%">
-
-                    </div>
-                </div>
-
-
-                <div class="row ">
-                    <div class="col-lg-1">
-
-                    </div>
-                    <div class="col">
-                        @*<select class="js-select2 form-select" id="apprvStatusfilter" name="apprvStatusfilter" style="width:100%">
-                        <option value="" selected>Approval Status</option>
-                    </select>*@
-
-                        <textarea class="form-control" id="apprvStatusfilter" placeholder="Approval Status" rows="2"></textarea>
-                    </div>
-
-                    <div class="col">
-                        @*<select class="js-select2 form-select" id="statusfilter" name="statusfilter" style="width:100%">
-                        <option value="" selected>Status</option>
-                    </select>*@
-
-                        <textarea class="form-control" placeholder="Status" id="statusfilter" rows="2"></textarea>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="col-lg-1 d-flex justify-content-center align-items-center">
-                <button class="btn btn-primary btn-sm" onclick="CobaCari()"> FILTER </button>
-            </div>
-
-        </div>
-
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_mappingApproval">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive w-100" id="tbl_mappingapproval">
             <thead class="text-center">
                 <tr>
                     <th>APPROVAL ACTION</th>
                     <th>APPROVAL ORDER</th>
-                    <th>FROM</th>
-                    <th>TO</th>
-                    <th>LOCATION FROM</th>
-                    <th>LOCATION TO</th>
-                    <th>CURRENT POSITION</th>
-                    <th>NEXT POSITION</th>
+                    <th>APPROVAL FROM</th>
+                    <th>APPROVAL TO</th>
+                    <th>CURRENT POSITION ID</th>
+                    <th>NEXT POSITION ID</th>
                     <th>APPROVAL STATUS</th>
-                    <th>STATUS</th>
-                    <th>ACTION </th>
+                    <th>CURRENT STATUS</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
-            <tbody id="tableMapping">
+            <tbody>
             </tbody>
         </table>
     </div>
 </div>
 
-<div class="modal" id="modal-insert" tabindex="-1" aria-labelledby="modal-large" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal" id="modal-insert" tabindex="-1" aria-labelledby="modal-normal" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="block block-rounded shadow-none mb-0">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title">Register User's Group</h3>
-                    <div class="block-options">
-                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close" onclick="cancelModal()">
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="block-content fs-sm">
-
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <input id="apprv_no" hidden></input>
-                                <label class="form-label" for="txt_nrp">APPROVAL ACTION</label>
-                                <select class="js-select2 form-select select2-modal" id="txt_action" name="txt_action" style="width: 100%;">
-                                    
-                                    @*@foreach (var item in ViewBag.dstrct)
-            {
-                <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-            }*@
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">APPROVAL ORDER</label>
-                                <input type="number" class="form-control" id="apprv_order" placeholder="Number Order">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">APPROVAL FROM</label>
-                                <select class="js-select2 form-select select2-modal" id="apprv_from" name="apprv_from" onchange="getloc_from()" style="width: 100%;">
-                                    
-                                    @*@foreach (var item in ViewBag.dstrct)
-                        {
-                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-                        }*@
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">APPROVAL TO</label>
-                                <select class="js-select2 form-select select2-modal" id="apprv_to" name="apprv_to" onchange="getloc_to()" style="width: 100%;">
-                                    
-                                    @*@foreach (var item in ViewBag.loc)
-                        {
-                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
-                        }*@
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">LOCATION FROM</label>
-                                <select class="js-select2 form-select select2-modal" id="loc_from" name="loc_from" style="width: 100%;">
-                                    
-                                    @*@foreach (var item in ViewBag.dstrct)
-                        {
-                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-                        }*@
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">LOCATION TO</label>
-                                <select class="js-select2 form-select select2-modal" id="loc_to" name="loc_to" style="width: 100%;">
-                                    
-                                    @*@foreach (var item in ViewBag.loc)
-                        {
-                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
-                        }*@
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">CURRENT POSITION</label>
-                                <select class="js-select2 form-select select2-modal" id="curr_position" name="curr_position" style="width: 100%;">
-                                    <option></option>
-                                    @*@foreach (var item in ViewBag.dstrct)
-                        {
-                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-                        }*@
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">NEXT POSITION</label>
-                                <select class="js-select2 form-select select2-modal" id="next_position" name="next_position" style="width: 100%;">
-                                    
-                                    @*@foreach (var item in ViewBag.loc)
-                        {
-                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
-                        }*@
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">APPROVAL STATUS</label>
-                                <textarea class="form-control" id="apprv_status" rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">CURRENT STATUS</label>
-                                <textarea class="form-control" id="curr_status" rows="2"></textarea>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="block-content block-content-full block-content-sm text-end border-top">
-                    <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal" onclick="cancelModal()">
-                        Cancel
-                    </button>
-                    <button id="buttonInsert" type="button" class="btn btn-alt-primary" onclick="insertMapApproval()">
-                        Insert
-                    </button>
-                    <button id="buttonUpdate" type="button" class="btn btn-alt-primary" onclick="updateMapApproval()">
-                        Update
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-@*modal edit mapping approval*@
-
-<!--<div class="modal" id="modal-editor" tabindex="-1" aria-labelledby="modal-large" aria-modal="true" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="block block-rounded shadow-none mb-0">
-                <div class="block-header block-header-default">
-                    <h3 class="block-title">Editor Mapping's Group</h3>
+                    <h3 class="block-title">Add Mapping Approval</h3>
                     <div class="block-options">
                         <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-times"></i>
@@ -336,172 +53,132 @@
                     </div>
                 </div>
                 <div class="block-content fs-sm">
-
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">APPROVAL ACTION</label>
-                                <select class="js-select2 form-select select2-modal" id="edit_action" name="edit_action" style="width: 100%;">
-                                    <option>PILIH</option>
-                                    <option value="0">REJECT</option>
-                                    <option value="1">APPROVE</option>-->
-                                    @*@foreach (var item in ViewBag.dstrct)
-                                        {
-                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-                                        }*@
-                                <!--</select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">APPROVAL ORDER</label>
-                                <input type="number" class="form-control" id="editapprv_order" placeholder="Number Order">
-                            </div>
-                        </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_action">APPROVAL ACTION</label>
+                        <select class="js-select2 form-select" id="approval_action" name="approval_action" style="width: 100%;">
+                        </select>
                     </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">APPROVAL FROM</label>
-                                <select class="js-select2 form-select select2-modal" id="editapprv_from" name="editapprv_from" onchange="getloc_from()" style="width: 100%;">
-                                    <option></option>-->
-                                    @*@foreach (var item in ViewBag.dstrct)
-                                        {
-                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-                                        }*@
-                                <!--</select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">APPROVAL TO</label>
-                                <select class="js-select2 form-select select2-modal" id="editapprv_to" name="editapprv_to" onchange="getloc_to()" style="width: 100%;">
-                                    <option></option>-->
-                                    @*@foreach (var item in ViewBag.loc)
-                                        {
-                                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
-                                        }*@
-                                <!--</select>
-                            </div>
-                        </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_order">APPROVAL ORDER</label>
+                        <input type="text" class="form-control" id="approval_order" name="approval_order">
                     </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">LOCATION FROM</label>
-                                <select class="js-select2 form-select select2-modal" id="editloc_from" name="editloc_from" style="width: 100%;">
-                                    <option></option>-->
-                                    @*@foreach (var item in ViewBag.dstrct)
-                                        {
-                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-                                        }*@
-                                <!--</select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">LOCATION TO</label>
-                                <select class="js-select2 form-select select2-modal" id="editloc_to" name="editloc_to" style="width: 100%;">
-                                    <option></option>-->
-                                    @*@foreach (var item in ViewBag.loc)
-                                        {
-                                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
-                                        }*@
-                                <!--</select>
-                            </div>
-                        </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_from">APPROVAL FROM</label>
+                        <select class="js-select2 form-select" id="approval_from" name="approval_from" style="width: 100%;">
+                        </select>
                     </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">CURRENT POSITION</label>
-                                <select class="js-select2 form-select select2-modal" id="editcurr_position" name="editcurr_position" style="width: 100%;">
-                                    <option></option>-->
-                                    @*@foreach (var item in ViewBag.dstrct)
-                                        {
-                                            <option value="@item.DSTRCT_CODE">@item.DSTRCT_CODE</option>
-                                        }*@
-                                <!--</select>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">NEXT POSITION</label>
-                                <select class="js-select2 form-select select2-modal" id="editnext_position" name="editnext_position" style="width: 100%;">
-                                    <option></option>-->
-                                    @*@foreach (var item in ViewBag.loc)
-                                        {
-                                            <option value="@item.TABLE_CODE">@item.TABLE_CODE</option>
-                                        }*@
-                                <!--</select>
-                            </div>
-                        </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_to">APPROVAL TO</label>
+                        <select class="js-select2 form-select" id="approval_to" name="approval_to" style="width: 100%;">
+                        </select>
                     </div>
-
-                    <div class="row">
-                        <div class=" col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_nrp">APPROVAL STATUS</label>
-                                <textarea class="form-control" id="editapprv_status" rows="2"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="mb-4">
-                                <label class="form-label" for="txt_group">CURRENT STATUS</label>
-                                <textarea class="form-control" id="editcurr_status" rows="2"></textarea>
-                            </div>
-                        </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="curr_pos_id">CURRENT POSITION ID</label>
+                        <select class="js-select2 form-select" id="curr_pos_id" name="curr_pos_id" style="width: 100%;">
+                        </select>
                     </div>
-
+                    <div class="mb-4">
+                        <label class="form-label" for="next_pos_id">NEXT POSITION ID</label>
+                        <select class="js-select2 form-select" id="next_pos_id" name="next_pos_id" style="width: 100%;">
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_status">APPROVAL STATUS</label>
+                        <input type="text" class="form-control" id="approval_status" name="approval_status">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="current_status">CURRENT STATUS</label>
+                        <input type="text" class="form-control" id="current_status" name="current_status">
+                    </div>
                 </div>
                 <div class="block-content block-content-full block-content-sm text-end border-top">
                     <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
                         Cancel
                     </button>
-                    <button type="button" class="btn btn-alt-primary" onclick="insertMapApproval()">
+                    <button type="button" class="btn btn-alt-primary" onclick="insertDist()">
                         Insert
                     </button>
                 </div>
             </div>
         </div>
     </div>
-</div>-->
+</div>
 
-@*<script>
-   // $('#fromgilter').addEventListener('input', handleInputChange);
-    const inputElement = document.getElementById('fromgilter');
-    const inputElement2 = document.getElementById('tofilter');
-    const inputElement3 = document.getElementById('locFromfilter');
-    const inputElement4 = document.getElementById('locTofilter');
-    const inputElement5 = document.getElementById('apprvStatusfilter');
-    const inputElement6 = document.getElementById('statusfilter');
-
-
-     
-
-    function handleInputChange() {
-        // Check if the input field has a value
-        if (inputElement.value.trim() !== '' || inputElement2.value.trim() !== '' || inputElement3.value.trim() !== '' || inputElement4.value.trim() !== '' || inputElement5.value.trim() !== '' || inputElement6.value.trim() !== '') {
-            // Run your function here
-            CobaCari();
-            // Call your function here, for example:
-            // yourFunction();
-        }
-    }
-        inputElement.addEventListener('input', handleInputChange);
-        inputElement2.addEventListener('input', handleInputChange);
-        inputElement3.addEventListener('input', handleInputChange);
-        inputElement4.addEventListener('input', handleInputChange);
-        inputElement5.addEventListener('input', handleInputChange);
-        inputElement6.addEventListener('input', handleInputChange);
-
-</script>*@
+<div class="modal" id="modal_update" tabindex="-1" aria-labelledby="modal-normal" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Edit data</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <input type="text" name="txt_id" id="txt_id" hidden />
+                        <label class="form-label" for="approval_action_update">APPROVAL ACTION</label>
+                        <select class="js-select2 form-select" id="approval_action_update" name="approval_action_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_order_update">APPROVAL ORDER</label>
+                        <input type="text" class="form-control" id="approval_order_update" name="approval_order_update">
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_from_update">APPROVAL FROM</label>
+                        <select class="js-select2 form-select" id="approval_from_update" name="approval_from_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_to_update">APPROVAL TO</label>
+                        <select class="js-select2 form-select" id="approval_to_update" name="approval_to_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="curr_pos_id_update">CURRENT POSITION ID</label>
+                        <select class="js-select2 form-select" id="curr_pos_id_update" name="curr_pos_id_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="next_pos_id_update">NEXT POSITION ID</label>
+                        <select class="js-select2 form-select" id="next_pos_id_update" name="next_pos_id_update" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="approval_status_update">APPROVAL STATUS</label>
+                        <input type="text" class="form-control" id="approval_status_update" name="approval_status_update">
+                    </div>
+                </div>
+                <div class="block-content fs-sm">
+                    <div class="mb-4">
+                        <label class="form-label" for="current_status_update">CURRENT STATUS</label>
+                        <input type="text" class="form-control" id="current_status_update" name="current_status_update">
+                    </div>
+                </div>
+                <div class="block-content block-content-full block-content-sm text-end border-top">
+                    <button type="button" class="btn btn-alt-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-alt-primary" onclick="updateAccountDL()">
+                        Insert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
