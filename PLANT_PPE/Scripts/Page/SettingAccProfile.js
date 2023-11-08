@@ -75,6 +75,9 @@ function getDistrict(callback) {
                 text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
             });
             $("#txt_district").append(text);
+            $('#txt_district').select2({
+                dropdownParent: $('#modal-insert')
+            });
             $("#txt_district").change(function () {
                 selectedDistrict = $(this).val();
                 //getLoc();
@@ -101,6 +104,9 @@ function getLoc() {
                 text += '<option value="' + val.TABLE_CODE + '">' + val.TABLE_CODE + '</option>';
             });
             $("#txt_loc").append(text);
+            $('#txt_loc').select2({
+                dropdownParent: $('#modal-insert')
+            });
             $("#txt_loc").change(function () {
                 selectedLoc = $(this).val();
                 equipmentDesc();
@@ -209,13 +215,8 @@ function deleteDist(id) {
 function setAccountprofile(id, distrik, eqploc, eqpdesc, flagg, prod_eqp, supp_eqp, ws_eqp) {
     debugger
     districtUpdate(distrik, eqploc);
-    //locUpdate(distrik, eqploc);
-    //descUpdate(eqploc);
 
     $("#txt_id").val(id);
-    //$("#txt_district_update").val(distrik);
-    //$("#txt_loc_update").val(eqploc);
-    //$("#txt_desc_update").val(eqpdesc);
     $("#flag_update").val(flagg);
     $("#prodeqp_update").val(prod_eqp);
     $("#suppeqp_update").val(supp_eqp);
@@ -241,7 +242,9 @@ function districtUpdate(distrik, eqploc) {
                 }
             });
             $("#txt_district_update").append(text);
-            //console.log($("#txt_district_update").val())
+            $('#txt_district_update').select2({
+                dropdownParent: $('#modal_update')
+            });
             locUpdate($("#txt_district_update").val(), eqploc)
         }
     });
@@ -276,6 +279,9 @@ function locUpdate(dist, eqploc) {
                 }
             });
             $("#txt_loc_update").append(text);
+            $('#txt_loc_update').select2({
+                dropdownParent: $('#modal_update')
+            });
             descUpdate($("#txt_loc_update").val())
         }
     });
@@ -299,6 +305,9 @@ function locUpdate2(dist, eqploc) {
                 }
             });
             $("#txt_loc_update").append(text);
+            $('#txt_loc_update').select2({
+                dropdownParent: $('#modal_update')
+            });
         }
     });
 }

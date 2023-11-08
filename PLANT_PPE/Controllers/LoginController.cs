@@ -55,7 +55,7 @@ namespace PLANT_PPE.Controllers
                 Session["Role"] = dataRoledakun.RoleName;
                 //Session["Pos"]
                 //Session[Pos_Code] = 
-                Session["PositionID"] = dataUser.POSITION_ID;
+                Session["PositionID"] = dataUser.POSITION_ID.Trim();
                 ViewBag.POSID = dataUser.POSITION_ID;
                 return new JsonResult() { Data = new { Remarks = true }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }

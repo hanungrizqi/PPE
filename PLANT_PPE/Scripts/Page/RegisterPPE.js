@@ -1,14 +1,4 @@
-﻿//KP1PT015
-//KP1PT015
-//KP1PT015
-//KP1PT02
-//RT1D01
-//RT11
-//AS11
-//KP0161
-//KP0111
-
-Codebase.helpersOnLoad(['jq-select2']);
+﻿Codebase.helpersOnLoad(['jq-select2']);
 
 $("document").ready(function () {
     var txtDateInput = document.getElementById("txt_date");
@@ -24,15 +14,6 @@ $("document").ready(function () {
     $('#modal-terms').on('show.bs.modal', function () {
         getContent();
     });
-    //$('#modal-terms').on('hidden.bs.modal', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.checked = true; //kalo diklik accept, cek box jadi aktif
-    //});
-
-    //$('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.disabled = false; //kalo baca modal, cek box aktip
-    //});
 
     $('#closeModalButton').click(function () {
         $('#modal-terms').modal('hide');

@@ -1,4 +1,9 @@
-﻿Codebase.helpersOnLoad(['jq-select2']);
+﻿//Codebase.helpersOnLoad(['jq-select2']);
+
+$("document").ready(function () {
+    getDistrict()
+    getLoc()
+})
 
 var table = $("#tbl_dstrct").DataTable({
     ajax: {
@@ -48,6 +53,45 @@ var table = $("#tbl_dstrct").DataTable({
     },
 });
 
+function getDistrict() {
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/Master/getDistrict", //URI,
+        type: "GET",
+        cache: false,
+        success: function (result) {
+            $('#txt_district').empty();
+            text = '<option></option>';
+            $.each(result.Data, function (key, val) {
+                text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
+            });
+            $("#txt_district").append(text);
+            $('#txt_district').select2({
+                dropdownParent: $('#modal-insert')
+            });
+        }
+    });
+}
+
+function getLoc() {
+    debugger
+    $.ajax({
+        url: $("#web_link").val() + "/api/Master/getAllLocation", //URI,
+        type: "GET",
+        cache: false,
+        success: function (result) {
+            $('#txt_loc').empty();
+            text = '<option></option>';
+            $.each(result.Data, function (key, val) {
+                text += '<option value="' + val.TABLE_CODE + '">' + val.TABLE_CODE + '</option>';
+            });
+            $("#txt_loc").append(text);
+            $('#txt_loc').select2({
+                dropdownParent: $('#modal-insert')
+            });
+        }
+    });
+}
 
 function insertDist() {
     let obj = new Object();

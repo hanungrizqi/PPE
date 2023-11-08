@@ -400,6 +400,14 @@ namespace API_PLANT_PPE.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<VW_DISTRICT_ALL> VW_DISTRICT_ALLs
+		{
+			get
+			{
+				return this.GetTable<VW_DISTRICT_ALL>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.cusp_insertNotifEmail_SectionHead")]
 		public ISingleResult<cusp_insertNotifEmail_SectionHeadResult> cusp_insertNotifEmail_SectionHead([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PPE_NO", DbType="VarChar(20)")] string pPE_NO)
 		{
@@ -9145,6 +9153,51 @@ namespace API_PLANT_PPE.Models
 				if ((this._DSTRCT_CODE != value))
 				{
 					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.VW_DISTRICT_ALL")]
+	public partial class VW_DISTRICT_ALL
+	{
+		
+		private string _DSTRCT_CODE;
+		
+		private string _DSTRCT_NAME;
+		
+		public VW_DISTRICT_ALL()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_CODE", DbType="VarChar(100)")]
+		public string DSTRCT_CODE
+		{
+			get
+			{
+				return this._DSTRCT_CODE;
+			}
+			set
+			{
+				if ((this._DSTRCT_CODE != value))
+				{
+					this._DSTRCT_CODE = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSTRCT_NAME", DbType="VarChar(100)")]
+		public string DSTRCT_NAME
+		{
+			get
+			{
+				return this._DSTRCT_NAME;
+			}
+			set
+			{
+				if ((this._DSTRCT_NAME != value))
+				{
+					this._DSTRCT_NAME = value;
 				}
 			}
 		}

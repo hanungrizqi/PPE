@@ -82,14 +82,24 @@ $("document").ready(function () {
     $('#modal-terms').on('show.bs.modal', function () {
         getContent();
     });
-    $('#modal-terms').on('hidden.bs.modal', function () {
-        var agreeCheckbox = document.getElementById('val-terms');
-        agreeCheckbox.checked = true;
+    //$('#modal-terms').on('hidden.bs.modal', function () {
+    //    var agreeCheckbox = document.getElementById('val-terms');
+    //    agreeCheckbox.checked = true;
+    //});
+
+    //$('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
+    //    var agreeCheckbox = document.getElementById('val-terms');
+    //    agreeCheckbox.disabled = false; 
+    //});
+    $('#closeModalButton').click(function () {
+        $('#modal-terms').modal('hide');
     });
 
-    $('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
+    $('#acceptButton').click(function () {
         var agreeCheckbox = document.getElementById('val-terms');
-        agreeCheckbox.disabled = false; 
+        agreeCheckbox.checked = true;
+        agreeCheckbox.disabled = false;
+        $('#modal-terms').modal('hide');
     });
 })
 

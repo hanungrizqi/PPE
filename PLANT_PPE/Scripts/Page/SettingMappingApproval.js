@@ -1,8 +1,9 @@
-﻿
-
-$("document").ready(function () {
-    approvalFrom()
-    approvalTo()
+﻿$("document").ready(function () {
+    //approvalFrom()
+    //approvalTo()
+    approvalFrom(function () {
+        approvalTo();
+    });
     approvalAction()
     currPosID()
     nextPosID()
@@ -64,18 +65,27 @@ var table = $("#tbl_mappingapproval").DataTable({
     },
 });
 
-function approvalFrom() {
+var selectedApprovalFrom;
+function approvalFrom(callback) {
     $.ajax({
-        url: $("#web_link").val() + "/api/Master/getDistrict", //URI,
+        url: $("#web_link").val() + "/api/Master/getDistrict_and_ALL", //URI,
         type: "GET",
         cache: false,
         success: function (result) {
             $('#approval_from').empty();
-            text = '<option value="ALL">ALL</option>';
+            //text = '<option value="ALL">ALL</option>';
+            text = '<option></option>';
             $.each(result.Data, function (key, val) {
                 text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
             });
             $("#approval_from").append(text);
+            $("#approval_from").change(function () {
+                selectedApprovalFrom = $(this).val();
+                approvalTo();
+                if (typeof callback === "function") {
+                    callback();
+                }
+            });
             $('#approval_from').select2({
                 dropdownParent: $('#modal-insert')
             });
@@ -84,19 +94,24 @@ function approvalFrom() {
 }
 
 function approvalTo() {
+    console.log($("#approval_from").val())
+    debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/Master/getDistrict", //URI,
+        url: $("#web_link").val() + "/api/Master/getDistrict_and_ALL", //URI,
         type: "GET",
         cache: false,
         success: function (result) {
             $('#approval_to').empty();
-            text = '<option value="ALL">ALL</option>';
+            //text = '<option value="ALL">ALL</option>';
+            text = '<option></option>';
             $.each(result.Data, function (key, val) {
-                text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
+                if (val.DSTRCT_CODE !== selectedApprovalFrom) {
+                    text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
+                }
             });
             $("#approval_to").append(text);
             $('#approval_to').select2({
-                dropdownParent: $('#modal-insert') // This line attaches the Select2 dropdown to the modal
+                dropdownParent: $('#modal-insert') 
             });
         }
     });
@@ -308,7 +323,7 @@ function approvalActionUpdate(aprv_action) {
 function approvalFromUpdate(aprv_from) {
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/Master/getDistrict", //URI,
+        url: $("#web_link").val() + "/api/Master/getDistrict_and_ALL", //URI,
         type: "GET",
         cache: false,
         success: function (result) {
@@ -316,7 +331,8 @@ function approvalFromUpdate(aprv_from) {
             $('#approval_from_update').empty();
             text = '<option></option>';
             var dataStatus = aprv_from;
-            text += '<option value="ALL">ALL</option>';
+            //text += '<option value="ALL">ALL</option>';
+            text = '<option></option>';
             $.each(result.Data, function (key, val) {
                 if (val.DSTRCT_CODE == dataStatus) {
                     text += '<option selected value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
@@ -335,7 +351,7 @@ function approvalFromUpdate(aprv_from) {
 function approvalToUpdate(aprv_to) {
     debugger
     $.ajax({
-        url: $("#web_link").val() + "/api/Master/getDistrict", //URI,
+        url: $("#web_link").val() + "/api/Master/getDistrict_and_ALL", //URI,
         type: "GET",
         cache: false,
         success: function (result) {
@@ -343,7 +359,8 @@ function approvalToUpdate(aprv_to) {
             $('#approval_to_update').empty();
             text = '<option></option>';
             var dataStatus = aprv_to;
-            text += '<option value="ALL">ALL</option>';
+            //text += '<option value="ALL">ALL</option>';
+            text = '<option></option>';
             $.each(result.Data, function (key, val) {
                 if (val.DSTRCT_CODE == dataStatus) {
                     text += '<option selected value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
@@ -373,9 +390,9 @@ function currPosIDUpdate(cur_posid) {
             $.each(result.Data, function (key, val) {
                 if (val.POSITION_ID == dataStatus) {
                     var optionText = val.EMPLOYEE_ID + " - " + val.POSITION_ID;
-                    text += '<option selected value="' + val.POSITION_ID + '">' + val.POSITION_ID + '</option>';
+                    text += '<option selected value="' + val.POSITION_ID + '">' + val.EMPLOYEE_ID + " - " + val.POSITION_ID + '</option>';
                 } else {
-                    text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_ID + '</option>';
+                    text += '<option value="' + val.POSITION_ID + '">' + val.EMPLOYEE_ID + " - " + val.POSITION_ID + '</option>';
                 }
             });
             $("#curr_pos_id_update").append(text);
@@ -400,9 +417,9 @@ function nextPosIDUpdate(next_posid) {
             $.each(result.Data, function (key, val) {
                 if (val.POSITION_ID == dataStatus) {
                     var optionText = val.EMPLOYEE_ID + " - " + val.POSITION_ID;
-                    text += '<option selected value="' + val.POSITION_ID + '">' + val.POSITION_ID + '</option>';
+                    text += '<option selected value="' + val.POSITION_ID + '">' + val.EMPLOYEE_ID + " - " + val.POSITION_ID + '</option>';
                 } else {
-                    text += '<option value="' + val.POSITION_ID + '">' + val.POSITION_ID + '</option>';
+                    text += '<option value="' + val.POSITION_ID + '">' + val.EMPLOYEE_ID + " - " + val.POSITION_ID + '</option>';
                 }
             });
             $("#next_pos_id_update").append(text);

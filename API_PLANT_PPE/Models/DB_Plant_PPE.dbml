@@ -553,6 +553,12 @@
       <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VW_DISTRICT_ALL" Member="VW_DISTRICT_ALLs">
+    <Type Name="VW_DISTRICT_ALL">
+      <Column Name="DSTRCT_CODE" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DSTRCT_NAME" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.cusp_insertNotifEmail_SectionHead" Method="cusp_insertNotifEmail_SectionHead">
     <Parameter Name="PPE_NO" Parameter="pPE_NO" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="cusp_insertNotifEmail_SectionHeadResult">

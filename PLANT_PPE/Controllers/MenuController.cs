@@ -60,7 +60,14 @@ namespace PLANT_PPE.Controllers
                 }
                 else
                 {
-                    ViewBag.Sub = db.TBL_R_SUB_MENUs.Where(x => x.Akses.Contains("ALL")).ToList();
+                    if (Session["PositionID"].ToString() == "KP2AC0133")
+                    {
+                        ViewBag.Sub = db.TBL_R_SUB_MENUs.Where(x => x.Akses == "Accounting").ToList();
+                    }
+                    else
+                    {
+                        ViewBag.Sub = db.TBL_R_SUB_MENUs.Where(x => x.Akses.Contains("ALL")).ToList();
+                    }
                 }
 
 

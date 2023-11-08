@@ -188,7 +188,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
             }
@@ -252,7 +252,7 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
                 return Ok(new { Data = data });
             }
             catch (Exception)
@@ -296,7 +296,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager" && a.STATUS != "REJECT").ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Project Manager" && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
             }
@@ -369,7 +369,7 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head" && a.STATUS != "REJECT").ToList();
+                var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Division Head" && a.STATUS != "REJECT").ToList();
 
                 return Ok(new { Data = data });
             }
@@ -507,11 +507,11 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpPost]
         [Route("Cek_History_Part")]
-        public IHttpActionResult Cek_History_Part(VW_T_PPE param)
+        public IHttpActionResult Cek_History_Part(TBL_T_PPE param)
         {
             try
             {
-                var cek = db.TBL_T_PPEs.Where(a => a.EQUIP_NO == param.EQUIP_NO).FirstOrDefault();
+                var cek = db.TBL_T_PPEs.Where(a => a.EQUIP_NO == param.EQUIP_NO).OrderByDescending(a => a.ID).FirstOrDefault();
                 if (cek != null)
                 {
 

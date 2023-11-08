@@ -224,5 +224,11 @@
         <elementListCompartment Id="82fcd7b5-a230-4edb-a2b0-89eec8dfe168" absoluteBounds="0.51500000000000012, 4.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="af2b8787-0c2c-4fea-b440-dc824a344ebb" isExpanded="false" absoluteBounds="6.875, 5.5, 2, 0.45">
+      <DataClassMoniker Name="/DB_Plant_PPEDataContext/VW_DISTRICT_ALL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e7d8737b-2286-4531-9a38-e90e735bd02d" absoluteBounds="6.89, 5.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

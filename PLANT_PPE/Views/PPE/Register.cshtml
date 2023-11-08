@@ -294,6 +294,8 @@
 
     function removeRow(button) {
         $(button).closest("tr").remove();
+        $("#txt_districtTo").prop("disabled", false);
+        $("#txt_districtFrom").prop("disabled", false);
     }
     function formatDate(date) {
         var parts = date.split("-");
