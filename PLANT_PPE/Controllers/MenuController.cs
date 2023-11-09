@@ -23,6 +23,20 @@ namespace PLANT_PPE.Controllers
             else
             {
                 var menu = db.VW_R_MENUs.Where(x => x.ID == Convert.ToInt16(Session["ID_Role"].ToString())).OrderBy(x => x.Order).ToList();
+                if (Session["ID_Role"].ToString() == "5")
+                {
+                    if (Session["PositionID"].ToString() != "KP2AC0133")
+                    {
+                        var settingMenu = menu.Where(x => x.Name_Menu == "Setting").FirstOrDefault();
+                        menu.Remove(settingMenu);
+                    }
+                    //else if (Session["PositionID"].ToString() == "KP2AC0133")
+                    //{
+                    //    ViewBag.Sub = db.TBL_R_SUB_MENUs.Where(x => x.Akses == "Accounting").ToList();
+
+                    //}
+                }
+
 
                 var dataMap = db.TBL_M_USER_APPROVALs.Where(a => a.Position_id == Session["PositionID"].ToString()).ToList();
                 var poslist = dataMap.Select(b => new { b.sub_menu }).Distinct().ToList();
@@ -60,9 +74,12 @@ namespace PLANT_PPE.Controllers
                 }
                 else
                 {
-                    if (Session["PositionID"].ToString() == "KP2AC0133")
+                    if (Session["ID_Role"].ToString() == "5")
                     {
-                        ViewBag.Sub = db.TBL_R_SUB_MENUs.Where(x => x.Akses == "Accounting").ToList();
+                        if (Session["PositionID"].ToString() == "KP2AC0133")
+                        {
+                            ViewBag.Sub = db.TBL_R_SUB_MENUs.Where(x => x.Akses == "Accounting").ToList();
+                        }
                     }
                     else
                     {
