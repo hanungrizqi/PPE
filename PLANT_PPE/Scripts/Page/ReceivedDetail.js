@@ -1,20 +1,5 @@
 ﻿$("document").ready(function () {
     getDetail();
-    //var dateInputs = document.querySelectorAll("input[type='date']");
-
-    //dateInputs.forEach(function (dateInput) {
-    //    dateInput.setAttribute("max", new Date().toISOString().split("T")[0]);
-    //    debugger
-    //});
-    //dateInputs.forEach(function (dateInput) {
-    //    var tdElement = dateInput.closest("td");
-    //    var createdDate = tdElement.getAttribute("data-created-date");
-    //    var formattedCreatedDate = moment(createdDate, "DD/MM/YYYY HH:mm:ss").format("YYYY-MM-DD");
-
-    //    dateInput.setAttribute("min", formattedCreatedDate);
-    //    dateInput.setAttribute("max", new Date().toISOString().split("T")[0]);
-    //    debugger;
-    //});
 })
 
 var table_eqp = $("#table_eqp").DataTable({
@@ -44,17 +29,6 @@ function getDetail() {
 
 function submitApproval(postStatus) {
     debugger
-    //var today = new Date();
-    //var dayOfMonth = today.getDate();
-
-    //if (dayOfMonth >= 15 && dayOfMonth <= 26) {
-    //    Swal.fire(
-    //        'Warning!',
-    //        'Submission is not allowed between the 15th and 26th of each month.',
-    //        'warning'
-    //    );
-    //    return;
-    //}
     var dataEquipment = [];
     var emptyFields = false;
     $.each($("#table_eqp tbody tr"), function () {
@@ -250,7 +224,6 @@ function SM_Update_MSE600() {
                         window.location.href = "/Received/Index";
                     }
                 })
-                //SM_Update_MSO687();
             } if (data.Remarks == false) {
                 Swal.fire(
                     'Error!',

@@ -4,14 +4,6 @@
     $('#modal-terms').on('show.bs.modal', function () {
         getContent();
     });
-    //$('#modal-terms').on('hidden.bs.modal', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.checked = true;
-    //});
-    //$('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.disabled = false;
-    //});
 
     $('#closeModalButton').click(function () {
         $('#modal-terms').modal('hide');
@@ -44,12 +36,10 @@ function getContent() {
 
 function getDetail() {
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + (URLEncoder.encode($("#txt_noPPE").val, "UTF-8")), //URI,
         url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + $("#id_ppe").val(), //URI,
         type: "GET",
         cache: false,
         success: function (result) {
-            //debugger
             var dataPPE = result.Data;
             $("#txt_noPPE").val(dataPPE.PPE_NO);
             $("#txt_eqNumber").val(dataPPE.EQUIP_NO);
@@ -113,7 +103,6 @@ function submitApproval(postStatus) {
         },
         success: function (data) {
             debugger
-            //sendMailPlant_Manager(NomorPPEM);
             if (distrikto === "KPHO") {
                 sendMaildivhead_eng(NomorPPEM);
             } else {
@@ -132,8 +121,6 @@ function sendMailPlant_Manager(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
-        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
-        //data: JSON.stringify(NomorPPEM),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -171,8 +158,6 @@ function sendMaildivhead_eng(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Divhead_Eng?ppe=" + encodedPPENo,
-        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
-        //data: JSON.stringify(NomorPPEM),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",

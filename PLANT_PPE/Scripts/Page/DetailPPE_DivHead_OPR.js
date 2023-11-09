@@ -4,12 +4,10 @@
 
 function getDetail() {
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + (URLEncoder.encode($("#txt_noPPE").val, "UTF-8")), //URI,
         url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + $("#id_ppe").val(), //URI,
         type: "GET",
         cache: false,
         success: function (result) {
-            //debugger
             var dataPPE = result.Data;
             $("#txt_noPPE").val(dataPPE.PPE_NO);
             $("#txt_eqNumber").val(dataPPE.EQUIP_NO);
@@ -46,7 +44,6 @@ function submitApproval(postStatus) {
     dataEQP.UPDATED_BY = $("#hd_nrp").val();
     dataEQP.STATUS = postStatus;
     dataEQP.APPROVAL_ORDER = 8;
-    //dataEQP.URL_FORM_DONE = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $("#txt_noPPE").val();
     dataEQP.URL_FORM_DONE = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + $("#txt_noPPE").val();
 
     debugger
@@ -79,26 +76,11 @@ function sendMail(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Done?ppe=" + encodedPPENo,
-        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
-        //data: JSON.stringify(NomorPPEM),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             if (data.Remarks) {
-                //Swal.fire({
-                //    title: 'Saved',
-                //    text: "Data has been Saved.",
-                //    icon: 'success',
-                //    confirmButtonColor: '#3085d6',
-                //    confirmButtonText: 'OK',
-                //    allowOutsideClick: false,
-                //    allowEscapeKey: false
-                //}).then((result) => {
-                //    if (result.isConfirmed) {
-                //        window.location.href = "/Approval/DivHeadOPR";
-                //    }
-                //});
                 update_MSE600();
             } else {
                 Swal.fire(

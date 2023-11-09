@@ -3,7 +3,6 @@
 var table = $("#tbl_ppe_penerima").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima?posid=" + $("#hd_PositionID").val(),
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Penerima",
         dataSrc: "Data",
     },
 
@@ -82,15 +81,6 @@ $("document").ready(function () {
     $('#modal-terms').on('show.bs.modal', function () {
         getContent();
     });
-    //$('#modal-terms').on('hidden.bs.modal', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.checked = true; 
-    //});
-
-    //$('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.disabled = false; 
-    //});
 
     $('#closeModalButton').click(function () {
         $('#modal-terms').modal('hide');
@@ -219,7 +209,6 @@ function sendMailDivhead_Eng(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",

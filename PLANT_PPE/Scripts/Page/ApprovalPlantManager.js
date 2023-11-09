@@ -2,7 +2,6 @@
 var table = $("#tbl_ppe").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE/" + $("#hd_PositionID").val(),
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE",
         dataSrc: "Data",
     },
 
@@ -75,50 +74,6 @@ var table = $("#tbl_ppe").DataTable({
                     });
             });
     },
-    //initComplete: function () {
-    //    var headerCheckbox = document.getElementById('checkAll');
-    //    var rowCheckboxes = document.getElementsByClassName('row-checkbox');
-    //    headerCheckbox.addEventListener('change', function () {
-    //        var isChecked = headerCheckbox.checked;
-    //        for (var i = 0; i < rowCheckboxes.length; i++) {
-    //            rowCheckboxes[i].checked = isChecked;
-    //        }
-    //    });
-
-    //    var firstPPE = this.api().column(1).data()[0];
-    //    debugger
-    //    this.api().column(1).order('asc').draw();
-
-    //    this.api().columns(1).every(function () {
-    //        var column = this;
-    //        var select = $('<select class="form-control form-control-sm" style="width:200px; display:inline-block; margin-left: 10px;"></select>')
-    //            .appendTo($("#tbl_ppe_filter.dataTables_filter"))
-    //            .on('change', function () {
-    //                var val = $.fn.dataTable.util.escapeRegex($(this).val());
-    //                column.search(val ? '^' + val + '$' : '', true, false).draw();
-    //            });
-
-    //        if (firstPPE) {
-    //            select.append('<option value="' + firstPPE + '">' + firstPPE + '</option>');
-    //        } else {
-    //            select.append('<option value="-- PPE NUMBER --">-- PPE NUMBER --</option>');
-    //        }
-    //        column
-    //            .data()
-    //            .unique()
-    //            .sort()
-    //            .each(function (d, j) {
-    //                if (d !== firstPPE) {
-    //                    select.append('<option value="' + d + '">' + d + '</option>');
-    //                }
-    //            });
-    //        if (firstPPE) {
-    //            column.search('^' + firstPPE + '$', true, false).draw();
-    //        } else {
-    //            column.search('^-- PPE NUMBER --$', true, false).draw();
-    //        }
-    //    });
-    //},
 });
 
 table.on('draw', function () {
@@ -190,7 +145,6 @@ function submitApproval(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
-            /*sendMailPlant_DeptHead(Array.from(uniquePPE_NO));*/
             $('.row-checkbox:checked').each(function () {
                 let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
                 let statss = $(this).closest('tr').find('td:eq(7)').text();
@@ -215,7 +169,6 @@ function sendMailPlant_DeptHead(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
@@ -253,11 +206,9 @@ function sendMailPlant_DeptHead(uniquePPE_NO) {
 
 function sendMailPlant_Manager(uniquePPE_NO) {
     debugger
-    //var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     var encodedPPENo = uniquePPE_NO.map(ppeNo => encodeURIComponent(ppeNo));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
@@ -297,7 +248,6 @@ function sendMailPM_Penerima(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",

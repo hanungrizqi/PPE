@@ -2,7 +2,6 @@
 var table = $("#tbl_ppe").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPMADMDev_PPE",
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_PPE",
         dataSrc: "Data",
     },
 
@@ -146,7 +145,6 @@ function submitApproval(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
-            /*sendMailPlant_DeptHead(Array.from(uniquePPE_NO));*/
             $('.row-checkbox:checked').each(function () {
                 let distrikfrom = $(this).closest('tr').find('td:eq(4)').text();
                 let statss = $(this).closest('tr').find('td:eq(7)').text();
@@ -171,7 +169,6 @@ function sendMailPlant_DeptHead(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_DeptHead",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
@@ -209,11 +206,9 @@ function sendMailPlant_DeptHead(uniquePPE_NO) {
 
 function sendMailPlant_Manager(uniquePPE_NO) {
     debugger
-    //var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     var encodedPPENo = uniquePPE_NO.map(ppeNo => encodeURIComponent(ppeNo));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Plant_Manager",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
@@ -253,7 +248,6 @@ function sendMailPM_Penerima(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",

@@ -2,7 +2,6 @@
 var table = $("#tbl_ppe_pengirim").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Pengirim?posid=" + $("#hd_PositionID").val(),
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPM_Pengirim",
         dataSrc: "Data",
     },
 
@@ -82,15 +81,6 @@ $("document").ready(function () {
     $('#modal-terms').on('show.bs.modal', function () {
         getContent();
     });
-    //$('#modal-terms').on('hidden.bs.modal', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.checked = true;
-    //});
-
-    //$('#modal-terms').on('click', '.btn.btn-alt-primary', function () {
-    //    var agreeCheckbox = document.getElementById('val-terms');
-    //    agreeCheckbox.disabled = false; 
-    //});
     $('#closeModalButton').click(function () {
         $('#modal-terms').modal('hide');
     });
@@ -180,7 +170,6 @@ function submitApproval(postStatus) {
         },
         success: function (data) {
             if (data.Remarks == true) {
-                //sendMailPM_Penerima(Array.from(uniquePPE_NO));
                 $('.row-checkbox:checked').each(function () {
                     let distrikto = $(this).closest('tr').find('td:eq(5)').text();
                     if (distrikto === "KPHO") {
@@ -228,7 +217,6 @@ function sendMailPM_Penerima(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Penerima",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
@@ -269,7 +257,6 @@ function sendMailDivhead_Eng(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Divhead_Eng",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",

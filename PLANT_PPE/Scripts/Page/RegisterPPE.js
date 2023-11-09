@@ -6,8 +6,6 @@ $("document").ready(function () {
     var formattedDate = today.toISOString().split("T")[0];
     txtDateInput.value = formattedDate;
     txtDateInput.setAttribute("max", formattedDate);
-    //getDistrict();
-    //getDistrictTO();
     getDistrict(function () {
         getDistrictTO();
     });
@@ -93,9 +91,6 @@ function getDistrictTO() {
             debugger
             $('#txt_districtTo').empty();
             text = '<option></option>';
-            //$.each(result.Data, function (key, val) {
-            //    text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
-            //});
             $.each(result.Data, function (key, val) {
                 if (val.DSTRCT_CODE !== selectedDistrict) {
                     text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
@@ -330,9 +325,7 @@ function savePPEtoTable() {
         });
     }
     $("#txt_districtTo").prop("disabled", true);
-    //$("#txt_locTo").prop("disabled", true);
     $("#txt_districtFrom").prop("disabled", true);
-    //$("#txt_locFrom").prop("disabled", true);
 };
 
 function formatDate(date) {

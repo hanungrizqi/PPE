@@ -1,7 +1,6 @@
 ﻿Codebase.helpersOnLoad(['cb-table-tools-checkable', 'cb-table-tools-sections']);
 var table = $("#tbl_ppe_opr").DataTable({
     ajax: {
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalDivHead_OPR/" + $("#hd_PositionID").val(),
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalDivHead_OPR",
         dataSrc: "Data",
     },
@@ -124,7 +123,6 @@ function submitApprovalOPR(postStatus) {
             POSISI_PPE: postStatus === "REJECT" ? "Division Head OPR" : "Waiting SM Dept",
             STATUS: postStatus,
             APPROVAL_ORDER: 8,
-            //URL_FORM_DONE: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE&PPE_NO=" + $(this).data('id'),
             URL_FORM_DONE: "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DONE_BARU&PPE_NO=" + $(this).data('id'),
         };
         dataPPE.push(ppe);
@@ -168,7 +166,6 @@ function sendMailPPE_DONE(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_Done?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_Done",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",

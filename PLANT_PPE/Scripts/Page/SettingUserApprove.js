@@ -3,7 +3,7 @@
 
 $("document").ready(function () {
     $('.select2-modal').select2({
-        dropdownParent: $('#modal-insert') // This line attaches the Select2 dropdown to the modal
+        dropdownParent: $('#modal-insert') 
     });
 })
 
@@ -14,7 +14,7 @@ var table = $("#tbl_usrapprv").DataTable({
     },
     "columnDefs": [
         { "className": "dt-center", "targets": '_all' },
-        { "className": "dt-nowrap", "targets": '_all' /*[1, 2]*/ }
+        { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
     columns: [

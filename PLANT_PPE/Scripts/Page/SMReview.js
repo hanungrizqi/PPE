@@ -97,7 +97,6 @@ function getdetail(nomor_equip) {
                     return tanggal;
                 }
             },
-            //{ data: 'UPLOAD_FORM_CAAB' }
         ], order: [[3, 'asc']]
     });
 }

@@ -57,7 +57,6 @@ namespace PLANT_PPE.Controllers
             }
             ViewBag.dstrct = db.VW_DISTRICTs.ToList();
             ViewBag.loc = db.VW_LOCATIONs.ToList();
-            //ViewBag.acctprofile = db.VW_MSF68Cs.ToList();
             return View();
         }
 
@@ -77,8 +76,6 @@ namespace PLANT_PPE.Controllers
                 return RedirectToAction("index", "login");
             }
             ViewBag.Emp = db.TBL_R_MASTER_KARYAWAN_ALLs.ToList();
-            /*ViewBag.dstrct = db.VW_DISTRICTs.ToList();
-            ViewBag.loc = db.VW_LOCATIONs.ToList();*/
             return View();
         }
 

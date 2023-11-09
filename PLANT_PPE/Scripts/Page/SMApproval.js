@@ -36,15 +36,6 @@ var table = $("#tbl_ppe_sm").DataTable({
                 return text;
             }
         },
-        //{
-        //    data: 'ID',
-        //    targets: 'no-sort', orderable: false,
-        //    render: function (data, type, row) {
-        //        action = `<div class="btn-group">`
-        //        action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
-        //        return action;
-        //    }
-        //}
     ],
     initComplete: function () {
         var headerCheckbox = document.getElementById('checkAll');

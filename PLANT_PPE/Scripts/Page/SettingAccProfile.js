@@ -1,6 +1,4 @@
-﻿//Codebase.helpersOnLoad(['jq-select2']);
-
-var table = $("#tbl_accp").DataTable({
+﻿var table = $("#tbl_accp").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/Setting/Acc_profile",
         dataSrc: "Data",
@@ -80,7 +78,6 @@ function getDistrict(callback) {
             });
             $("#txt_district").change(function () {
                 selectedDistrict = $(this).val();
-                //getLoc();
                 if (typeof callback === "function") {
                     callback();
                 }
@@ -121,7 +118,6 @@ function equipmentDesc() {
         type: "GET",
         cache: false,
         success: function (result) {
-            //debugger
             var eq = result.Data;
             $("#txt_desc").val(eq.TABLE_DESC);
         }

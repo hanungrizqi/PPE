@@ -60,7 +60,6 @@ namespace API_PLANT_PPE.Controllers
                     {
                         his.Ppe_NO = ppe.PPE_NO;
                         his.Equip_No = ppe.EQUIP_NO;
-                        //his.Posisi_Ppe = old_posisi;
                         his.Posisi_Ppe = "SM";
                         his.Approval_Order = ppe.APPROVAL_ORDER;
                         his.Approved_Date = DateTime.UtcNow.ToLocalTime();

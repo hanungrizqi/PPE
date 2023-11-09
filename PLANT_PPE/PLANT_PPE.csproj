@@ -197,7 +197,6 @@
     <Compile Include="Reports\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Reports\ReportReview.aspx.cs">
       <DependentUpon>ReportReview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,6 +1,4 @@
 ﻿$("document").ready(function () {
-    //approvalFrom()
-    //approvalTo()
     approvalFrom(function () {
         approvalTo();
     });
@@ -16,7 +14,7 @@ var table = $("#tbl_mappingapproval").DataTable({
     },
     "columnDefs": [
         { "className": "dt-center", "targets": '_all' },
-        { "className": "dt-nowrap", "targets": '_all' /*[1, 2]*/ }
+        { "className": "dt-nowrap", "targets": '_all' }
     ],
     scrollX: true,
     columns: [
@@ -73,7 +71,6 @@ function approvalFrom(callback) {
         cache: false,
         success: function (result) {
             $('#approval_from').empty();
-            //text = '<option value="ALL">ALL</option>';
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
                 text += '<option value="' + val.DSTRCT_CODE + '">' + val.DSTRCT_CODE + '</option>';
@@ -102,7 +99,6 @@ function approvalTo() {
         cache: false,
         success: function (result) {
             $('#approval_to').empty();
-            //text = '<option value="ALL">ALL</option>';
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
                 if (val.DSTRCT_CODE !== selectedApprovalFrom) {
@@ -133,7 +129,7 @@ function approvalAction() {
     selectElement.appendChild(optionReject);
 
     $(selectElement).select2({
-        dropdownParent: $('#modal-insert') // This line attaches the Select2 dropdown to the modal
+        dropdownParent: $('#modal-insert')
     });
 }
 
@@ -152,7 +148,7 @@ function currPosID() {
             });
             $("#curr_pos_id").append(text);
             $('#curr_pos_id').select2({
-                dropdownParent: $('#modal-insert') // This line attaches the Select2 dropdown to the modal
+                dropdownParent: $('#modal-insert')
             });
         }
     });
@@ -173,7 +169,7 @@ function nextPosID() {
             });
             $("#next_pos_id").append(text);
             $('#next_pos_id').select2({
-                dropdownParent: $('#modal-insert') // This line attaches the Select2 dropdown to the modal
+                dropdownParent: $('#modal-insert')
             });
         }
     });
@@ -331,7 +327,6 @@ function approvalFromUpdate(aprv_from) {
             $('#approval_from_update').empty();
             text = '<option></option>';
             var dataStatus = aprv_from;
-            //text += '<option value="ALL">ALL</option>';
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
                 if (val.DSTRCT_CODE == dataStatus) {
@@ -359,7 +354,6 @@ function approvalToUpdate(aprv_to) {
             $('#approval_to_update').empty();
             text = '<option></option>';
             var dataStatus = aprv_to;
-            //text += '<option value="ALL">ALL</option>';
             text = '<option></option>';
             $.each(result.Data, function (key, val) {
                 if (val.DSTRCT_CODE == dataStatus) {

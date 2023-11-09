@@ -1,6 +1,4 @@
-﻿//Codebase.helpersOnLoad(['jq-select2']);
-
-$("document").ready(function () {
+﻿$("document").ready(function () {
     getDistrict()
     getLoc()
 })

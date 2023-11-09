@@ -10,14 +10,7 @@ namespace API_PLANT_PPE
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-            // Configure Web API to use only bearer token authentication.
-            //config.SuppressDefaultHostAuthentication();
-            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             config.MessageHandlers.Add(new CorsHandler());
-            // Web API configuration and services
-
-            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -27,11 +20,7 @@ namespace API_PLANT_PPE
             );
 
             EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "GET,POST");
-            //EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:57074,http://10.14.101.111:7676,http://10.14.101.111:7677", "*", "GET,POST");
-
-            //EnableCorsAttribute cors2 = new EnableCorsAttribute("http://10.14.101.111:7676", "*", "GET,POST");
             config.EnableCors(cors);
-            //config.EnableCors(cors2);
         }
     }
 }

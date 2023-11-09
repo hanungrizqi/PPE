@@ -199,14 +199,12 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
-        //[Route("Get_ListApprovalPPE_SECHEAD/{posid}")]
         [Route("Get_ListApprovalPPE_SECHEAD")]
         public IHttpActionResult Get_ListApprovalPPE_SECHEAD()
         {
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.VW_T_SECHEADs.Where(a => a.POSISI_PPE == "Sect. Head" && a.NEXT_POSITION_ID == posid || "KP1PT024" == posid && a.STATUS != "REJECT").ToList();
                 var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Sect. Head" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
@@ -219,26 +217,14 @@ namespace API_PLANT_PPE.Controllers
 
         [HttpGet]
         [Route("Get_ListApprovalPM_PPE/{posid}")]
-        //[Route("Get_ListApprovalPM_PPE")]
         public IHttpActionResult Get_ListApprovalPM_PPE( string posid)
         {
             try
             {
                 db.CommandTimeout = 120;
-                //if (posid == "KP1PT03")
-                //{
-                //    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Adm & Dev Manager" && a.DISTRICT_FROM == "KPHO" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
-                //    return Ok(new { Data = data });
-                //}
-                //else
-                //{
-                //    var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
-                //    return Ok(new { Data = data });
-                //}
-
                 var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Plant Manager" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
-                return Ok(new { Data = data });
 
+                return Ok(new { Data = data });
             }
             catch (Exception)
             {
@@ -380,14 +366,12 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
-        //[Route("Get_ListApprovalDivHead_ENG/{posid}")]
         [Route("Get_ListApprovalDivHead_ENG")]
         public IHttpActionResult Get_ListApprovalDivHead_ENG()
         {
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
                 var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Division Head ENG" && a.STATUS != "REJECT").OrderBy(a => a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
@@ -399,14 +383,12 @@ namespace API_PLANT_PPE.Controllers
         }
 
         [HttpGet]
-        //[Route("Get_ListApprovalDivHead_OPR/{posid}")]
         [Route("Get_ListApprovalDivHead_OPR")]
         public IHttpActionResult Get_ListApprovalDivHead_OPR()
         {
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.VW_T_PPEs.Where(a => a.POSISI_PPE == "Division Head OPR" && a.NEXT_POSITION_ID == posid && a.STATUS != "REJECT").ToList();
                 var data = db.TBL_T_PPEs.Where(a => a.POSISI_PPE == "Division Head OPR" && a.STATUS != "REJECT").OrderBy(a=> a.PPE_NO).ToList();
 
                 return Ok(new { Data = data });
@@ -494,7 +476,6 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 db.CommandTimeout = 120;
-                //var data = db.TBL_H_APPROVAL_PPEs.Where(a => a.Equip_No == Equip_No).OrderBy(a => a.Approval_Order).ToList();
                 var data = db.cufn_getHistoryPPE(Equip_No);
 
                 return Ok(new { Data = data });
@@ -565,25 +546,6 @@ namespace API_PLANT_PPE.Controllers
                 return BadRequest();
             }
         }
-
-        //[HttpPost]
-        //[Route("Sendmail_Plant_Manager")]
-        //public IHttpActionResult Sendmail_Plant_Manager(string ppe)
-        //{
-        //    try
-        //    {
-        //        string decodedPpenosh = Uri.UnescapeDataString(ppe);
-
-        //        db.CommandTimeout = 120;
-        //        db.cusp_insertNotifEmail_PlantManager(decodedPpenosh);
-
-        //        return Ok(new { Remarks = true });
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
 
         [HttpPost]
         [Route("Sendmail_Plant_Manager")]

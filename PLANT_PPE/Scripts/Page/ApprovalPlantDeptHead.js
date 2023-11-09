@@ -3,7 +3,6 @@
 var table = $("#tbl_ppe").DataTable({
     ajax: {
         url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE?posid=" + $("#hd_PositionID").val(),
-        //url: $("#web_link").val() + "/api/PPE/Get_ListApprovalPDH_PPE",
         dataSrc: "Data",
     },
     
@@ -13,12 +12,6 @@ var table = $("#tbl_ppe").DataTable({
     ],
     scrollX: true,
     columns: [
-        //{
-        //    "data": null,
-        //    render: function (data, type, row, meta) {
-        //        return '<input type="checkbox" class="row-checkbox" data-id="' + row.PPE_NO + '">';
-        //    }
-        //},
         {
             "data": null,
             render: function (data, type, row, meta) {
@@ -26,8 +19,6 @@ var table = $("#tbl_ppe").DataTable({
             }
         },
         { data: 'PPE_NO' },
-        //{ data: 'EGI' },
-        //{ data: 'EQUIP_NO' },
         { data: 'DISTRICT_FROM' },
         { data: 'DISTRICT_TO' },
         {
@@ -44,21 +35,6 @@ var table = $("#tbl_ppe").DataTable({
                 return text;
             }
         },
-        //{
-        //    data: 'UPLOAD_FORM_CAAB',
-        //    render: function (data, type, row) {
-        //        return '<td><input class="form-control form-control-sm input-file" type="file" accept=".pdf" multiple></td>';
-        //    }
-        //},
-        //{
-        //    data: 'ID',
-        //    targets: 'no-sort', orderable: false,
-        //    render: function (data, type, row) {
-        //        action = `<div class="btn-group">`
-        //        action += `<a href="/Approval/DetailPPE?idppe=${data}" class="btn btn-sm btn-info">Detail</a>`
-        //        return action;
-        //    }
-        //},
         {
             data: 'PPE_NO',
             targets: 'no-sort', orderable: false,

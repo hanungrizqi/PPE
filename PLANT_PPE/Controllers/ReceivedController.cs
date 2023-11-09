@@ -38,20 +38,13 @@ namespace PLANT_PPE.Controllers
 
             using (var client = new HttpClient())
             {
-                //Passing service base url  
                 client.BaseAddress = new Uri((string)Session["Web_Link"]);
-
                 client.DefaultRequestHeaders.Clear();
-                //Define request data format  
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
                 HttpResponseMessage Res = await client.GetAsync("api/SM/Get_PPE_EquipmentPart?ppe=" + encodedPpe);
 
-                //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
-                    //Storing the response details recieved from web api   
                     var ApiResponse = Res.Content.ReadAsStringAsync().Result;
                     Cls_PPEDetail data = new Cls_PPEDetail();
                     data = JsonConvert.DeserializeObject<Cls_PPEDetail>(ApiResponse);

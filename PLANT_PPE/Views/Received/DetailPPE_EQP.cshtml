@@ -92,10 +92,7 @@
                                     @{
                                         DateTime createdDate = (DateTime)equip.CREATED_DATE;
                                         string formattedCreatedDate = createdDate.ToString("yyyy-MM-dd");
-                                        //string defaultDate = "yyyy-MM-dd";
                                     }
-                                    @*<input type="date" class="form-control form-control-sm datereceived" id="txt_DateRecivSM" name="txt_DateRecivSM">*@
-                                    @*<input type="date" class="form-control form-control-sm datereceived" id="txt_DateRecivSM" name="txt_DateRecivSM" min="@formattedCreatedDate" max="@DateTime.Now" value="@defaultDate">*@
                                     <input type="date" class="form-control form-control-sm datereceived" id="txt_DateRecivSM" name="txt_DateRecivSM" min="@equip.CREATED_DATE.ToString("yyyy-MM-dd")" value="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.ToString("yyyy-MM-dd")">
                                 </td>
                                 <td>
@@ -117,9 +114,6 @@
             <div class="row text-center">
                 <div class="col-md-12">
                     <a href="/Received/Index" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
-                    @*<button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="r(this.value)">
-                        <i class="fa fa-times opacity-50 me-1"></i> Cancel
-                    </button>*@
                     <button type="submit" class="btn btn-sm btn-success" value="SM APPROVED" onclick="submitApproval(this.value)">
                         <i class="fa fa-check-circle opacity-50 me-1"></i> Approve
                     </button>

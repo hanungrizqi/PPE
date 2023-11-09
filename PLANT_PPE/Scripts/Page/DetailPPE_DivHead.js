@@ -4,12 +4,10 @@
 
 function getDetail() {
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + (URLEncoder.encode($("#txt_noPPE").val, "UTF-8")), //URI,
         url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + $("#id_ppe").val(), //URI,
         type: "GET",
         cache: false,
         success: function (result) {
-            //debugger
             var dataPPE = result.Data;
             $("#txt_noPPE").val(dataPPE.PPE_NO);
             $("#txt_eqNumber").val(dataPPE.EQUIP_NO);
@@ -78,8 +76,6 @@ function sendMail(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Divhead_Opr?ppe=" + encodedPPENo,
-        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
-        //data: JSON.stringify(NomorPPEM),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",

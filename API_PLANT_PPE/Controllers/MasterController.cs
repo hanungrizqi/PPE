@@ -102,7 +102,6 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 var data = db.VW_DISTRICTs.OrderBy(a => a.DSTRCT_CODE).ToList();
-                //var data = db.TBL_M_DISTRICTs.OrderBy(a => a.TABLE_DESC).ToList();
 
                 return Ok(new { Data = data });
             }
@@ -119,7 +118,6 @@ namespace API_PLANT_PPE.Controllers
             try
             {
                 var data = db.VW_DISTRICT_ALLs.OrderBy(a => a.DSTRCT_CODE).ToList();
-                //var data = db.TBL_M_DISTRICTs.OrderBy(a => a.TABLE_DESC).ToList();
                 return Ok(new { Data = data });
             }
             catch (Exception)
@@ -134,7 +132,6 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                //var data = db.VW_R_DISTRICT_LOCATIONs.Where(a => a.DSTRCT_CODE == dstrct).ToList();
                 var data = db.TBL_M_DISTRICTs.Where(a => a.TABLE_DESC == dstrct).ToList();
 
                 return Ok(new { Data = data, Total = data.Count() });
@@ -152,7 +149,6 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                //var data = db.VW_R_DISTRICT_LOCATIONs.Where(a => a.DSTRCT_CODE == dstrct).ToList();
                 var data = db.VW_LOCATIONs.OrderBy(a => a.TABLE_CODE).ToList();
 
                 return Ok(new { Data = data, Total = data.Count() });

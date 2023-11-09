@@ -18,13 +18,10 @@ namespace API_PLANT_PPE.ViewModel
         DB_Plant_PPEDataContext db = new DB_Plant_PPEDataContext();
         public ClsUpdate_MSO687_Result updatemse687_SM(TBL_T_PPE dataEquipment)
         {
+
+            //tdk dipake, sudah ada console
             ClsUpdate_MSO687_Result cls = new ClsUpdate_MSO687_Result();
-            //var data = db.VW_MSF685s.Where(a => a.ASSET_NO == dataEquipment.EQUIP_NO).FirstOrDefault(); //pertama
-            //var data = db.VW_MSF685s.Where(a => a.ASSET_NO == dataEquipment.EQUIP_NO && a.DSTRCT_CODE == dataEquipment.DISTRICT_FROM).FirstOrDefault(); //kedua
-            //var dataList = db.VW_MSF685s.Where(a => a.ASSET_NO == dataEquipment.EQUIP_NO).ToList(); //looping dengan duplikat
             var dataList = db.VW_MSF685s.Where(a => a.ASSET_NO == dataEquipment.EQUIP_NO).GroupBy(a => a.SUB_ASSET_NO).Select(g => g.First()).ToList();
-            //var dataList = db.VW_MSF685s.Where(a => a.ASSET_NO == dataEquipment.EQUIP_NO).GroupBy(a => new { a.SUB_ASSET_NO, a.ACCT_PROFILE }).Where(g => g.Any(a => a.DSTRCT_CODE == dataEquipment.DISTRICT_FROM)).Select(g => g.First()).ToList();
-            //var dataAcctSub = db.VW_R_ACCT_PROFILEs.Where(a => a.DSTRCT_CODE == dataEquipment.DISTRICT_TO && a.EQUIP_LOCATION == dataEquipment.LOC_TO).FirstOrDefault();
             try
             {
                 ScreenService.ScreenService service = new ScreenService.ScreenService();
@@ -36,12 +33,6 @@ namespace API_PLANT_PPE.ViewModel
                 string str_password = ConfigurationManager.AppSettings["password"].ToString();
                 string str_posisi = ConfigurationManager.AppSettings["pos_id"].ToString();
 
-                //Random cap = new Random();
-                //var cekL = str_username.Length;
-                //int num = cap.Next(1, str_username.Length);
-
-                //string uName = str_username;
-                //string updatedName = uName.Substring(0, num).ToUpper() + uName.Substring(num).ToLower();
                 string acak = AcakHurufBesarKecil(str_username);
 
                 //login ellipse
@@ -145,26 +136,15 @@ namespace API_PLANT_PPE.ViewModel
                     listInsert.Remove(fieldDTO8);
                     listInsert.Remove(fieldDTO9);
 
-                    //ScreenNameValueDTO fieldDTO10 = new ScreenNameValueDTO();
-                    //ScreenNameValueDTO fieldDTO11 = new ScreenNameValueDTO();
                     ScreenNameValueDTO fieldDTO12 = new ScreenNameValueDTO();
                
-                    //input dengan parameter fieldname dan value
-                    //fieldDTO10.fieldName = "DEPR_METHOD3I";
-                    //fieldDTO10.value = "L";
-                    //fieldDTO11.fieldName = "DEPR_RATE3I";
-                    //fieldDTO11.value = "";
                     fieldDTO12.fieldName = "EST_MM_LIFE3I";
                     fieldDTO12.value = "12";
 
-                    //disatukan dalam list
-                    //listInsert.Add(fieldDTO10);
-                    //listInsert.Add(fieldDTO11);
                     listInsert.Add(fieldDTO12);
                 
                     //submit data
                     screen_request.screenFields = listInsert.ToArray();
-                    //screen_request.screenFields = null;
                     screen_request.screenKey = "1";
                     screen_DTO = service.submit(context, screen_request);
 
@@ -179,10 +159,7 @@ namespace API_PLANT_PPE.ViewModel
                     ScreenNameValueDTO fieldDTO13 = new ScreenNameValueDTO();
                     ScreenNameValueDTO fieldDTO14 = new ScreenNameValueDTO();
 
-                    //input dengan parameter fieldname dan value
-                    //DateTime datereceivedsm = (DateTime)dataEquipment.DATE_RECEIVED_SM;
                     fieldDTO13.fieldName = "XFER_DATE1I";
-                    //fieldDTO13.value = datereceivedsm.ToString("yyyyMMdd");
                     fieldDTO13.value = "20220730";
                     fieldDTO14.fieldName = "XFER_PERCENT1I";
                     fieldDTO14.value = "100.00";

@@ -4,12 +4,10 @@
 
 function getDetail() {
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + (URLEncoder.encode($("#txt_noPPE").val, "UTF-8")), //URI,
         url: $("#web_link").val() + "/api/PPE/Get_PPEDetail/" + $("#id_ppe").val(), //URI,
         type: "GET",
         cache: false,
         success: function (result) {
-            //debugger
             var dataPPE = result.Data;
             $("#txt_noPPE").val(dataPPE.PPE_NO);
             $("#txt_eqNumber").val(dataPPE.EQUIP_NO);
@@ -66,8 +64,6 @@ function submitApproval(postStatus) {
             $("#overlay").show();
         },
         success: function (data) {
-            //debugger
-            //sendMailPlant_DeptHead(NomorPPEM);
             debugger
             if (distrikfrom === "KPHO" && statss !== "PLANT ADM & DEV MANAGER APPROVED") {
                 sendMailPlant_Manager(NomorPPEM);
@@ -89,8 +85,6 @@ function sendMailPlant_DeptHead(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_DeptHead?ppe=" + encodedPPENo,
-        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
-        //data: JSON.stringify(NomorPPEM),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -128,8 +122,6 @@ function sendMailPlant_Manager(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager?ppe=" + encodedPPENo,
-        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
-        //data: JSON.stringify(NomorPPEM),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -167,8 +159,6 @@ function sendMailPM_penerima(NomorPPEM) {
     debugger
     $.ajax({
         url: $("#web_link").val() + "/api/DetailApproval/Sendmail_PM_Penerima?ppe=" + encodedPPENo,
-        //url: $("#web_link").val() + "/api/DetailApproval/Sendmail_Plant_Manager",
-        //data: JSON.stringify(NomorPPEM),
         dataType: "json",
         type: "POST",
         contentType: "application/json; charset=utf-8",

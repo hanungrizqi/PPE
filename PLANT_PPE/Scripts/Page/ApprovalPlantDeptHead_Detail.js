@@ -47,7 +47,6 @@ function submitApproval(postStatus) {
             LOC_FROM: $(this).find("td:nth-child(8)").text(),
             LOC_TO: $(this).find("td:nth-child(9)").text(),
             UPLOAD_FORM_CAAB: $(this).find("input[name='txt_CAAB']").val(),
-            //POSISI_PPE: postStatus === "REJECT" ? "SM" : "DONE",
             POSISI_PPE: postStatus === "REJECT" ? "Plant Dept. Head" : "Project Manager Pengirim",
             UPDATED_BY: $("#hd_nrp").val(),
             STATUS: postStatus,
@@ -211,7 +210,6 @@ function sendMailPM_Pengirim(uniquePPE_NO) {
     var encodedPPENo = encodeURIComponent(uniquePPE_NO.join(','));
     debugger
     $.ajax({
-        //url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Pengirim?ppe=" + encodedPPENo,
         url: $("#web_link").val() + "/api/PPE/Sendmail_PM_Pengirim",
         data: JSON.stringify(uniquePPE_NO),
         dataType: "json",
@@ -264,7 +262,6 @@ function rejectApproval(postStatus) {
             LOC_FROM: $(this).find("td:nth-child(8)").text(),
             LOC_TO: $(this).find("td:nth-child(9)").text(),
             UPLOAD_FORM_CAAB: $(this).find("input[name='txt_CAAB']").val(),
-            //POSISI_PPE: postStatus === "REJECT" ? "SM" : "DONE",
             POSISI_PPE: postStatus === "REJECT" ? "Plant Dept. Head" : "Project Manager Pengirim",
             UPDATED_BY: $("#hd_nrp").val(),
             STATUS: postStatus,

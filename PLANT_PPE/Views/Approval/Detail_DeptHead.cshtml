@@ -65,7 +65,6 @@
                             <th>District To</th>
                             <th>Loc From</th>
                             <th>Loc To</th>
-                            @*<th>Date Received</th>*@
                             <th>Upload CAAB</th>
                         </tr>
                     </thead>
@@ -82,22 +81,8 @@
                                 <td>@equip.DISTRICT_TO</td>
                                 <td>@equip.LOC_FROM</td>
                                 <td>@equip.LOC_TO</td>
-                                @*<td>
-                                    @if (equip.DATE_RECEIVED_SM == null)
-                                    {
-                                        <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM">
-                                    }
-                                    else
-                                    {
-                                        <input type="date" class="form-control form-control-sm " name="txt_DateRecivSM" value="@equip.DATE_RECEIVED_SM.ToString("yyyy-MM-dd")">
-                                    }
-                                </td>*@
                                 <td>
                                     <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_CAAB" multiple>
-                                    @*@if (equip.BERITA_ACARA_SM == null)
-                                        {
-                                            <input class="form-control form-control-sm input-file" type="file" accept=".pdf" name="txt_BA" multiple>
-                                        }*@
                                 </td>
                             </tr>
                         }
@@ -123,9 +108,6 @@
             <div class="row text-center">
                 <div class="col-md-12">
                     <a href="/Approval/PlantDeptHead" class="btn btn-sm btn-info"><i class="fa fa-backward opacity-50 me-1"></i>Back</a>
-                    @*<button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="r(this.value)">
-                            <i class="fa fa-times opacity-50 me-1"></i> Cancel
-                        </button>*@
                     <button type="submit" class="btn btn-sm btn-danger" value="REJECT" onclick="rejectApproval(this.value)">
                         <i class="fa fa-times opacity-50 me-1"></i> Cancel
                     </button>

@@ -8,7 +8,6 @@ function PostLogin() {
     var obj = new Object();
     obj.Username = $("#login-username").val();
     obj.Password = $("#login-password").val();
-    //obj.Jobsite = $("#jobSite").val();
     obj.Roled = $("#roled").val();
     $.ajax({
         url: $("#web_link").val() + "/api/Login/Get_Login", //URI
@@ -22,7 +21,7 @@ function PostLogin() {
         },
         success: function (data) {
             if (data.Remarks == true) {
-                MakeSession(obj.Username/*, obj.Jobsite*/, obj.Roled);
+                MakeSession(obj.Username, obj.Roled);
             }
             else {
                 swal.fire({
@@ -44,11 +43,9 @@ function PostLogin() {
     })
 }
 
-function MakeSession(nrp, /*site,*/ role) {
-    //debugger
+function MakeSession(nrp, role) {
     var obj = {
         NRP: nrp,
-        //Jobsite: site,
         Roled: role
     };
 
@@ -80,7 +77,6 @@ function MakeSession(nrp, /*site,*/ role) {
 
 function addJobsite() {
     $.ajax({
-        /*url: $("#web_link").val() + "/api/Master/Get_Jobsite?username=" + $("#login-username").val(), //URI,*/
         url: $("#web_link").val() + "/api/Master/Get_JobsiteByUsername?username=" + $("#login-username").val(), //URI,
         type: "GET",
         cache: false,
@@ -98,7 +94,6 @@ function addJobsite() {
 function addRoled() {
     $.ajax({
         url: $("#web_link").val() + "/api/Master/Get_Roled", //URI,
-        //url: $("#web_link").val() + "/api/Master/Get_RoledByUsername?username=" + $("#login-username").val(), //URI,
         type: "GET",
         cache: false,
         success: function (result) {

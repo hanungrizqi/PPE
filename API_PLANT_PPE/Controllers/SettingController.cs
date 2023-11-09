@@ -15,7 +15,6 @@ namespace API_PLANT_PPE.Controllers
     {
         DB_Plant_PPEDataContext db = new DB_Plant_PPEDataContext();
 
-        //Setting User
         [HttpPost]
         [Route("Create_User")]
         public IHttpActionResult Create_User(TBL_M_USER param)
@@ -140,8 +139,7 @@ namespace API_PLANT_PPE.Controllers
             }
 
         }
-        //END Setting User
-        //Setting Menu
+
         [HttpGet]
         [Route("Get_Menu/{group}")]
         public IHttpActionResult Get_Menu(int group)
@@ -176,8 +174,7 @@ namespace API_PLANT_PPE.Controllers
             }
 
         }
-        //END Setting Menu
-        //Setting Agreement
+
         [HttpPost]
         [Route("Create_Agreement")]
         public IHttpActionResult Create_Agreement(TBL_M_AGREEMENT param)
@@ -221,7 +218,6 @@ namespace API_PLANT_PPE.Controllers
                 return Json(new { Remarks = false, Message = ex });
             }
         }
-        //END Setting Agreement
 
         [HttpGet]
         [Route("Get_AccountProfile")]
@@ -470,8 +466,6 @@ namespace API_PLANT_PPE.Controllers
         {
             try
             {
-                // var data = db.TBL_M_MAPPING_APPROVALs.Where(a => a.APPROVAL_NO == id).ToList();
-
                 var data = db.TBL_M_MAPPING_APPROVALSSes.Where(a => a.ID == id).FirstOrDefault();
                 db.TBL_M_MAPPING_APPROVALSSes.DeleteOnSubmit(data);
                 db.SubmitChanges();

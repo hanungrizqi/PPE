@@ -30,11 +30,10 @@ namespace API_PLANT_PPE.Controllers
                     var dataEquipment = db.TBL_T_PPEs.FirstOrDefault(a => a.EQUIP_NO == ppe.EQUIP_NO);
                     if (dataEquipment != null)
                     {
-                        //cls.updatemse600(dataEquipment);
                         result = cls.updatemse687_SM(dataEquipment);
                     }
                 }
-                //db.SubmitChanges();
+                
                 return Ok(new { Remarks = result.Remarks, Message = result.Message });
             }
             catch (Exception ex)
