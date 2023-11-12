@@ -62,8 +62,8 @@ namespace API_PLANT_PPE.ViewModel
 
             try
             {
-                var ldap = new LdapAuthentication("LDAP://KPPMINING:389");
-                //stat = ldap.IsAuthenticated("KPPMINING", Username, Password);
+                var ldap = new LdapAuthentication("LDAP://KPPMINING.NET:389");
+                //stat = ldap.IsAuthenticated("KPPMINING.NET", Username, Password);
                 stat = true;
             }
             catch (Exception)

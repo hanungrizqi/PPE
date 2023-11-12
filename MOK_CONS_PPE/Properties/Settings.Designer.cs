@@ -45,22 +45,22 @@ namespace MOK_CONS_PPE.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kphosq101\\shpol;Initial Catalog=DB_PLANT_PPE_NEW_KPT;Persist Security" +
-            " Info=True;User ID=sqlservices;Password=sqlservices1")]
-        public string DB_PLANT_PPE_NEW_KPT {
-            get {
-                return ((string)(this["DB_PLANT_PPE_NEW_KPT"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpt.kppmining.net/ews/services/EquipmentService")]
         public string MOK_CONS_PPE_EquipmentService_EquipmentService {
             get {
                 return ((string)(this["MOK_CONS_PPE_EquipmentService_EquipmentService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.14.101.101\\SHPOL;Initial Catalog=DB_PLANT_PPE_NEW_KPT;Persist Secu" +
+            "rity Info=True;User ID=sqlservices;Password=sqlservices1")]
+        public string DB_PLANT_PPE_NEW_KPT {
+            get {
+                return ((string)(this["DB_PLANT_PPE_NEW_KPT"]));
             }
         }
     }

@@ -141,7 +141,8 @@ function getEqNumber() {
 }
 
 var savePPEtoTableClicked = false;
-function savePPEtoTable() { 
+function savePPEtoTable() {
+    debugger
     var agreeCheckbox = document.getElementById('val-terms');
     var date = $("#txt_date").val();
     var formattedDate = formatDate(date);
@@ -158,6 +159,26 @@ function savePPEtoTable() {
     var locTo = $("#txt_locTo").val();
     var remark = $("#txt_remark").val();
     var attch = $("#txt_attach").val();
+
+    // Memeriksa apakah eqNumber sudah ada di tabel sementara
+    var isEqNumberExists = false;
+
+    $("#table_equipment tbody tr").each(function () {
+        var existingEqNumber = $(this).find("td:eq(3)").text(); // Kolom ke-4 mengandung eqNumber
+        if (existingEqNumber === eqNumber) {
+            isEqNumberExists = true;
+            return false; // Keluar dari loop jika sudah ditemukan eqNumber yang sama
+        }
+    });
+
+    if (isEqNumberExists) {
+        Swal.fire(
+            'Warning!',
+            'Equipment sudah ada di tabel sementara.',
+            'warning'
+        );
+        return;
+    }
 
     if (districtFrom == "" || locFrom == "" || districtTo == "" || locTo == "" || eqNumber == "" || ppeDescription == "") {
         Swal.fire(

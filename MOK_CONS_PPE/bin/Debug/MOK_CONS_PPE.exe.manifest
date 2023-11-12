@@ -61,17 +61,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>1qkuKDTmp/wS2DqLBOdUdbBOAPnvNd48UMflK6+Yufo=</dsig:DigestValue>
+        <dsig:DigestValue>K+03vOnG+BEZpAQY1XCjbI0NwhUbP5NUFj4zBjtrLe4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="MOK_CONS_PPE.exe.config" size="2226">
+  <file name="MOK_CONS_PPE.exe.config" size="2230">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Y3IeNVhQ71c5PkCW+P3gQ/GmbJh0wjwmfNIUOKwQph0=</dsig:DigestValue>
+      <dsig:DigestValue>yFDjqkv92SF8xQQ23zpyIJiMmQbOI5+lyHFOU/V8II8=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
