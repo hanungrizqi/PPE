@@ -25,17 +25,6 @@ namespace MOK_CONS_PPE.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.14.101.181\\dmsprod;Initial Catalog=DB_DCTM_Integration_KPT;Persist" +
-            " Security Info=True;User ID=sqlservices;Password=sqlservices1")]
-        public string DB_DCTM_Integration {
-            get {
-                return ((string)(this["DB_DCTM_Integration"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("D:\\Application\\")]
         public string LogDir {
             get {
@@ -46,7 +35,7 @@ namespace MOK_CONS_PPE.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpt.kppmining.net/ews/services/EquipmentService")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ews-kpp.kppmining.net/ews/services/EquipmentService")]
         public string MOK_CONS_PPE_EquipmentService_EquipmentService {
             get {
                 return ((string)(this["MOK_CONS_PPE_EquipmentService_EquipmentService"]));
@@ -56,11 +45,22 @@ namespace MOK_CONS_PPE.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.14.101.101\\SHPOL;Initial Catalog=DB_PLANT_PPE_NEW_KPT;Persist Secu" +
-            "rity Info=True;User ID=sqlservices;Password=sqlservices1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=KPHOAZSQCO402.KPPMINING.NET;Initial Catalog=DB_PLANT_PPE_NEW_KPP;Pers" +
+            "ist Security Info=True;User ID=sqlservices;Password=sqlservices1")]
         public string DB_PLANT_PPE_NEW_KPT {
             get {
                 return ((string)(this["DB_PLANT_PPE_NEW_KPT"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.14.101.181\\dmsprod;Initial Catalog=DB_DCTM_Integration_KPP;Persist" +
+            " Security Info=True;User ID=sqlservices;Password=sqlservices1")]
+        public string DB_DCTM_Integration {
+            get {
+                return ((string)(this["DB_DCTM_Integration"]));
             }
         }
     }
