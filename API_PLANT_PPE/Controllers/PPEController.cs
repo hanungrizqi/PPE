@@ -130,7 +130,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = "Created";
                         his.Approval_Order = 1;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.CREATED_BY;
 
                         db.TBL_H_APPROVAL_PPEs.InsertOnSubmit(his);

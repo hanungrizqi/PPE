@@ -49,7 +49,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.STATUS = ppe.STATUS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.DATE_RECEIVED_SM = ppe.DATE_RECEIVED_SM;
 
@@ -62,7 +62,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = "SM";
                         his.Approval_Order = ppe.APPROVAL_ORDER;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")

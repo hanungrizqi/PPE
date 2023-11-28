@@ -30,7 +30,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = param.REMARKS;
                     cek.UPDATED_BY = param.UPDATED_BY;
                     cek.POSISI_PPE = "Plant Adm & Dev Manager";
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = 2;
                     //cek.URL_FORM_PLNTMNGR = param.URL_FORM_PLNTMNGR;
                 }
@@ -41,7 +41,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = param.REMARKS;
                     cek.UPDATED_BY = param.UPDATED_BY;
                     cek.POSISI_PPE = param.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = 2;
                     cek.URL_FORM_PLNTMNGR = param.URL_FORM_PLNTMNGR;
                 }
@@ -55,7 +55,7 @@ namespace API_PLANT_PPE.Controllers
                     his.Equip_No = param.EQUIP_NO;
                     his.Posisi_Ppe = old_posisi;
                     his.Approval_Order = 2;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    his.Approved_Date = DateTime.Now;
                     his.Approved_By = param.UPDATED_BY;
 
                     if (param.STATUS != "REJECT")
@@ -127,7 +127,7 @@ namespace API_PLANT_PPE.Controllers
                 cek.REMARKS = ppe.REMARKS;
                 cek.UPDATED_BY = ppe.UPDATED_BY;
                 cek.POSISI_PPE = ppe.POSISI_PPE;
-                cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                cek.UPDATED_DATE = DateTime.Now;
                 cek.APPROVAL_ORDER = 2;
 
                 // History ppe
@@ -138,7 +138,7 @@ namespace API_PLANT_PPE.Controllers
                     his.Equip_No = ppe.EQUIP_NO;
                     his.Posisi_Ppe = old_posisi;
                     his.Approval_Order = 2;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    his.Approved_Date = DateTime.Now;
                     his.Approved_By = ppe.UPDATED_BY;
 
                     if (ppe.STATUS != "REJECT")
@@ -174,7 +174,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = "Plant Manager";
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER; //3;
                     //cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
 
@@ -186,7 +186,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = old_posisi;
                         his.Approval_Order = ppe.APPROVAL_ORDER;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")
@@ -202,7 +202,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.URL_FORM_PLNTDH = ppe.URL_FORM_PLNTDH;
 
@@ -214,7 +214,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = old_posisi;
                         his.Approval_Order = ppe.APPROVAL_ORDER;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")
@@ -229,7 +229,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = "Project Manager Penerima";
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = 4;
                     cek.URL_FORM_PM_PENERIMA = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_PMPenerima&PPE_NO=" + cek.PPE_NO;
 
@@ -241,7 +241,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = old_posisi;
                         his.Approval_Order = 4;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")
@@ -296,7 +296,7 @@ namespace API_PLANT_PPE.Controllers
                 cek.REMARKS = ppe.REMARKS;
                 cek.UPDATED_BY = ppe.UPDATED_BY;
                 cek.POSISI_PPE = ppe.POSISI_PPE;
-                cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                cek.UPDATED_DATE = DateTime.Now;
                 cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
 
                 //history ppe
@@ -308,7 +308,7 @@ namespace API_PLANT_PPE.Controllers
                     his.Equip_No = ppe.EQUIP_NO;
                     his.Posisi_Ppe = old_posisi;
                     his.Approval_Order = ppe.APPROVAL_ORDER;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    his.Approved_Date = DateTime.Now;
                     his.Approved_By = ppe.UPDATED_BY;
 
                     if (ppe.STATUS != "REJECT")
@@ -345,7 +345,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = "Division Head ENG";
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     //cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_PM_PENERIMA;
                     cek.URL_FORM_DIVHEAD_ENG = "http://10.14.101.181/ReportServer_RPTPROD?/PPE/Rpt_PPE_DivHead_Eng&PPE_NO=" + cek.PPE_NO;
@@ -357,7 +357,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.URL_FORM_PM_PENERIMA = ppe.URL_FORM_PM_PENERIMA;
                 }
@@ -371,7 +371,7 @@ namespace API_PLANT_PPE.Controllers
                     his.Equip_No = ppe.EQUIP_NO;
                     his.Posisi_Ppe = old_posisi;
                     his.Approval_Order = ppe.APPROVAL_ORDER;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    his.Approved_Date = DateTime.Now;
                     his.Approved_By = ppe.UPDATED_BY;
 
                     if (ppe.STATUS != "REJECT")
@@ -425,7 +425,7 @@ namespace API_PLANT_PPE.Controllers
                 cek.REMARKS = ppe.REMARKS;
                 cek.UPDATED_BY = ppe.UPDATED_BY;
                 cek.POSISI_PPE = ppe.POSISI_PPE;
-                cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                cek.UPDATED_DATE = DateTime.Now;
                 cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
 
                 //history ppe
@@ -437,7 +437,7 @@ namespace API_PLANT_PPE.Controllers
                     his.Equip_No = ppe.EQUIP_NO;
                     his.Posisi_Ppe = old_posisi;
                     his.Approval_Order = ppe.APPROVAL_ORDER;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    his.Approved_Date = DateTime.Now;
                     his.Approved_By = ppe.UPDATED_BY;
 
                     if (ppe.STATUS != "REJECT")
@@ -474,7 +474,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = 5;
                     cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_DIVHEAD_ENG;
 
@@ -486,7 +486,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = old_posisi;
                         his.Approval_Order = 5;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")
@@ -502,7 +502,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.URL_FORM_DIVHEAD_ENG = ppe.URL_FORM_DIVHEAD_ENG;
 
@@ -514,7 +514,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = old_posisi;
                         his.Approval_Order = ppe.APPROVAL_ORDER;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")
@@ -571,7 +571,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = 6;
                     cek.URL_FORM_DIVHEAD_OPR = ppe.URL_FORM_DIVHEAD_OPR;
 
@@ -583,7 +583,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = old_posisi;
                         his.Approval_Order = 6;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")
@@ -599,7 +599,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.URL_FORM_DIVHEAD_OPR = ppe.URL_FORM_DIVHEAD_OPR;
 
@@ -611,7 +611,7 @@ namespace API_PLANT_PPE.Controllers
                         his.Equip_No = ppe.EQUIP_NO;
                         his.Posisi_Ppe = old_posisi;
                         his.Approval_Order = ppe.APPROVAL_ORDER;
-                        his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                        his.Approved_Date = DateTime.Now;
                         his.Approved_By = ppe.UPDATED_BY;
 
                         if (ppe.STATUS != "REJECT")
@@ -668,7 +668,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = 8;
                     cek.URL_FORM_DONE = ppe.URL_FORM_DONE;
                 }
@@ -679,7 +679,7 @@ namespace API_PLANT_PPE.Controllers
                     cek.REMARKS = ppe.REMARKS;
                     cek.UPDATED_BY = ppe.UPDATED_BY;
                     cek.POSISI_PPE = ppe.POSISI_PPE;
-                    cek.UPDATED_DATE = DateTime.UtcNow.ToLocalTime();
+                    cek.UPDATED_DATE = DateTime.Now;
                     cek.APPROVAL_ORDER = ppe.APPROVAL_ORDER;
                     cek.URL_FORM_DONE = ppe.URL_FORM_DONE;
                 }
@@ -693,7 +693,7 @@ namespace API_PLANT_PPE.Controllers
                     his.Equip_No = ppe.EQUIP_NO;
                     his.Posisi_Ppe = old_posisi;
                     his.Approval_Order = ppe.APPROVAL_ORDER;
-                    his.Approved_Date = DateTime.UtcNow.ToLocalTime();
+                    his.Approved_Date = DateTime.Now;
                     his.Approved_By = ppe.UPDATED_BY;
 
                     if (ppe.STATUS != "REJECT")
