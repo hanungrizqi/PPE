@@ -85,7 +85,7 @@ namespace API_PLANT_PPE.ViewModel
             {
                 object connected = root.NativeObject;
                 status = true;
-
+                 
             }
             catch (Exception)
             {
