@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,6 +9,7 @@ using System.Web;
 using System.Web.Http;
 using API_PLANT_PPE.Models;
 using API_PLANT_PPE.ViewModel;
+using static System.Net.WebRequestMethods;
 
 namespace API_PLANT_PPE.Controllers
 {
@@ -15,6 +17,7 @@ namespace API_PLANT_PPE.Controllers
     public class PPEController : ApiController
     {
         DB_Plant_PPEDataContext db = new DB_Plant_PPEDataContext();
+        public string _cloudUploadUrl = ConfigurationManager.AppSettings["fileUploadPath"].ToString();
 
         //Get Last No PPE
         [HttpGet]
@@ -152,33 +155,74 @@ namespace API_PLANT_PPE.Controllers
         [Route("UploadAttachment")]
         public IHttpActionResult UploadAttachment()
         {
+
+            string documentFolder = null;
+            documentFolder = DocumentFolderConstant.Attachment;
+
+            var baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+
+            var ctx = HttpContext.Current;
+            string root;
+            //root = ctx.Server.MapPath($"~/Content{documentFolder}"); //local
+            root = _cloudUploadUrl + documentFolder; //azure
+
             try
             {
-                var httpRequest = HttpContext.Current.Request;
-                if (httpRequest.Files.Count > 0)
+                if (!Directory.Exists(root))
                 {
-                    var file = httpRequest.Files[0];
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var folderPath = HttpContext.Current.Server.MapPath("~/Content/AttachmentFile");
-                    if (!Directory.Exists(folderPath))
-                    {
-                        Directory.CreateDirectory(folderPath);
-                    }
-                    var filePath = Path.Combine(folderPath, fileName);
-                    file.SaveAs(filePath);
+                    Directory.CreateDirectory(root);
+                }
 
-                    var attachmentUrl = Url.Content("~/Content/AttachmentFile/" + fileName);
-                    return Ok(new { AttachmentUrl = attachmentUrl });
-                }
-                else
-                {
-                    return BadRequest("No file found in the request.");
-                }
+                var httpRequest = HttpContext.Current.Request;
+                var file = httpRequest.Files[0];
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var folderPath = System.IO.Path.Combine(root, fileName);
+
+                file.SaveAs(folderPath);
+
+                //var filesnm = folderPath.Substring(folderPath.LastIndexOf(@"\Content\")); //local
+                var filesnm = folderPath.Substring(folderPath.LastIndexOf(documentFolder)); //azure
+                
+                var modifiedFilePath = filesnm.Replace('\\', '/');
+
+                //var attachmentUrl = baseUrl + modifiedFilePath; //local
+                var attachmentUrl = baseUrl + "/FileUpload" + modifiedFilePath; //azure
+
+                return Ok(new { AttachmentUrl = attachmentUrl });
+
             }
             catch (Exception e)
             {
-                return InternalServerError(e);
+                return Ok(new { Remarks = false, Message = e });
             }
+
+            //try
+            //{
+            //    var httpRequest = HttpContext.Current.Request;
+            //    if (httpRequest.Files.Count > 0)
+            //    {
+            //        var file = httpRequest.Files[0];
+            //        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            //        var folderPath = HttpContext.Current.Server.MapPath("~/Content/AttachmentFile");
+            //        if (!Directory.Exists(folderPath))
+            //        {
+            //            Directory.CreateDirectory(folderPath);
+            //        }
+            //        var filePath = Path.Combine(folderPath, fileName);
+            //        file.SaveAs(filePath);
+
+            //        var attachmentUrl = Url.Content("~/Content/AttachmentFile/" + fileName);
+            //        return Ok(new { AttachmentUrl = attachmentUrl });
+            //    }
+            //    else
+            //    {
+            //        return BadRequest("No file found in the request.");
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    return InternalServerError(e);
+            //}
         }
 
         [HttpGet]

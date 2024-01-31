@@ -243,6 +243,7 @@
     <Compile Include="ViewModel\ClsUpdate_MSF600_Result.cs" />
     <Compile Include="ViewModel\ClsUpdate_MSO687.cs" />
     <Compile Include="ViewModel\ClsUpdate_MSO687_Result.cs" />
+    <Compile Include="ViewModel\DocumentFolderConstant.cs" />
     <Compile Include="Web References\EquipmentReferenceService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

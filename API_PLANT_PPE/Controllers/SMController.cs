@@ -1,6 +1,8 @@
 ﻿using API_PLANT_PPE.Models;
+using API_PLANT_PPE.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,6 +16,7 @@ namespace API_PLANT_PPE.Controllers
     public class SMController : ApiController
     {
         DB_Plant_PPEDataContext db = new DB_Plant_PPEDataContext();
+        public string _cloudUploadUrl = ConfigurationManager.AppSettings["fileUploadPath"].ToString();
 
         [HttpGet]
         [Route("Get_PPE_EquipmentPart")]
@@ -97,8 +100,23 @@ namespace API_PLANT_PPE.Controllers
         [Route("Upload_BA")]
         public IHttpActionResult Upload_BA()
         {
+            string documentFolder = null;
+            documentFolder = DocumentFolderConstant.BA;
+
+            var baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+
+            var ctx = HttpContext.Current;
+            string root;
+            //root = ctx.Server.MapPath($"~/Content{documentFolder}"); //local
+            root = _cloudUploadUrl + documentFolder; //azure
+
             try
             {
+                if (!Directory.Exists(root))
+                {
+                    Directory.CreateDirectory(root);
+                }
+
                 var httpRequest = HttpContext.Current.Request;
                 var files = httpRequest.Files;
                 var attachmentUrls = new List<string>();
@@ -115,27 +133,23 @@ namespace API_PLANT_PPE.Controllers
                         {
                             var postedFile = files[i];
                             var fileName = Guid.NewGuid().ToString() + Path.GetExtension(postedFile.FileName);
-                            var folderPath = HttpContext.Current.Server.MapPath("~/Content/UploadBA");
+                            var folderPath = System.IO.Path.Combine(root, fileName);
 
-                            if (!Directory.Exists(folderPath))
-                            {
-                                Directory.CreateDirectory(folderPath);
-                            }
-
-                            var filePath = Path.Combine(folderPath, fileName);
-                            if (File.Exists(filePath))
-                            {
-                                return Ok(new { Remarks = false });
-                            }
-
-                            using (var fileStream = File.Create(filePath))
+                            using (var fileStream = File.Create(folderPath))
                             {
                                 postedFile.InputStream.CopyTo(fileStream);
                                 fileStream.Flush();
                             }
-                            File.SetAttributes(filePath, FileAttributes.Normal);
+                            File.SetAttributes(folderPath, FileAttributes.Normal);
 
-                            var attachmentUrl = Url.Content("~/Content/UploadBA/" + fileName);
+                            //var filesnm = folderPath.Substring(folderPath.LastIndexOf(@"\Content\")); //local
+                            var filesnm = folderPath.Substring(folderPath.LastIndexOf(documentFolder)); //azure
+
+                            var modifiedFilePath = filesnm.Replace('\\', '/');
+
+                            //var attachmentUrl = baseUrl + modifiedFilePath; //local
+                            var attachmentUrl = baseUrl + "/FileUpload" + modifiedFilePath; //azure
+
                             attachmentUrls.Add(attachmentUrl);
                             for (int j = 0; j < nomorEQP.Length; j++)
                             {
