@@ -26,7 +26,7 @@ namespace MSO687_CONSOLEAPP.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.14.101.101\\SHPOL;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;User I" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.14.101.1\\KPPPROD;Initial Catalog=DB_MANAGEMENT_SERVICES_KPP;User I" +
             "D=sqlservices;Password=sqlservices1")]
         public string DB_MANAGEMENT_SERVICES_KPTConnectionString {
             get {

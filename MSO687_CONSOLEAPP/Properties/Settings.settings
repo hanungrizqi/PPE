@@ -5,10 +5,10 @@
     <Setting Name="DB_MANAGEMENT_SERVICES_KPTConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=10.14.101.101\SHPOL;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;User ID=sqlservices;Password=sqlservices1&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=10.14.101.1\KPPPROD;Initial Catalog=DB_MANAGEMENT_SERVICES_KPP;User ID=sqlservices;Password=sqlservices1&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=10.14.101.101\SHPOL;Initial Catalog=DB_MANAGEMENT_SERVICES_KPT;User ID=sqlservices;Password=sqlservices1</Value>
+      <Value Profile="(Default)">Data Source=10.14.101.1\KPPPROD;Initial Catalog=DB_MANAGEMENT_SERVICES_KPP;User ID=sqlservices;Password=sqlservices1</Value>
     </Setting>
     <Setting Name="MSO687_CONSOLEAPP_ScreenService_ScreenService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://ews-kpp.kppmining.net/ews/services/ScreenService</Value>

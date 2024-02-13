@@ -73,7 +73,7 @@ namespace MSO687_CONSOLEAPP
 
                                     CONNECT.Open();
                                     var Query = "INSERT INTO TBL_T_UPLOAD_JOB_MASTER (JOB_ID, SERVER_ID, SCRIPT_CODE, ELLIPSE_USERNAME, ELLIPSE_PASSWORD, ELLIPSE_POSITION, ELLIPSE_DISTRICT, POST_DATETIME, JOB_STATUS, JOB_REMARK, DB_SERVER_NAME, DATABASE_NAME) " +
-                                "VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'PRODUCTION', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', '" + item.DISTRICT_FROM + "', GETDATE(), 1, 'Login Ellipse', '10.14.101.181\\DMSPROD', 'DB_PLANT_PPE_NEW_KPP')";
+                                "VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'PRODUCTION', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', '" + item.DISTRICT_FROM + "', GETDATE(), 1, 'Login Ellipse', 'KPHOAZSQCO402', 'DB_PLANT_PPE_NEW')";
                                     SqlCommand COMMAND = new SqlCommand(Query, CONNECT);
                                     COMMAND.ExecuteNonQuery();
                                     CONNECT.Close();
@@ -621,7 +621,7 @@ namespace MSO687_CONSOLEAPP
 
                                     CONNECT.Open();
                                     var Query = "INSERT INTO TBL_T_UPLOAD_JOB_MASTER (JOB_ID, SERVER_ID, SCRIPT_CODE, ELLIPSE_USERNAME, ELLIPSE_PASSWORD, ELLIPSE_POSITION, ELLIPSE_DISTRICT, POST_DATETIME, JOB_STATUS, JOB_REMARK, DB_SERVER_NAME, DATABASE_NAME) " +
-                                "VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'PRODUCTION', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', '" + item.DISTRICT_FROM + "', GETDATE(), 1, 'Login Ellipse', '10.14.101.181\\DMSPROD', 'DB_PLANT_PPE_NEW_KPP')";
+                                "VALUES ('NEWPPE-MSO687-BY-TEAM-KPP-2023', 'PRODUCTION', 'NEWPPE_MSO687', '" + str_username.ToString() + "', '" + str_password.ToString() + "', '" + str_posisi.ToString() + "', '" + item.DISTRICT_FROM + "', GETDATE(), 1, 'Login Ellipse', 'KPHOAZSQCO402', 'DB_PLANT_PPE_NEW')";
                                     SqlCommand COMMAND = new SqlCommand(Query, CONNECT);
                                     COMMAND.ExecuteNonQuery();
                                     CONNECT.Close();

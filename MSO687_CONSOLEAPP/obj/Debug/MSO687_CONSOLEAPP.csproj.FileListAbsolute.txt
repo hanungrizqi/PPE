@@ -26,3 +26,16 @@ D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.application
 D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.CopyComplete
 D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.exe
 D:\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.pdb
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.exe.config
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.exe.manifest
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.application
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.exe
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\bin\Debug\MSO687_CONSOLEAPP.pdb
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.AssemblyReference.cache
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.SuggestedBindingRedirects.cache
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.CoreCompileInputs.cache
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.exe.manifest
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.application
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.csproj.CopyComplete
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.exe
+D:\KPP Project\Project\PLANT PPE-NEW\ppe\new_ppe\MSO687_CONSOLEAPP\obj\Debug\MSO687_CONSOLEAPP.pdb
