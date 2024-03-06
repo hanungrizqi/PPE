@@ -914,7 +914,7 @@ namespace API_PLANT_PPE.Controllers
                             var filesnm = folderPath.Substring(folderPath.LastIndexOf(documentFolder)); //azure
 
                             var modifiedFilePath = filesnm.Replace('\\', '/');
-
+                             
                             //var attachmentUrl = baseUrl + modifiedFilePath; //local
                             var attachmentUrl = baseUrl + "/FileUpload" + modifiedFilePath; //azure
                             
